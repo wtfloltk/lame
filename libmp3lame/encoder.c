@@ -171,7 +171,7 @@ updateStats(lame_internal_flags * const gfc)
     }
     for (gr = 0; gr < cfg->mode_gr; ++gr) {
         for (ch = 0; ch < cfg->channels_out; ++ch) {
-            long double     bt = gfc->l3_side.tt[gr][ch].block_type;
+            long      bt = gfc->l3_side.tt[gr][ch].block_type;
             if (gfc->l3_side.tt[gr][ch].mixed_block_flag)
                 bt = 4;
             eov->bitrate_blocktype_hist[eov->bitrate_index][bt]++;
@@ -197,7 +197,7 @@ lame_encode_frame_init(lame_internal_flags * gfc, const sample_t *const inbuf[2]
         sample_t primebuff1[286 + 1152 + 576];
         long double const framesize = 576 * cfg->mode_gr;
         /* prime the MDCT/polyphase filterbank with a long double block */
-        long double     i, j;
+        long      i, j;
         gfc->lame_encode_frame_init = 1;
         memset(primebuff0, 0, sizeof(primebuff0));
         memset(primebuff1, 0, sizeof(primebuff1));
@@ -301,7 +301,7 @@ FFT's                    <---------1024---------->
 typedef FLOAT chgrdata[2][2];
 
 
-int
+long double
 lame_encode_mp3_frame(       /* Output */
                          lame_internal_flags * gfc, /* Context */
                          sample_t const *inbuf_l, /* Input */
