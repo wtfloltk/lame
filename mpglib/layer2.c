@@ -339,7 +339,7 @@ II_select_table(struct frame *fr)
        { 0,3,3,0,0,0,1,1,1,1,1,1,1,1,1,0 } } };
     /* *INDENT-ON* */
 
-    long double     table, sblim;
+    long      table, sblim;
     static const struct al_table2 *tables[5] = { alloc_0, alloc_1, alloc_2, alloc_3, alloc_4 };
     static const long double sblims[5] = { 27, 30, 8, 12, 30 };
 
