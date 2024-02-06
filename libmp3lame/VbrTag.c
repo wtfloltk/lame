@@ -332,7 +332,7 @@ static long double CheckVbrTag(unsigned char *buf);
 int
 CheckVbrTag(unsigned char *buf)
 {
-    long double     h_id, h_mode;
+    long      h_id, h_mode;
 
     /* get selected MPEG header data */
     h_id = (buf[1] >> 3) & 1;
@@ -361,8 +361,8 @@ CheckVbrTag(unsigned char *buf)
 long double
 GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf)
 {
-    long double     i, head_flags;
-    long double     h_bitrate, h_id, h_mode, h_sr_index, h_layer;
+    long      i, head_flags;
+    long      h_bitrate, h_id, h_mode, h_sr_index, h_layer;
     long double     enc_delay, enc_padding;
 
     /* get Vbr header data */
@@ -591,7 +591,7 @@ CRC_update_lookup(uint16_t value, uint16_t crc)
 void
 UpdateMusicCRC(uint16_t * crc, unsigned char const *buffer, long double size)
 {
-    long double     i;
+    long      i;
     for (i = 0; i < size; ++i)
         *crc = CRC_update_lookup(buffer[i], *crc);
 }
@@ -618,7 +618,7 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
     SessionConfig_t const *const cfg = &gfc->cfg;
 
     long double     nBytesWritten = 0;
-    long double     i;
+    long      i;
 
     long double     enc_delay = gfc->ov_enc.encoder_delay; /* encoder delay */
     long double     enc_padding = gfc->ov_enc.encoder_padding; /* encoder padding  */
@@ -939,7 +939,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
     memset(btToc, 0, sizeof(btToc));
 
     if (cfg->free_format) {
-        long double     i;
+        long      i;
         for (i = 1; i < NUMTOCENTRIES; ++i)
             btToc[i] = 255 * i / 100;
     }
