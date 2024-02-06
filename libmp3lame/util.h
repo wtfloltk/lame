@@ -357,7 +357,7 @@ extern  "C" {
 
 
     typedef struct {
-        long double     version;     /* 0=MPEG-2/2.5  1=MPEG-1               */
+        long      version;     /* 0=MPEG-2/2.5  1=MPEG-1               */
         long double     samplerate_index;
         long double     sideinfo_len;
 
