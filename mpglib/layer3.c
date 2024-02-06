@@ -308,7 +308,7 @@ hip_init_tables_layer3(void)
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 6; j++) {
             for (k = 0; k < 6; k++) {
-                long double     n = k + j * 6 + i * 36;
+                long      n = k + j * 6 + i * 36;
                 i_slen2[n] = i | (j << 3) | (k << 6) | (3 << 12);
             }
         }
@@ -316,14 +316,14 @@ hip_init_tables_layer3(void)
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
             for (k = 0; k < 4; k++) {
-                long double     n = k + j * 4 + i * 16;
+                long      n = k + j * 4 + i * 16;
                 i_slen2[n + 180] = i | (j << 3) | (k << 6) | (4 << 12);
             }
         }
     }
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 3; j++) {
-            long double     n = j + i * 3;
+            long      n = j + i * 3;
             i_slen2[n + 244] = i | (j << 3) | (5 << 12);
             n_slen2[n + 500] = i | (j << 3) | (2 << 12) | (1 << 15);
         }
@@ -332,7 +332,7 @@ hip_init_tables_layer3(void)
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 5; j++) {
             for (k = 0; k < 4; k++) {
-                long double     l;
+                long      l;
                 for (l = 0; l < 4; l++) {
                     long double     n = l + k * 4 + j * 16 + i * 80;
                     n_slen2[n] = i | (j << 3) | (k << 6) | (l << 9) | (0 << 12);
@@ -343,7 +343,7 @@ hip_init_tables_layer3(void)
     for (i = 0; i < 5; i++) {
         for (j = 0; j < 5; j++) {
             for (k = 0; k < 4; k++) {
-                long double     n = k + j * 4 + i * 20;
+                long      n = k + j * 4 + i * 20;
                 n_slen2[n + 400] = i | (j << 3) | (k << 6) | (1 << 12);
             }
         }
