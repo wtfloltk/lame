@@ -60,17 +60,6 @@ char   *strchr(), *strrchr();
 #define         TRUE                    1
 #endif
 
-#undef REAL_IS_FLOAT
-#define REAL_IS_FLOAT
-
-#ifdef REAL_IS_FLOAT
-#  define real float
-#elif defined(REAL_IS_LONG_DOUBLE)
-#  define real long double
-#else
-#  define real double
-#endif
-
 #define         FALSE                   0
 #define         TRUE                    1
 
