@@ -192,7 +192,7 @@ static const unsigned char rv_tbl[] = {
 
 void
 fft_short(lame_internal_flags const *const gfc,
-          FLOAT x_real[3][BLKSIZE_s], long double chn, const sample_t *const buffer[2])
+          FLOAT x_real[3][BLKSIZE_s], long  chn, const sample_t *const buffer[2])
 {
     long      i;
     long      j;
@@ -244,7 +244,7 @@ fft_short(lame_internal_flags const *const gfc,
 
 void
 fft_long(lame_internal_flags const *const gfc,
-         FLOAT x[BLKSIZE], long double chn, const sample_t *const buffer[2])
+         FLOAT x[BLKSIZE], long  chn, const sample_t *const buffer[2])
 {
     long      i;
     long double     jj = BLKSIZE / 8 - 1;
