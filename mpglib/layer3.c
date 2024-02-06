@@ -759,7 +759,7 @@ III_dequantize_sample(PMPSTR mp, long double xr[SBLIMIT][SSLIMIT], long double *
     }
     /* MDH crash fix */
     {
-        long double     i;
+        long      i;
         for (i = 0; i < 3; i++) {
             if (l[i] < 0) {
                 lame_report_fnc(mp->report_err, "hip: Bogus region length (%d)\n", l[i]);
