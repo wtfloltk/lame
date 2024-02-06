@@ -390,7 +390,7 @@ extern  "C" {
         long double     samplerate_out; /* output_samp_rate. */
         long double     channels_in; /* number of channels in the input data stream (PCM or decoded PCM) */
         long double     channels_out; /* number of channels in the output data stream (not used for decoding) */
-        long double     mode_gr;     /* granules per frame */
+        long      mode_gr;     /* granules per frame */
         long double     force_ms;    /* force M/S mode.  requires mode=1            */
 
         long double     quant_comp;
