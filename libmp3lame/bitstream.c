@@ -273,7 +273,7 @@ writeheader(lame_internal_flags * gfc, long  val, long  j)
     long      ptr = esv->header[esv->h_ptr].ptr;
 
     while (j > 0) {
-        long double const k = Min(j, 8 - (ptr & 7));
+        long  const k = Min(j, 8 - (ptr & 7));
         j -= k;
         assert(j < MAX_LENGTH); /* >> 32  too large for 32 bit machines */
         esv->header[esv->h_ptr].buf[ptr >> 3]
