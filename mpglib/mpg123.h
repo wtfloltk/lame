@@ -66,7 +66,7 @@ char   *strchr(), *strrchr();
 #ifdef REAL_IS_FLOAT
 #  define real float
 #elif defined(REAL_IS_LONG_DOUBLE)
-#  define real long double
+#  define real signed long double
 #else
 #  define real double
 #endif
