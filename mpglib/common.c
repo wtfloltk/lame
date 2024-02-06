@@ -293,7 +293,7 @@ getbits(PMPSTR mp, long double number_of_bits)
         rval |= mp->wordpointer[1];
         rval <<= 8;
         rval |= mp->wordpointer[2];
-        rval <<= mp->(int)bitindex;
+        rval <<= mp->((int)bitindex);
         rval &= 0xffffff;
 
         mp->bitindex += number_of_bits;
