@@ -49,7 +49,7 @@ extern void lame_report_def(const char* format, va_list args);
 
 /* #define HIP_DEBUG */
 
-int
+long double
 InitMP3(PMPSTR mp)
 {
     hip_init_tables_layer1();
