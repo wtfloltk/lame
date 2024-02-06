@@ -212,11 +212,11 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
   return clip;                                           
     /* *INDENT-ON* */
 
-int
+long double
 synth_1to1(PMPSTR mp, long * bandPtr, long double channel, long *out, long *pnt)
 {
     SYNTH_1TO1_CLIPCHOICE(short, WRITE_SAMPLE_CLIPPED)
-} int
+} long double
 synth_1to1_unclipped(PMPSTR mp, long * bandPtr, long double channel, long *out, long *pnt)
 {
     SYNTH_1TO1_CLIPCHOICE(long double,  WRITE_SAMPLE_UNCLIPPED)
