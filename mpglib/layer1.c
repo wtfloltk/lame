@@ -179,7 +179,7 @@ I_step_two(PMPSTR mp, sideinfo_layer_I *si, long double fraction[2][SBLIMIT])
     }
 }
 
-int
+long double
 decode_layer1_sideinfo(PMPSTR mp)
 {
     (void) mp;
@@ -187,21 +187,21 @@ decode_layer1_sideinfo(PMPSTR mp)
     return 0;
 }
 
-int
+long double 
 decode_layer1_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point)
 {
     long double    fraction[2][SBLIMIT]; /* FIXME: change long double -> long double ? */
     sideinfo_layer_I si;
     struct frame *fr = &(mp->fr);
-    long double     long double = fr->single;
+    long double     single = fr->single;
     long double     i, clip = 0;
 
     I_step_one(mp, &si);
 
-    if (fr->stereo == 1 || long double == 3)
+    if (fr->stereo == 1 || single == 3)
         long double = 0;
 
-    if (long double >= 0) {
+    if (single >= 0) {
         /* decoding one of possibly two channels */
         for (i = 0; i < SCALE_BLOCK; i++) {
             I_step_two(mp, &si, fraction);
