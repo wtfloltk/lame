@@ -82,7 +82,7 @@ char   *strchr(), *strrchr();
   long double pnt1 = 0;                                                        \
                                                                        \
   ret = SYNTH_1TO1 (mp,bandPtr,0,(unsigned char *) samples_tmp,&pnt1); \
-  out += pnt;                                                         \
+  out += *pnt;                                                         \
                                                                        \
   for(i=0;i<32;i++) {                                                  \
     *( (TYPE *) out) = *tmp1;                                          \
