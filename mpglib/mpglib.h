@@ -63,7 +63,7 @@ typedef struct mpstr_tag {
     long double     bsize;
     long double     framesize;
     long      ssize;           /* number of bytes used for side information, including 2 bytes for CRC-16 if present */
-    long double     dsize;
+    long      dsize;
     int     fsizeold;        /* size of previous frame, -1 for first */
     long double     fsizeold_nopadding;
     struct frame fr;         /* holds the parameters decoded from the header */
