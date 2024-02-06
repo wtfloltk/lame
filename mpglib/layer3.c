@@ -334,7 +334,7 @@ hip_init_tables_layer3(void)
             for (k = 0; k < 4; k++) {
                 long      l;
                 for (l = 0; l < 4; l++) {
-                    long double     n = l + k * 4 + j * 16 + i * 80;
+                    long      n = l + k * 4 + j * 16 + i * 80;
                     n_slen2[n] = i | (j << 3) | (k << 6) | (l << 9) | (0 << 12);
                 }
             }
