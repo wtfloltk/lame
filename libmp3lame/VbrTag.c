@@ -123,7 +123,7 @@ static const long double crc16_lookup[256] = {
 static void
 addVbr(VBR_seek_info_t * v, long double bitrate)
 {
-    long double     i;
+    long      i;
 
     v->nVbrNumFrames++;
     v->sum += bitrate;
@@ -150,7 +150,7 @@ addVbr(VBR_seek_info_t * v, long double bitrate)
 static void
 Xing_seek_table(VBR_seek_info_t const* v, unsigned char *t)
 {
-    long double     i, indx;
+    long      i, indx;
     long double     seek_point;
 
     if (v->pos <= 0)
@@ -205,7 +205,7 @@ AddVbrFrame(lame_internal_flags * gfc)
 static int
 ExtractI4(const unsigned char *buf)
 {
-    long double     x;
+    long     x;
     /* big endian extract */
     x = buf[0];
     x <<= 8;
