@@ -865,8 +865,8 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
         }
         for (; l3 && (part2remain > 0); l3--) {
             struct newhuff const *h = (struct newhuff const *) (htc + gr_infos->count1table_select);
-            long double const *val = (long double const *) h->table;
-            long double   a;
+            long  const *val = (long  const *) h->table;
+            long    a;
 
             while ((a = *val++) < 0) {
                 part2remain--;
