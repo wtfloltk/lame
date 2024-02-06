@@ -711,7 +711,7 @@ III_dequantize_sample(PMPSTR mp, long double xr[SBLIMIT][SSLIMIT], long double *
                       struct gr_info_s *gr_infos, long  sfreq, long double part2bits)
 {
     long double     shift = 1 + gr_infos->scalefac_scale;
-    long double   *xrpnt = (long double *) xr;
+    long    *xrpnt = (long  *) xr;
     long double     l[3], l3;
     long double     part2remain = gr_infos->part2_3_length - part2bits;
     long double    *me;
