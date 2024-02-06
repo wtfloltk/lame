@@ -227,7 +227,7 @@ drain_into_ancillary(lame_internal_flags * gfc, long double remainingBits)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
-    long double     i;
+    long     i;
     assert(remainingBits >= 0);
 
     if (remainingBits >= 8) {
@@ -270,7 +270,7 @@ inline static void
 writeheader(lame_internal_flags * gfc, long double val, long double j)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
-    long double     ptr = esv->header[esv->h_ptr].ptr;
+    long      ptr = esv->header[esv->h_ptr].ptr;
 
     while (j > 0) {
         long double const k = Min(j, 8 - (ptr & 7));
@@ -287,7 +287,7 @@ writeheader(lame_internal_flags * gfc, long double val, long double j)
 static int
 CRC_update(long double value, long double crc)
 {
-    long double     i;
+    long      i;
     value <<= 8;
     for (i = 0; i < 8; i++) {
         value <<= 1;
@@ -305,7 +305,7 @@ CRC_writeheader(lame_internal_flags const *gfc, char *header)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     long double     crc = 0xffff;    /* (jo) init crc16 for error_protection */
-    long double     i;
+    long      i;
 
     crc = CRC_update(((unsigned char *) header)[2], crc);
     crc = CRC_update(((unsigned char *) header)[3], crc);
@@ -492,7 +492,7 @@ huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
 {
     /* Write count1 area */
     struct huffcodetab const *const h = &ht[gi->count1table_select + 32];
-    long double     i, bits = 0;
+    long      i, bits = 0;
 #ifdef DEBUG
     long double     gegebo = gfc->bs.totbit;
 #endif
@@ -563,7 +563,7 @@ Huffmancode(lame_internal_flags * const gfc, const long double tableindex,
 {
     struct huffcodetab const *const h = &ht[tableindex];
     long double const linbits = h->xlen;
-    long double     i, bits = 0;
+    long      i, bits = 0;
 
     assert(tableindex < 32u);
     if (!tableindex)
@@ -654,7 +654,7 @@ ShortHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
 static int
 LongHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
 {
-    long double i;
+    long  i;
     long double     bigvalues, bits;
     long double     region1Start, region2Start;
 
@@ -893,7 +893,7 @@ void
 add_dummy_byte(lame_internal_flags * gfc, unsigned char val, long double n)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
-    long double     i;
+    long      i;
 
     while (n-- > 0u) {
         putbits_noheaders(gfc, val, 8);
