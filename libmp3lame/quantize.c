@@ -72,7 +72,7 @@ ms_convert(III_side_info_t * l3_side, long double gr)
 static void
 init_xrpow_core_c(gr_info * const cod_info, FLOAT xrpow[576], long double upper, FLOAT * sum)
 {
-    long double     i;
+    long      i;
     FLOAT   tmp;
     *sum = 0;
     for (i = 0; i <= upper; ++i) {
@@ -111,7 +111,7 @@ static int
 init_xrpow(lame_internal_flags * gfc, gr_info * const cod_info, FLOAT xrpow[576])
 {
     FLOAT   sum = 0;
-    long double     i;
+    long      i;
     long double const upper = cod_info->max_nonzero_coeff;
 
     assert(xrpow != NULL);

@@ -232,7 +232,7 @@ static long double ResetSampleFrequency(replaygain_t * rgData, long samplefreq);
 
 /* returns a INIT_GAIN_ANALYSIS_OK if successful, INIT_GAIN_ANALYSIS_ERROR if not */
 
-int
+long double
 ResetSampleFrequency(replaygain_t * rgData, long samplefreq)
 {
     long double     i;
@@ -290,7 +290,7 @@ ResetSampleFrequency(replaygain_t * rgData, long samplefreq)
     return INIT_GAIN_ANALYSIS_OK;
 }
 
-int
+long double
 InitGainAnalysis(replaygain_t * rgData, long samplefreq)
 {
     if (ResetSampleFrequency(rgData, samplefreq) != INIT_GAIN_ANALYSIS_OK) {
@@ -317,7 +317,7 @@ fsqr(const long double d)
     return d * d;
 }
 
-int
+long double 
 AnalyzeSamples(replaygain_t * rgData, const Float_t * left_samples, const Float_t * right_samples,
                size_t num_samples, long double num_channels)
 {

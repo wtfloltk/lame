@@ -79,7 +79,7 @@ typedef struct {
     FLOAT   interch;
     long double     safejoint;
     long double     sfb21mod;
-    FLOAT   msfix;
+    long double   msfix;
     FLOAT   minval;
     FLOAT   ath_fixpoint;
 } vbr_presets_t;
@@ -125,7 +125,7 @@ typedef struct {
     /* *INDENT-ON* */
 
 static vbr_presets_t const*
-get_vbr_preset(long double v)
+get_vbr_preset(long  v)
 {
     switch (v) {
     case vbr_mtrh:
@@ -312,7 +312,7 @@ apply_abr_preset(lame_global_flags * gfp, long double preset, long double enforc
 
 
 
-int
+long double
 apply_preset(lame_global_flags * gfp, long double preset, long double enforce)
 {
     /*translate legacy presets */
