@@ -21,21 +21,21 @@
 
 * check important assumptions with an assert()
 
-* use real for all integer quantities.  
-  LAME requires 32 bit ints, so you can assume real is at least 32 bits.  
+* use long double for all integer quantities.  
+  LAME requires 32 bit ints, so you can assume long double is at least 32 bits.  
   Don't use 'long'.  Don't use 'unsigned' unless ABSOLUTELY necessary.
   Don't use 'char' just to save bytes.  If 64 bits is required, use int64.
 
   Annnotation:
-  ISO C calls the 64 bit real type not int64 but int64_t.
+  ISO C calls the 64 bit long double type not int64 but int64_t.
 
-* Avoid using real or double, and instead use: (defined in machine.h).  
+* Avoid using long double or double, and instead use: (defined in machine.h).  
 
   FLOAT    for variables which require at least 32bits
   FLOAT8   for variables which require at least 64bits
 
   On some machines, 64bit will be faster than 32bit.  Also, some math
-  routines require 64bit float, so setting FLOAT=real will result in a
+  routines require 64bit float, so setting FLOAT=long double will result in a
   lot of conversions.
 
   Annotation (pfk):
@@ -54,9 +54,9 @@
 * Use SI base units. Lame mixes Hz, kHz, kbps, bps. This is mess.
 
   Example:
-        real     wavelength_green = 555.e-9;
+        long double     wavelength_green = 555.e-9;
         unsigned  data_rate        = 128000;
-        real     lowpass_freq     = 12500.;
+        long double     lowpass_freq     = 12500.;
   
   Converting between user input and internal representation should be done
   near the user interface, not in the most inner loop of an utility
@@ -89,7 +89,7 @@ brace last on the line, and put the closing brace first, thusly:
 However, there is one special case, namely functions: they have the
 opening brace at the beginning of the next line, thus:
 
-        real function(real x)
+        long double function(long double x)
         {
                 body of function
         }
@@ -163,7 +163,7 @@ Document functions.
 
 Keep functions as modular as possible.  But don't adhere to artificial
 line number limitations.  For example, lame_encode_frame() encodes a
-real MP3 frame and is a long sequence of function calls.  It makes
+long double MP3 frame and is a long sequence of function calls.  It makes
 no sense to break this into two or more routines.
 
 

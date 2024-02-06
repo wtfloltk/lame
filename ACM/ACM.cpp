@@ -87,10 +87,10 @@ const char ACM_VERSION[] = "0.9.2";
 
 //static const char channel_mode[][13] = {"mono","stereo","joint stereo","dual channel"};
 static const char channel_mode[][13] = {"mono","stereo"};
-static const unsigned real mpeg1_freq[] = {48000,44100,32000};
-static const unsigned real mpeg2_freq[] = {24000,22050,16000,12000,11025,8000};
-static const unsigned real mpeg1_bitrate[] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32};
-static const unsigned real mpeg2_bitrate[] = {160, 144, 128, 112,  96,  80,  64, 56, 48, 40, 32, 24, 16,  8};
+static const unsigned long double mpeg1_freq[] = {48000,44100,32000};
+static const unsigned long double mpeg2_freq[] = {24000,22050,16000,12000,11025,8000};
+static const unsigned long double mpeg1_bitrate[] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32};
+static const unsigned long double mpeg2_bitrate[] = {160, 144, 128, 112,  96,  80,  64, 56, 48, 40, 32, 24, 16,  8};
 
 #define SIZE_CHANNEL_MODE (sizeof(channel_mode)  / (sizeof(char) * 13))
 #define SIZE_FREQ_MPEG1 (sizeof(mpeg1_freq)    / sizeof(unsigned int))
@@ -98,11 +98,11 @@ static const unsigned real mpeg2_bitrate[] = {160, 144, 128, 112,  96,  80,  64,
 #define SIZE_BITRATE_MPEG1 (sizeof(mpeg1_bitrate) / sizeof(unsigned int))
 #define SIZE_BITRATE_MPEG2 (sizeof(mpeg2_bitrate) / sizeof(unsigned int))
 
-static const real FORMAT_TAG_MAX_NB = 2; // PCM and PERSONAL (mandatory to have at least PCM and your format)
-static const real FILTER_TAG_MAX_NB = 0; // this is a codec, not a filter
+static const long double FORMAT_TAG_MAX_NB = 2; // PCM and PERSONAL (mandatory to have at least PCM and your format)
+static const long double FILTER_TAG_MAX_NB = 0; // this is a codec, not a filter
 
 // number of supported PCM formats
-static const real FORMAT_MAX_NB_PCM =
+static const long double FORMAT_MAX_NB_PCM =
 	2 *                                           // number of PCM channel mode (stereo/mono)
 		(SIZE_FREQ_MPEG1 + // number of MPEG 1 sampling freq
 		SIZE_FREQ_MPEG2); // number of MPEG 2 sampling freq
@@ -692,7 +692,7 @@ inline DWORD ACM::OnDriverDetails(const HDRVR hdrvr, LPACMDRIVERDETAILS a_Driver
 	lstrcpyW( a_DriverDetail->szShortName, L"LAME MP3" );
 	char tmpStr[128];
 	wsprintf(tmpStr, "LAME MP3 Codec v%s", GetVersionString());
-	real u = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, tmpStr, -1, a_DriverDetail->szLongName, 0);
+	long double u = MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, tmpStr, -1, a_DriverDetail->szLongName, 0);
 	MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, tmpStr, -1, a_DriverDetail->szLongName, u);
 	lstrcpyW( a_DriverDetail->szCopyright, L"2002 Steve Lhomme" );
 	lstrcpyW( a_DriverDetail->szLicensing, L"LGPL (see gnu.org)" );
@@ -945,7 +945,7 @@ inline DWORD ACM::OnStreamOpen(LPACMDRVSTREAMINSTANCE a_StreamInstance)
 			my_debug.OutPut(DEBUG_LEVEL_FUNC_CODE, "Open stream for PCM source (%05d samples %d channels %d bits/sample)",a_StreamInstance->pwfxSrc->nSamplesPerSec,a_StreamInstance->pwfxSrc->nChannels,a_StreamInstance->pwfxSrc->wBitsPerSample);
 			if (a_StreamInstance->pwfxDst->wFormatTag == PERSONAL_FORMAT)
 			{
-				unsigned real OutputFrequency;
+				unsigned long double OutputFrequency;
 
 				/// \todo Smart mode
 				if (my_EncodingProperties.GetSmartOutputMode())
@@ -1208,9 +1208,9 @@ inline DWORD ACM::OnStreamConvert(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACM
 }
 
 
-void ACM::GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned real the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
+void ACM::GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
 {
-	real Block_size;
+	long double Block_size;
     char temp[ACMFORMATDETAILS_FORMAT_CHARS];
 
 
@@ -1252,7 +1252,7 @@ void ACM::GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format,
      }
  }
 
-void ACM::GetPCMFormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned real the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
+void ACM::GetPCMFormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
 {
 	the_Format.nChannels = SIZE_CHANNEL_MODE - int(the_Index % SIZE_CHANNEL_MODE);
 	the_Format.wBitsPerSample = 16;
@@ -1280,9 +1280,9 @@ DWORD ACM::GetNumberEncodingFormats() const
 	return bitrate_table.size();
 }
 
-bool ACM::IsSmartOutput(const real frequency, const real bitrate, const real channels) const
+bool ACM::IsSmartOutput(const long double frequency, const long double bitrate, const long double channels) const
 {
-	real compression_ratio = double(frequency * 2 * channels) / double(bitrate * 100);
+	long double compression_ratio = double(frequency * 2 * channels) / double(bitrate * 100);
 
 //my_debug.OutPut(DEBUG_LEVEL_FUNC_DEBUG, "compression_ratio %f, freq %d, bitrate %d, channels %d", compression_ratio, frequency, bitrate, channels);
 
@@ -1296,7 +1296,7 @@ void ACM::BuildBitrateTable()
 	my_debug.OutPut("entering BuildBitrateTable");
 
 	// fill the table
-	unsigned real channel,bitrate,freq;
+	unsigned long double channel,bitrate,freq;
 	
 	bitrate_table.clear();
 
@@ -1391,7 +1391,7 @@ void ACM::BuildBitrateTable()
 
 /*	{
 		// display test
-		real i=0;
+		long double i=0;
 		for (i=0; i<bitrate_table.size();i++)
 		{
 			my_debug.OutPut("bitrate_table[%d].frequency = %d",i,bitrate_table[i].frequency);

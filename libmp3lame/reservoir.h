@@ -22,10 +22,10 @@
 #ifndef LAME_RESERVOIR_H
 #define LAME_RESERVOIR_H
 
-real     ResvFrameBegin(lame_internal_flags * gfc, real *mean_bits);
-void    ResvMaxBits(lame_internal_flags * gfc, real mean_bits, real *targ_bits, real *max_bits,
-                    real cbr);
+long double     ResvFrameBegin(lame_internal_flags * gfc, long double *mean_bits);
+void    ResvMaxBits(lame_internal_flags * gfc, long double mean_bits, long double *targ_bits, long double *max_bits,
+                    long double cbr);
 void    ResvAdjust(lame_internal_flags * gfc, gr_info const *gi);
-void    ResvFrameEnd(lame_internal_flags * gfc, real mean_bits);
+void    ResvFrameEnd(lame_internal_flags * gfc, long double mean_bits);
 
 #endif /* LAME_RESERVOIR_H */

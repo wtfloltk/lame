@@ -27,27 +27,27 @@ typedef struct {
     unsigned char no;
     unsigned char width;
     unsigned char minval_2;
-    real   quiet_thr;
-    real   norm;
-    real   bark;
+    long double   quiet_thr;
+    long double   norm;
+    long double   bark;
 } type1_t;
 
 typedef struct {
     unsigned char no;
     unsigned char width;
-    real   quiet_thr;
-    real   norm;
-    real   SNR;
-    real   bark;
+    long double   quiet_thr;
+    long double   norm;
+    long double   SNR;
+    long double   bark;
 } type2_t;
 
 typedef struct {
-    unsigned real no:5;
-    unsigned real cbw:3;
-    unsigned real bu:6;
-    unsigned real bo:6;
-    unsigned real w1_576:10;
-    unsigned real w2_576:10;
+    unsigned long double no:5;
+    unsigned long double cbw:3;
+    unsigned long double bu:6;
+    unsigned long double bo:6;
+    unsigned long double w1_576:10;
+    unsigned long double w2_576:10;
 } type34_t;
 
 typedef struct {
@@ -68,8 +68,8 @@ extern const type5_t table5[6];
 #define HTN	34
 
 struct huffcodetab {
-    const unsigned real xlen;          /* max. x-index+   */
-    const unsigned real linmax;        /* max number to be stored in linbits */
+    const unsigned long double xlen;          /* max. x-index+   */
+    const unsigned long double linmax;        /* max number to be stored in linbits */
     const uint16_t *table;      /* pointer to array[xlen][ylen]  */
     const uint8_t *hlen;        /* pointer to array[xlen][ylen]  */
 };
@@ -87,9 +87,9 @@ extern const uint32_t largetbl[16 * 16];
 extern const uint32_t table23[3 * 3];
 extern const uint32_t table56[4 * 4];
 
-extern const real scfsi_band[5];
+extern const long double scfsi_band[5];
 
-extern const real bitrate_table    [3][16];
-extern const real samplerate_table [3][ 4];
+extern const long double bitrate_table    [3][16];
+extern const long double samplerate_table [3][ 4];
 
 #endif /* LAME_TABLES_H */

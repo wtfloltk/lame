@@ -42,11 +42,11 @@
 #endif
 
 static void
-dct64_1(real * out0, real * out1, real * b1, real * b2, real * samples)
+dct64_1(long double * out0, long double * out1, long double * b1, long double * b2, long double * samples)
 {
 
     {
-        real   *costab = pnts[0];
+        long double   *costab = pnts[0];
 
         b1[0x00] = samples[0x00] + samples[0x1F];
         b1[0x1F] = (samples[0x00] - samples[0x1F]) * costab[0x0];
@@ -99,7 +99,7 @@ dct64_1(real * out0, real * out1, real * b1, real * b2, real * samples)
 
 
     {
-        real   *costab = pnts[1];
+        long double   *costab = pnts[1];
 
         b2[0x00] = b1[0x00] + b1[0x0F];
         b2[0x0F] = (b1[0x00] - b1[0x0F]) * costab[0];
@@ -137,7 +137,7 @@ dct64_1(real * out0, real * out1, real * b1, real * b2, real * samples)
     }
 
     {
-        real   *costab = pnts[2];
+        long double   *costab = pnts[2];
 
         b1[0x00] = b2[0x00] + b2[0x07];
         b1[0x07] = (b2[0x00] - b2[0x07]) * costab[0];
@@ -177,8 +177,8 @@ dct64_1(real * out0, real * out1, real * b1, real * b2, real * samples)
     }
 
     {
-        real const cos0 = pnts[3][0];
-        real const cos1 = pnts[3][1];
+        long double const cos0 = pnts[3][0];
+        long double const cos1 = pnts[3][1];
 
         b2[0x00] = b1[0x00] + b1[0x03];
         b2[0x03] = (b1[0x00] - b1[0x03]) * cos0;
@@ -222,7 +222,7 @@ dct64_1(real * out0, real * out1, real * b1, real * b2, real * samples)
     }
 
     {
-        real const cos0 = pnts[4][0];
+        long double const cos0 = pnts[4][0];
 
         b1[0x00] = b2[0x00] + b2[0x01];
         b1[0x01] = (b2[0x00] - b2[0x01]) * cos0;
@@ -341,8 +341,8 @@ dct64_1(real * out0, real * out1, real * b1, real * b2, real * samples)
  * (new) registers for the b1,b2 pointer to the bufs[xx] field
  */
 void
-dct64(real * a, real * b, real * c)
+dct64(long double * a, long double * b, long double * c)
 {
-    real    bufs[0x40];
+    long double    bufs[0x40];
     dct64_1(a, b, bufs, bufs + 0x20, c);
 }

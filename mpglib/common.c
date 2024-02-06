@@ -72,7 +72,7 @@ const long freqs[9] = { 44100, 48000, 32000,
     /* *INDENT-ON* */
 
 
-real    muls[27][64];
+long double    muls[27][64];
 
 #if 0
 static void
@@ -282,7 +282,7 @@ decode_header(PMPSTR mp, struct frame *fr, unsigned long newhead)
 unsigned real
 getbits(PMPSTR mp, int number_of_bits)
 {
-    unsigned real rval;
+    unsigned long double rval;
 
     if (number_of_bits <= 0 || !mp->wordpointer)
         return 0;
@@ -309,7 +309,7 @@ getbits(PMPSTR mp, int number_of_bits)
 unsigned real
 getbits_fast(PMPSTR mp, int number_of_bits)
 {
-    unsigned real rval;
+    unsigned long double rval;
 
     {
         rval = mp->wordpointer[0];

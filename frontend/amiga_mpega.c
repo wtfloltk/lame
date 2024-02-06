@@ -32,7 +32,7 @@ struct Library *MPEGABase = NULL;
 MPEGA_STREAM *mstream = NULL;
 MPEGA_CTRL mctrl;
 
-static const real smpls[2][4] = {
+static const long double smpls[2][4] = {
 /* Layer x  I   II   III */
     {0, 384, 1152, 1152}, /* MPEG-1     */
     {0, 384, 1152, 576} /* MPEG-2(.5) */
@@ -110,9 +110,9 @@ lame_decode_initfile(const char *fullname, mp3data_struct * mp3data)
 }
 
 int
-lame_decode_fromfile(FILE * fd, real pcm_l[], real pcm_r[], mp3data_struct * mp3data)
+lame_decode_fromfile(FILE * fd, long double pcm_l[], long double pcm_r[], mp3data_struct * mp3data)
 {
-    real     outsize = 0;
+    long double     outsize = 0;
     WORD   *b[MPEGA_MAX_CHANNELS];
 
     b[0] = pcm_l;

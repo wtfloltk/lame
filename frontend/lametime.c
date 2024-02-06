@@ -71,7 +71,7 @@ GetCPUTime(void)
 /*
  * name:        GetRealTime ( void )
  *
- * description: returns real (human) time elapsed relative to a fixed time (mostly 1970-01-01 00:00:00)
+ * description: returns long double (human) time elapsed relative to a fixed time (mostly 1970-01-01 00:00:00)
  * input:       none
  * output:      time in seconds
  * known bugs:  bad precision with time()

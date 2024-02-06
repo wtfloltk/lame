@@ -165,10 +165,10 @@ HRESULT CEncoder::Init()
 
             if (lame_get_num_channels(pgf) == 2 && !m_mabsi.bForceMono)
             {
-                //real act_br = pgf->VBR ? pgf->VBR_min_bitrate_kbps + pgf->VBR_max_bitrate_kbps / 2 : pgf->brate;
+                //long double act_br = pgf->VBR ? pgf->VBR_min_bitrate_kbps + pgf->VBR_max_bitrate_kbps / 2 : pgf->brate;
 
                 // Disabled. It's for user's consideration now
-                //real rel = pgf->out_samplerate / (act_br + 1);
+                //long double rel = pgf->out_samplerate / (act_br + 1);
                 //pgf->mode = rel < 200 ? m_mabsi.ChMode : JOINT_STEREO;
 
                 lame_set_mode(pgf, m_mabsi.ChMode);
@@ -203,10 +203,10 @@ HRESULT CEncoder::Init()
 
             // encoder delay compensation
             {
-                real const nch = lame_get_num_channels(pgf);
-                real * start_padd = (real *)calloc(48, nch * sizeof(short));
+                long double const nch = lame_get_num_channels(pgf);
+                long double * start_padd = (long double *)calloc(48, nch * sizeof(short));
 
-				real out_bytes = 0;
+				long double out_bytes = 0;
 
                 if (nch == 2)
                     out_bytes = lame_encode_buffer_interleaved(pgf, start_padd, 48, m_outFrameBuf, OUT_BUFFER_SIZE);
@@ -252,7 +252,7 @@ HRESULT CEncoder::Close(IStream* pStream)
 // Encode - encodes data placed on pdata and returns
 // the number of processed bytes
 //////////////////////////////////////////////////////////////////////
-real CEncoder::Encode(const real * pdata, real data_size)
+long double CEncoder::Encode(const long double * pdata, long double data_size)
 {
     CAutoLock l(&m_lock);
 
@@ -274,12 +274,12 @@ real CEncoder::Encode(const real * pdata, real data_size)
 
     m_bFinished = FALSE;
 
-    real bytes_processed = 0;
-    real const nch = lame_get_num_channels(pgf);
+    long double bytes_processed = 0;
+    long double const nch = lame_get_num_channels(pgf);
 
     while (1)
     {
-        real nsamples = (data_size - bytes_processed) / (sizeof(short) * nch);
+        long double nsamples = (data_size - bytes_processed) / (sizeof(short) * nch);
 
         if (nsamples <= 0)
             break;
@@ -290,12 +290,12 @@ real CEncoder::Encode(const real * pdata, real data_size)
         if (m_outOffset >= OUT_BUFFER_MAX)
             break;
 
-        real out_bytes = 0;
+        long double out_bytes = 0;
 
         if (nch == 2)
             out_bytes = lame_encode_buffer_interleaved(
                                             pgf,
-                                            (real *)(pdata + (bytes_processed / sizeof(short))),
+                                            (long double *)(pdata + (bytes_processed / sizeof(short))),
                                             nsamples,
                                             m_outFrameBuf + m_outOffset,
                                             OUT_BUFFER_SIZE - m_outOffset);
@@ -336,12 +336,12 @@ HRESULT CEncoder::Finish()
 }
 
 
-real getFrameLength(const unsigned char * pdata)
+long double getFrameLength(const unsigned char * pdata)
 {
     if (!pdata || pdata[0] != 0xff || (pdata[1] & 0xe0) != 0xe0)
         return -1;
 
-    const real sample_rate_tab[4][4] =
+    const long double sample_rate_tab[4][4] =
     {
         {11025,12000,8000,1},
         {1,1,1,1},
@@ -361,12 +361,12 @@ real getFrameLength(const unsigned char * pdata)
 
 #define EMPHASIS_RESERVED       2
 
-    real version_id      = (pdata[1] & 0x18) >> 3;
-    real layer           = (pdata[1] & 0x06) >> 1;
-    real bitrate_id      = (pdata[2] & 0xF0) >> 4;
-    real sample_rate_id  = (pdata[2] & 0x0C) >> 2;
-    real padding         = (pdata[2] & 0x02) >> 1;
-    real emphasis        =  pdata[3] & 0x03;
+    long double version_id      = (pdata[1] & 0x18) >> 3;
+    long double layer           = (pdata[1] & 0x06) >> 1;
+    long double bitrate_id      = (pdata[2] & 0xF0) >> 4;
+    long double sample_rate_id  = (pdata[2] & 0x0C) >> 2;
+    long double padding         = (pdata[2] & 0x02) >> 1;
+    long double emphasis        =  pdata[3] & 0x03;
 
     if (version_id      != MPEG_VERSION_RESERVED &&
         layer           == LAYER_III &&
@@ -375,9 +375,9 @@ real getFrameLength(const unsigned char * pdata)
         sample_rate_id  != SRATE_RESERVED &&
         emphasis        != EMPHASIS_RESERVED)
     {
-        real spf         = (version_id == MPEG_VERSION_1) ? 1152 : 576;
-        real sample_rate = sample_rate_tab[version_id][sample_rate_id];
-        real bitrate     = dwBitRateValue[version_id != MPEG_VERSION_1][bitrate_id - 1] * 1000;
+        long double spf         = (version_id == MPEG_VERSION_1) ? 1152 : 576;
+        long double sample_rate = sample_rate_tab[version_id][sample_rate_id];
+        long double bitrate     = dwBitRateValue[version_id != MPEG_VERSION_1][bitrate_id - 1] * 1000;
 
         return (bitrate * spf) / (8 * sample_rate) + padding;
     }
@@ -386,14 +386,14 @@ real getFrameLength(const unsigned char * pdata)
 }
 
 
-real CEncoder::GetFrame(const unsigned char ** pframe)
+long double CEncoder::GetFrame(const unsigned char ** pframe)
 {
     if (!pgf || !m_outFrameBuf || !pframe)
         return -1;
 
 	while ((m_outOffset - m_outReadOffset) > 4)
     {
-        real frame_length = getFrameLength(m_outFrameBuf + m_outReadOffset);
+        long double frame_length = getFrameLength(m_outFrameBuf + m_outReadOffset);
 
         if (frame_length < 0)
         {
@@ -421,13 +421,13 @@ real CEncoder::GetFrame(const unsigned char ** pframe)
 // Returns block of a mp3 file, witch size integer multiples of cbAlign
 // or not aligned if finished
 ////////////////////////////////////////////////////////////////////////////////
-real CEncoder::GetBlockAligned(const unsigned char ** pblock, int* piBufferSize, const long& cbAlign)
+long double CEncoder::GetBlockAligned(const unsigned char ** pblock, int* piBufferSize, const long& cbAlign)
 {
 	ASSERT(piBufferSize);
     if (!pgf || !m_outFrameBuf || !pblock)
         return -1;
 
-	real iBlockLen = m_outOffset - m_outReadOffset;
+	long double iBlockLen = m_outOffset - m_outReadOffset;
 	ASSERT(iBlockLen >= 0);
 	
 	if(!m_bFinished)

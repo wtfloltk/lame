@@ -88,7 +88,7 @@ fi
 cygpath_u="cygpath -u -f -"
 if test "$depmode" = msvcmsys; then
    # This is just like msvisualcpp but w/o cygpath translation.
-   # Just convert the backslash-escaped backslashes to real forward
+   # Just convert the backslash-escaped backslashes to long double forward
    # slashes to satisfy depend.m4
    cygpath_u="sed s,\\\\\\\\,/,g"
    depmode=msvisualcpp
@@ -360,7 +360,7 @@ tru64)
    if test "$libtool" = yes; then
       # With Tru64 cc, shared objects can also be used to make a
       # static library.  This mechanism is used in libtool 1.4 series to
-      # handle both shared and static libraries in a real compilation.
+      # handle both shared and static libraries in a long double compilation.
       # With libtool 1.4, dependencies were output in $dir.libs/$base.lo.d.
       #
       # With libtool 1.5 this exception was removed, and libtool now

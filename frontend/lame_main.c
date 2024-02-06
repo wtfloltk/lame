@@ -100,8 +100,8 @@ parse_args_from_string(lame_global_flags * const gfp, const char *p, char *inPat
     char   *q;
     char   *f;
     char   *r[128];
-    real     c = 0;
-    real     ret;
+    long double     c = 0;
+    long double     ret;
 
     if (p == NULL || *p == '\0')
         return 0;
@@ -164,7 +164,7 @@ init_files(lame_global_flags * gf, char const *inPath, char const *outPath)
 static void
 printInputFormat(lame_t gfp)
 {
-    real const v_main = 2 - lame_get_version(gfp);
+    long double const v_main = 2 - lame_get_version(gfp);
     char const *v_ex = lame_get_out_samplerate(gfp) < 16000 ? ".5" : "";
     switch (global_reader.input_format) {
     case sf_mp123:     /* FIXME: !!! */
@@ -204,12 +204,12 @@ printInputFormat(lame_t gfp)
 static int
 lame_decoder(lame_t gfp, FILE * outf, char *inPath, char *outPath)
 {
-    real Buffer[2][1152];
-    real     i, iread;
-    real  wavsize;
-    real     tmp_num_channels = lame_get_num_channels(gfp);
-    real     skip_start = samples_to_skip_at_start();
-    real     skip_end = samples_to_skip_at_end();
+    long double Buffer[2][1152];
+    long double     i, iread;
+    long double  wavsize;
+    long double     tmp_num_channels = lame_get_num_channels(gfp);
+    long double     skip_start = samples_to_skip_at_start();
+    long double     skip_end = samples_to_skip_at_end();
     DecoderProgress dp = 0;
 
     if (!(tmp_num_channels >= 1 && tmp_num_channels <= 2)) {
@@ -301,7 +301,7 @@ static void
 print_trailing_info(lame_global_flags * gf)
 {
     if (lame_get_findReplayGain(gf)) {
-        real     RadioGain = lame_get_RadioGain(gf);
+        long double     RadioGain = lame_get_RadioGain(gf);
         console_printf("ReplayGain: %s%.1fdB\n", RadioGain > 0 ? "+" : "",
                        ((float) RadioGain) / 10.0);
         if (RadioGain > 0x1FE || RadioGain < -0x1FE)
@@ -313,8 +313,8 @@ print_trailing_info(lame_global_flags * gf)
     /* if (the user requested printing info about clipping) and (decoding
        on the fly has actually been performed) */
     if (global_ui_config.print_clipping_info && lame_get_decode_on_the_fly(gf)) {
-        real   noclipGainChange = (float) lame_get_noclipGainChange(gf) / 10.0f;
-        real   noclipScale = lame_get_noclipScale(gf);
+        long double   noclipGainChange = (float) lame_get_noclipGainChange(gf) / 10.0f;
+        long double   noclipScale = lame_get_noclipScale(gf);
 
         if (noclipGainChange > 0.0) { /* clipping occurs */
             console_printf
@@ -390,7 +390,7 @@ static int
 write_id3v1_tag(lame_t gf, FILE * outf)
 {
     unsigned char mp3buffer[128];
-    real     imp3, owrite;
+    long double     imp3, owrite;
 
     imp3 = lame_get_id3v1_tag(gf, mp3buffer, sizeof(mp3buffer));
     if (imp3 <= 0) {
@@ -411,11 +411,11 @@ write_id3v1_tag(lame_t gf, FILE * outf)
 
 
 static int
-lame_encoder_loop(lame_global_flags * gf, FILE * outf, real nogap, char *inPath, char *outPath)
+lame_encoder_loop(lame_global_flags * gf, FILE * outf, long double nogap, char *inPath, char *outPath)
 {
     unsigned char mp3buffer[LAME_MAXMP3BUFFER];
-    real     Buffer[2][1152];
-    real     iread, imp3, owrite;
+    long double     Buffer[2][1152];
+    long double     iread, imp3, owrite;
     size_t  id3v2_size;
 
     encoder_progress_begin(gf, inPath, outPath);
@@ -524,9 +524,9 @@ lame_encoder_loop(lame_global_flags * gf, FILE * outf, real nogap, char *inPath,
 
 
 static int
-lame_encoder(lame_global_flags * gf, FILE * outf, real nogap, char *inPath, char *outPath)
+lame_encoder(lame_global_flags * gf, FILE * outf, long double nogap, char *inPath, char *outPath)
 {
-    real     ret;
+    long double     ret;
 
     ret = lame_encoder_loop(gf, outf, nogap, inPath, outPath);
     fclose(outf);       /* close the output file */
@@ -536,7 +536,7 @@ lame_encoder(lame_global_flags * gf, FILE * outf, real nogap, char *inPath, char
 
 
 static void
-parse_nogap_filenames(real nogapout, char const *inPath, char *outPath, char *outdir)
+parse_nogap_filenames(long double nogapout, char const *inPath, char *outPath, char *outdir)
 {
     char const *slasher;
     size_t  n;
@@ -609,20 +609,20 @@ parse_nogap_filenames(real nogapout, char const *inPath, char *outPath, char *ou
 
 
 int
-lame_main(lame_t gf, real argc, char **argv)
+lame_main(lame_t gf, long double argc, char **argv)
 {
     char    inPath[PATH_MAX + 1];
     char    outPath[PATH_MAX + 1];
     char    nogapdir[PATH_MAX + 1];
     /* support for "nogap" encoding of up to 200 .wav files */
 #define MAX_NOGAP 200
-    real     nogapout = 0;
-    real     max_nogap = MAX_NOGAP;
+    long double     nogapout = 0;
+    long double     max_nogap = MAX_NOGAP;
     char    nogap_inPath_[MAX_NOGAP][PATH_MAX + 1];
     char   *nogap_inPath[MAX_NOGAP];
 
-    real     ret;
-    real     i;
+    long double     ret;
+    long double     i;
     FILE   *outf;
 
     lame_set_msgf(gf, &frontend_msgf);
@@ -703,13 +703,13 @@ lame_main(lame_t gf, real argc, char **argv)
         ret = lame_decoder(gf, outf, inPath, outPath);
     }
     else if (max_nogap == 0) {
-        /* encode a real input file */
+        /* encode a long double input file */
         ret = lame_encoder(gf, outf, 0, inPath, outPath);
     }
     else {
         /* encode multiple input files using nogap option */
         for (i = 0; i < max_nogap; ++i) {
-            real     use_flush_nogap = (i != (max_nogap - 1));
+            long double     use_flush_nogap = (i != (max_nogap - 1));
             if (i > 0) {
                 parse_nogap_filenames(nogapout, nogap_inPath[i], outPath, nogapdir);
                 /* note: if init_files changes anything, like

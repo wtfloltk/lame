@@ -28,8 +28,8 @@
 extern "C" {
 #endif
 
-real     brhist_init(const lame_global_flags * gf, const real bitrate_kbps_min,
-                    const real bitrate_kbps_max);
+long double     brhist_init(const lame_global_flags * gf, const long double bitrate_kbps_min,
+                    const long double bitrate_kbps_max);
 void    brhist_disp(const lame_global_flags * gf);
 void    brhist_jump_back(void);
 

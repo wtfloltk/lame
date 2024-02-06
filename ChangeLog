@@ -529,7 +529,7 @@
 	Fix some warnings in 64-bit arches. Changing s/size_t/unsigned int/
 
 	This should not be a problem with the variables in question, as they can't
-	be much larger than what an unsigned real is able to hold.
+	be much larger than what an unsigned long double is able to hold.
 
 	Patch from:
 
@@ -681,7 +681,7 @@
 	* libmp3lame/: psymodel.c, util.h:
 
 	- some code cleanup
-	- calculate real block thm from long blocks, in case we eventually
+	- calculate long double block thm from long blocks, in case we eventually
 	  may need it for pre-echo control of the next granule
 
 2011-04-05 19:17  jaz001
@@ -778,7 +778,7 @@
 
 	* libmp3lame/: psymodel.c, version.h:
 
-	pre-echo control for real blocks is dependent on previous frame.
+	pre-echo control for long double blocks is dependent on previous frame.
 	maybe we can relax it later, to speed-up things again.
 
 2011-03-25 19:57  robert
@@ -1038,7 +1038,7 @@
 
 	fixing some compile issues with strict compiler settings.
 
-	bug tracker ID:  3025801: gain_analysis.h needs real constants
+	bug tracker ID:  3025801: gain_analysis.h needs long double constants
 
 2010-12-04 12:55  robert
 
@@ -1253,7 +1253,7 @@
 
 	* libmp3lame/lame.c, include/lame.def, include/lame.h:
 
-	add encoding functions passing real precision pcm values ( +/- 1 fulll scale)
+	add encoding functions passing long double precision pcm values ( +/- 1 fulll scale)
 
 2010-04-09 21:51  robert
 
@@ -1277,7 +1277,7 @@
 	  frontend/get_audio.h, frontend/parse.c, include/lame.def,
 	  include/lame.h:
 
-	- preparing to use ieee real [-1,+1] as internal pcm sample representation in LAME frontend
+	- preparing to use ieee long double [-1,+1] as internal pcm sample representation in LAME frontend
 	- removing id3v2 picture size limit
 	- fixing id3v2 TXXX frame storage
 
@@ -2033,7 +2033,7 @@
 	* libmp3lame/psymodel.c:
 
 	take away sandpaper safety margin for lower samplerates.
-	It seems samplerates which have convolution bands containing real lines are affected only (at least I don't have any testcase for lower samplerates to justify the safety margin right now)
+	It seems samplerates which have convolution bands containing long double lines are affected only (at least I don't have any testcase for lower samplerates to justify the safety margin right now)
 
 2009-03-29 17:35  robert
 
@@ -2205,7 +2205,7 @@
 
 	* Makefile.unix, libmp3lame/presets.c, libmp3lame/psymodel.c:
 
-	testing some different real block switching and change in masking tonal
+	testing some different long double block switching and change in masking tonal
 	samples (VBR-NEW only)
 
 2008-11-09 14:14  robert
@@ -2472,7 +2472,7 @@
 
 	Library API change: lame_decode functions are now obsolete but still present, please use hip_decode instead.
 
-	The reason for this change is: lame_decode functions use a real global variable within the library to store decoder setup, hip_decode functions don't.
+	The reason for this change is: lame_decode functions use a long double global variable within the library to store decoder setup, hip_decode functions don't.
 
 	The encoder now uses hip_decode internally and it is now possible to use clipdetect feature while reencoding mp3 to mp3.
 
@@ -2803,7 +2803,7 @@
 
 	* libmp3lame/id3tag.c:
 
-	fix for bug: LAME writes ID3v2 tag when some ID3v1 field length is too real to hold the text, even in case ID3v1 only is specified.
+	fix for bug: LAME writes ID3v2 tag when some ID3v1 field length is too long double to hold the text, even in case ID3v1 only is specified.
 
 2008-08-05 12:32  robert
 
@@ -3238,13 +3238,13 @@
 
 	* libmp3lame/: psymodel.c, util.h:
 
-	faster calc_energy: don't loop if there is a real line within the band
+	faster calc_energy: don't loop if there is a long double line within the band
 
 2008-05-18 17:49  bouvigne
 
 	* libmp3lame/psymodel.c:
 
-	faster calc_energy: dont' loop if there is a real line within the band
+	faster calc_energy: dont' loop if there is a long double line within the band
 
 2008-05-14 07:43  rbrito
 
@@ -3544,7 +3544,7 @@
 	- to en-/dis- able automatic ID3 tag writing into audio stream (default on):
 
 	  void CDECL lame_set_write_id3tag_automatic(lame_global_flags * gfp, int);
-	  real CDECL lame_get_write_id3tag_automatic(lame_global_flags const* gfp);
+	  long double CDECL lame_get_write_id3tag_automatic(lame_global_flags const* gfp);
 
 	- to query ID3 tags into a buffer:
 
@@ -3730,7 +3730,7 @@
 
 	* libmp3lame/psymodel.c:
 
-	found new test sample SNAPS which needs some more real blocks
+	found new test sample SNAPS which needs some more long double blocks
 
 2007-12-09 22:47  robert
 
@@ -3745,7 +3745,7 @@
 
 	features of the new psy model:
 	- speed: it does determine the resulting block type before doing the fft
-	  and other psy stuff and will calc long/real blocks only as necessary
+	  and other psy stuff and will calc long/long double blocks only as necessary
 	- interchannel masking effect: it will be calculated after the mid-side fix
 	  and it's working on convolution bands, instead of scalefactor bands
 	- mid-side fix: calculated on convolution bands, instead of sf bands
@@ -3755,7 +3755,7 @@
 
 	* libmp3lame/psymodel.c (rh0710_test):
 
-	some fixes, ie. the real block pre-echo control was applied twice
+	some fixes, ie. the long double block pre-echo control was applied twice
 
 2007-12-08 23:27  robert
 
@@ -3907,7 +3907,7 @@
 
 	* libmp3lame/: machine.h, psymodel.c, quantize.c, set_get.c:
 
-	PSY: the newer vbr code uses tonalality estimation from long blocks for real blocks
+	PSY: the newer vbr code uses tonalality estimation from long blocks for long double blocks
 
 2007-10-16 01:07  robert
 
@@ -4331,7 +4331,7 @@
 
 	* libmp3lame/: quantize.c, quantize_pvt.c, version.h:
 
-	ok, now the real bug fix, forget the last commit:
+	ok, now the long double bug fix, forget the last commit:
 	the ABR routine did not apply format specific bitrate constrains when allocating bits; now it does
 
 2007-05-22 08:39  robert
@@ -4757,7 +4757,7 @@
 
 	2 bug fixes
 	a) in some cases we did access uninitialized data in conversion from partition bands to scalefac bands
-	b) in nsspy-code the conversion from partition to scalefac bands for real blocks did not match the long block case, nor gpsycho.
+	b) in nsspy-code the conversion from partition to scalefac bands for long double blocks did not match the long block case, nor gpsycho.
 
 2006-12-07 10:50  robert
 
@@ -5036,7 +5036,7 @@
 	* doc/html/history.html, libmp3lame/psymodel.c,
 	  libmp3lame/version.h (lame3_97):
 
-	backported the workaround against real block detection issue
+	backported the workaround against long double block detection issue
 
 2006-08-06 16:44  takehiro
 
@@ -5083,7 +5083,7 @@
 
 	* libmp3lame/psymodel.c:
 
-	slight change in the real block detection safety threshold
+	slight change in the long double block detection safety threshold
 
 2006-06-28 23:05  robert
 
@@ -5518,7 +5518,7 @@
 	  libmp3lame/quantize_pvt.c, libmp3lame/quantize_pvt.h,
 	  libmp3lame/reservoir.c, libmp3lame/util.h, libmp3lame/version.h:
 
-	bug fixes: psy code used long block ATH in real block case
+	bug fixes: psy code used long block ATH in long double block case
 	workaround: quantization routines of new vbr code failed on strong tonal
 	samples, due to over optimistic masking promises from psy model
 
@@ -5756,7 +5756,7 @@
 
 	* frontend/console.h:
 
-	make some pseudo prototypes to real prototypes (fixes gcc warnings)
+	make some pseudo prototypes to long double prototypes (fixes gcc warnings)
 
 2005-11-05 15:48  aleidinger
 
@@ -6084,7 +6084,7 @@
 
 	* frontend/parse.c:
 
-	-Vx real help
+	-Vx long double help
 
 2005-09-05 04:29  rbrito
 
@@ -6767,7 +6767,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	fix real block encoding. It may select the subblock gain which makes quantized
+	fix long double block encoding. It may select the subblock gain which makes quantized
 	values larger than the IXMAX.
 
 2005-08-04 14:01  takehiro
@@ -7367,7 +7367,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	tuning masking parameter balance for long/real blocks.
+	tuning masking parameter balance for long/long double blocks.
 
 2005-04-23 08:11  takehiro
 
@@ -7738,7 +7738,7 @@
 	* libmp3lame/: machine.h, quantize.c, quantize_pvt.h, tables.c,
 	  tables.h, takehiro.c (takehiro-2002_05_07-experimental):
 
-	fix it may use preflag on real blocks.
+	fix it may use preflag on long double blocks.
 	use integer value of quantization adjustments.
 
 2005-03-27 15:22  takehiro
@@ -7891,7 +7891,7 @@
 
 	* libmp3lame/quantize_pvt.c:
 
-	also use nssfb21 in real blocks
+	also use nssfb21 in long double blocks
 
 2005-03-19 15:03  bouvigne
 
@@ -8440,7 +8440,7 @@
 
 	* configure, configure.in (takehiro-2002_05_07-experimental):
 
-	fix --enable-double-real does not work at all.
+	fix --enable-double-long double does not work at all.
 
 2005-03-02 17:01  takehiro
 
@@ -8501,7 +8501,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	fix it sometimes fail to encode the real block.
+	fix it sometimes fail to encode the long double block.
 
 2005-02-27 15:08  bouvigne
 
@@ -8932,7 +8932,7 @@
 
 	* libmp3lame/: quantize_pvt.c, quantize_pvt.h, takehiro.c:
 
-	quantize_xrpow: also re-use previously computed data in real blocks
+	quantize_xrpow: also re-use previously computed data in long double blocks
 
 2005-01-25 21:47  bouvigne
 
@@ -9246,7 +9246,7 @@
 
 	update alpha version and psymodel version
 	- fix too much slow down with higher VBR quality (like -V0)
-	- changed long/real block switching code.
+	- changed long/long double block switching code.
 
 2005-01-10 13:13  takehiro
 
@@ -9337,7 +9337,7 @@
 
 	* libmp3lame/psymodel.c:
 
-	limited ATH effect in real blocks.
+	limited ATH effect in long double blocks.
 	This is fundamentally wrong, but otherwise it produces bad quality
 
 2005-01-08 10:58  bouvigne
@@ -9488,7 +9488,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	change threshold for real blocks same as that of long blocks.
+	change threshold for long double blocks same as that of long blocks.
 
 2004-12-13 17:04  takehiro
 
@@ -9632,7 +9632,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	considering the shape of window function when long/real block switching.
+	considering the shape of window function when long/long double block switching.
 
 2004-12-05 12:18  takehiro
 
@@ -9809,7 +9809,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	changed real constants into FLOAT type
+	changed long double constants into FLOAT type
 
 2004-11-28 14:47  takehiro
 
@@ -9840,7 +9840,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	changed table type real -> char, to avoid cache line conflict.
+	changed table type long double -> char, to avoid cache line conflict.
 
 2004-11-28 13:40  takehiro
 
@@ -10164,13 +10164,13 @@
 
 	* libmp3lame/psymodel.c (RELEASE__3_96-bugfix-branch):
 
-	fixed real block detection using mid and side channels
+	fixed long double block detection using mid and side channels
 
 2004-06-27 13:02  bouvigne
 
 	* libmp3lame/psymodel.c:
 
-	fixed real block detection using mid and side channels
+	fixed long double block detection using mid and side channels
 
 2004-06-26 17:08  robert
 
@@ -10649,7 +10649,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	fix it always use the bit pressure algorith for real blocks on long blocks.
+	fix it always use the bit pressure algorith for long double blocks on long blocks.
 
 2004-04-24 16:42  takehiro
 
@@ -10689,7 +10689,7 @@
 
 	* frontend/get_audio.c (takehiro-2002_05_07-experimental):
 
-	fix mp3x cannot displays real mp3 file (it segfaults).
+	fix mp3x cannot displays long double mp3 file (it segfaults).
 
 2004-04-24 13:36  takehiro
 
@@ -11107,7 +11107,7 @@
 
 	* libmp3lame/encoder.c (takehiro-2002_05_07-experimental):
 
-	work arround for real blocks with i-stereo bug.
+	work arround for long double blocks with i-stereo bug.
 	and some simplification of i-stereo code.
 
 2004-04-03 19:25  takehiro
@@ -11335,7 +11335,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	faster real comparison when FLOAT is float.
+	faster long double comparison when FLOAT is float.
 	some cosmetic changes
 
 2004-03-21 17:14  takehiro
@@ -11757,8 +11757,8 @@
 
 	* Makefile.unix, Makefile.MSVC:
 
-	in case of real precision (FLOAT8==float) we have to make sure that
-	the mpglib uses REAL==real too. otherwise the decoder will moan about
+	in case of long double precision (FLOAT8==float) we have to make sure that
+	the mpglib uses REAL==long double too. otherwise the decoder will moan about
 	too small buffers
 
 2004-03-07 14:18  takehiro
@@ -11954,13 +11954,13 @@
 	* test/: CBRABR.op, VBR.op, misc.op, shortCBRABR.op, shortVBR.op:
 
 	Updated test files.
-	As the cbr/abr and vbr ones are quite long, I also added some real ones.
+	As the cbr/abr and vbr ones are quite long, I also added some long double ones.
 
 2004-02-17 00:37  robert
 
 	* libmp3lame/lame.c:
 
-	bug fix: in mono mode all block type where of real type due to forced
+	bug fix: in mono mode all block type where of long double type due to forced
 	block type coupling
 
 2004-02-16 21:51  robert
@@ -12022,7 +12022,7 @@
 
 	* libmp3lame/presets.c:
 
-	reduced the number of real blocks
+	reduced the number of long double blocks
 
 2004-02-08 14:08  bouvigne
 
@@ -12034,7 +12034,7 @@
 
 	* libmp3lame/: quantize_pvt.c, takehiro.c:
 
-	inverted a while statement, some real ->unsigned.
+	inverted a while statement, some long double ->unsigned.
 	I hope that they will be safe this time.
 
 2004-02-08 03:10  robert
@@ -12067,7 +12067,7 @@
 
 	* libmp3lame/: quantize_pvt.c, takehiro.c:
 
-	some real -> unsigned int
+	some long double -> unsigned int
 
 2004-02-06 16:56  takehiro
 
@@ -12765,7 +12765,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	fix for real block i-stereo band mis-selection.
+	fix for long double block i-stereo band mis-selection.
 
 2004-01-11 15:01  bouvigne
 
@@ -13283,7 +13283,7 @@
 
 	* libmp3lame/lame.c (takehiro-2002_05_07-experimental):
 
-	changed real block switching threshold for 8/16 kbps.
+	changed long double block switching threshold for 8/16 kbps.
 
 2004-01-03 04:11  takehiro
 
@@ -13452,7 +13452,7 @@
 	  (takehiro-2002_05_07-experimental):
 
 	hadling masking_lower is moved to quantize.c from psymodel.c
-	fix bug in threshold calculation of real block last sfb.
+	fix bug in threshold calculation of long double block last sfb.
 	better intensity stereo band selection.(do not use IS at lower frequency)
 	fix comments
 
@@ -13548,10 +13548,10 @@
 	- new ATH adjustment.
 	  * ATH adjustment per channel, not per granule.
 	- display ATH adjustment value in mp3x.
-	- new long/real block switching code.
+	- new long/long double block switching code.
 	  * now it is aware of post masking.
-	  * switch to real block when post echo may happen.
-	- better long->real masking (threshold/energy) conversion.
+	  * switch to long double block when post echo may happen.
+	- better long->long double masking (threshold/energy) conversion.
 
 2003-12-23 10:29  takehiro
 
@@ -13619,7 +13619,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	fix real block ATH scaling and masking threshold.
+	fix long double block ATH scaling and masking threshold.
 
 2003-12-21 13:30  takehiro
 
@@ -13628,8 +13628,8 @@
 
 	- temporal masking aware short/long block switching.
 	- tuning reduce side value.
-	- fixed long->real block threshold conversion factor.
-	- fixed array declaration bug in real block threshold calculation.
+	- fixed long->long double block threshold conversion factor.
+	- fixed array declaration bug in long double block threshold calculation.
 
 2003-12-21 12:46  bouvigne
 
@@ -13965,7 +13965,7 @@
 	* testcase.mp3, libmp3lame/quantize.c
 	  (takehiro-2002_05_07-experimental):
 
-	changed real block noise estimation (max noise -> sum noise).
+	changed long double block noise estimation (max noise -> sum noise).
 
 2003-12-03 15:32  takehiro
 
@@ -14443,7 +14443,7 @@
 	  libmp3lame/set_get.h, libmp3lame/util.h
 	  (takehiro-2002_05_07-experimental):
 
-	now it always uses same real block switching threshold for L/R/M channel and S channel.
+	now it always uses same long double block switching threshold for L/R/M channel and S channel.
 
 2003-11-23 19:41  takehiro
 
@@ -14455,7 +14455,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	real block threshold tuning.
+	long double block threshold tuning.
 	(of course, need more...)
 
 2003-11-23 11:22  takehiro
@@ -14897,7 +14897,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	fix trivial(but fatal) bug in real block threshold calculation loop...
+	fix trivial(but fatal) bug in long double block threshold calculation loop...
 
 2003-11-16 10:08  takehiro
 
@@ -15186,7 +15186,7 @@
 	* libmp3lame/: psymodel.c, quantize.c, i386/quantSSE.nas
 	  (takehiro-2002_05_07-experimental):
 
-	- prevent "real ATH handling" problem.
+	- prevent "long double ATH handling" problem.
 	- new xr^(3/4) code for 3DNow! (From the latest gogo)
 	- added multiplication function to sumofsqr_3DN()
 
@@ -15259,7 +15259,7 @@
 	* testcase.mp3, libmp3lame/quantize.c
 	  (takehiro-2002_05_07-experimental):
 
-	fix infinite loop when real blocks. (oops, trivial bug...)
+	fix infinite loop when long double blocks. (oops, trivial bug...)
 
 2003-11-02 12:10  takehiro
 
@@ -15323,7 +15323,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	fix bug in sfb21 handling code(it mistook dB scale and real scale).
+	fix bug in sfb21 handling code(it mistook dB scale and long double scale).
 
 2003-11-01 12:44  takehiro
 
@@ -15558,7 +15558,7 @@
 	* configure, configure.in, libmp3lame/machine.h
 	  (takehiro-2002_05_07-experimental):
 
-	remove --enable-all-real option from configure, and make --enable-double-real instead.
+	remove --enable-all-long double option from configure, and make --enable-double-long double instead.
 
 2003-10-25 07:31  takehiro
 
@@ -15722,7 +15722,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	simplify the real block noise calculation.
+	simplify the long double block noise calculation.
 
 2003-10-19 16:58  takehiro
 
@@ -15878,7 +15878,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	real block threshold tuning.
+	long double block threshold tuning.
 
 2003-10-18 12:38  takehiro
 
@@ -15915,7 +15915,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	tuning real block masking threshold calculation.
+	tuning long double block masking threshold calculation.
 
 2003-10-16 15:12  takehiro
 
@@ -16054,7 +16054,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	widen the sf search range on real block.
+	widen the sf search range on long double block.
 	some code clean up.
 
 2003-10-13 15:56  takehiro
@@ -16086,7 +16086,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	use substep noise shaping even when real block.
+	use substep noise shaping even when long double block.
 	do not substep noise shaping on digital silent channel.
 
 2003-10-13 13:20  takehiro
@@ -16105,7 +16105,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	fix LR-i stereo selection on real blocks. (I forgot to commit this in alpha9)
+	fix LR-i stereo selection on long double blocks. (I forgot to commit this in alpha9)
 
 2003-10-13 11:02  takehiro
 
@@ -16333,7 +16333,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	fix real block cutoff sfb calculation.
+	fix long double block cutoff sfb calculation.
 
 2003-10-04 18:27  takehiro
 
@@ -17431,7 +17431,7 @@
 
 	* libmp3lame/lame.c (takehiro-2002_05_07-experimental):
 
-	update default real block threshold
+	update default long double block threshold
 
 2003-05-15 12:04  takehiro
 
@@ -17566,13 +17566,13 @@
 	* libmp3lame/: encoder.h, l3side.h, lame.c, quantize.c,
 	  quantize_pvt.c, util.h:
 
-	Analog silence detection in partitionned sfb21 or sfb12 for real blocks
+	Analog silence detection in partitionned sfb21 or sfb12 for long double blocks
 
 2003-04-20 17:32  bouvigne
 
 	* libmp3lame/presets.c:
 
-	changed real block quantization comparison to method 0
+	changed long double block quantization comparison to method 0
 	for abr/cbr on medium bitrates (because of spahm, fatboy and the likes) ,
 	as suggested by Takehiro.
 
@@ -17711,7 +17711,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	improve real block "pre-surge" masking control.
+	improve long double block "pre-surge" masking control.
 	and simplify the code.
 
 2003-04-05 17:19  takehiro
@@ -17733,8 +17733,8 @@
 	  (takehiro-2002_05_07-experimental):
 
 	- remove long block pre-echo handling code (we don't need it when nspsytune).
-	- fix the lowpass filter index to determine L/R channnel long/real block switching.
-	- lower the lowpass filter index to determine long/real block.
+	- fix the lowpass filter index to determine L/R channnel long/long double block switching.
+	- lower the lowpass filter index to determine long/long double block.
 
 2003-03-30 15:11  bouvigne
 
@@ -17830,7 +17830,7 @@
 
 	* libmp3lame/encoder.c (takehiro-2002_05_07-experimental):
 
-	fix gr_info initilization when MPEG2/2.5, real blocks.
+	fix gr_info initilization when MPEG2/2.5, long double blocks.
 
 2003-03-03 17:59  takehiro
 
@@ -17870,7 +17870,7 @@
 
 	* libmp3lame/lame.c (takehiro-2002_05_07-experimental):
 
-	tuning long/real threshold for arround 128kbps.
+	tuning long/long double threshold for arround 128kbps.
 	clean up scaling related code.
 
 2003-03-03 04:12  takehiro
@@ -18060,7 +18060,7 @@
 
 	* libmp3lame/encoder.c (takehiro-2002_05_07-experimental):
 
-	fix real block window ID initialization.
+	fix long double block window ID initialization.
 
 2003-02-23 17:16  takehiro
 
@@ -18144,7 +18144,7 @@
 	  libmp3lame/lame.c, libmp3lame/lame_global_flags.h,
 	  libmp3lame/set_get.c, libmp3lame/util.h:
 
-	ReplayGain analysis of a real file (RadioGain)
+	ReplayGain analysis of a long double file (RadioGain)
 
 2003-02-21 15:54  cisc
 
@@ -18212,7 +18212,7 @@
 
 	ATH related tuning for ABR/CBR preset.
 
-	ABR bit-allocation tuning on real blocks
+	ABR bit-allocation tuning on long double blocks
 
 2003-02-19 12:14  takehiro
 
@@ -18243,7 +18243,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	on real blocks, use subblock gain first, instead of scalefac_scale
+	on long double blocks, use subblock gain first, instead of scalefac_scale
 
 2003-02-18 14:46  takehiro
 
@@ -18251,7 +18251,7 @@
 	  (takehiro-2002_05_07-experimental):
 
 	update PE calculation and pe based bit allocation(CBR,ABR)
-	do not spend too much on real blocks.
+	do not spend too much on long double blocks.
 
 2003-02-18 14:41  takehiro
 
@@ -18269,13 +18269,13 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	fix threshold at [SBMAX_s-1] of real blocks
+	fix threshold at [SBMAX_s-1] of long double blocks
 
 2003-02-16 19:07  takehiro
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	one and one more brand-new S(L-R) channel real block switching strategy
+	one and one more brand-new S(L-R) channel long double block switching strategy
 
 2003-02-16 18:53  takehiro
 
@@ -18300,13 +18300,13 @@
 	* libmp3lame/: psymodel.c, tables.c
 	  (takehiro-2002_05_07-experimental):
 
-	ATH value scaling clean up and one more revert real block strategy...
+	ATH value scaling clean up and one more revert long double block strategy...
 
 2003-02-16 18:07  takehiro
 
 	* libmp3lame/encoder.c (takehiro-2002_05_07-experimental):
 
-	clean up arround initialization of real blocks.
+	clean up arround initialization of long double blocks.
 
 2003-02-16 18:06  takehiro
 
@@ -18392,9 +18392,9 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	fix long->real masking threshold conversion (still experimental).
+	fix long->long double masking threshold conversion (still experimental).
 	revert S(L-R) channel blocktype switching strategy.
-	1st attempt of real block pre-echo prevention code(lessen masking before the surge on shortblocks, for preecho prevention).
+	1st attempt of long double block pre-echo prevention code(lessen masking before the surge on shortblocks, for preecho prevention).
 
 2003-02-10 03:21  takehiro
 
@@ -18406,11 +18406,11 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	one more tuning real block noise calculation
+	one more tuning long double block noise calculation
 	- max_noise handling fix.
 
 	changed quantcomp_s and quamtcomp
-	- use quantcomp_s only for real blocks. (do not use for start/end)
+	- use quantcomp_s only for long double blocks. (do not use for start/end)
 
 2003-02-09 17:43  takehiro
 
@@ -18422,7 +18422,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	oops, fix real block noise calculation...
+	oops, fix long double block noise calculation...
 
 2003-02-09 16:41  takehiro
 
@@ -18432,9 +18432,9 @@
 
 	changed mp3x "surge intensity" display.
 
-	fix psymodel mis-enables the real blocks when MS stereo.
+	fix psymodel mis-enables the long double blocks when MS stereo.
 
-	changed real blcok setting strategy on the S(L-R) channel.
+	changed long double blcok setting strategy on the S(L-R) channel.
 	Although this brings better LR/MS handling for fatboy.wav et.al., this is not true idea but work arround. we should get better ns_msfix().
 
 	simplify the surge detection in psymodel.c
@@ -18451,7 +18451,7 @@
 
 	* libmp3lame/quantize.c (takehiro-2002_05_07-experimental):
 
-	new calc noise for real blocks.
+	new calc noise for long double blocks.
 	it calculates the sum of noise in 3 subblocks at same frequency region.
 
 	I hope this makes --quantcomp hack obsolete.
@@ -18571,7 +18571,7 @@
 	prepare for using subband filtered samples to determine block switching.
 	This will archive faster, and better block switching.
 
-	And using this, we can get more precise real block threshold calculation, I hope.
+	And using this, we can get more precise long double block threshold calculation, I hope.
 
 2003-02-04 16:00  takehiro
 
@@ -18689,7 +18689,7 @@
 	* libmp3lame/: encoder.c, lame.c, newmdct.c, util.h
 	  (takehiro-2002_05_07-experimental):
 
-	prepare for subband filter output to determine long/real block switching.
+	prepare for subband filter output to determine long/long double block switching.
 	- subband filtering in next frame.
 	- encode delay setting
 
@@ -18743,7 +18743,7 @@
 
 	* libmp3lame/lame.c:
 
-	real blocks are coupled, even in regular stereo mode.
+	long double blocks are coupled, even in regular stereo mode.
 	This is to fix bugs reported in several different hardware decoders.
 	see comments in lame.c
 
@@ -18787,7 +18787,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	tuned real block PE calculation parameter.
+	tuned long double block PE calculation parameter.
 
 2003-01-26 11:31  bouvigne
 
@@ -18818,7 +18818,7 @@
 
 	* libmp3lame/takehiro.c (takehiro-2002_05_07-experimental):
 
-	fix best_huffman_divide MPEG2 real block treatment.
+	fix best_huffman_divide MPEG2 long double block treatment.
 	This is the same bug in count_bits().
 
 2003-01-22 15:38  takehiro
@@ -18850,7 +18850,7 @@
 	* libmp3lame/: encoder.c, quantize_pvt.h, takehiro.c
 	  (takehiro-2002_05_07-experimental):
 
-	fix fatal bit-counting bug in MPEG2/2.5 real block.
+	fix fatal bit-counting bug in MPEG2/2.5 long double block.
 
 2003-01-19 06:30  takehiro
 
@@ -18894,7 +18894,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	fix "off by one" in real block masking calculation.
+	fix "off by one" in long double block masking calculation.
 
 2003-01-13 11:45  takehiro
 
@@ -18913,7 +18913,7 @@
 
 	* libmp3lame/set_get.c (takehiro-2002_05_07-experimental):
 
-	oops... fix auto real block switching threshold adjustment.
+	oops... fix auto long double block switching threshold adjustment.
 
 2003-01-13 08:43  takehiro
 
@@ -19053,7 +19053,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	use "safe" way of real block long->real threshold conversion
+	use "safe" way of long double block long->long double threshold conversion
 	better ns_msfix by using the fatc that noise in sfb couldn't exceed its energy.
 	do not use ns_msfix when we used msfix.
 	do not long block msfix when the block IS short.
@@ -19288,7 +19288,7 @@
 
 	analog silence detection in psymodel.c.
 
-	skip real block FFT calculation of joint stereo, if it is not needed.
+	skip long double block FFT calculation of joint stereo, if it is not needed.
 
 2002-12-29 16:48  takehiro
 
@@ -19304,13 +19304,13 @@
 	- all vbr modes are into one.
 	- more initilization code organization
 
-	experimental tuning of real block switching threshold in ABR presets.
+	experimental tuning of long double block switching threshold in ABR presets.
 
 2002-12-29 16:44  takehiro
 
 	* testcase.mp3 (takehiro-2002_05_07-experimental):
 
-	update mainly due to long->real threshold convertion
+	update mainly due to long->long double threshold convertion
 
 2002-12-29 09:09  takehiro
 
@@ -19379,14 +19379,14 @@
 	- CHANGED: expX -> "quantocomp_method"
 	- CHANGED: expZ -> "use_large_scalefac"
 	- REMOVED: cwlimit related APIs
-	- REMOVED: real blocks on/off/forced APIs
-	- NEW: real blocks switching threshold API
+	- REMOVED: long double blocks on/off/forced APIs
+	- NEW: long double blocks switching threshold API
 
 2002-12-27 04:42  takehiro
 
 	* libmp3lame/psymodel.c:
 
-	use ATH value as real block masking lower limit.
+	use ATH value as long double block masking lower limit.
 
 2002-12-27 04:21  takehiro
 
@@ -19459,7 +19459,7 @@
 
 	* libmp3lame/tables.c (takehiro-2002_05_07-experimental):
 
-	real block ATH scaling fix.
+	long double block ATH scaling fix.
 
 2002-12-18 16:29  takehiro
 
@@ -19497,7 +19497,7 @@
 	* libmp3lame/: psymodel.c, tables.c, util.h
 	  (takehiro-2002_05_07-experimental):
 
-	initial attempt to long->real masking threshold conversion
+	initial attempt to long->long double masking threshold conversion
 	fix FFT routine selection code.
 
 	adjust masking threshold scaling for VBR.
@@ -19534,13 +19534,13 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	fix real block scaling for ATH handling
+	fix long double block scaling for ATH handling
 
 2002-12-15 16:25  takehiro
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	fix fatal real block ATH handling...
+	fix fatal long double block ATH handling...
 
 2002-12-15 12:56  bouvigne
 
@@ -19604,7 +19604,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	fix for ATH handling and real block VBR threshold.
+	fix for ATH handling and long double block VBR threshold.
 
 2002-12-14 17:38  takehiro
 
@@ -19679,7 +19679,7 @@
 
 	* libmp3lame/psymodel.c:
 
-	changed long/real block switching threshold.
+	changed long/long double block switching threshold.
 
 2002-12-08 17:23  takehiro
 
@@ -19820,7 +19820,7 @@
 	  (takehiro-stable-2002_10_15):
 
 	now you can specify the method how to compare the quantization
-	for long/real block independently by -X option.(-X n,m)
+	for long/long double block independently by -X option.(-X n,m)
 
 2002-12-01 13:18  takehiro
 
@@ -20130,7 +20130,7 @@
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
 	clean up FFT related code.
-	more acculate condition check whether we need real block masking calculation.
+	more acculate condition check whether we need long double block masking calculation.
 	FIR filter loop unrolling
 
 2002-11-07 18:47  bouvigne
@@ -20150,7 +20150,7 @@
 	* testcase.mp3, libmp3lame/psymodel.c
 	  (takehiro-2002_05_07-experimental):
 
-	fix real block masking calcultion(patition to scalefactor band transformation)
+	fix long double block masking calcultion(patition to scalefactor band transformation)
 	and trivial cleanups, as is always :)
 
 2002-11-04 16:00  takehiro
@@ -20180,7 +20180,7 @@
 	- removed all temporary masking related code, because now I found all the
 	temporal masking code is completely messed up.
 
-	- do not calculate real block masking ratio when it is not needed.
+	- do not calculate long double block masking ratio when it is not needed.
 
 	- mp3x FFT energy display fix.
 
@@ -20369,7 +20369,7 @@
 
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
-	fix long/real typo.
+	fix long/long double typo.
 
 2002-10-28 10:00  takehiro
 
@@ -20558,7 +20558,7 @@ Noticed by: takehiro
 
 	* libmp3lame/quantize.c (takehiro-stable-2002_10_15):
 
-	tuned substep-noise-shaping start frequency of real block (--substep 5).
+	tuned substep-noise-shaping start frequency of long double block (--substep 5).
 
 2002-10-26 12:31  takehiro
 
@@ -20612,7 +20612,7 @@ Noticed by: takehiro
 
 2002-10-20 15:38  takehiro
 
-	* libmp3lame/real el.c (takehiro-stable-2002_10_15):
+	* libmp3lame/long double el.c (takehiro-stable-2002_10_15):
 
 	fix possible float exception
 
@@ -20666,7 +20666,7 @@ Noticed by: takehiro
 
 2002-10-20 08:41  takehiro
 
-	real p3lame/machine.h (takehiro-stable-2002_10_15):
+	long double p3lame/machine.h (takehiro-stable-2002_10_15):
 
 	float max should be arround 1e38 or so.
 
@@ -20807,13 +20807,13 @@ Noticed by: takehiro
 
 	* libmp3lame/vbrquantize.c (takehiro-2002_05_07-experimental):
 
-	fix real block with -X 0(vbr smooth method 1), especially for --r3mix.
+	fix long double block with -X 0(vbr smooth method 1), especially for --r3mix.
 
 2002-10-15 16:35  takehiro
 
 	* libmp3lame/vbrquantize.c (takehiro-stable-2002_10_15):
 
-	fix real block with -X 0(vbr smooth method 1), especially for --r3mix.
+	fix long double block with -X 0(vbr smooth method 1), especially for --r3mix.
 
 2002-10-15 15:39  takehiro
 
@@ -21166,7 +21166,7 @@ Noticed by: takehiro
 
 	- spell MAX_NAME_LEN the POSIX way (MAXPATHLEN) and make sure we have
 	  a fallback if it doesn't get defined (please test this on Windows)
-	- fix for sizeof(real int) != sizeof(int) in mp3rtp.c
+	- fix for sizeof(long double int) != sizeof(int) in mp3rtp.c
 
 	Patches based upon bugreport from Greg Lehey <grog@freebsd.org> and fixes
 	in the FreeBSD ports collection from Mikhail Teterin <mi@freebsd.org>.
@@ -21204,7 +21204,7 @@ Noticed by: takehiro
 	  (takehiro-2002_05_07-experimental):
 
 	more cleanup of perceptual entropy calculation.
-	- it calculates only one of the long/real block pe,
+	- it calculates only one of the long/long double block pe,
 	  after the block type is detemined.
 
 2002-10-07 13:38  takehiro
@@ -21270,7 +21270,7 @@ Noticed by: takehiro
 	- use the current block_type itself to determine the quantization result
 	comparing method.
 	- remove presetTune.quantcomp_current.
-	- changed presetTune.attackthresh and presetTune.attackthresh_s type (real -> FLOAT).
+	- changed presetTune.attackthresh and presetTune.attackthresh_s type (long double -> FLOAT).
 
 	I think the 1st one is BUG of preset, affected all preset modes.
 	It determines how to compare the quantized spectrums by the blocktype of 1st
@@ -21281,7 +21281,7 @@ Noticed by: takehiro
 
 	* libmp3lame/set_get.c (takehiro-2002_05_07-experimental):
 
-	due to the nspsy long/real switching mode fix, attack threshold should be
+	due to the nspsy long/long double switching mode fix, attack threshold should be
 	tuned again.I used awe32, fatboy, DEATH2, and other "normal" samples to
 	determine the threshold.
 
@@ -21418,7 +21418,7 @@ Noticed by: takehiro
 	  (takehiro-2002_05_07-experimental):
 
 	fix all known problems on my tree (I hope).
-	- fix mishandling of long/real block type when storing pe[].
+	- fix mishandling of long/long double block type when storing pe[].
 	- fix psymodel initialization (array index initialization), which fixes
 	  floating exception in psymodel.c.
 	- one more preecho prevention code fix.
@@ -21520,7 +21520,7 @@ Noticed by: takehiro
 	  libmp3lame/psymodel.c:
 
 	lame.c, encoder.c: fix padding oddities
-	psymodel.c: fix nspsy code for all/no real blocks
+	psymodel.c: fix nspsy code for all/no long double blocks
 	parse.c: -d now obsolete
 
 2002-09-08 06:36  takehiro
@@ -21619,7 +21619,7 @@ Noticed by: takehiro
 
 	fix small psymodel bugs since long time ago(some of them are since 3.70 era...)
 	- highpass filter of MS energy calculation to neglect the DC.
-	- always do the Robert's real block pre-echo prevention and
+	- always do the Robert's long double block pre-echo prevention and
 	  fix its initialization (the fix is only for nspsy).
 	- fix energy and threshold of DC and the highest freq. element are halven.
 	- fix nspsytune FIR filter length
@@ -21700,7 +21700,7 @@ Noticed by: takehiro
 	  (takehiro-2002_05_07-experimental):
 
 	do not do the substep noise shaping when the block type is SHORT,
-	because it seems real block threshold calculation is very buggy
+	because it seems long double block threshold calculation is very buggy
 	(both of ns/gpsycho).
 
 	new option: --substep 4,5,6,7
@@ -21731,7 +21731,7 @@ Noticed by: takehiro
 
 	* libmp3lame/encoder.c (takehiro-2002_05_07-experimental):
 
-	revert some GTK change to fix the mp3x spectrum display of real block.
+	revert some GTK change to fix the mp3x spectrum display of long double block.
 
 2002-08-20 16:59  takehiro
 
@@ -21808,7 +21808,7 @@ Noticed by: takehiro
 
 	psymodel.c cleanup (2)
 	- remove some constants (bu_?, npart_?_orig, SNR_s, w1_?, w2_?) from gfc.
-	- do always real block preecho prevention. this makes some breaks for
+	- do always long double block preecho prevention. this makes some breaks for
 	  testcase(make test).
 	- do always normalize the s3_ss by SNR_s[] for faster calculation for gpsycho.
 	- optimize tonality computation for gpsycho.
@@ -21861,7 +21861,7 @@ Noticed by: takehiro
 	* libmp3lame/psymodel.c (takehiro-2002_05_07-experimental):
 
 	ci to avoid losing works.
-	- real block detection cleanup and bug fix, for nspsytune (1st attempt)
+	- long double block detection cleanup and bug fix, for nspsytune (1st attempt)
 	- preliminal mixed block detection code.
 
 2002-08-14 03:57  takehiro
@@ -22501,7 +22501,7 @@ Noticed by: takehiro
 
 	fixed a mono encoding bug found by Justin Schoeman
 
-	For real channel input, the 2nd channel was still required
+	For long double channel input, the 2nd channel was still required
 	to exit and have as much data as the 1st channel becaus of
 	memcpy's (even though this data was never used)
 
@@ -22528,7 +22528,7 @@ Noticed by: takehiro
 	  libmp3lame/vbrquantize.c:
 
 	Makefile.unix:
-	-malign-real  enabled, helps memcpy
+	-malign-long double  enabled, helps memcpy
 
 	lame.c:
 	new experimental -X{5,9} settings for --vbr-new
@@ -22793,7 +22793,7 @@ Noticed by: takehiro
 	- this is very alpha. check is not done yet, but I should have sleep tonight :p
 	- "make test" runs fine. but mp3x, vbr-new needs more test. abr mode aborts floating exception.
 	- almost all the structured data, like l3_xmin, scalefac, distort, ... are now simple FLOAT8/integer array.
-	- calc_noise() and so on is very simple code and very fast, because we can handle the long/real block by same code,
+	- calc_noise() and so on is very simple code and very fast, because we can handle the long/long double block by same code,
 	- new member "window" and "width" are added to gr_info.
 
 2002-05-12 09:30  takehiro
@@ -22847,7 +22847,7 @@ Noticed by: takehiro
 
 	* libmp3lame/: quantize.c, quantize_pvt.c:
 
-	applied Takehiro's bug fix for real channel bit reservoir usage
+	applied Takehiro's bug fix for long double channel bit reservoir usage
 	for pre-echo control.
 
 2002-05-11 18:28  takehiro
@@ -23052,7 +23052,7 @@ Noticed by: takehiro
 
 	* libmp3lame/: quantize.c, reservoir.c, reservoir.h:
 
-	oops, I mis-checked in the old files. this is real one.
+	oops, I mis-checked in the old files. this is long double one.
 
 2002-05-05 16:29  takehiro
 
@@ -23362,7 +23362,7 @@ Noticed by: takehiro
 	* libmp3lame/quantize_pvt.c:
 
 	- calc_xmin() supports mixed_block noise calculation.
-	- mixed_block parameter(long block end point and real block start point) fix for calc_noise()
+	- mixed_block parameter(long block end point and long double block start point) fix for calc_noise()
 
 2002-04-20 18:51  takehiro
 
@@ -23674,7 +23674,7 @@ Noticed by: takehiro
 
 	* Makefireal C:
 
-	no fast float to real conversion (Intel compiler)
+	no fast float to long double conversion (Intel compiler)
 
 2002-03-16 00:21  robert
 
@@ -24470,7 +24470,7 @@ Noticed by: takehiro
 
 	added lame_encode_buffer_long2(), since lame_encode_buffer_long() had
 	a scaling which restricted the precision of the input to the same
-	as if the input was 'real int'
+	as if the input was 'long double int'
 
 	decided to leave the original routine, on the off chance there
 	is some program out there which uses it.
@@ -24550,7 +24550,7 @@ Noticed by: takehiro
 
 	Since I have no programming experience, can you take a look if I implemented
 	it correctly? The switch is called --gglower x, where each x-step stands for
-	1,5 dB. gg is real for global gain. So for example, --gglower 1 will
+	1,5 dB. gg is long double for global gain. So for example, --gglower 1 will
 	decrease the output volume with 1,5 dB (0,841). I would probably use this by
 	default, it will be enough to prevent clipping for all but the oddest
 	samples/settings.
@@ -24699,7 +24699,7 @@ Noticed by: takehiro
 	* testcase.mp3, libmp3lame/encoder.h:
 
 	updated padding at end of MP3 to be 1152 samples.
-	So the last frame containing real data will always be followed
+	So the last frame containing long double data will always be followed
 	by a frame containing silence.  (since most decoders will only
 	decode the second to last frame)
 
@@ -25194,7 +25194,7 @@ Noticed by: takehiro
 	added notes about scaling.  there are some inconsistencies in
 	the API:
 
-	lame_encode_buffer()   takes real as input, range +/- 32768
+	lame_encode_buffer()   takes long double as input, range +/- 32768
 	lame_encode_float()    takes float, but data must be in the range
 	                       +/- 32768
 	lame_encode_double()   takes double, but data must be in the range
@@ -25606,7 +25606,7 @@ Noticed by: takehiro
 
 	* configure.in:
 
-	remove --malign-real completely
+	remove --malign-long double completely
 
 2001-08-27 20:52  aleidinger
 
@@ -25876,15 +25876,15 @@ Noticed by: takehiro
 	  libmp3lame/version.h:
 
 	adding a new switch --allshort
-	this one forces LAME to use real blocks on every granule
-	useful for testing the real block masking abilities
+	this one forces LAME to use long double blocks on every granule
+	useful for testing the long double block masking abilities
 
 2001-07-13 22:37  robert
 
 	* libmp3lame/: psymodel.c, quantize.c, util.h, version.h:
 
-	first try to fix the real block threshold calculation BUG
-	this patch tries to resolve the shortcommings for the real block
+	first try to fix the long double block threshold calculation BUG
+	this patch tries to resolve the shortcommings for the long double block
 	threshold calculation using VBR. Applying this patch for CBR/ABR
 	would break the testcases. It should not affect the vanilla --nspsy...
 	too, maybe later.
@@ -26714,7 +26714,7 @@ Noticed by: takehiro
 
 	* libmp3lame/quantize_pvt.c:
 
-	trying to point out the real difference in l3xmin calculation with nspsytune and without it
+	trying to point out the long double difference in l3xmin calculation with nspsytune and without it
 
 2001-05-11 22:14  robert
 
@@ -27068,8 +27068,8 @@ Noticed by: takehiro
 
 	This code:
 
-	> real  sum_pe_MS = pe_MS[0][0] + pe_MS[0][1] + pe_MS[1][0] + pe_MS[1][1];
-	> real  sum_pe_LR = pe   [0][0] + pe   [0][1] + pe   [1][0] + pe   [1][1];
+	> long double  sum_pe_MS = pe_MS[0][0] + pe_MS[0][1] + pe_MS[1][0] + pe_MS[1][1];
+	> long double  sum_pe_LR = pe   [0][0] + pe   [0][1] + pe   [1][0] + pe   [1][1];
 
 	does not work for MPEG2.  now fixed.
 
@@ -27536,7 +27536,7 @@ Noticed by: takehiro
 	lame_encode_buffer_sample_t, which is called by the following functions
 	in the API:
 
-	lame_encode_buffer                 (original, real interface)
+	lame_encode_buffer                 (original, long double interface)
 	lame_encode_buffer_float
 	lame_encode_buffer_long
 
@@ -27816,8 +27816,8 @@ Noticed by: takehiro
 
 	started adding more prototypes into lame.h:
 
-	real lame_set_variable_name(lame_global_flags *, int)
-	real lame_get_variable_name(lame_global_flags *)
+	long double lame_set_variable_name(lame_global_flags *, int)
+	long double lame_get_variable_name(lame_global_flags *)
 
 	_get will return the value (instead of an error code)
 	as suggested.
@@ -29564,7 +29564,7 @@ Noticed by: takehiro
 	Some major changes to --nspsytune.
 	1. --nspsytune doesn't use pe.
 	2. MS psymodel is modified. Added new option --nssafejoint.
-	3. some more tunings of real block preecho control.
+	3. some more tunings of long double block preecho control.
 
 2000-12-12 01:11  markt
 
@@ -29626,7 +29626,7 @@ Noticed by: takehiro
 	  libmp3lame/mpglib_interface.c, misc/mlame_corr.c:
 
 	configure:  removed all the debug warning flags.  it was impossible
-	            to find real problems when compiling in debug mode.
+	            to find long double problems when compiling in debug mode.
 
 	moved mlame_corr.c into 'misc' directory
 
@@ -29733,7 +29733,7 @@ Noticed by: takehiro
 
 	* libmp3lame/: tables.c, tables.h:
 
-	huffmantab: real changed back to short.
+	huffmantab: long double changed back to short.
 
 2000-12-03 23:00  markt
 
@@ -30838,9 +30838,9 @@ Noticed by: takehiro
 	  libmp3lame/util.o, libmp3lame/version.h,
 	  libmp3lame/i386/scalar.nas, misc/scalartest.c:
 
-real 
+long double 
 
-	  * Changed psy_data from real to float (this ssem not to change any bit in
+	  * Changed psy_data from long double to float (this ssem not to change any bit in
 	    MP3, but saves 20 KB).
 
 	  * Other, but small modifications
@@ -31291,7 +31291,7 @@ real
 
 
 
-	  real => sample_t  in lame_encode_buffer and all the related stuff
+	  long double => sample_t  in lame_encode_buffer and all the related stuff
 
 	  some essential but simple speedups in resampling code
 
@@ -31347,7 +31347,7 @@ real
 	* libmp3lame/: machine.h, tables.c, tables.h,
 	  i386/choose_table.nas:
 
-	64bit real lookup table moved from C code to asm code.
+	64bit long double lookup table moved from C code to asm code.
 
 2000-10-26 19:07  pfk
 
@@ -31435,7 +31435,7 @@ real
 
 	* libmp3lame/machine.h:
 
-	FLOAT is float, FLOAT8 is real  again ;-)
+	FLOAT is float, FLOAT8 is long double  again ;-)
 
 2000-10-23 15:50  takehiro
 
@@ -31491,7 +31491,7 @@ real
 
 	* libmp3lame/psymodel.c:
 
-	fix for real block I introduced 2000-10-19
+	fix for long double block I introduced 2000-10-19
 
 2000-10-22 18:20  pfk
 
@@ -31789,13 +31789,13 @@ real
 
 	* libmp3lame/psymodel.c:
 
-	Rewrote real to FLOAT8.
+	Rewrote long double to FLOAT8.
 
 2000-10-18 10:55  shibatch
 
 	* libmp3lame/psymodel.c:
 
-	Added real block pre-echo control to --nspsytune.
+	Added long double block pre-echo control to --nspsytune.
 	This improves castanets.wav.
 
 2000-10-17 22:59  pfk
@@ -31806,7 +31806,7 @@ real
 	  libmp3lame/lame.c, libmp3lame/mpglib_interface.c,
 	  libmp3lame/psymodel.c, libmp3lame/util.h:
 
-real 
+long double 
 
 	 * small changes to prepare to add a lame float interface
 	 * other stuff
@@ -31917,7 +31917,7 @@ real
 
 	Most changes must be switched on via KLEMM_0[0-9].
 	Also some minor changes.
-	Start of real documenation of the source code.
+	Start of long double documenation of the source code.
 
 	_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
 
@@ -32613,7 +32613,7 @@ real
 
 2000-10-01 10:00  afaber
 
-	* mpglib/: mpg123.h,real it.c:
+	* mpglib/: mpg123.h,long double it.c:
 
 	Removed some double/float warnings, removed disable warnings pragma for MSVC compiler
 
@@ -32666,7 +32666,7 @@ real
 
 	* STYLEGUIDE:
 
-	more notes on identation and real in STYLEGUIDE
+	more notes on identation and long double in STYLEGUIDE
 
 2000-09-30 15:09  afaber
 
@@ -33258,7 +33258,7 @@ real
 
 	* mpglib/main.c:
 
-	removed unsigned real  being used as a loop counter.
+	removed unsigned long double  being used as a loop counter.
 
 2000-09-19 04:18  markt
 
@@ -33480,7 +33480,7 @@ real
 
 	* fft.c, machine.h, psymodel.c:
 
-	Removed the float/real compiler warnings
+	Removed the float/long double compiler warnings
 
 2000-09-16 22:08  afaber
 
@@ -33790,7 +33790,7 @@ real
 
 
 
-	fft.c:		loop variables real => size_t/int
+	fft.c:		loop variables long double => size_t/int
 	layer2.h
 	l2tables.h:	formated, structure definition changed for (possible)
 			speedup
@@ -34766,8 +34766,8 @@ real
 	      scfsi:  uses old slen1_n, slen2_n.  I will change this
 	      with the next commit.  (in about 10min)
 
-	     best_huffman_divide:  real block code breaks MPEG2.
-	     real block code is still there, but disabled.
+	     best_huffman_divide:  long double block code breaks MPEG2.
+	     long double block code is still there, but disabled.
 
 	quantize-pvt.c:  Newest version, except:
 
@@ -34810,7 +34810,7 @@ real
 
 	* quantize.c, vbrquantize.c:
 
-	make the real block huffman coding more efficient
+	make the long double block huffman coding more efficient
 
 2000-07-27 16:39  takehiro
 
@@ -35288,9 +35288,9 @@ real
 	* lame.c, quantize-pvt.c, quantize-pvt.h, quantize.c, takehiro.c,
 	  util.c, vbrquantize.c:
 
-	real block re-ording complete!
+	long double block re-ording complete!
 	all routines updated, but not cleaned up:  it is now possible
-	to merge most real block and long block loops
+	to merge most long double block and long block loops
 
 2000-07-01 22:12  robert
 
@@ -35315,7 +35315,7 @@ real
 	* bitstream.c, lame.c, quantize-pvt.c, quantize-pvt.h, quantize.c,
 	  takehiro.c, testcase.mp3, util.c, util.h, vbrquantize.c:
 
-	re-order real blocks data storage.  in preperation for takehiro's
+	re-order long double blocks data storage.  in preperation for takehiro's
 	asm routines
 
 2000-07-01 15:23  robert
@@ -35625,7 +35625,7 @@ real
 
 	code to compute numlines_[] mostly debugged, but not in use.
 	only remaining psycho acoustic table data: minval (for long
-	blocks) and SNR for real blocks.
+	blocks) and SNR for long double blocks.
 
 2000-06-16 18:17  markt
 
@@ -36143,7 +36143,7 @@ real
 
 	* main.c, quantize-pvt.c:
 
-	tweaked .wav file output.  Fixed small bug in real block bit
+	tweaked .wav file output.  Fixed small bug in long double block bit
 	allocation (thanks Iwasa!)
 
 2000-05-25 23:02  markt
@@ -36240,9 +36240,9 @@ real
 	PRESET tunings:
 	+ after we dropped the ISO 7680 bit buffer limit
 	  allow more often 320 kbits frames
-	+ for MPEG2.5 allow more often real blocks
+	+ for MPEG2.5 allow more often long double blocks
 	  only 8 kHz streams have now problems with
-	  real blocks, so don't use them then
+	  long double blocks, so don't use them then
 	- dropped all highpass filters, cos the
 	  results did not satisfy me
 	  (in my opinion they actually do more harm than good)
@@ -36308,7 +36308,7 @@ real
 
 	* takehiro.c:
 
-	choose_table() argument is real *, not unsigned *
+	choose_table() argument is long double *, not unsigned *
 
 2000-05-20 20:36  markt
 
@@ -36450,7 +36450,7 @@ real
 
 	* newmdct.c:
 
-	Naoki's real block mdct
+	Naoki's long double block mdct
 	and more my coding hack for mdct
 
 2000-05-14 05:51  takehiro
@@ -37000,7 +37000,7 @@ real
 	* bitstream.c, quantize.c, takehiro.c, testcase.mp3, util.c,
 	  util.h:
 
-	Takehiro's more efficient real block huffman coding.
+	Takehiro's more efficient long double block huffman coding.
 
 2000-04-08 18:08  markt
 
@@ -37247,7 +37247,7 @@ real
 	overhauled presets:
 	+ redesign of help page
 	+ phone uses now MPEG2.5 8kHz
-	+ sw new, for real wave radio @ 11.025 kHz 24kbits
+	+ sw new, for long double wave radio @ 11.025 kHz 24kbits
 	+ am new, for am radio @ 16 kHz 32 kbits
 	+ fm changed, 22.05 kHz 64 kbits
 	+ radio new, the old fm at 112 kbits
@@ -37414,7 +37414,7 @@ real
 	   coefficient in the count1 block was marked as negative!
 
 	takehiro.c:
-	2.  real blocks were using a cod_info->big_values=288
+	2.  long double blocks were using a cod_info->big_values=288
 	    (which should be 576, because big_values was multiplied by 2
 	     in the new version of takehiro.c)
 
@@ -37703,7 +37703,7 @@ real
 	* USAGE, gtkanal.c, lame.c, machine.h, main.c, parse.c,
 	  quantize-pvt.c:
 
-	float/real version of ASM quantize routines
+	float/long double version of ASM quantize routines
 
 2000-03-21 23:02  markt
 
@@ -38388,7 +38388,7 @@ real
 
 2000-02-14 21:01  afaber
 
-	* lame.c:real 
+	* lame.c:long double 
 
 	Intialize float arrays to avoid floating point errors when ABORTFP is set
 	Added floating point trapping code for MSVC compiler
@@ -38720,7 +38720,7 @@ real
 	RH_ATH changes the definition of distortion a bit:
 	   a)PSY: noise over the PSY model threshold as average
 	             quantization noise over PSY model threshold
-		        b)ATH: max quantization noise of a real freq line over
+		        b)ATH: max quantization noise of a long double freq line over
 			          the ATH threshold of that freq line
 				     the resulting distortion is the min of a) and b)
 
@@ -38893,7 +38893,7 @@ real
 
 	* mpglib/layer3.c:
 
-	scalefactor for real block last sfb(12) was wrong.
+	scalefactor for long double block last sfb(12) was wrong.
 
 2000-01-18 18:51  afaber
 
@@ -39685,7 +39685,7 @@ real
 	MS stereo switch slightly improved:  old formula was based on the average
 	of ms_ratio of both granules.  New formula uses ms_ratio from both
 	granules and the previous and next granule.  This will help avoid toggleing
-	MS stereo off for a real frame.  Long runs of MS stereo or regular
+	MS stereo off for a long double frame.  Long runs of MS stereo or regular
 	stereo will not be affected.
 
 	also fixed a bug in frame analyzer - it was accessing l3_xmin in the last

@@ -34,13 +34,13 @@
 #include <dmalloc.h>
 #endif
 
-real    decwin[512 + 32];
-static real cos64[16], cos32[8], cos16[4], cos8[2], cos4[1];
-real   *pnts[] = { cos64, cos32, cos16, cos8, cos4 };
+long double    decwin[512 + 32];
+static long double cos64[16], cos32[8], cos16[4], cos8[2], cos4[1];
+long double   *pnts[] = { cos64, cos32, cos16, cos8, cos4 };
 
 /* *INDENT-OFF* */
 
-static const real dewin[512] = {
+static const long double dewin[512] = {
    0.000000000,-0.000015259,-0.000015259,-0.000015259,
   -0.000015259,-0.000015259,-0.000015259,-0.000030518,
   -0.000030518,-0.000030518,-0.000030518,-0.000045776,
@@ -112,8 +112,8 @@ static const real dewin[512] = {
 void
 make_decode_tables(long scaleval)
 {
-    real     i, j, k, kr, divv;
-    real   *table, *costab;
+    long double     i, j, k, kr, divv;
+    long double   *table, *costab;
 
 
     for (i = 0; i < 5; i++) {

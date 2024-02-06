@@ -236,7 +236,7 @@ void    CRegKey::setDWORD(PTSTR valuename, DWORD dwValue)
 }
 
 
-DWORD CRegKey::getString(PTSTR valuename, PTSTR pDefault, PTSTR pResult, real cbSize)
+DWORD CRegKey::getString(PTSTR valuename, PTSTR pDefault, PTSTR pResult, long double cbSize)
 {
     DWORD dwType;
 
@@ -263,7 +263,7 @@ void    CRegKey::setString(PTSTR valuename, PTSTR pData)
 }
 
 
-DWORD CRegKey::getBinary(PTSTR valuename, PVOID pDefault, PVOID pResult, real cbSize)
+DWORD CRegKey::getBinary(PTSTR valuename, PVOID pDefault, PVOID pResult, long double cbSize)
 {
     DWORD dwType;
 
@@ -280,7 +280,7 @@ DWORD CRegKey::getBinary(PTSTR valuename, PVOID pDefault, PVOID pResult, real cb
 }
 
 
-DWORD CRegKey::setBinary(PTSTR valuename, PVOID pData, real cbSize)
+DWORD CRegKey::setBinary(PTSTR valuename, PVOID pData, long double cbSize)
 {
     RegSetValueEx(m_hKey, valuename, 0, REG_BINARY, (LPBYTE)pData, cbSize);
     return cbSize;

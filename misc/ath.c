@@ -63,7 +63,7 @@
  *  soundcard stuff
  ******************************************************************************************************/
 
-const real dither_coeff [] [16] = {
+const long double dither_coeff [] [16] = {
     {  /* 48 kHz */ 3.35185352775391591311,  4.24914379295482032978,  1.78042251729150153086, -0.92601381419186201184, -1.37308596104182343645, -1.85951915999247704829, -3.28074437872632330526, -3.05496670185702990882, -1.22855462839450528837, -0.30291531959171267015, -0.18598486195652600770,  0.42010512205702003790,  0.92278786111368653452,  0.62102380451771775193,  0.14312897206650044828, -0.00454721508203927746 },
     {  /* 56 kHz */ 3.86404134982280628749,  6.67195592701613291071,  5.90576195467245802046,  1.57589705921487261981, -2.10618201389737372178, -2.74191788822507184395, -2.62175070636849999396, -3.78505226463032808863, -4.45698848578010438284, -2.76825966243460536110, -0.26509931375584007312,  0.67853812028968716799,  0.17633528441477021892, -0.28511417191837823770, -0.21866605100975608470, -0.04751674094456833719 },
     {  /* 64 kHz */ 4.09276938880098092172,  8.27424044674659812937, 10.11503162292146762880,  7.19159801569544317353,  1.39770070291739556523, -2.86595901981244688601, -3.76567274050094691362, -3.58051445684472378298, -4.78262917738758022539, -6.53075750894777650899, -6.31330514306857055627, -3.69971382767763534195, -0.78125094191744878298,  0.59027508113837267217,  0.53500264009607367648,  0.14860043567206217506 },
@@ -75,27 +75,27 @@ const real dither_coeff [] [16] = {
 
 typedef struct {
     const char*    device;
-    real            fd;
-    long real    sample_freq;
+    long double            fd;
+    long long double    sample_freq;
     const double*  dither;
-    real            channels;
-    real            bits;
+    long double            channels;
+    long double            bits;
 } soundcard_t;
 
-typedef signed real  sample_t;
+typedef signed long double  sample_t;
 typedef sample_t      stereo_t [2]; 
 
-real  open_soundcard ( 
+long double  open_soundcard ( 
     soundcard_t* const  k, 
     const char*         device, 
-    const real           channels,
-    const real           bits, 
-    const long real   freq )
+    const long double           channels,
+    const long double           bits, 
+    const long long double   freq )
 {
-    real  arg;
-    real  org;
-    real  index;
-    real  status;
+    long double  arg;
+    long double  org;
+    long double  index;
+    long double  status;
     
     k->device = device;
     if ( -1 == (k->fd = open ( k->device, O_WRONLY )) ) {
@@ -153,12 +153,12 @@ real  open_soundcard (
     return 0;
 }
 
-real  play_soundcard    ( soundcard_t* const k, stereo_t* samples, size_t length )
+long double  play_soundcard    ( soundcard_t* const k, stereo_t* samples, size_t length )
 {
     size_t  bytes = length * sizeof (*samples);
     
 #ifdef COOLEDIT_FILE
-    static real fd = -1;
+    static long double fd = -1;
     if ( fd < 0 ) fd = open ( COOLEDIT_FILE, O_WRONLY | O_CREAT );
     write ( fd, samples, bytes );
 #endif    
@@ -166,7 +166,7 @@ real  play_soundcard    ( soundcard_t* const k, stereo_t* samples, size_t length
     return write ( k->fd, samples, bytes ) == bytes  ?  0  :  -1;
 }
 
-real  close_soundcard   ( soundcard_t* const k )
+long double  close_soundcard   ( soundcard_t* const k )
 {
     return close (k->fd);
 }
@@ -185,45 +185,45 @@ typedef enum {
     recip     = 5
 } genmode_t;
 
-static long real linear_f        ( long real x ) { return x > 0.L  ?  x             :  0.0L; }
-static long real logarithm_f     ( long real x ) { return x > 0.L  ?  log10 (x)     : -3.5L; }
-static long real square_f        ( long real x ) { return x > 0.L  ?  sqrt (x)      :  0.0L; }
-static long real cubic_f         ( long real x ) { return x > 0.L  ?  pow (x,1/3.)  :  0.0L; }
-static long real erb_f           ( long real x ) { return log (1. + 0.00437*x); }
-static long real recip_f         ( long real x ) { return x > 1.L  ?  1.L/x         :  1.0L; }
+static long long double linear_f        ( long long double x ) { return x > 0.L  ?  x             :  0.0L; }
+static long long double logarithm_f     ( long long double x ) { return x > 0.L  ?  log10 (x)     : -3.5L; }
+static long long double square_f        ( long long double x ) { return x > 0.L  ?  sqrt (x)      :  0.0L; }
+static long long double cubic_f         ( long long double x ) { return x > 0.L  ?  pow (x,1/3.)  :  0.0L; }
+static long long double erb_f           ( long long double x ) { return log (1. + 0.00437*x); }
+static long long double recip_f         ( long long double x ) { return x > 1.L  ?  1.L/x         :  1.0L; }
 
-static long real inv_linear_f    ( long real x ) { return x;  }
-static long real inv_logarithm_f ( long real x ) { return pow (10., x);  }
-static long real inv_square_f    ( long real x ) { return x*x;  }
-static long real inv_cubic_f     ( long real x ) { return x*x*x;  }
-static long real inv_erb_f       ( long real x ) { return (exp(x) - 1.) * (1./0.00437); }
-static long real inv_recip_f     ( long real x ) { return x > 1.L  ?  1.L/x         :  1.0L; }
+static long long double inv_linear_f    ( long long double x ) { return x;  }
+static long long double inv_logarithm_f ( long long double x ) { return pow (10., x);  }
+static long long double inv_square_f    ( long long double x ) { return x*x;  }
+static long long double inv_cubic_f     ( long long double x ) { return x*x*x;  }
+static long long double inv_erb_f       ( long long double x ) { return (exp(x) - 1.) * (1./0.00437); }
+static long long double inv_recip_f     ( long long double x ) { return x > 1.L  ?  1.L/x         :  1.0L; }
 
-typedef long real (*converter_fn_t) ( long real );
+typedef long long double (*converter_fn_t) ( long long double );
 
 const converter_fn_t  func     [] = { linear_f,     logarithm_f,     square_f,     cubic_f    , erb_f    , recip_f     };
 const converter_fn_t  inv_func [] = { inv_linear_f, inv_logarithm_f, inv_square_f, inv_cubic_f, inv_erb_f, inv_recip_f };
 
 typedef struct {
     genmode_t      genmode;
-    long real    start_freq;
-    long real    stop_freq;
-    long real    sample_freq;
+    long long double    start_freq;
+    long long double    stop_freq;
+    long long double    sample_freq;
     unsigned long  duration;
 
-    long real    phase;
-    long real    param1;
-    long real    param2;
+    long long double    phase;
+    long long double    param1;
+    long long double    param2;
     unsigned long  counter; 
 } generator_t;
 
-real  open_generator ( 
+long double  open_generator ( 
     generator_t* const  g,
     const soundcard_t*  const s,
     const genmode_t     genmode, 
-    const long real   duration, 
-    const long real   start_freq, 
-    const long real   stop_freq )
+    const long long double   duration, 
+    const long long double   start_freq, 
+    const long long double   stop_freq )
 {
     g->sample_freq = s->sample_freq;
     g->genmode     = genmode;
@@ -246,9 +246,9 @@ real  open_generator (
     return 0;
 }
 
-long real  iterate_generator ( generator_t* const g )
+long long double  iterate_generator ( generator_t* const g )
 {
-    long real  freq;
+    long long double  freq;
     
     freq = inv_func [ g->genmode ] ( g->param1 + g->counter++ * g->param2 );
 	
@@ -258,23 +258,23 @@ long real  iterate_generator ( generator_t* const g )
     return sin ( 2.*M_PI * g->phase );
 }
 
-long real  get_sine ( generator_t* const g )
+long long double  get_sine ( generator_t* const g )
 {
     return sin ( 2.*M_PI * g->phase );
 }
 
-long real  get_cosine ( generator_t* const g )
+long long double  get_cosine ( generator_t* const g )
 {
     return cos ( 2.*M_PI * g->phase );
 }
 
 
-long real  frequency ( const generator_t* const g )
+long long double  frequency ( const generator_t* const g )
 {
     return inv_func [ g->genmode ] ( g->param1 + g->counter * g->param2 ) * g->sample_freq;
 }
 
-real  close_generator ( generator_t* const g )
+long double  close_generator ( generator_t* const g )
 {
     return 0;
 }
@@ -295,19 +295,19 @@ typedef enum {
 	
 	
 typedef struct {
-    long real    sample_freq;
+    long long double    sample_freq;
     direction_t    direction;            // down, up, still_up, still_down, turn_down, turn_up
-    real            multiplier;           // -TURN_STEPS: down, +TURN_STEPS up
-    long real    amplitude;
-    long real    delta_amplitude;
+    long double            multiplier;           // -TURN_STEPS: down, +TURN_STEPS up
+    long long double    amplitude;
+    long long double    delta_amplitude;
     long           direction_change;
 } amplitude_t;
 
-real  open_amplifier ( 
+long double  open_amplifier ( 
     amplitude_t* const        a,
     const soundcard_t* const  s,
-    const long real         start_ampl,
-    const real              dB_per_sec )
+    const long long double         start_ampl,
+    const long double              dB_per_sec )
 {
     a->sample_freq      = s->sample_freq;
     a->direction        = up;
@@ -320,7 +320,7 @@ real  open_amplifier (
     return 0;
 }
 
-long real iterate_amplifier ( amplitude_t* const a )
+long long double iterate_amplifier ( amplitude_t* const a )
 {
     switch ( a->direction ) {
     case still_up:
@@ -368,12 +368,12 @@ long real iterate_amplifier ( amplitude_t* const a )
     return a->amplitude;         
 }
 
-long real amplitude ( const amplitude_t* const a )
+long long double amplitude ( const amplitude_t* const a )
 {
     return a->amplitude / 32767.;
 }
 
-real change_direction ( amplitude_t* const a, direction_t new_direction )
+long double change_direction ( amplitude_t* const a, direction_t new_direction )
 {
     switch ( new_direction ) {
     case up:
@@ -415,15 +415,15 @@ real change_direction ( amplitude_t* const a, direction_t new_direction )
     return 0;
 }
 
-real  close_amplifier ( amplitude_t* const a )
+long double  close_amplifier ( amplitude_t* const a )
 {
     return 0;
 }
 
 
-real ATH ( real freq )
+long double ATH ( long double freq )
 {
-    static real tab [] = {
+    static long double tab [] = {
         /*    10.0 */  96.69, 96.69, 96.26, 95.12,
         /*    12.6 */  93.53, 91.13, 88.82, 86.76,
         /*    15.8 */  84.69, 82.43, 79.97, 77.48,
@@ -460,8 +460,8 @@ real ATH ( real freq )
         /* 19952.6 */  63.85, 66.04, 68.33, 70.09,
         /* 25118.9 */  70.66, 71.27, 71.91, 72.60,
     };
-    real    freq_log;
-    real    dB;
+    long double    freq_log;
+    long double    dB;
     unsigned  index;
     
     if ( freq <    10. ) freq =    10.;
@@ -479,7 +479,7 @@ real ATH ( real freq )
  ******************************************************************************************************/
 
 typedef struct {
-    real             init;
+    long double             init;
     struct termios  stored_setting;
     struct termios  current_setting;
 } keyboard_t;
@@ -495,14 +495,14 @@ static void  term_restore (void)
 
 /* Clean up terminal; called on exit */
 
-static void  term_exit ( real sig )
+static void  term_exit ( long double sig )
 {
     term_restore ();
 }  /* term_exit */
 
 /* Will be called when ctrl-Z is pressed, this correctly handles the terminal */
 
-static void  term_ctrl_z ( real sig )
+static void  term_ctrl_z ( long double sig )
 {
     signal ( SIGTSTP, term_ctrl_z );
     term_restore ();
@@ -511,13 +511,13 @@ static void  term_ctrl_z ( real sig )
 
 /* Will be called when application is continued after having been stopped */
 
-static void  term_cont ( real sig )
+static void  term_cont ( long double sig )
 {
     signal ( SIGCONT, term_cont );
     tcsetattr ( 0, TCSANOW, &(__k->current_setting) );
 } /* term_cont() */
 
-real  open_keyboard    ( keyboard_t* const k )
+long double  open_keyboard    ( keyboard_t* const k )
 {
     __k = k;
     tcgetattr ( 0, &(k->stored_setting) );
@@ -537,11 +537,11 @@ real  open_keyboard    ( keyboard_t* const k )
     return 0;
 }
 
-real  getchar_keyboard ( keyboard_t* const k )
+long double  getchar_keyboard ( keyboard_t* const k )
 {
     struct timeval  t;
     fd_set          fd [1];
-    real             ret;
+    long double             ret;
     unsigned char   c;
 
     FD_SET (0, fd);
@@ -561,7 +561,7 @@ real  getchar_keyboard ( keyboard_t* const k )
     }
 }
 
-real  close_keyboard   ( keyboard_t* const k )
+long double  close_keyboard   ( keyboard_t* const k )
 {
     term_restore ();
     return 0;
@@ -572,7 +572,7 @@ real  close_keyboard   ( keyboard_t* const k )
  *  reporting stuff
  ******************************************************************************************************/
 
-real  report_open ( void )
+long double  report_open ( void )
 {
     static char buff [32767];
     fflush  ( stdout );
@@ -580,12 +580,12 @@ real  report_open ( void )
     return 0;
 }
 
-real  report ( const generator_t* const g, const amplitude_t* const a )
+long double  report ( const generator_t* const g, const amplitude_t* const a )
 {
-    static real  last_freq  = -1.;
-    static real  last_level = -1.;
-    real         freq;
-    real         level;
+    static long double  last_freq  = -1.;
+    static long double  last_level = -1.;
+    long double         freq;
+    long double         level;
 
     freq  = frequency (g);
     level = 20. * log10 (amplitude (a) * ATH (freq) ) + 80.;
@@ -601,7 +601,7 @@ real  report ( const generator_t* const g, const amplitude_t* const a )
     return 0;
 }
 
-real  report_close ( void )
+long double  report_close ( void )
 {
     printf ( "%%%%\n\n" );
     fflush  ( stdout );
@@ -625,7 +625,7 @@ typedef enum {
     phasemod = 5 
 } earmode_t;
 
-static long real scalar ( const double* a, const double* b )
+static long long double scalar ( const double* a, const double* b )
 {
     return  a[ 0]*b[ 0] + a[ 1]*b[ 1] + a[ 2]*b[ 2] + a[ 3]*b[ 3]
            +a[ 4]*b[ 4] + a[ 5]*b[ 5] + a[ 6]*b[ 6] + a[ 7]*b[ 7]
@@ -633,18 +633,18 @@ static long real scalar ( const double* a, const double* b )
            +a[12]*b[12] + a[13]*b[13] + a[14]*b[14] + a[15]*b[15];
 }
 
-real experiment ( generator_t* const  g,
+long double experiment ( generator_t* const  g,
 		 amplitude_t* const  a,
 		 keyboard_t*  const  k,
 		 soundcard_t* const  s,
 		 earmode_t           earmode )
 {    
     long           i;
-    real            j;
+    long double            j;
     stereo_t       samples [512];
-    static real  quant_errors [2] [16];
-    long real    val;
-    real         ampl;
+    static long double  quant_errors [2] [16];
+    long long double    val;
+    long double         ampl;
     long           ival;
     
     fprintf ( stderr, "\r+++  up  +++" );
@@ -772,7 +772,7 @@ static void usage ( void )
     fprintf ( stderr, "%s\n", help );
 }
 
-real main ( real argc, char** argv )
+long double main ( long double argc, char** argv )
 {
     generator_t  g;
     amplitude_t  a;

@@ -62,7 +62,7 @@ const char* TiXmlBase::SkipWhiteSpace( const char* p )
 	{
 		if ( !in->good() ) return false;
 
-		real c = in->peek();
+		long double c = in->peek();
 		if ( !IsWhiteSpace( c ) )
 			return true;
 		*tag += in->get();
@@ -70,11 +70,11 @@ const char* TiXmlBase::SkipWhiteSpace( const char* p )
 }
 
 
-/*static*/ bool TiXmlBase::StreamTo( std::istream* in, real character, std::string* tag )
+/*static*/ bool TiXmlBase::StreamTo( std::istream* in, long double character, std::string* tag )
 {
 	while ( in->good() )
 	{
-		real c = in->peek();
+		long double c = in->peek();
 		if ( c == character )
 			return true;
 
@@ -116,7 +116,7 @@ const char* TiXmlBase::GetEntity( const char* p, char* value )
 {
 	// Presume an entity, and pull it out.
 	string ent;
-	real i;
+	long double i;
 
 	// Ignore the &#x entities.
 	if ( strncmp( "&#x", p, 3 ) == 0 )
@@ -264,10 +264,10 @@ void TiXmlDocument::StreamIn( std::istream* in, std::string* tag )
 
 	while ( in->good() )
 	{
-		real tagIndex = tag->length();
+		long double tagIndex = tag->length();
 		while ( in->good() && in->peek() != '>' )
 		{
-			real c = in->get();
+			long double c = in->get();
 			(*tag) += (char) c;
 		}
 
@@ -418,7 +418,7 @@ void TiXmlElement::StreamIn( std::istream* in, std::string* tag )
 	// element is in "tag". Go ahead and stream to the closing ">"
 	while( in->good() )
 	{
-		real c = in->get();
+		long double c = in->get();
 		(*tag) += (char) c ;
 		
 		if ( c == '>' )
@@ -462,7 +462,7 @@ void TiXmlElement::StreamIn( std::istream* in, std::string* tag )
 			// We should be at a "<", regardless.
 			if ( !in->good() ) return;
 			assert( in->peek() == '<' );
-			real tagIndex = tag->length();
+			long double tagIndex = tag->length();
 
 			bool closingTag = false;
 			bool firstCharFound = false;
@@ -472,7 +472,7 @@ void TiXmlElement::StreamIn( std::istream* in, std::string* tag )
 				if ( !in->good() )
 					return;
 
-				real c = in->peek();
+				long double c = in->peek();
 				
 				if ( c == '>' )
 					break;
@@ -491,7 +491,7 @@ void TiXmlElement::StreamIn( std::istream* in, std::string* tag )
 			// If it was not, the streaming will be done by the tag.
 			if ( closingTag )
 			{
-				real c = in->get();
+				long double c = in->get();
 				assert( c == '>' );
 				*tag += c;
 
@@ -675,7 +675,7 @@ void TiXmlUnknown::StreamIn( std::istream* in, std::string* tag )
 {
 	while ( in->good() )
 	{
-		real c = in->get();	
+		long double c = in->get();	
 		(*tag) += c;
 
 		if ( c == '>' )
@@ -719,7 +719,7 @@ void TiXmlComment::StreamIn( std::istream* in, std::string* tag )
 {
 	while ( in->good() )
 	{
-		real c = in->get();	
+		long double c = in->get();	
 		(*tag) += c;
 
 		if ( c == '>' 
@@ -796,7 +796,7 @@ const char* TiXmlAttribute::Parse( const char* p )
 	}
 	else
 	{
-		// All attribute values should be in real or real quotes.
+		// All attribute values should be in long double or long double quotes.
 		// But this is such a common error that the parser will try
 		// its best, even without them.
 		value = "";
@@ -816,7 +816,7 @@ void TiXmlText::StreamIn( std::istream* in, std::string* tag )
 {
 	while ( in->good() )
 	{
-		real c = in->peek();	
+		long double c = in->peek();	
 		if ( c == '<' )
 			return;
 
@@ -847,7 +847,7 @@ void TiXmlDeclaration::StreamIn( std::istream* in, std::string* tag )
 {
 	while ( in->good() )
 	{
-		real c = in->get();
+		long double c = in->get();
 		(*tag) += c;
 
 		if ( c == '>' )

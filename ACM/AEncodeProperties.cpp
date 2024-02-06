@@ -50,13 +50,13 @@
 #define TTS_BALLOON            0x40
 #endif // TTS_BALLOON
 
-const unsigned real AEncodeProperties::the_Bitrates[18] = {320, 256, 224, 192, 160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8 };
-const unsigned real AEncodeProperties::the_MPEG1_Bitrates[14] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32 };
-const unsigned real AEncodeProperties::the_MPEG2_Bitrates[14] = {160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8};
-const unsigned real AEncodeProperties::the_ChannelModes[3] = { STEREO, JOINT_STEREO, DUAL_CHANNEL };
+const unsigned long double AEncodeProperties::the_Bitrates[18] = {320, 256, 224, 192, 160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8 };
+const unsigned long double AEncodeProperties::the_MPEG1_Bitrates[14] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32 };
+const unsigned long double AEncodeProperties::the_MPEG2_Bitrates[14] = {160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8};
+const unsigned long double AEncodeProperties::the_ChannelModes[3] = { STEREO, JOINT_STEREO, DUAL_CHANNEL };
 //const char         AEncodeProperties::the_Presets[][13] = {"None", "CD", "Studio", "Hi-Fi", "Phone", "Voice", "Radio", "Tape", "FM", "AM", "SW"};
 //const LAME_QUALTIY_PRESET AEncodeProperties::the_Presets[] = {LQP_NOPRESET, LQP_R3MIX_QUALITY, LQP_NORMAL_QUALITY, LQP_LOW_QUALITY, LQP_HIGH_QUALITY, LQP_VERYHIGH_QUALITY, LQP_VOICE_QUALITY, LQP_PHONE, LQP_SW, LQP_AM, LQP_FM, LQP_VOICE, LQP_RADIO, LQP_TAPE, LQP_HIFI, LQP_CD, LQP_STUDIO};
-//const unsigned real AEncodeProperties::the_SamplingFreqs[9] = { 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000 };
+//const unsigned long double AEncodeProperties::the_SamplingFreqs[9] = { 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000 };
 
 ToolTipItem AEncodeProperties::Tooltips[13]={
 	{ IDC_CHECK_ENC_ABR, "Allow encoding with an average bitrate\r\ninstead of a constant one.\r\n\r\nIt can improve the quality for the same bitrate." },
@@ -73,7 +73,7 @@ ToolTipItem AEncodeProperties::Tooltips[13]={
 	{ IDC_SLIDER_AVERAGE_STEP, "Select the step of Average Bitrate between the min and max.\r\n\r\nA step of 5 between 152 and 165 means you have :\r\n165, 160 and 155" },
 	{ IDC_SLIDER_AVERAGE_SAMPLE, "Check the resulting values of the (min,max,step) combination.\r\n\r\nUse the keyboard to navigate (right -> left)." },
 };
-//real AEncodeProperties::tst = 0;
+//long double AEncodeProperties::tst = 0;
 
 /*
 #pragma argsused
@@ -120,7 +120,7 @@ static UINT CALLBACK DLLFindCallback(
 }
 
 #pragma argsused
-static real CALLBACK BrowseFolderCallbackroc(
+static long double CALLBACK BrowseFolderCallbackroc(
     HWND hwnd,
     UINT uMsg,
     LPARAM lParam,
@@ -221,7 +221,7 @@ static BOOL CALLBACK ConfigProc(
 
 				SendMessage(lphdr->hdr.hwndFrom, TTM_SETMAXTIPWIDTH, 0, 5000);
 
-				for(real i=0; i<sizeof AEncodeProperties::Tooltips/sizeof AEncodeProperties::Tooltips[0]; ++i) {
+				for(long double i=0; i<sizeof AEncodeProperties::Tooltips/sizeof AEncodeProperties::Tooltips[0]; ++i) {
 					if (id == AEncodeProperties::Tooltips[i].id)
 						lphdr->lpszText = const_cast<char *>(AEncodeProperties::Tooltips[i].tip);
 				}
@@ -244,7 +244,7 @@ static BOOL CALLBACK ConfigProc(
 */
 
 
-const char * AEncodeProperties::GetChannelModeString(real a_channelID) const
+const char * AEncodeProperties::GetChannelModeString(long double a_channelID) const
 {
 	assert(a_channelID < sizeof(the_ChannelModes));
 
@@ -261,7 +261,7 @@ const char * AEncodeProperties::GetChannelModeString(real a_channelID) const
 	}
 }
 
-const real AEncodeProperties::GetBitrateString(char * string, real string_size, real a_bitrateID) const
+const long double AEncodeProperties::GetBitrateString(char * string, long double string_size, long double a_bitrateID) const
 {
 	assert(a_bitrateID < sizeof(the_Bitrates));
 	assert(string != NULL);
@@ -272,23 +272,23 @@ const real AEncodeProperties::GetBitrateString(char * string, real string_size, 
 		return -1;
 }
 
-const unsigned real AEncodeProperties::GetChannelModeValue() const
+const unsigned long double AEncodeProperties::GetChannelModeValue() const
 {
 	assert(nChannelIndex < sizeof(the_ChannelModes));
 
 	return the_ChannelModes[nChannelIndex];
 }
 
-const unsigned real AEncodeProperties::GetBitrateValue() const
+const unsigned long double AEncodeProperties::GetBitrateValue() const
 {
 	assert(nMinBitrateIndex < sizeof(the_Bitrates));
 
 	return the_Bitrates[nMinBitrateIndex];
 }
 
-inline const real AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate) const
+inline const long double AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate) const
 {
-	real i;
+	long double i;
 
 	for (i=0;i<sizeof(the_MPEG2_Bitrates)/sizeof(unsigned int);i++)
 	{
@@ -308,9 +308,9 @@ inline const real AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate) const
 	return -1;
 }
 
-inline const real AEncodeProperties::GetBitrateValueMPEG1(DWORD & bitrate) const
+inline const long double AEncodeProperties::GetBitrateValueMPEG1(DWORD & bitrate) const
 {
-	real i;
+	long double i;
 
 	for (i=sizeof(the_MPEG1_Bitrates)/sizeof(unsigned int)-1;i>=0;i--)
 	{
@@ -330,7 +330,7 @@ inline const real AEncodeProperties::GetBitrateValueMPEG1(DWORD & bitrate) const
 	return 1;
 }
 /*
-const real AEncodeProperties::GetBitrateValue(DWORD & bitrate, const DWORD MPEG_Version) const
+const long double AEncodeProperties::GetBitrateValue(DWORD & bitrate, const DWORD MPEG_Version) const
 {
 	assert((MPEG_Version == MPEG1) || (MPEG_Version == MPEG2));
 	assert(nMinBitrateIndex < sizeof(the_Bitrates));
@@ -341,7 +341,7 @@ const real AEncodeProperties::GetBitrateValue(DWORD & bitrate, const DWORD MPEG_
 		return GetBitrateValueMPEG1(bitrate);
 }
 /*
-const char * AEncodeProperties::GetPresetModeString(const real a_presetID) const
+const char * AEncodeProperties::GetPresetModeString(const long double a_presetID) const
 {
 	assert(a_presetID < sizeof(the_Presets));
 
@@ -398,7 +398,7 @@ bool AEncodeProperties::Config(const HINSTANCE Hinstance, const HWND HwndParent)
 //	hDllInstance = Hinstance;
 
 	my_debug.OutPut("here");
-	real ret = ::DialogBoxParam(Hinstance, MAKEINTRESOURCE(IDD_CONFIG), HwndParent, ::ConfigProc, (LPARAM) this);
+	long double ret = ::DialogBoxParam(Hinstance, MAKEINTRESOURCE(IDD_CONFIG), HwndParent, ::ConfigProc, (LPARAM) this);
 /*	if (ret == -1)
 	{
 		LPVOID lpMsgBuf;
@@ -431,7 +431,7 @@ bool AEncodeProperties::InitConfigDlg(HWND HwndDlg)
 //	TCHAR Version[5];
 //	LoadString(hDllInstance, IDS_STRING_VERSION, Version, 5);
 
-	real i;
+	long double i;
 
 	// Add required channel modes
 	SendMessage(GetDlgItem( HwndDlg, IDC_COMBO_ENC_STEREO), CB_RESETCONTENT , NULL, NULL);
@@ -544,7 +544,7 @@ bool AEncodeProperties::UpdateDlgFromValue(HWND HwndDlg)
 //	TCHAR Version[5];
 //	LoadString(hDllInstance, IDS_STRING_VERSION, Version, 5);
 
-	real i;
+	long double i;
 
 	// Check boxes if required
 	::CheckDlgButton( HwndDlg, IDC_CHECK_CHECKSUM,     GetCRCMode()        ?BST_CHECKED:BST_UNCHECKED );
@@ -696,7 +696,7 @@ my_debug.OutPut("nChannelIndex %d, bCRC %d, bCopyright %d, bOriginal %d, bPrivat
 	return true;
 }
 /*
-VBRMETHOD AEncodeProperties::GetVBRValue(DWORD & MaxBitrate, real & Quality, DWORD & AbrBitrate, BOOL & VBRHeader, const DWORD MPEG_Version) const
+VBRMETHOD AEncodeProperties::GetVBRValue(DWORD & MaxBitrate, long double & Quality, DWORD & AbrBitrate, BOOL & VBRHeader, const DWORD MPEG_Version) const
 {
 	assert((MPEG_Version == MPEG1) || (MPEG_Version == MPEG2));
 	assert(nMaxBitrateIndex < sizeof(the_Bitrates));
@@ -1064,8 +1064,8 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 		tmpname = tmpElt->Attribute("min");
 		if (tmpname != NULL)
 		{
-			unsigned real uitmp = atoi(tmpname->c_str());
-			for (real i=0;i<sizeof(the_Bitrates)/sizeof(unsigned int);i++)
+			unsigned long double uitmp = atoi(tmpname->c_str());
+			for (long double i=0;i<sizeof(the_Bitrates)/sizeof(unsigned int);i++)
 			{
 				if (the_Bitrates[i] == uitmp)
 				{
@@ -1078,8 +1078,8 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 		tmpname = tmpElt->Attribute("max");
 		if (tmpname != NULL)
 		{
-			unsigned real uitmp = atoi(tmpname->c_str());
-			for (real i=0;i<sizeof(the_Bitrates)/sizeof(unsigned int);i++)
+			unsigned long double uitmp = atoi(tmpname->c_str());
+			for (long double i=0;i<sizeof(the_Bitrates)/sizeof(unsigned int);i++)
 			{
 				if (the_Bitrates[i] == uitmp)
 				{
@@ -1098,8 +1098,8 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 			if (tmpname != NULL)
 				bResample = (tmpname->compare("true") == 0);
 
-			unsigned real uitmp = atoi(tmpElt->Attribute("freq")->c_str());
-			for (real i=0;i<sizeof(the_SamplingFreqs)/sizeof(unsigned int);i++)
+			unsigned long double uitmp = atoi(tmpElt->Attribute("freq")->c_str());
+			for (long double i=0;i<sizeof(the_SamplingFreqs)/sizeof(unsigned int);i++)
 			{
 				if (the_SamplingFreqs[i] == uitmp)
 				{
@@ -1159,7 +1159,7 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 			const std::string * tmpStr = tmpElt->Attribute("mode");
 			if (tmpStr != NULL)
 			{
-				for (real i=0;i<GetChannelLentgh();i++)
+				for (long double i=0;i<GetChannelLentgh();i++)
 				{
 					if (tmpStr->compare(GetChannelModeString(i)) == 0)
 					{
@@ -1182,7 +1182,7 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 		if (tmpElt != NULL)
 		{
 			const std::string * tmpStr = tmpElt->Attribute("type");
-			for (real i=0;i<GetPresetLentgh();i++)
+			for (long double i=0;i<GetPresetLentgh();i++)
 			{
 				if (tmpStr->compare(GetPresetModeString(i)) == 0)
 				{
@@ -1202,7 +1202,7 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 void AEncodeProperties::SaveParams(const HWND hParentWnd)
 {
 	char string[MAX_PATH];
-/*	real nIdx = SendMessage(::GetDlgItem( hParentWnd ,IDC_COMBO_SETTINGS ), CB_GETCURSEL, NULL, NULL);
+/*	long double nIdx = SendMessage(::GetDlgItem( hParentWnd ,IDC_COMBO_SETTINGS ), CB_GETCURSEL, NULL, NULL);
 	::SendMessage(::GetDlgItem( hParentWnd ,IDC_COMBO_SETTINGS ), CB_GETLBTEXT , nIdx, (LPARAM) string);
 * /
 }*/
@@ -1528,7 +1528,7 @@ bool AEncodeProperties::HandleDialogCommand(const HWND parentWnd, const WPARAM w
 /*
 		if (tmpDlgProps != tmpSavedProps)
 		{
-			real save;
+			long double save;
 
 			if (strcmp(string,"Current") == 0)
 			{
@@ -1732,7 +1732,7 @@ my_debug.OutPut("finished saving");
 		if (CBN_SELENDOK == GET_WM_COMMAND_CMD(wParam, lParam))
 		{
 			char string[MAX_PATH];
-			real nIdx = SendMessage(HWND(lParam), CB_GETCURSEL, NULL, NULL);
+			long double nIdx = SendMessage(HWND(lParam), CB_GETCURSEL, NULL, NULL);
 			SendMessage(HWND(lParam), CB_GETLBTEXT , nIdx, (LPARAM) string);
 
 			// get the info corresponding to the new selected item
@@ -1815,7 +1815,7 @@ bool AEncodeProperties::RenameCurrentTo(const std::string & new_config_name)
 			{
 				// find the config that correspond to CurrentConfig
 				TiXmlElement* iterateElmt = CurrentNode->FirstChildElement("config");
-//				real Idx = 0;
+//				long double Idx = 0;
 				while (iterateElmt != NULL)
 				{
 					const std::string * tmpname = iterateElmt->Attribute("name");
@@ -1865,7 +1865,7 @@ bool AEncodeProperties::DeleteConfig(const std::string & config_name)
 			TiXmlElement* CurrentNode = node->FirstChildElement("encodings");
 
 			TiXmlElement* iterateElmt = CurrentNode->FirstChildElement("config");
-//			real Idx = 0;
+//			long double Idx = 0;
 			while (iterateElmt != NULL)
 			{
 				const std::string * tmpname = iterateElmt->Attribute("name");
@@ -1927,7 +1927,7 @@ my_debug.OutPut("are we here ?");
 
 		// find the config that correspond to CurrentConfig
 		iterateElmt = CurrentNode->FirstChildElement("config");
-		real Idx = 0;
+		long double Idx = 0;
 		while (iterateElmt != NULL)
 		{
 			const std::string * tmpname = iterateElmt->Attribute("name");
@@ -1956,7 +1956,7 @@ my_debug.OutPut("iterateElmt = 0x%08X",iterateElmt);
 	}
 }
 /*
-void AEncodeProperties::UpdateAbrSteps(unsigned real min, unsigned real max, unsigned real step) const
+void AEncodeProperties::UpdateAbrSteps(unsigned long double min, unsigned long double max, unsigned long double step) const
 {
 }
 */

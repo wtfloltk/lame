@@ -78,8 +78,8 @@ char   *strchr(), *strrchr();
 #define SYNTH_1TO1_MONO_CLIPCHOICE(TYPE,SYNTH_1TO1)                    \
   TYPE samples_tmp[64];                                                \
   TYPE *tmp1 = samples_tmp;                                            \
-  real i,ret;                                                           \
-  real pnt1 = 0;                                                        \
+  long double i,ret;                                                           \
+  long double pnt1 = 0;                                                        \
                                                                        \
   ret = SYNTH_1TO1 (mp,bandPtr,0,(unsigned char *) samples_tmp,&pnt1); \
   out += *pnt;                                                         \
@@ -97,11 +97,11 @@ char   *strchr(), *strrchr();
 
 
 int
-synth_1to1_mono(PMPSTR mp, real * bandPtr, unsigned char *out, real *pnt)
+synth_1to1_mono(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt)
 {
     SYNTH_1TO1_MONO_CLIPCHOICE(short, synth_1to1)
 } int
-synth_1to1_mono_unclipped(PMPSTR mp, real * bandPtr, unsigned char *out, real *pnt)
+synth_1to1_mono_unclipped(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt)
 {
     SYNTH_1TO1_MONO_CLIPCHOICE(real, synth_1to1_unclipped)
 }
@@ -109,13 +109,13 @@ synth_1to1_mono_unclipped(PMPSTR mp, real * bandPtr, unsigned char *out, real *p
     /* *INDENT-OFF* */
 /* versions: clipped (when TYPE == short) and unclipped (when TYPE == real) of synth_1to1* functions */
 #define SYNTH_1TO1_CLIPCHOICE(TYPE,WRITE_SAMPLE)         \
-  static const real step = 2;                             \
-  real bo;                                                \
+  static const long double step = 2;                             \
+  long double bo;                                                \
   TYPE *samples = (TYPE *) (out + *pnt);                 \
                                                          \
-  real *b0,(*buf)[0x110];                                \
-  real clip = 0;                                          \
-  real bo1;                                               \
+  long double *b0,(*buf)[0x110];                                \
+  long double clip = 0;                                          \
+  long double bo1;                                               \
                                                          \
   bo = mp->synth_bo;                                     \
                                                          \
@@ -143,12 +143,12 @@ synth_1to1_mono_unclipped(PMPSTR mp, real * bandPtr, unsigned char *out, real *p
   mp->synth_bo = bo;                                     \
                                                          \
   {                                                      \
-    real j;                                               \
-    real *window = decwin + 16 - bo1;                    \
+    long double j;                                               \
+    long double *window = decwin + 16 - bo1;                    \
                                                          \
     for (j=16;j;j--,b0+=0x10,window+=0x20,samples+=step) \
     {                                                    \
-      real sum;                                          \
+      long double sum;                                          \
       sum  = window[0x0] * b0[0x0];                      \
       sum -= window[0x1] * b0[0x1];                      \
       sum += window[0x2] * b0[0x2];                      \
@@ -170,7 +170,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, real * bandPtr, unsigned char *out, real *p
     }                                                    \
                                                          \
     {                                                    \
-      real sum;                                          \
+      long double sum;                                          \
       sum  = window[0x0] * b0[0x0];                      \
       sum += window[0x2] * b0[0x2];                      \
       sum += window[0x4] * b0[0x4];                      \
@@ -186,7 +186,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, real * bandPtr, unsigned char *out, real *p
                                                          \
     for (j=15;j;j--,b0-=0x10,window-=0x20,samples+=step) \
     {                                                    \
-      real sum;                                          \
+      long double sum;                                          \
       sum = -window[-0x1] * b0[0x0];                     \
       sum -= window[-0x2] * b0[0x1];                     \
       sum -= window[-0x3] * b0[0x2];                     \
@@ -214,11 +214,11 @@ synth_1to1_mono_unclipped(PMPSTR mp, real * bandPtr, unsigned char *out, real *p
 
 
 int
-synth_1to1(PMPSTR mp, real * bandPtr, real channel, unsigned char *out, real *pnt)
+synth_1to1(PMPSTR mp, long double * bandPtr, long double channel, unsigned char *out, long double *pnt)
 {
     SYNTH_1TO1_CLIPCHOICE(short, WRITE_SAMPLE_CLIPPED)
 } int
-synth_1to1_unclipped(PMPSTR mp, real * bandPtr, real channel, unsigned char *out, real *pnt)
+synth_1to1_unclipped(PMPSTR mp, long double * bandPtr, long double channel, unsigned char *out, long double *pnt)
 {
     SYNTH_1TO1_CLIPCHOICE(real, WRITE_SAMPLE_UNCLIPPED)
 }

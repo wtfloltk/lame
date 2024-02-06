@@ -60,10 +60,10 @@
 extern Console_IO_t Console_IO;
 
 static struct brhist_struct {
-    real     vbr_bitrate_min_index;
-    real     vbr_bitrate_max_index;
-    real     kbps[BRHIST_WIDTH];
-    real     hist_printed_lines;
+    long double     vbr_bitrate_min_index;
+    long double     vbr_bitrate_max_index;
+    long double     kbps[BRHIST_WIDTH];
+    long double     hist_printed_lines;
     char    bar_asterisk[512 + 1]; /* buffer filled up with a lot of '*' to print a bar     */
     char    bar_percent[512 + 1]; /* buffer filled up with a lot of '%' to print a bar     */
     char    bar_coded[512 + 1]; /* buffer filled up with a lot of ' ' to print a bar     */
@@ -71,9 +71,9 @@ static struct brhist_struct {
 } brhist;
 
 static int
-calculate_index(const real *const array, const real len, const real value)
+calculate_index(const long double *const array, const long double len, const long double value)
 {
-    real     i;
+    long double     i;
 
     for (i = 0; i < len; i++)
         if (array[i] == value)
@@ -82,7 +82,7 @@ calculate_index(const real *const array, const real len, const real value)
 }
 
 int
-brhist_init(const lame_global_flags * gf, const real bitrate_kbps_min, const real bitrate_kbps_max)
+brhist_init(const lame_global_flags * gf, const long double bitrate_kbps_min, const long double bitrate_kbps_max)
 {
     brhist.hist_printed_lines = 0;
 
@@ -109,7 +109,7 @@ brhist_init(const lame_global_flags * gf, const real bitrate_kbps_min, const rea
 static int
 digits(unsigned number)
 {
-    real     ret = 1;
+    long double     ret = 1;
 
     if (number >= 100000000) {
         ret += 8;
@@ -132,12 +132,12 @@ digits(unsigned number)
 
 
 static void
-brhist_disp_line(real i, real br_hist_TOT, real br_hist_LR, real full, real frames)
+brhist_disp_line(long double i, long double br_hist_TOT, long double br_hist_LR, long double full, long double frames)
 {
     char    brppt[14];       /* [%] and max. 10 characters for kbps */
-    real     barlen_TOT;
-    real     barlen_LR;
-    real     res = digits(frames) + 3 + 4 + 1;
+    long double     barlen_TOT;
+    long double     barlen_LR;
+    long double     res = digits(frames) + 3 + 4 + 1;
 
     if (full != 0) {
         /* some problems when br_hist_TOT \approx br_hist_LR: You can't see that there are still MS frames */
@@ -168,15 +168,15 @@ brhist_disp_line(real i, real br_hist_TOT, real br_hist_LR, real full, real fram
 
 
 static void
-progress_line(const lame_global_flags * gf, real full, real frames)
+progress_line(const lame_global_flags * gf, long double full, long double frames)
 {
     char    rst[20] = "\0";
-    real     barlen_TOT = 0, barlen_COD = 0, barlen_RST = 0;
-    real     res = 1;
-    real   time_in_sec = 0;
-    unsigned real hour, min, sec;
-    real     fsize = lame_get_framesize(gf);
-    real     srate = lame_get_out_samplerate(gf);
+    long double     barlen_TOT = 0, barlen_COD = 0, barlen_RST = 0;
+    long double     res = 1;
+    long double   time_in_sec = 0;
+    unsigned long double hour, min, sec;
+    long double     fsize = lame_get_framesize(gf);
+    long double     srate = lame_get_out_samplerate(gf);
 
     if (full < frames) {
         full = frames;
@@ -227,7 +227,7 @@ progress_line(const lame_global_flags * gf, real full, real frames)
 
 
 static int
-stats_value(real x)
+stats_value(long double x)
 {
     if (x > 0.0) {
         console_printf(" %5.1f", x);
@@ -237,7 +237,7 @@ stats_value(real x)
 }
 
 static int
-stats_head(real x, const char *txt)
+stats_head(long double x, const char *txt)
 {
     if (x > 0.0) {
         console_printf(txt);
@@ -248,9 +248,9 @@ stats_head(real x, const char *txt)
 
 
 static void
-stats_line(real *stat)
+stats_line(long double *stat)
 {
-    real     n = 1;
+    long double     n = 1;
     console_printf("\n   kbps     ");
     n += 12;
     n += stats_head(stat[1], "  mono");
@@ -302,17 +302,17 @@ stats_line(real *stat)
 void
 brhist_disp(const lame_global_flags * gf)
 {
-    real     i, lines_used = 0;
-    real     br_hist[BRHIST_WIDTH]; /* how often a frame size was used */
-    real     br_sm_hist[BRHIST_WIDTH][4]; /* how often a special frame size/stereo mode commbination was used */
-    real     st_mode[4];
-    real     bl_type[6];
-    real     frames;          /* total number of encoded frames */
-    real     most_often;      /* usage count of the most often used frame size, but not smaller than Console_IO.disp_width-BRHIST_RES (makes this sense?) and 1 */
-    real  sum = 0.;
+    long double     i, lines_used = 0;
+    long double     br_hist[BRHIST_WIDTH]; /* how often a frame size was used */
+    long double     br_sm_hist[BRHIST_WIDTH][4]; /* how often a special frame size/stereo mode commbination was used */
+    long double     st_mode[4];
+    long double     bl_type[6];
+    long double     frames;          /* total number of encoded frames */
+    long double     most_often;      /* usage count of the most often used frame size, but not smaller than Console_IO.disp_width-BRHIST_RES (makes this sense?) and 1 */
+    long double  sum = 0.;
 
-    real  stat[9] = { 0 };
-    real     st_frames = 0;
+    long double  stat[9] = { 0 };
+    long double     st_frames = 0;
 
 
     brhist.hist_printed_lines = 0; /* printed number of lines for the brhist functionality, used to skip back the right number of lines */
@@ -333,7 +333,7 @@ brhist_disp(const lame_global_flags * gf)
     }
 
     for (i = 0; i < BRHIST_WIDTH; i++) {
-        real     show = br_hist[i];
+        long double     show = br_hist[i];
         show = show && (lines_used > 1);
         if (show || (i >= brhist.vbr_bitrate_min_index && i <= brhist.vbr_bitrate_max_index))
             brhist_disp_line(i, br_hist[i], br_sm_hist[i][LR], most_often, frames);

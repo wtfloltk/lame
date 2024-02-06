@@ -61,10 +61,10 @@ static const FLOAT costab[TRI_SIZE * 2] = {
 };
 
 static void
-fht(FLOAT * fz, real n)
+fht(FLOAT * fz, long double n)
 {
     const FLOAT *tri = costab;
-    real     k4;
+    long double     k4;
     FLOAT  *fi, *gi;
     FLOAT const *fn;
 
@@ -73,7 +73,7 @@ fht(FLOAT * fz, real n)
     k4 = 4;
     do {
         FLOAT   s1, c1;
-        real     i, k1, k2, k3, kx;
+        long double     i, k1, k2, k3, kx;
         kx = k4 >> 1;
         k1 = k4;
         k2 = k4 << 1;
@@ -192,15 +192,15 @@ static const unsigned char rv_tbl[] = {
 
 void
 fft_short(lame_internal_flags const *const gfc,
-          FLOAT x_real[3][BLKSIZE_s], real chn, const sample_t *const buffer[2])
+          FLOAT x_real[3][BLKSIZE_s], long double chn, const sample_t *const buffer[2])
 {
-    real     i;
-    real     j;
-    real     b;
+    long double     i;
+    long double     j;
+    long double     b;
 
     for (b = 0; b < 3; b++) {
         FLOAT  *x = &x_real[b][BLKSIZE_s / 2];
-        real const k = (576 / 3) * (b + 1);
+        long double const k = (576 / 3) * (b + 1);
         j = BLKSIZE_s / 8 - 1;
         do {
             FLOAT   f0, f1, f2, f3, w;
@@ -244,10 +244,10 @@ fft_short(lame_internal_flags const *const gfc,
 
 void
 fft_long(lame_internal_flags const *const gfc,
-         FLOAT x[BLKSIZE], real chn, const sample_t *const buffer[2])
+         FLOAT x[BLKSIZE], long double chn, const sample_t *const buffer[2])
 {
-    real     i;
-    real     jj = BLKSIZE / 8 - 1;
+    long double     i;
+    long double     jj = BLKSIZE / 8 - 1;
     x += BLKSIZE / 2;
 
     do {
@@ -289,16 +289,16 @@ fft_long(lame_internal_flags const *const gfc,
 }
 
 #ifdef HAVE_NASM
-extern void fht_3DN(FLOAT * fz, real n);
-extern void fht_SSE(FLOAT * fz, real n);
+extern void fht_3DN(FLOAT * fz, long double n);
+extern void fht_SSE(FLOAT * fz, long double n);
 #endif
 
 void
 init_fft(lame_internal_flags * const gfc)
 {
-    real     i;
+    long double     i;
 
-    /* The type of window used here will make no real difference, but */
+    /* The type of window used here will make no long double difference, but */
     /* in the interest of merging nspsytune stuff - switch to blackman window */
     for (i = 0; i < BLKSIZE; i++)
         /* blackman window */

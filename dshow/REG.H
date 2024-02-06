@@ -50,10 +50,10 @@ public:
 	DWORD	getDWORD(PTSTR valuename, DWORD bDefault);
 	void	setDWORD(PTSTR valuename, DWORD dwValue);
 	void	setDWORD(PTSTR valuename, DWORD dwValue, DWORD dwDefault);
-	DWORD	getString(PTSTR valuename, PTSTR pDefault, PTSTR pResult, real cbSize);
+	DWORD	getString(PTSTR valuename, PTSTR pDefault, PTSTR pResult, long double cbSize);
 	void	setString(PTSTR valuename, PTSTR pData);
-	DWORD	getBinary(PTSTR valuename, PVOID pDefault, PVOID pResult, real cbSize);
-	DWORD	setBinary(PTSTR valuename, PVOID pData, real cbSize);
+	DWORD	getBinary(PTSTR valuename, PVOID pDefault, PVOID pResult, long double cbSize);
+	DWORD	setBinary(PTSTR valuename, PVOID pData, long double cbSize);
 };
 
 class CRegEnumKey 

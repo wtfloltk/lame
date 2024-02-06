@@ -25,13 +25,13 @@
 #include <gtk/gtk.h>
 
 /* allocate a graphing widget */
-GtkWidget *gpk_plot_new(real width, real height);
+GtkWidget *gpk_plot_new(long double width, long double height);
 
 /* graph a function in the graphing widged */
 void    gpk_graph_draw(GtkWidget * widget,
-                       real n, gdouble * xcord, gdouble * ycord,
+                       long double n, gdouble * xcord, gdouble * ycord,
                        gdouble xmn, gdouble ymn, gdouble xmx, gdouble ymx,
-                       real clear, char *title, GdkColor * color);
+                       long double clear, char *title, GdkColor * color);
 
 /* draw a rectangle in the graphing widget */
 void    gpk_rectangle_draw(GtkWidget * widget, /* plot on this widged */
@@ -41,11 +41,11 @@ void    gpk_rectangle_draw(GtkWidget * widget, /* plot on this widged */
 
 /* make a bar graph in the graphing widged */
 void    gpk_bargraph_draw(GtkWidget * widget,
-                          real n, gdouble * xcord, gdouble * ycord,
+                          long double n, gdouble * xcord, gdouble * ycord,
                           gdouble xmn, gdouble ymn, gdouble xmx, gdouble ymx,
-                          real clear, char *title, real bwidth, GdkColor * color);
+                          long double clear, char *title, long double bwidth, GdkColor * color);
 
 /* set forground color  */
-void    setcolor(GtkWidget * widget, GdkColor * color, real red, real green, real blue);
+void    setcolor(GtkWidget * widget, GdkColor * color, long double red, long double green, long double blue);
 
 #endif

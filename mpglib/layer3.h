@@ -23,10 +23,10 @@
 #define LAYER3_H_INCLUDED
 
 void    hip_init_tables_layer3(void);
-real     decode_layer3_sideinfo(PMPSTR mp);
-real     decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, real *pcm_point,
-                  real (*synth_1to1_mono_ptr) (PMPSTR, real *, unsigned char *, real *),
-                  real (*synth_1to1_ptr) (PMPSTR, real *, int, unsigned char *, real *));
-real     layer3_audiodata_precedesframes(PMPSTR mp);
+long double     decode_layer3_sideinfo(PMPSTR mp);
+long double     decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point,
+                  long double (*synth_1to1_mono_ptr) (PMPSTR, long double *, unsigned char *, long double *),
+                  long double (*synth_1to1_ptr) (PMPSTR, long double *, int, unsigned char *, long double *));
+long double     layer3_audiodata_precedesframes(PMPSTR mp);
 
 #endif

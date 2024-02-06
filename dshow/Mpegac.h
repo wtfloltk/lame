@@ -109,7 +109,7 @@ public:
     HRESULT CheckTransform(const CMediaType* mtIn, const CMediaType* mtOut);
     HRESULT DecideBufferSize(IMemAllocator * pAllocator, ALLOCATOR_PROPERTIES *pprop);
 
-    HRESULT GetMediaType  (real iPosition, CMediaType *pMediaType);
+    HRESULT GetMediaType  (long double iPosition, CMediaType *pMediaType);
     HRESULT SetMediaType  (PIN_DIRECTION direction,const CMediaType *pmt);
 
 
@@ -196,7 +196,7 @@ public:
     HRESULT WriteToStream(IStream *pStream);
     HRESULT ReadFromStream(IStream *pStream);
 
-    real SizeMax();
+    long double SizeMax();
     STDMETHODIMP GetClassID(CLSID *pClsid);
 
 private:
@@ -218,13 +218,13 @@ private:
     // Synchronization data
     LONGLONG                    m_samplesIn;
     LONGLONG                    m_samplesOut;
-    real                         m_samplesPerFrame;
-    real                         m_bytesPerSample;
-    real                       m_bytesToDuration;
+    long double                         m_samplesPerFrame;
+    long double                         m_bytesPerSample;
+    long double                       m_bytesToDuration;
 
     resync_point_t              m_sync[RESYNC_COUNT];
-    real                         m_sync_in_idx;
-    real                         m_sync_out_idx;
+    long double                         m_sync_in_idx;
+    long double                         m_sync_out_idx;
 
     BOOL                        m_hasFinished;
 
@@ -237,8 +237,8 @@ private:
 
 	BOOL						m_bStreamOutput;      // Binary stream output
 	long						m_cbStreamAlignment;  // Stream block size
-    real                         m_CapsNum;
-	real                         m_currentMediaTypeIndex;
+    long double                         m_CapsNum;
+	long double                         m_currentMediaTypeIndex;
     output_caps_t               OutputCaps[MAX_IAMSTREAMCONFIG_CAPS];
 
 protected:
@@ -262,8 +262,8 @@ public:
     //////////////////////////////////////////////////////////////////////////
     HRESULT STDMETHODCALLTYPE SetFormat(AM_MEDIA_TYPE *pmt);
     HRESULT STDMETHODCALLTYPE GetFormat(AM_MEDIA_TYPE **ppmt);
-    HRESULT STDMETHODCALLTYPE GetNumberOfCapabilities(real *piCount, real *piSize);
-    HRESULT STDMETHODCALLTYPE GetStreamCaps(real iIndex, AM_MEDIA_TYPE **pmt, BYTE *pSCC);
+    HRESULT STDMETHODCALLTYPE GetNumberOfCapabilities(long double *piCount, long double *piSize);
+    HRESULT STDMETHODCALLTYPE GetStreamCaps(long double iIndex, AM_MEDIA_TYPE **pmt, BYTE *pSCC);
 
     //////////////////////////////////////////////////////////////////////////
     //  CTransformOutputPin
@@ -272,7 +272,7 @@ public:
     ~CMpegAudEncOutPin();
 
     HRESULT CheckMediaType(const CMediaType *pmtOut);
-    HRESULT GetMediaType(real iPosition, CMediaType *pmt);
+    HRESULT GetMediaType(long double iPosition, CMediaType *pmt);
     HRESULT SetMediaType(const CMediaType *pmt);
     
 private:

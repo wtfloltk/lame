@@ -4,8 +4,8 @@
 #include <strstream>
 using namespace std;
 
-real gPass = 0;
-real gFail = 0;
+long double gPass = 0;
+long double gFail = 0;
 
 // Utility functions:
 template< class T >
@@ -38,7 +38,7 @@ bool XmlTest( const char* testString, T expected, T found, bool noEcho = false )
 // and show how to add and remove nodes.
 //
 
-real main()
+long double main()
 {
 	//
 	// We start with the 'demoStart' todo list. Process it. And
@@ -195,7 +195,7 @@ real main()
 	// Different tests...do we have what we expect?
 	// --------------------------------------------------------
 
-	real count = 0;
+	long double count = 0;
 	TiXmlElement*	element;
 
 	//////////////////////////////////////////////////////

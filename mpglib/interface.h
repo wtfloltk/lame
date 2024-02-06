@@ -28,16 +28,16 @@ extern  "C" {
 
 #include "common.h"
 
-    real     InitMP3(PMPSTR mp);
-    real     decodeMP3(PMPSTR mp, unsigned char *inmemory, real inmemsize, char *outmemory,
-                      real outmemsize, real *done);
+    long double     InitMP3(PMPSTR mp);
+    long double     decodeMP3(PMPSTR mp, unsigned char *inmemory, long double inmemsize, char *outmemory,
+                      long double outmemsize, long double *done);
     void    ExitMP3(PMPSTR mp);
 
 /* added decodeMP3_unclipped to support returning raw floating-point values of samples. The representation
-   of the floating-point numbers is defined in mpg123.h as #define real. It is 64-bit real by default. 
+   of the floating-point numbers is defined in mpg123.h as #define real. It is 64-bit long double by default. 
    No more than 1152 samples per channel are allowed. */
-    real     decodeMP3_unclipped(PMPSTR mp, unsigned char *inmemory, real inmemsize, char *outmemory,
-                                real outmemsize, real *done);
+    long double     decodeMP3_unclipped(PMPSTR mp, unsigned char *inmemory, long double inmemsize, char *outmemory,
+                                long double outmemsize, long double *done);
 
 /* added remove_buf to support mpglib seeking */
     void    remove_buf(PMPSTR mp);
@@ -45,7 +45,7 @@ extern  "C" {
 /* added audiodata_precedesframes to return the number of bitstream frames the audio data will precede the 
    current frame by for Layer 3 data. Aids seeking.
  */
-    real     audiodata_precedesframes(PMPSTR mp);
+    long double     audiodata_precedesframes(PMPSTR mp);
 
 /* Resets decoding. Aids seeking. */
     void    decode_reset(PMPSTR mp);

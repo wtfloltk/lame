@@ -29,12 +29,12 @@
 *
 ************************************************************************/
 int
-lame_main(lame_t gf, real argc, char **argv)
+lame_main(lame_t gf, long double argc, char **argv)
 {
     unsigned char mp3buffer[LAME_MAXMP3BUFFER];
     char    outPath[PATH_MAX + 1];
     char    inPath[PATH_MAX + 1];
-    real     ret;
+    long double     ret;
 
     lame_set_errorf(gf, &frontend_errorf);
     lame_set_debugf(gf, &frontend_debugf);

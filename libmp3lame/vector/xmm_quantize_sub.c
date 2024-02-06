@@ -38,7 +38,7 @@
 
 typedef union {
     int32_t _i_32[4]; /* unions are initialized by its first member */
-    real   _float[4];
+    long double   _float[4];
     __m128  _m128;
 } vecfloat_union;
 
@@ -53,13 +53,13 @@ static const FLOAT costab[TRI_SIZE * 2] = {
 
 
 void
-init_xrpow_core_sse(gr_info * const cod_info, FLOAT xrpow[576], real upper, FLOAT * sum)
+init_xrpow_core_sse(gr_info * const cod_info, FLOAT xrpow[576], long double upper, FLOAT * sum)
 {
-    real     i;
-    real   tmp_max = 0;
-    real   tmp_sum = 0;
-    real     upper4 = (upper / 4) * 4;
-    real     rest = upper-upper4;
+    long double     i;
+    long double   tmp_max = 0;
+    long double   tmp_sum = 0;
+    long double     upper4 = (upper / 4) * 4;
+    long double     rest = upper-upper4;
 
     const vecfloat_union fabs_mask = {{ 0x7FFFFFFF, 0x7FFFFFFF, 0x7FFFFFFF, 0x7FFFFFFF }};
     const __m128 vec_fabs_mask = _mm_loadu_ps(&fabs_mask._float[0]);
@@ -102,9 +102,9 @@ init_xrpow_core_sse(gr_info * const cod_info, FLOAT xrpow[576], real upper, FLOA
     }
     tmp_sum = vec_sum._float[0] + vec_sum._float[1] + vec_sum._float[2] + vec_sum._float[3];
     {
-        real ma = vec_xrpow_max._float[0] > vec_xrpow_max._float[1]
+        long double ma = vec_xrpow_max._float[0] > vec_xrpow_max._float[1]
                 ? vec_xrpow_max._float[0] : vec_xrpow_max._float[1];
-        real mb = vec_xrpow_max._float[2] > vec_xrpow_max._float[3]
+        long double mb = vec_xrpow_max._float[2] > vec_xrpow_max._float[3]
                 ? vec_xrpow_max._float[2] : vec_xrpow_max._float[3];
         tmp_max = ma > mb ? ma : mb;
     }
@@ -125,10 +125,10 @@ static void store4(__m128 v, float* f0, float* f1, float* f2, float* f3)
 
 
 void
-fht_SSE2(FLOAT * fz, real n)
+fht_SSE2(FLOAT * fz, long double n)
 {
     const FLOAT *tri = costab;
-    real     k4;
+    long double     k4;
     FLOAT  *fi, *gi;
     FLOAT const *fn;
 
@@ -137,7 +137,7 @@ fht_SSE2(FLOAT * fz, real n)
     k4 = 4;
     do {
         FLOAT   s1, c1;
-        real     i, k1, k2, k3, kx;
+        long double     i, k1, k2, k3, kx;
         kx = k4 >> 1;
         k1 = k4;
         k2 = k4 << 1;

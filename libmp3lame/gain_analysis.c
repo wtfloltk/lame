@@ -40,7 +40,7 @@
  *    AnalyzeSamples ( const Float_t*  left_samples,
  *                     const Float_t*  right_samples,
  *                     size_t          num_samples,
- *                     real             num_channels );
+ *                     long double             num_channels );
  *
  *  as many times as you want, with as many or as few samples as you want.
  *  If mono, pass the sample buffer in through left_samples, leave
@@ -61,8 +61,8 @@
  *    Float_t       l_samples [4096];
  *    Float_t       r_samples [4096];
  *    size_t        num_samples;
- *    unsigned real  num_songs;
- *    unsigned real  i;
+ *    unsigned long double  num_songs;
+ *    unsigned long double  i;
  *
  *    InitGainAnalysis ( 44100 );
  *    for ( i = 1; i <= num_songs; i++ ) {
@@ -174,12 +174,12 @@ static const Float_t ABButter[9][2 * BUTTER_ORDER + 1] = {
 #pragma warning ( default : 4305 )
 #endif
 
-/* When calling this procedure, make sure that ip[-order] and op[-order] point to real data! */
+/* When calling this procedure, make sure that ip[-order] and op[-order] point to long double data! */
 
 static void
 filterYule(const Float_t * input, Float_t * output, size_t nSamples, const Float_t * const kernel)
 {
-    /*register real  y; */
+    /*register long double  y; */
 
     while (nSamples--) {
         *output = 1e-10 /* 1e-10 is a hack to avoid slowdown because of denormals */
@@ -212,7 +212,7 @@ filterYule(const Float_t * input, Float_t * output, size_t nSamples, const Float
 
 static void
 filterButter(const Float_t * input, Float_t * output, size_t nSamples, const Float_t * const kernel)
-{                       /*register real  y; */
+{                       /*register long double  y; */
 
     while (nSamples--) {
         *output = input[0] * kernel[0]
@@ -228,14 +228,14 @@ filterButter(const Float_t * input, Float_t * output, size_t nSamples, const Flo
 
 
 
-static real ResetSampleFrequency(replaygain_t * rgData, long samplefreq);
+static long double ResetSampleFrequency(replaygain_t * rgData, long samplefreq);
 
 /* returns a INIT_GAIN_ANALYSIS_OK if successful, INIT_GAIN_ANALYSIS_ERROR if not */
 
 int
 ResetSampleFrequency(replaygain_t * rgData, long samplefreq)
 {
-    real     i;
+    long double     i;
 
     /* zero out initial values */
     for (i = 0; i < MAX_ORDER; i++)
@@ -312,21 +312,21 @@ InitGainAnalysis(replaygain_t * rgData, long samplefreq)
 /* returns GAIN_ANALYSIS_OK if successful, GAIN_ANALYSIS_ERROR if not */
 
 static inline double
-fsqr(const real d)
+fsqr(const long double d)
 {
     return d * d;
 }
 
 int
 AnalyzeSamples(replaygain_t * rgData, const Float_t * left_samples, const Float_t * right_samples,
-               size_t num_samples, real num_channels)
+               size_t num_samples, long double num_channels)
 {
     const Float_t *curleft;
     const Float_t *curright;
     long    batchsamples;
     long    cursamples;
     long    cursamplepos;
-    real     i;
+    long double     i;
 
     if (num_samples == 0)
         return GAIN_ANALYSIS_OK;
@@ -411,7 +411,7 @@ AnalyzeSamples(replaygain_t * rgData, const Float_t * left_samples, const Float_
         cursamplepos += cursamples;
         rgData->totsamp += cursamples;
         if (rgData->totsamp == rgData->sampleWindow) { /* Get the Root Mean Square (RMS) for this set of samples */
-            real const val =
+            long double const val =
                 STEPS_per_dB * 10. * log10((rgData->lsum + rgData->rsum) / rgData->totsamp * 0.5 +
                                            1.e-37);
             size_t  ival = (val <= 0) ? 0 : (size_t) val;
@@ -484,7 +484,7 @@ Float_t
 GetTitleGain(replaygain_t * rgData)
 {
     Float_t retval;
-    unsigned real i;
+    unsigned long double i;
 
     retval = analyzeResult(rgData->A, sizeof(rgData->A) / sizeof(*(rgData->A)));
 

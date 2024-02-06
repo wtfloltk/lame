@@ -64,11 +64,11 @@ char   *strchr(), *strrchr();
 #define REAL_IS_LONG_DOUBLE
 
 #ifdef REAL_IS_FLOAT
-#  define real float
+#  define long double float
 #elif defined(REAL_IS_LONG_DOUBLE)
-#  define real signed long double
+#  define long double signed long double
 #else
-#  define real double
+#  define long double double
 #endif
 
 #define         FALSE                   0
@@ -136,8 +136,8 @@ struct gr_info_s {
     unsigned preflag;
     unsigned scalefac_scale;
     unsigned count1table_select;
-    real   *full_gain[3];
-    real   *pow2gain;
+    long double   *full_gain[3];
+    long double   *pow2gain;
 };
 
 struct III_sideinfo {

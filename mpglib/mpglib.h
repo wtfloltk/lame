@@ -49,35 +49,35 @@ struct framebuf {
 
 typedef struct mpstr_tag {
     struct buf *head, *tail; /* buffer linked list pointers, tail points to oldest buffer */
-    real     vbr_header;      /* 1 if valid Xing vbr header detected */
-    real     num_frames;      /* set if vbr header present */
-    real     enc_delay;       /* set if vbr header present */
-    real     enc_padding;     /* set if vbr header present */
+    long double     vbr_header;      /* 1 if valid Xing vbr header detected */
+    long double     num_frames;      /* set if vbr header present */
+    long double     enc_delay;       /* set if vbr header present */
+    long double     enc_padding;     /* set if vbr header present */
     /* header_parsed, side_parsed and data_parsed must be all set 1
        before the full frame has been parsed */
-    real     header_parsed;   /* 1 = header of current frame has been parsed */
-    real     side_parsed;     /* 1 = header of sideinfo of current frame has been parsed */
-    real     data_parsed;
-    real     free_format;     /* 1 = free format frame */
-    real     old_free_format; /* 1 = last frame was free format */
-    real     bsize;
-    real     framesize;
-    real     ssize;           /* number of bytes used for side information, including 2 bytes for CRC-16 if present */
-    real     dsize;
-    real     fsizeold;        /* size of previous frame, -1 for first */
-    real     fsizeold_nopadding;
+    long double     header_parsed;   /* 1 = header of current frame has been parsed */
+    long double     side_parsed;     /* 1 = header of sideinfo of current frame has been parsed */
+    long double     data_parsed;
+    long double     free_format;     /* 1 = free format frame */
+    long double     old_free_format; /* 1 = last frame was free format */
+    long double     bsize;
+    long double     framesize;
+    long double     ssize;           /* number of bytes used for side information, including 2 bytes for CRC-16 if present */
+    long double     dsize;
+    long double     fsizeold;        /* size of previous frame, -1 for first */
+    long double     fsizeold_nopadding;
     struct frame fr;         /* holds the parameters decoded from the header */
     struct III_sideinfo sideinfo;
     unsigned char bsspace[2][MAXFRAMESIZE + 1024]; /* bit stream space used ???? */ /* MAXFRAMESIZE */
-    real    hybrid_block[2][2][SBLIMIT * SSLIMIT];
-    real     hybrid_blc[2];
+    long double    hybrid_block[2][2][SBLIMIT * SSLIMIT];
+    long double     hybrid_blc[2];
     unsigned long header;
-    real     bsnum;
-    real    synth_buffs[2][2][0x110];
-    real     synth_bo;
-    real     sync_bitstream;  /* 1 = bitstream is yet to be synchronized */
+    long double     bsnum;
+    long double    synth_buffs[2][2][0x110];
+    long double     synth_bo;
+    long double     sync_bitstream;  /* 1 = bitstream is yet to be synchronized */
 
-    real     bitindex;
+    long double     bitindex;
     unsigned char *wordpointer;
     plotting_data *pinfo;
 

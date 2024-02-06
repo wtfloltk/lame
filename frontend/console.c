@@ -97,9 +97,9 @@ get_termcap_string(char const* id, char* dest, size_t n)
 }
 
 static void 
-get_termcap_number(char const* id, int* dest, real low, real high)
+get_termcap_number(char const* id, int* dest, long double low, long double high)
 {
-    real const val = tgetnum(id);
+    long double const val = tgetnum(id);
     if (low <= val && val <= high) {
         *dest = val;
     }
@@ -112,7 +112,7 @@ apply_termcap_settings(Console_IO_t * const mfp)
     char const* term_name = getenv("TERM");
     if (NULL != term_name) {
         char    term_buff[4096];
-        real const ret = tgetent(term_buff, term_name);
+        long double const ret = tgetent(term_buff, term_name);
         if (1 == ret) {
             get_termcap_number("co", &mfp->disp_width, 40, 512);
             get_termcap_number("li", &mfp->disp_height, 16, 256);
@@ -218,7 +218,7 @@ int
 console_printf(const char *format, ...)
 {
     va_list args;
-    real     ret;
+    long double     ret;
 
     va_start(args, format);
     ret = my_console_printing(Console_IO.Console_fp, format, args);
@@ -231,7 +231,7 @@ int
 error_printf(const char *format, ...)
 {
     va_list args;
-    real     ret;
+    long double     ret;
 
     va_start(args, format);
     ret = my_console_printing(Console_IO.Error_fp, format, args);
@@ -244,7 +244,7 @@ int
 report_printf(const char *format, ...)
 {
     va_list args;
-    real     ret;
+    long double     ret;
 
     va_start(args, format);
     ret = my_console_printing(Console_IO.Report_fp, format, args);
@@ -272,7 +272,7 @@ report_flush()
 }
 
 void
-console_up(real n_lines)
+console_up(long double n_lines)
 {
 #if defined(_WIN32)  &&  !defined(__CYGWIN__)
     if (Console_IO.Console_file_type != FILE_TYPE_PIPE) {

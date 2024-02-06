@@ -139,7 +139,7 @@ find doc/html -name "Makefile*" | xargs rm -f
 
 * Tue Oct 23 2001 Matthias Saou <matthias.saou@est.une.marmotte.net>
 - Fixed the %pre and %post that should have been %post and %postun, silly me!
-- Removed -malign-real (it's evil, Yosi told me and I tested, brrr ;-)).
+- Removed -malign-long double (it's evil, Yosi told me and I tested, brrr ;-)).
 - Now build with gcc3, VBR encoding gets a hell of a boost, impressive!
   I recommend you now use "lame --r3mix", it's the best.
 - Tried to re-enable vorbis, but it's a no-go.

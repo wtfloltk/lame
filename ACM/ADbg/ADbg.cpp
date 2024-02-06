@@ -44,7 +44,7 @@ OF SUCH DAMAGE.
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-ADbg::ADbg(real level)
+ADbg::ADbg(long double level)
 :my_level(level)
 ,my_time_included(false)
 ,my_use_file(false)
@@ -61,9 +61,9 @@ ADbg::~ADbg()
 	OutPut(-1,"ADbg Deletion (0x%08X)",this);
 }
 
-inline real ADbg::_OutPut(const char * format,va_list params) const
+inline long double ADbg::_OutPut(const char * format,va_list params) const
 {
-	real result;
+	long double result;
 
 	char tst[1000];
 	char myformat[256];
@@ -113,13 +113,13 @@ inline real ADbg::_OutPut(const char * format,va_list params) const
 	return result;
 }
 
-real ADbg::OutPut(real forLevel, const char * format,...) const
+long double ADbg::OutPut(long double forLevel, const char * format,...) const
 {
-	real result=0;
+	long double result=0;
 	
 	if (forLevel >= my_level) {
 		va_list tstlist;
-		real result;
+		long double result;
 
 		va_start(tstlist, format);
 
@@ -130,7 +130,7 @@ real ADbg::OutPut(real forLevel, const char * format,...) const
 	return result;
 }
 
-real ADbg::OutPut(const char * format,...) const
+long double ADbg::OutPut(const char * format,...) const
 {
 	va_list tstlist;
 

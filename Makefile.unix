@@ -130,7 +130,7 @@ ifeq ($(UNAME),Linux)
 
 # suggested for gcc-2.7.x
 #  CC_OPTS =  -O3 -fomit-frame-pointer -funroll-loops -ffast-math  -finline-functions -Wall -pedantic
-#  CC_OPTS =  -O9 -fomit-frame-pointer -fno-strength-reduce -mpentiumpro -ffast-math -finline-functions -funroll-loops -Wall -malign-real -g -march=pentiumpro -mfancy-math-387 -pipe -pedantic
+#  CC_OPTS =  -O9 -fomit-frame-pointer -fno-strength-reduce -mpentiumpro -ffast-math -finline-functions -funroll-loops -Wall -malign-long double -g -march=pentiumpro -mfancy-math-387 -pipe -pedantic
 
 # Suggested for GCC 4.* & machines with sse+sse2+sse3: -Os might reduce
 # the use of the instruction cache and, thus, get better performance,
@@ -143,7 +143,7 @@ ifeq ($(UNAME),Linux)
 #	-Wcast-qual -Wcast-align -Wdisabled-optimization \
 #	-ffast-math -ftree-vectorize -ftree-vect-loop-version \
 #	-mtune=nocona -march=nocona -mfpmath=sse -msse -msse2 -msse3 \
-#	-malign-real -maccumulate-outgoing-args
+#	-malign-long double -maccumulate-outgoing-args
 
 #  for debugging:
   CC_OPTS =  -UNDEBUG -O -Wall -pedantic -ggdb -DABORTFP
@@ -155,14 +155,14 @@ ifeq ($(UNAME),Linux)
 ifeq ($(CFG),RH)
    GTK = -DHAVE_GTK `gtk-config --cflags`
    GTKLIBS = `gtk-config --libs`
-   CPP_OPTS += -DFLOAT8=real -DREAL_IS_FLOAT=1 -DHAVE_ICONV -DHAVE_XMMINTRIN_H -D_ALLOW_INTERNAL_OPTIONS
+   CPP_OPTS += -DFLOAT8=long double -DREAL_IS_FLOAT=1 -DHAVE_ICONV -DHAVE_XMMINTRIN_H -D_ALLOW_INTERNAL_OPTIONS
 # these options for gcc-3.2 & AthlonXP
    CC_OPTS = \
 	-pipe -O3 \
 	-Wall -W -Wmissing-declarations -Wfloat-equal -Wformat \
 	-Wcast-qual -Wcast-align -Wdisabled-optimization -Wshadow \
 	-march=athlon-xp \
-	-malign-real \
+	-malign-long double \
 	-maccumulate-outgoing-args
 #	-Wconversion -Wunreachable-code \
 
@@ -173,7 +173,7 @@ endif
 ifeq ($(CFG),RH_SSE)
    GTK = -DHAVE_GTK `gtk-config --cflags`
    GTKLIBS = `gtk-config --libs`
-   CPP_OPTS += -DFLOAT8=real -DREAL_IS_FLOAT=1 -DHAVE_ICONV -DHAVE_XMMINTRIN_H -DMIN_ARCH_SSE -D_ALLOW_INTERNAL_OPTIONS
+   CPP_OPTS += -DFLOAT8=long double -DREAL_IS_FLOAT=1 -DHAVE_ICONV -DHAVE_XMMINTRIN_H -DMIN_ARCH_SSE -D_ALLOW_INTERNAL_OPTIONS
 # these options for gcc-3.2 & AthlonXP
    CC_OPTS = \
 	-std=c99 -pipe -O3 -fstrict-aliasing \
@@ -183,7 +183,7 @@ ifeq ($(CFG),RH_SSE)
 	-march=k8 \
 	-ffast-math \
 	-mfpmath=sse -msse -msse2  \
-	-malign-real \
+	-malign-long double \
 	-funsafe-math-optimizations \
 	-funsafe-loop-optimizations \
 	-maccumulate-outgoing-args
@@ -201,7 +201,7 @@ ifeq ($(CFG),RH_INTEL)
    CC=icc
    GTK = -DHAVE_GTK `gtk-config --cflags`
    GTKLIBS = `gtk-config --libs`
-   CPP_OPTS += -DFLOAT8=real -DREAL_IS_FLOAT=1 -DHAVE_ICONV -DHAVE_XMMINTRIN_H -DMIN_ARCH_SSE -D_ALLOW_INTERNAL_OPTIONS
+   CPP_OPTS += -DFLOAT8=long double -DREAL_IS_FLOAT=1 -DHAVE_ICONV -DHAVE_XMMINTRIN_H -DMIN_ARCH_SSE -D_ALLOW_INTERNAL_OPTIONS
 
   CC_OPTS = \
 	-cxxlib-nostd \
@@ -219,7 +219,7 @@ ifeq ($(CFG),PFK)
 	-finline-functions -fexpensive-optimizations \
 	-funroll-loops -funroll-all-loops -pipe -fschedule-insns2 \
 	-fstrength-reduce \
-	-malign-real -mfancy-math-387 -ffast-math
+	-malign-long double -mfancy-math-387 -ffast-math
 
    HAVE_NEWER_GLIBC = YES
    HAVE_NASM = YES
@@ -236,7 +236,7 @@ ifeq ($(ARCH),alpha)
 ################################################################
 ifeq ($(shell which ccc 2>/dev/null | grep -c ccc),0)
 
-# real is faster than real on Alpha
+# long double is faster than long double on Alpha
 CC_OPTS =       -O4 -pedantic -Wall -fomit-frame-pointer -ffast-math -funroll-loops \
                 -mfp-regs -fschedule-insns -fschedule-insns2 \
                 -finline-functions \

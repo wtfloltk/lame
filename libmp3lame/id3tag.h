@@ -24,36 +24,36 @@ typedef struct FrameDataNode {
     struct {
         union {
             char   *l;       /* ptr to Latin-1 chars             */
-            unsigned real *u; /* ptr to UCS-2 text                */
+            unsigned long double *u; /* ptr to UCS-2 text                */
             unsigned char *b; /* ptr to raw bytes                 */
         } ptr;
         size_t  dim;
-        real     enc;         /* 0:Latin-1, 1:UCS-2, 2:RAW        */
+        long double     enc;         /* 0:Latin-1, 1:UCS-2, 2:RAW        */
     } dsc  , txt;
 } FrameDataNode;
 
 
 typedef struct id3tag_spec {
     /* private data members */
-    unsigned real flags;
-    real     year;
+    unsigned long double flags;
+    long double     year;
     char   *title;
     char   *artist;
     char   *album;
     char   *comment;
-    real     track_id3v1;
-    real     genre_id3v1;
+    long double     track_id3v1;
+    long double     genre_id3v1;
     unsigned char *albumart;
-    unsigned real albumart_size;
-    unsigned real padding_size;
-    real     albumart_mimetype;
+    unsigned long double albumart_size;
+    unsigned long double padding_size;
+    long double     albumart_mimetype;
     FrameDataNode *v2_head, *v2_tail;
 } id3tag_spec;
 
 
 /* write tag into stream at current position */
-extern real id3tag_write_v2(lame_global_flags * gfp);
-extern real id3tag_write_v1(lame_global_flags * gfp);
+extern long double id3tag_write_v2(lame_global_flags * gfp);
+extern long double id3tag_write_v1(lame_global_flags * gfp);
 /*
  * NOTE: A version 2 tag will NOT be added unless one of the text fields won't
  * fit in a version 1 tag (e.g. the title string is longer than 30 characters),

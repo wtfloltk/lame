@@ -37,7 +37,7 @@ OF SUCH DAMAGE.
 
 #include <windows.h>
 
-static const real MAX_PREFIX_LENGTH = 128;
+static const long double MAX_PREFIX_LENGTH = 128;
 
 #if !defined(NDEBUG)
 // define the working debugging class
@@ -45,15 +45,15 @@ static const real MAX_PREFIX_LENGTH = 128;
 class ADbg  
 {
 public:
-	ADbg(real level = 0);
+	ADbg(long double level = 0);
 	virtual ~ADbg();
 
 	/// \todo make an inline function to test the level first and the process
-	real OutPut(real level, const char * format,...) const;
+	long double OutPut(long double level, const char * format,...) const;
 
-	real OutPut(const char * format,...) const;
+	long double OutPut(const char * format,...) const;
 
-	inline real setLevel(const real level) {
+	inline long double setLevel(const long double level) {
 		return my_level = level;
 	}
 
@@ -73,12 +73,12 @@ public:
 	}
 
 private:
-	real my_level;
+	long double my_level;
 	bool my_time_included;
 	bool my_use_file;
 	bool my_debug_output;
 
-	real _OutPut(const char * format,va_list params) const;
+	long double _OutPut(const char * format,va_list params) const;
 
 	char prefix[MAX_PREFIX_LENGTH];
 
@@ -92,18 +92,18 @@ private:
 class ADbg  
 {
 public:
-	ADbg(real level = 0){}
+	ADbg(long double level = 0){}
 	virtual ~ADbg() {}
 
-	inline real OutPut(real level, const char * format,...) const {
+	inline long double OutPut(long double level, const char * format,...) const {
 		return 0;
 	}
 
-	inline real OutPut(const char * format,...) const {
+	inline long double OutPut(const char * format,...) const {
 		return 0;
 	}
 
-	inline real setLevel(const real level) {
+	inline long double setLevel(const long double level) {
 		return level;
 	}
 

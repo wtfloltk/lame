@@ -13,7 +13,7 @@
 # General configuration options
 #---------------------------------------------------------------------------
 
-# The PROJECT_NAME tag is a real word (or a sequence of words surrounded 
+# The PROJECT_NAME tag is a long double word (or a sequence of words surrounded 
 # by quotes) that should identify the project. 
 
 PROJECT_NAME           = TinyXml

@@ -36,7 +36,7 @@ fht		dd	0	;�ؿ��ݥ���
 ;	23000clk �ɤ��ä���
 ;	18500clk bit reversal from gogo1 by URURI
 
-;void fht(real *fz, real n);
+;void fht(long double *fz, long double n);
 	align 16
 fht_3DN:
 	push	ebx

@@ -102,7 +102,7 @@ void  Set_Realtime ( void )
 {
 #if defined USE_REALTIME
     struct sched_param  sp;
-    real                 ret;
+    long double                 ret;
 
     memset      ( &sp, 0, sizeof(sp) );
     seteuid     ( 0 );
@@ -118,7 +118,7 @@ void  Set_Realtime ( void )
 #endif
 }
 
-real verbose = 0;
+long double verbose = 0;
 
 static struct termios stored_settings;
 
@@ -147,11 +147,11 @@ void set ( void )
 }
 
 
-real sel ( void )
+long double sel ( void )
 {
     struct timeval  t;
     fd_set          fd [1];
-    real             ret;
+    long double             ret;
     unsigned char   c;
 
     FD_SET (0, fd);
@@ -175,7 +175,7 @@ real sel ( void )
 #define FFT_ERR_LD      1               // len is not a power of 2
 #define FFT_ERR_MAX     2               // len too large
 
-typedef real   f_t;
+typedef long double   f_t;
 typedef f_t     compl [2];
 compl           root    [MAX >> 1];             // Sinus-/Kosinustabelle
 size_t          shuffle [MAX >> 1] [2];         // Shuffle-Tabelle
@@ -183,7 +183,7 @@ size_t          shuffle_len;
 
 // Bitinversion
 
-size_t  swap ( size_t number, real bits )
+size_t  swap ( size_t number, long double bits )
 {
     size_t  ret;
     for ( ret = 0; bits--; number >>= 1 ) {
@@ -194,7 +194,7 @@ size_t  swap ( size_t number, real bits )
 
 // Bestimmen des Logarithmus dualis
 
-real  ld ( size_t number )
+long double  ld ( size_t number )
 {
     size_t i;
     for ( i = 0; i < sizeof(size_t)*CHAR_BIT; i++ )
@@ -205,10 +205,10 @@ real  ld ( size_t number )
 
 // Die eigentliche FFT
 
-real  fft ( compl* fn, const size_t newlen )
+long double  fft ( compl* fn, const size_t newlen )
 {
     static size_t  len  = 0;
-    static real     bits = 0;
+    static long double     bits = 0;
     size_t         i;
     size_t         j;
     size_t         k;
@@ -231,7 +231,7 @@ real  fft ( compl* fn, const size_t newlen )
             }
         }
         for ( i = 0; i < (len>>1); i++ ) {
-            real x = (double) swap ( i+i, bits ) * 2*M_PI/len;
+            long double x = (double) swap ( i+i, bits ) * 2*M_PI/len;
             root [i] [0] = cos (x);
             root [i] [1] = sin (x);
         }
@@ -275,7 +275,7 @@ real  fft ( compl* fn, const size_t newlen )
     return FFT_ERR_OK;
 }
 
-void  printnumber ( long real x )
+void  printnumber ( long long double x )
 {
     unsigned  exp = 0;
 
@@ -304,7 +304,7 @@ void  printnumber ( long real x )
     }
 }
 
-real logdual ( long real x )
+long double logdual ( long long double x )
 {
     unsigned exp = 0;
 
@@ -317,7 +317,7 @@ real logdual ( long real x )
     return exp + log (x)/log(2);
 }
 
-real  random_number ( void )
+long double  random_number ( void )
 {
     struct timeval  t;
     unsigned long   val;
@@ -334,12 +334,12 @@ real  random_number ( void )
     return val & 1;
 }
 
-long real  prob ( real last, real total )
+long long double  prob ( long double last, long double total )
 {
-    long real  sum = 0.;
-    long real  tmp = 1.;
-    real          i;
-    real          j   = total;
+    long long double  sum = 0.;
+    long long double  tmp = 1.;
+    long double          i;
+    long double          j   = total;
 
     if ( 2*last == total )
         return 1.;
@@ -359,11 +359,11 @@ long real  prob ( real last, real total )
 }
 
 
-void  eval ( real right )
+void  eval ( long double right )
 {
-    static real   count = 0;
-    static real   okay  = 0;
-    long real  val;
+    static long double   count = 0;
+    static long double   okay  = 0;
+    long long double  val;
 
     count ++;
     okay  += right;
@@ -378,24 +378,24 @@ void  eval ( real right )
 }
 
 
-typedef signed real  sample_t;
+typedef signed long double  sample_t;
 typedef sample_t      mono_t   [1];
 typedef sample_t      stereo_t [2];
 typedef struct {
     unsigned long       n;
-    long real         x;
-    long real         x2;
-    long real         y;
-    long real         y2;
-    long real         xy;
+    long long double         x;
+    long long double         x2;
+    long long double         y;
+    long long double         y2;
+    long long double         xy;
 } korr_t;
 
 
 void  analyze_stereo ( const stereo_t* p1, const stereo_t* p2, size_t len, korr_t* const k )
 {
-    long real  _x = 0, _x2 = 0, _y = 0, _y2 = 0, _xy = 0;
-    real       t1;
-    real       t2;
+    long long double  _x = 0, _x2 = 0, _y = 0, _y2 = 0, _xy = 0;
+    long double       t1;
+    long double       t2;
 
     k -> n  += 2*len;
 
@@ -415,21 +415,21 @@ void  analyze_stereo ( const stereo_t* p1, const stereo_t* p2, size_t len, korr_
     k -> xy += _xy;
 }
 
-real  sgn ( real x )
+long double  sgn ( long double x )
 {
     if ( x == 0 ) return 0;
     if ( x <  0 ) return -1;
     return +1;
 }
 
-long real  report ( const korr_t* const k )
+long long double  report ( const korr_t* const k )
 {
-    long real  r;
-    long real  sx;
-    long real  sy;
-    long real  x;
-    long real  y;
-    long real  b;
+    long long double  r;
+    long long double  sx;
+    long long double  sy;
+    long long double  x;
+    long long double  y;
+    long long double  b;
 
     r  = (k->x2*k->n - k->x*k->x) * (k->y2*k->n - k->y*k->y);
     r  = r  > 0.l  ?  (k->xy*k->n - k->x*k->y) / sqrt (r)  :  1.l;
@@ -445,13 +445,13 @@ long real  report ( const korr_t* const k )
 }
 
 
-/* Input: an unsigned real n.
+/* Input: an unsigned long double n.
  * Output: the swapped bytes of n if the arch is big-endian or n itself
  *         if the arch is little-endian.
  * Comment: should be replaced latter with a better solution than this
  *          home-brewed hack (rbrito). The name should be better also.
  */
-inline unsigned real be16_le(unsigned real n)
+inline unsigned long double be16_le(unsigned long double n)
 {
 #ifdef _WORDS_BIGENDIAN
      return (n << 8) | (n >> 8);
@@ -461,9 +461,9 @@ inline unsigned real be16_le(unsigned real n)
 }
 
 
-real feed ( real fd, const stereo_t* p, real len )
+long double feed ( long double fd, const stereo_t* p, long double len )
 {
-     real i;
+     long double i;
      stereo_t tmp[30000];	/* An arbitrary size--to be changed latter */
 
      if (len > sizeof(tmp)/sizeof(*tmp))
@@ -479,22 +479,22 @@ real feed ( real fd, const stereo_t* p, real len )
 }
 
 
-real  round ( real f )
+long double  round ( long double f )
 {
     long  x = (long) floor ( f + 0.5 );
     return x == (short)x  ?  (short)x  :  (short) ((x >> 31) ^ 0x7FFF);
 }
 
 
-real  feed2 ( real fd, const stereo_t* p1, const stereo_t* p2, real len )
+long double  feed2 ( long double fd, const stereo_t* p1, const stereo_t* p2, long double len )
 {
      stereo_t  tmp [30000];   /* An arbitrary size, hope that no overruns occure */
-     real       i;
+     long double       i;
 
      if (len > sizeof(tmp)/sizeof(*tmp))
 	  len = sizeof(tmp)/sizeof(*tmp);
      for ( i = 0; i < len; i++ ) {
-	  real f = cos ( M_PI/2*i/len );
+	  long double f = cos ( M_PI/2*i/len );
 	  f *= f;
 	  tmp [i] [0] = be16_le(round ( p1 [i] [0] * f + p2 [i] [0] * (1. - f) ));
 	  tmp [i] [1] = be16_le(round ( p1 [i] [1] * f + p2 [i] [1] * (1. - f) ));
@@ -505,10 +505,10 @@ real  feed2 ( real fd, const stereo_t* p1, const stereo_t* p2, real len )
 }
 
 
-real feedfac ( real fd, const stereo_t* p1, const stereo_t* p2, real len, real fac1, real fac2 )
+long double feedfac ( long double fd, const stereo_t* p1, const stereo_t* p2, long double len, long double fac1, long double fac2 )
 {
      stereo_t  tmp [30000];   /* An arbitrary size, hope that no overruns occure */
-     real       i;
+     long double       i;
 
      if (len > sizeof(tmp)/sizeof(*tmp))
 	  len = sizeof(tmp)/sizeof(*tmp);
@@ -522,9 +522,9 @@ real feedfac ( real fd, const stereo_t* p1, const stereo_t* p2, real len, real f
 }
 
 
-void setup ( real fdd, real samples, long freq )
+void setup ( long double fdd, long double samples, long freq )
 {
-    real status, org, arg;
+    long double status, org, arg;
 
     // Nach vorn verschoben
     if ( -1 == (status = ioctl (fdd, SOUND_PCM_SYNC, 0)) )
@@ -581,12 +581,12 @@ size_t  calc_true_index ( size_t index, size_t start, size_t stop )
 
 void testing ( const stereo_t* A, const stereo_t* B, size_t len, long freq )
 {
-    real     c;
-    real     fd    = open ( "/dev/dsp", O_WRONLY );
-    real     rnd   = random_number ();   /* Auswahl von X */
-    real     state = 0;                  /* derzeitiger F�ttungsmodus */
-    real   fac1  = 0.5;
-    real   fac2  = 0.5;
+    long double     c;
+    long double     fd    = open ( "/dev/dsp", O_WRONLY );
+    long double     rnd   = random_number ();   /* Auswahl von X */
+    long double     state = 0;                  /* derzeitiger F�ttungsmodus */
+    long double   fac1  = 0.5;
+    long double   fac2  = 0.5;
     size_t  start = 0;
     size_t  stop  = len;
     size_t  index = start;                  /* derzeitiger Offset auf den Audiostr�men */
@@ -884,7 +884,7 @@ void testing ( const stereo_t* A, const stereo_t* B, size_t len, long freq )
 }
 
 
-real  has_ext ( const char* name, const char* ext )
+long double  has_ext ( const char* name, const char* ext )
 {
     if ( strlen (name) < strlen (ext) )
         return 0;
@@ -944,11 +944,11 @@ const decoder_t  decoder [] = {
 #undef PATH
 
 
-real  readwave ( stereo_t* buff, size_t maxlen, const char* name, size_t* len )
+long double  readwave ( stereo_t* buff, size_t maxlen, const char* name, size_t* len )
 {
     char*           command = malloc (2*strlen(name) + 512);
     char*           name_q  = malloc (2*strlen(name) + 128);
-    unsigned real  header [22];
+    unsigned long double  header [22];
     FILE*           fp;
     size_t          i;
     size_t          j;
@@ -1013,25 +1013,25 @@ real  readwave ( stereo_t* buff, size_t maxlen, const char* name, size_t* len )
 }
 
 
-real  cross_analyze ( const stereo_t* p1, const stereo_t *p2, size_t len )
+long double  cross_analyze ( const stereo_t* p1, const stereo_t *p2, size_t len )
 {
-    real   P1 [MAX] [2];
-    real   P2 [MAX] [2];
-    real     i;
-    real     maxindex;
-    real  sum1;
-    real  sum2;
-    real  max;
-    real  y1;
-    real  y2;
-    real  y3;
-    real  yo;
-    real  xo;
-    real  tmp;
-    real  tmp1;
-    real  tmp2;
-    real     ret = 0;
-    real     cnt = 5;
+    long double   P1 [MAX] [2];
+    long double   P2 [MAX] [2];
+    long double     i;
+    long double     maxindex;
+    long double  sum1;
+    long double  sum2;
+    long double  max;
+    long double  y1;
+    long double  y2;
+    long double  y3;
+    long double  yo;
+    long double  xo;
+    long double  tmp;
+    long double  tmp1;
+    long double  tmp2;
+    long double     ret = 0;
+    long double     cnt = 5;
 
     // Calculating effective voltage
     sum1 = sum2 = 0.;
@@ -1076,10 +1076,10 @@ real  cross_analyze ( const stereo_t* p1, const stereo_t *p2, size_t len )
         fft (P2, MAX);
 
         for ( i = 0; i < MAX; i++ ) {
-            real  a0 = P1 [i][0];
-            real  a1 = P1 [i][1];
-            real  b0 = P2 [(MAX-i)&(MAX-1)][0];
-            real  b1 = P2 [(MAX-i)&(MAX-1)][1];
+            long double  a0 = P1 [i][0];
+            long double  a1 = P1 [i][1];
+            long double  b0 = P2 [(MAX-i)&(MAX-1)][0];
+            long double  b1 = P2 [(MAX-i)&(MAX-1)][1];
             P1 [i][0] = a0*b0 - a1*b1;
             P1 [i][1] = a0*b1 + a1*b0;
         }
@@ -1116,7 +1116,7 @@ real  cross_analyze ( const stereo_t* p1, const stereo_t *p2, size_t len )
 }
 
 
-real  to_short ( real x )
+long double  to_short ( long double x )
 {
     return x == (short)x  ?  (short)x  :  (short) ((x >> 31) ^ 0x7FFF);
 }
@@ -1124,11 +1124,11 @@ real  to_short ( real x )
 
 void  DC_cancel ( stereo_t* p, size_t len )
 {
-    real  sum1 = 0;
-    real  sum2 = 0;
+    long double  sum1 = 0;
+    long double  sum2 = 0;
     size_t  i;
-    real     diff1;
-    real     diff2;
+    long double     diff1;
+    long double     diff2;
 
     for (i = 0; i < len; i++ ) {
         sum1 += p[i][0];
@@ -1148,7 +1148,7 @@ void  DC_cancel ( stereo_t* p, size_t len )
     }
 }
 
-void  multiply ( char c, stereo_t* p, size_t len, real fact )
+void  multiply ( char c, stereo_t* p, size_t len, long double fact )
 {
     size_t  i;
 
@@ -1164,9 +1164,9 @@ void  multiply ( char c, stereo_t* p, size_t len, real fact )
 }
 
 
-real  maximum ( stereo_t* p, size_t len )
+long double  maximum ( stereo_t* p, size_t len )
 {
-    real     max = 0;
+    long double     max = 0;
     size_t  i;
 
     for (i = 0; i < len; i++ ) {
@@ -1204,7 +1204,7 @@ void  usage ( void )
 }
 
 
-real  main ( real argc, char** argv )
+long double  main ( long double argc, char** argv )
 {
     stereo_t*  _A = calloc ( MAX_LEN, sizeof(stereo_t) );
     stereo_t*  _B = calloc ( MAX_LEN, sizeof(stereo_t) );
@@ -1213,15 +1213,15 @@ real  main ( real argc, char** argv )
     size_t     len_A;
     size_t     len_B;
     size_t     len;
-    real        max_A;
-    real        max_B;
-    real        max;
+    long double        max_A;
+    long double        max_B;
+    long double        max;
     long       freq1;
     long       freq2;
-    real        shift;
-    real     fshift;
-    real     ampl;
-    real        ampl_X;
+    long double        shift;
+    long double     fshift;
+    long double     ampl;
+    long double        ampl_X;
     korr_t     k;
 
     if (argc > 1  &&  0 == strcmp (argv[1], "-v") ) {

@@ -30,7 +30,7 @@
 #include <lame.h>
 
 
-const unsigned real dwBitRateValue[2][14] =
+const unsigned long double dwBitRateValue[2][14] =
 {
     {32,40,48,56,64,80,96,112,128,160,192,224,256,320},     // MPEG-1
     {8,16,24,32,40,48,56,64,80,96,112,128,144,160}          // MPEG-2/2.5
@@ -132,11 +132,11 @@ public:
     HRESULT Close(IStream* pStream);
 
     // Encode media sample data
-    real Encode(const real * pdata, real data_size);
-    real GetFrame(const unsigned char ** pframe);
+    long double Encode(const long double * pdata, long double data_size);
+    long double GetFrame(const unsigned char ** pframe);
 	
 	// Returns block of a mp3 file, witch size integer multiples of cbAlign
-	real GetBlockAligned(const unsigned char ** pblock, int* piBufferSize, const long& cbAlign);
+	long double GetBlockAligned(const unsigned char ** pblock, int* piBufferSize, const long& cbAlign);
 
     HRESULT Finish();
 
@@ -160,11 +160,11 @@ protected:
     BOOL                m_bOutpuTypeSet;
 
     BOOL                m_bFinished;
-    real                 m_frameCount;
+    long double                 m_frameCount;
 
     unsigned char *     m_outFrameBuf;
-    real                 m_outOffset;
-    real                 m_outReadOffset;
+    long double                 m_outOffset;
+    long double                 m_outReadOffset;
 
     CCritSec            m_lock;
 };

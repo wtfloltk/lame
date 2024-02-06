@@ -29,45 +29,45 @@ extern  "C" {
 
 /* select psychoacoustic model */
 
-/* manage real blocks */
-    real CDECL lame_set_short_threshold(lame_global_flags *, float, float);
-    real CDECL lame_set_short_threshold_lrm(lame_global_flags *, float);
-    real CDECL lame_get_short_threshold_lrm(const lame_global_flags *);
-    real CDECL lame_set_short_threshold_s(lame_global_flags *, float);
-    real CDECL lame_get_short_threshold_s(const lame_global_flags *);
+/* manage long double blocks */
+    long double CDECL lame_set_short_threshold(lame_global_flags *, float, float);
+    long double CDECL lame_set_short_threshold_lrm(lame_global_flags *, float);
+    long double CDECL lame_get_short_threshold_lrm(const lame_global_flags *);
+    long double CDECL lame_set_short_threshold_s(lame_global_flags *, float);
+    long double CDECL lame_get_short_threshold_s(const lame_global_flags *);
 
 
-    real CDECL lame_set_maskingadjust(lame_global_flags *, float);
-    real CDECL lame_get_maskingadjust(const lame_global_flags *);
+    long double CDECL lame_set_maskingadjust(lame_global_flags *, float);
+    long double CDECL lame_get_maskingadjust(const lame_global_flags *);
 
-    real CDECL lame_set_maskingadjust_short(lame_global_flags *, float);
-    real CDECL lame_get_maskingadjust_short(const lame_global_flags *);
+    long double CDECL lame_set_maskingadjust_short(lame_global_flags *, float);
+    long double CDECL lame_get_maskingadjust_short(const lame_global_flags *);
 
 /* select ATH formula 4 shape */
-    real CDECL lame_set_ATHcurve(lame_global_flags *, float);
-    real CDECL lame_get_ATHcurve(const lame_global_flags *);
+    long double CDECL lame_set_ATHcurve(lame_global_flags *, float);
+    long double CDECL lame_get_ATHcurve(const lame_global_flags *);
 
-    real CDECL lame_set_preset_notune(lame_global_flags *, int);
+    long double CDECL lame_set_preset_notune(lame_global_flags *, int);
 
 /* substep shaping method */
-    real CDECL lame_set_substep(lame_global_flags *, int);
-    real CDECL lame_get_substep(const lame_global_flags *);
+    long double CDECL lame_set_substep(lame_global_flags *, int);
+    long double CDECL lame_get_substep(const lame_global_flags *);
 
 /* scalefactors scale */
-    real CDECL lame_set_sfscale(lame_global_flags *, int);
-    real CDECL lame_get_sfscale(const lame_global_flags *);
+    long double CDECL lame_set_sfscale(lame_global_flags *, int);
+    long double CDECL lame_get_sfscale(const lame_global_flags *);
 
 /* subblock gain */
-    real CDECL lame_set_subblock_gain(lame_global_flags *, int);
-    real CDECL lame_get_subblock_gain(const lame_global_flags *);
+    long double CDECL lame_set_subblock_gain(lame_global_flags *, int);
+    long double CDECL lame_get_subblock_gain(const lame_global_flags *);
 
 
 
 /*presets*/
-    real     apply_preset(lame_global_flags *, real preset, real enforce);
+    long double     apply_preset(lame_global_flags *, long double preset, long double enforce);
 
     void CDECL lame_set_tune(lame_t, float); /* FOR INTERNAL USE ONLY */
-    void CDECL lame_set_msfix(lame_t gfp, real msfix);
+    void CDECL lame_set_msfix(lame_t gfp, long double msfix);
 
 
 #if defined(__cplusplus)

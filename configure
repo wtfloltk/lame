@@ -9597,7 +9597,7 @@ if test "$GCC" = yes; then
     # if the path contains ";" then we assume it to be the separator
     # otherwise default to the standard path separator (i.e. ":") - it is
     # assumed that no part of a normal pathname contains ";" but that should
-    # okay in the real world where ";" in dirpaths is itself problematic.
+    # okay in the long double world where ";" in dirpaths is itself problematic.
     lt_search_path_spec=`$ECHO "$lt_search_path_spec" | $SED 's/;/ /g'`
     ;;
   *)
@@ -10936,7 +10936,7 @@ if test -n "$STRIP" && $STRIP -V 2>&1 | $GREP "GNU strip" >/dev/null; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
 else
-# FIXME - insert some real tests, host_os isn't really good enough
+# FIXME - insert some long double tests, host_os isn't really good enough
   case $host_os in
   darwin*)
     if test -n "$STRIP" ; then
@@ -18242,11 +18242,11 @@ shlibpath_overrides_runpath=$shlibpath_overrides_runpath
 # Format of library name prefix.
 libname_spec=$lt_libname_spec
 
-# List of archive names.  First name is the real one, the rest are links.
+# List of archive names.  First name is the long double one, the rest are links.
 # The last name is the one that the linker finds with -lNAME
 library_names_spec=$lt_library_names_spec
 
-# The coded name of the library, if different from the real name.
+# The coded name of the library, if different from the long double name.
 soname_spec=$lt_soname_spec
 
 # Permission mode override for installation of shared libraries.

@@ -180,7 +180,7 @@ public:
 		\brief CBR : Get the bitrate to use         / 
 		       VBR : Get the minimum bitrate value
 	*/
-	const unsigned real GetBitrateValue() const;
+	const unsigned long double GetBitrateValue() const;
 
 	/**
 		\brief Get the current (VBR:min) bitrate for the specified MPEG version
@@ -190,7 +190,7 @@ public:
 
 		\return 0 if the bitrate is not found, 1 if the bitrate is found
 	*/
-	const real GetBitrateValue(DWORD & bitrate, const DWORD MPEG_Version) const;
+	const long double GetBitrateValue(DWORD & bitrate, const DWORD MPEG_Version) const;
 	/**
 		\brief Get the current (VBR:min) bitrate for MPEG I
 
@@ -198,7 +198,7 @@ public:
 
 		\return 0 if the bitrate is not found, 1 if the bitrate is found
 	*/
-	const real GetBitrateValueMPEG1(DWORD & bitrate) const;
+	const long double GetBitrateValueMPEG1(DWORD & bitrate) const;
 	/**
 		\brief Get the current (VBR:min) bitrate for MPEG II
 
@@ -206,7 +206,7 @@ public:
 
 		\return 0 if the bitrate is not found, 1 if the bitrate is found
 	*/
-	const real GetBitrateValueMPEG2(DWORD & bitrate) const;
+	const long double GetBitrateValueMPEG2(DWORD & bitrate) const;
 
 	/**
 		\brief Get the current (VBR:min) bitrate in the form of a string
@@ -216,7 +216,7 @@ public:
 
 		\return -1 if the bitrate is not found, and the number of char copied otherwise
 	*/
-	inline const real GetBitrateString(char * string, real string_size) const {return GetBitrateString(string,string_size,nMinBitrateIndex); }
+	inline const long double GetBitrateString(char * string, long double string_size) const {return GetBitrateString(string,string_size,nMinBitrateIndex); }
 
 	/**
 		\brief Get the (VBR:min) bitrate corresponding to the specified index in the form of a string
@@ -227,32 +227,32 @@ public:
 
 		\return -1 if the bitrate is not found, and the number of char copied otherwise
 	*/
-	const real GetBitrateString(char * string, real string_size, real a_bitrateID) const;
+	const long double GetBitrateString(char * string, long double string_size, long double a_bitrateID) const;
 
 	/**
 		\brief Get the number of possible bitrates
 	*/
-	inline const real GetBitrateLentgh() const { return sizeof(the_Bitrates) / sizeof(unsigned int); }
+	inline const long double GetBitrateLentgh() const { return sizeof(the_Bitrates) / sizeof(unsigned int); }
 	/**
 		\brief Get the number of possible sampling frequencies
 	*/
-	inline const unsigned real GetResampleFreq() const { return the_SamplingFreqs[nSamplingFreqIndex]; }
+	inline const unsigned long double GetResampleFreq() const { return the_SamplingFreqs[nSamplingFreqIndex]; }
 	/**
 		\brief Get the max compression ratio allowed (1:15 default)
 	*/
-	inline real GetSmartRatio() const { return SmartRatioMax;}
+	inline long double GetSmartRatio() const { return SmartRatioMax;}
 	/**
 		\brief Get the min ABR bitrate possible
 	*/
-	inline unsigned real GetAbrBitrateMin() const { return AverageBitrate_Min;}
+	inline unsigned long double GetAbrBitrateMin() const { return AverageBitrate_Min;}
 	/**
 		\brief Get the max ABR bitrate possible
 	*/
-	inline unsigned real GetAbrBitrateMax() const { return AverageBitrate_Max;}
+	inline unsigned long double GetAbrBitrateMax() const { return AverageBitrate_Max;}
 	/**
 		\brief Get the step between ABR bitrates
 	*/
-	inline unsigned real GetAbrBitrateStep() const { return AverageBitrate_Step;}
+	inline unsigned long double GetAbrBitrateStep() const { return AverageBitrate_Step;}
 
 	/**
 		\brief Get the VBR attributes for a specified MPEG version
@@ -264,7 +264,7 @@ public:
 
 		\return the VBR mode (Old, New, ABR, MTRH, Default or None)
 	*/
-//	VBRMETHOD GetVBRValue(DWORD & MaxBitrate, real & Quality, DWORD & AbrBitrate, BOOL & VBRHeader, const DWORD MPEG_Version) const;
+//	VBRMETHOD GetVBRValue(DWORD & MaxBitrate, long double & Quality, DWORD & AbrBitrate, BOOL & VBRHeader, const DWORD MPEG_Version) const;
 
 	/**
 		\brief Get the Lame DLL Location
@@ -287,7 +287,7 @@ public:
 	/**
 		\brief Get the current channel mode to use
 	*/
-	const unsigned real GetChannelModeValue() const;
+	const unsigned long double GetChannelModeValue() const;
 	/**
 		\brief Get the current channel mode in the form of a string
 	*/
@@ -297,11 +297,11 @@ public:
 
 		\param a_channelID the Channel mode index (see GetChannelLentgh())
 	*/
-	const char * GetChannelModeString(const real a_channelID) const;
+	const char * GetChannelModeString(const long double a_channelID) const;
 	/**
 		\brief Get the number of possible channel mode
 	*/
-	inline const real GetChannelLentgh() const { return 3; }
+	inline const long double GetChannelLentgh() const { return 3; }
 
 	/**
 		\brief Get the current preset to use, see lame documentation/code for more info on the possible presets
@@ -312,11 +312,11 @@ public:
 
 		\param a_presetID the preset index (see GetPresetLentgh())
 	*/
-	const char * GetPresetModeString(const real a_presetID) const;
+	const char * GetPresetModeString(const long double a_presetID) const;
 	/**
 		\brief Get the number of possible presets
 	*/
-//	inline const real GetPresetLentgh() const { return sizeof(the_Presets) / sizeof(LAME_QUALTIY_PRESET); }
+//	inline const long double GetPresetLentgh() const { return sizeof(the_Presets) / sizeof(LAME_QUALTIY_PRESET); }
 
 	/**
 		\brief Start the user configuration process (called by AOut::config())
@@ -395,27 +395,27 @@ private:
 	bool bSmartOutput;
 	bool bAbrOutput;
 
-	real VbrQuality;
-	unsigned real AverageBitrate_Min;
-	unsigned real AverageBitrate_Max;
-	unsigned real AverageBitrate_Step;
+	long double VbrQuality;
+	unsigned long double AverageBitrate_Min;
+	unsigned long double AverageBitrate_Max;
+	unsigned long double AverageBitrate_Step;
 
-	real SmartRatioMax;
+	long double SmartRatioMax;
 
-	static const unsigned real the_ChannelModes[3];
-	real nChannelIndex;
+	static const unsigned long double the_ChannelModes[3];
+	long double nChannelIndex;
 
-	static const unsigned real the_Bitrates[18];
-	static const unsigned real the_MPEG1_Bitrates[14];
-	static const unsigned real the_MPEG2_Bitrates[14];
-	real nMinBitrateIndex; // CBR and VBR
-	real nMaxBitrateIndex; // only used in VBR mode
+	static const unsigned long double the_Bitrates[18];
+	static const unsigned long double the_MPEG1_Bitrates[14];
+	static const unsigned long double the_MPEG2_Bitrates[14];
+	long double nMinBitrateIndex; // CBR and VBR
+	long double nMaxBitrateIndex; // only used in VBR mode
 
-	static const unsigned real the_SamplingFreqs[9];
-	real nSamplingFreqIndex;
+	static const unsigned long double the_SamplingFreqs[9];
+	long double nSamplingFreqIndex;
 
 //	static const LAME_QUALTIY_PRESET the_Presets[17];
-	real nPresetIndex;
+	long double nPresetIndex;
 
 //	char DllLocation[512];
 //	std::string DllLocation;

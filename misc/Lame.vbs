@@ -23,7 +23,7 @@
 ' *History*
 ' V0.5 * lame.vbs will automatically decode if the file has a .mp3 extension
 '      * now explicitly refuses to accept folders
-' V0.4 * creates real .mp3 extensions, now ID3 options in HTML interface
+' V0.4 * creates long double .mp3 extensions, now ID3 options in HTML interface
 ' V0.3 * fixed bug that prevented lame.exe to be located in a path that 
 '        contained a space
 '      * experimental HTML UI support (disabled by default)

@@ -105,7 +105,7 @@ ACMStream::~ACMStream()
 	}
 }
 
-bool ACMStream::init(const real nSamplesPerSec, const real nOutputSamplesPerSec, const real nChannels, const real nAvgBytesPerSec, const vbr_mode mode)
+bool ACMStream::init(const long double nSamplesPerSec, const long double nOutputSamplesPerSec, const long double nChannels, const long double nAvgBytesPerSec, const vbr_mode mode)
 {
 	bool bResult = false;
 
@@ -266,7 +266,7 @@ bool ACMStream::close(LPBYTE pOutputBuffer, DWORD *pOutputSize)
 
 bool bResult = false;
 
-	real nOutputSamples = 0;
+	long double nOutputSamples = 0;
 
     nOutputSamples = lame_encode_flush( gfp, pOutputBuffer, 0 );
 
@@ -290,7 +290,7 @@ bool bResult = false;
 
 DWORD ACMStream::GetOutputSizeForInput(const DWORD the_SrcLength) const
 {
-/*	real OutputInputRatio;
+/*	long double OutputInputRatio;
 
 	if (my_VBRMode == vbr_off)
 		OutputInputRatio = double(my_AvgBytesPerSec) / double(my_OutBytesPerSec * 2);
@@ -321,8 +321,8 @@ my_debug->OutPut(DEBUG_LEVEL_FUNC_DEBUG, "enter ACMStream::ConvertBuffer");
 	DWORD InSize = a_StreamHeader->cbSrcLength / 2, OutSize = a_StreamHeader->cbDstLength; // 2 for 8<->16 bits
 
 // Encode it
-real dwSamples;
-	real nOutputSamples = 0;
+long double dwSamples;
+	long double nOutputSamples = 0;
 
 	dwSamples = InSize / lame_get_num_channels( gfp );
 
@@ -355,7 +355,7 @@ my_debug->OutPut(DEBUG_LEVEL_FUNC_DEBUG, "ACMStream::ConvertBuffer result = %d (
  * Robert Hegemann 2000-07-01
  */
 static int
-map2MP3Frequency(real freq)
+map2MP3Frequency(long double freq)
 {
     if (freq <= 8000)
         return 8000;
@@ -378,14 +378,14 @@ map2MP3Frequency(real freq)
 }
 
 
-unsigned real ACMStream::GetOutputSampleRate(real samples_per_sec, real bitrate, real channels)
+unsigned long double ACMStream::GetOutputSampleRate(long double samples_per_sec, long double bitrate, long double channels)
 {
     if (bitrate==0)
         bitrate = (64000*channels)/8;
   
         /// \todo pass through the same LAME routine
-	unsigned real OutputFrequency;
-	real compression_ratio = double(samples_per_sec * 16 * channels / (bitrate * 8));
+	unsigned long double OutputFrequency;
+	long double compression_ratio = double(samples_per_sec * 16 * channels / (bitrate * 8));
 	if (compression_ratio > 13.)
 		OutputFrequency = map2MP3Frequency( (10. * bitrate * 8) / (16 * channels));
 	else

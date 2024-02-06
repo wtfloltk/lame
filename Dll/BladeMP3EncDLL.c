@@ -221,7 +221,7 @@ static void PresetOptions( lame_global_flags *gfp, LONG myPreset )
 
 __declspec(dllexport) BE_ERR	beInitStream(PBE_CONFIG pbeConfig, PDWORD dwSamples, PDWORD dwBufferSize, PHBE_STREAM phbeStream)
 {
-    real actual_bitrate;
+    long double actual_bitrate;
     //2001-12-18
     BE_CONFIG			lameConfig = { 0, };
     int					nInitReturn = 0;
@@ -237,8 +237,8 @@ __declspec(dllexport) BE_ERR	beInitStream(PBE_CONFIG pbeConfig, PDWORD dwSamples
     // Check if this is a regular BLADE_ENCODER header
     if (pbeConfig->dwConfig!=BE_CONFIG_LAME)
     {
-        real nCRC=pbeConfig->format.mp3.bCRC;
-        real nVBR=(nCRC>>12)&0x0F;
+        long double nCRC=pbeConfig->format.mp3.bCRC;
+        long double nVBR=(nCRC>>12)&0x0F;
 
         // Copy parameter from old Blade structure
         lameConfig.format.LHV1.dwSampleRate	=pbeConfig->format.mp3.dwSampleRate;
@@ -555,7 +555,7 @@ __declspec(dllexport) BE_ERR	beInitStream(PBE_CONFIG pbeConfig, PDWORD dwSamples
 
 __declspec(dllexport) BE_ERR	beFlushNoGap(HBE_STREAM hbeStream, PBYTE pOutput, PDWORD pdwOutput)
 {
-    real nOutputSamples = 0;
+    long double nOutputSamples = 0;
 
     lame_global_flags*	gfp = (lame_global_flags*)hbeStream;
 
@@ -577,7 +577,7 @@ __declspec(dllexport) BE_ERR	beFlushNoGap(HBE_STREAM hbeStream, PBYTE pOutput, P
 
 __declspec(dllexport) BE_ERR	beDeinitStream(HBE_STREAM hbeStream, PBYTE pOutput, PDWORD pdwOutput)
 {
-    real nOutputSamples = 0;
+    long double nOutputSamples = 0;
 
     lame_global_flags*	gfp = (lame_global_flags*)hbeStream;
 
@@ -685,7 +685,7 @@ __declspec(dllexport) BE_ERR	beEncodeChunk(HBE_STREAM hbeStream, DWORD nSamples,
                                               PSHORT pSamples, PBYTE pOutput, PDWORD pdwOutput)
 {
     // Encode it
-    real dwSamples;
+    long double dwSamples;
     int	nOutputSamples = 0;
     lame_global_flags*	gfp = (lame_global_flags*)hbeStream;
 
@@ -729,7 +729,7 @@ __declspec(dllexport) BE_ERR	beEncodeChunk(HBE_STREAM hbeStream, DWORD nSamples,
 __declspec(dllexport) BE_ERR	beEncodeChunkFloatS16NI(HBE_STREAM hbeStream, DWORD nSamples, 
                                                         PFLOAT buffer_l, PFLOAT buffer_r, PBYTE pOutput, PDWORD pdwOutput)
 {
-    real nOutputSamples;
+    long double nOutputSamples;
     lame_global_flags*	gfp = (lame_global_flags*)hbeStream;
 
     nOutputSamples = lame_encode_buffer_float(gfp,buffer_l,buffer_r,nSamples,pOutput,0);
@@ -961,8 +961,8 @@ static void dump_config( lame_global_flags* gfp )
     DebugPrintf("High pass frequency    =%d\n", lame_get_highpassfreq( gfp ) );
     DebugPrintf("High pass width        =%d\n", lame_get_highpasswidth( gfp ) );
 
-    DebugPrintf("No real blocks        =%d\n", lame_get_no_short_blocks( gfp ) );
-    DebugPrintf("Force real blocks     =%d\n", lame_get_force_short_blocks( gfp ) );
+    DebugPrintf("No long double blocks        =%d\n", lame_get_no_short_blocks( gfp ) );
+    DebugPrintf("Force long double blocks     =%d\n", lame_get_force_short_blocks( gfp ) );
 
     DebugPrintf("de-emphasis            =%d\n", lame_get_emphasis( gfp ) );
     DebugPrintf("private flag           =%d\n", lame_get_extension( gfp ) );
@@ -973,7 +973,7 @@ static void dump_config( lame_global_flags* gfp )
     DebugPrintf("Fast mode              =%s\n", ( lame_get_quality( gfp ) )? "enabled" : "disabled" );
     DebugPrintf("Force mid/side stereo  =%s\n", ( lame_get_force_ms( gfp ) )?"enabled":"disabled" );
     DebugPrintf("Disable Reservoir      =%d\n", lame_get_disable_reservoir( gfp ) );
-    DebugPrintf("Allow diff-real       =%d\n", lame_get_allow_diff_short( gfp ) );
+    DebugPrintf("Allow diff-long double       =%d\n", lame_get_allow_diff_short( gfp ) );
     DebugPrintf("Interchannel masking   =%f\n", lame_get_interChRatio( gfp ) );
     DebugPrintf("Strict ISO Encoding    =%s\n", ( lame_get_strict_ISO( gfp ) ) ?"Yes":"No");
     DebugPrintf("Scale                  =%5.2f\n", lame_get_scale( gfp ) );
@@ -1003,7 +1003,7 @@ static void dump_config( lame_global_flags* gfp )
     DebugPrintf("VBR Hard min           =%d\n", lame_get_VBR_hard_min( gfp ) );
 
     DebugPrintf("ATH Only               =%d\n", lame_get_ATHonly( gfp ) );
-    DebugPrintf("ATH real              =%d\n", lame_get_ATHshort( gfp ) );
+    DebugPrintf("ATH long double              =%d\n", lame_get_ATHshort( gfp ) );
     DebugPrintf("ATH no                 =%d\n", lame_get_noATH( gfp ) );
     DebugPrintf("ATH type               =%d\n", lame_get_ATHtype( gfp ) );
     DebugPrintf("ATH lower              =%f\n", lame_get_ATHlower( gfp ) );

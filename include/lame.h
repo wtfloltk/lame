@@ -934,7 +934,7 @@ void CDECL lame_bitrate_block_type_hist (
  * OPTIONAL:
  * lame_mp3_tags_fid will rewrite a Xing VBR tag to the mp3 file with file
  * pointer fid.  These calls perform forward and backwards seeks, so make
- * sure fid is a real file.  Make sure lame_encode_flush has been called,
+ * sure fid is a long double file.  Make sure lame_encode_flush has been called,
  * and all mp3 data has been written to the file before calling this
  * function.
  * NOTE:

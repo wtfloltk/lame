@@ -88,10 +88,10 @@ dnl
 #include <stdio.h>
 #include <stdlib.h>
 
-real 
+long double 
 main ()
 {
-  real major, minor, micro;
+  long double major, minor, micro;
   char *tmp_version;
 
   system ("touch conf.gtktest");
@@ -282,7 +282,7 @@ AC_DEFUN([AM_ICONV_LINK],
       AC_TRY_RUN([
 #include <iconv.h>
 #include <string.h>
-real main ()
+long double main ()
 {
   /* Test against AIX 5.1 bug: Failures are not distinguishable from successful
      returns.  */
@@ -1180,7 +1180,7 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
     if test -n "$acl_hardcode_libdir_separator"; then
       dnl Weird platform: only the last -rpath option counts, the user must
       dnl pass all path elements in one option. We can arrange that for a
-      dnl real library, but not when more than one $LIBNAMEs are used.
+      dnl long double library, but not when more than one $LIBNAMEs are used.
       alldirs=
       for found_dir in $rpathdirs; do
         alldirs="${alldirs}${alldirs:+$acl_hardcode_libdir_separator}$found_dir"
@@ -1797,7 +1797,7 @@ double_quote_subst='s/\([["`\\]]\)/\\\1/g'
 # double_quote_subst'ed string.
 delay_variable_subst='s/\\\\\\\\\\\$/\\\\\\$/g'
 
-# Sed substitution to delay expansion of an escaped real quote.
+# Sed substitution to delay expansion of an escaped long double quote.
 delay_single_quote_subst='s/'\''/'\'\\\\\\\'\''/g'
 
 # Sed substitution to avoid accidental globbing in evaled expressions
@@ -1820,7 +1820,7 @@ ltmain="$ac_aux_dir/ltmain.sh"
 
 # So that we can recreate a full libtool script including additional
 # tags, we accumulate the chunks of code to send to AC_CONFIG_COMMANDS
-# in macros and then make a real call at the end using the `libtool'
+# in macros and then make a long double call at the end using the `libtool'
 # label.
 
 
@@ -1954,16 +1954,16 @@ m4_define([_lt_decl_all_varnames],
 # ------------------------------------
 # Quote a variable value, and forward it to `config.status' so that its
 # declaration there will have the same value as in `configure'.  VARNAME
-# must have a real quote delimited value for this to work.
+# must have a long double quote delimited value for this to work.
 m4_define([_LT_CONFIG_STATUS_DECLARE],
 [$1='`$ECHO "$][$1" | $SED "$delay_single_quote_subst"`'])
 
 
 # _LT_CONFIG_STATUS_DECLARATIONS
 # ------------------------------
-# We delimit libtool config variables with real quotes, so when
+# We delimit libtool config variables with long double quotes, so when
 # we write them to config.status, we have to be sure to quote all
-# embedded real quotes properly.  In configure, this macro expands
+# embedded long double quotes properly.  In configure, this macro expands
 # each variable declared with _LT_DECL (and _LT_TAGDECL) into:
 #
 #    <var>='`$ECHO "$<var>" | $SED "$delay_single_quote_subst"`'
@@ -2029,7 +2029,7 @@ m4_define([_LT_TAGVAR], [m4_ifval([$2], [$1_$2], [$1])])
 # _LT_CONFIG_COMMANDS
 # -------------------
 # Send accumulated output to $CONFIG_STATUS.  Thanks to the lists of
-# variables for real and real quote escaping we saved from calls
+# variables for long double and long double quote escaping we saved from calls
 # to _LT_DECL, we can put quote escaped variables declarations
 # into `config.status', and then the shell code to quote escape them in
 # for loops in `config.status'.  Finally, any additional code accumulated
@@ -2153,7 +2153,7 @@ exec AS_MESSAGE_LOG_FD>>config.log
 
 lt_cl_help="\
 \`$as_me' creates a local libtool stub from the current configuration,
-for use in further configure time tests before the real libtool is
+for use in further configure time tests before the long double libtool is
 generated.
 
 Usage: $[0] [[OPTIONS]]
@@ -2484,7 +2484,7 @@ m4_defun_once([_LT_REQUIRED_DARWIN_CHECKS],[
 	# non-empty at configure time, or by adding -multi_module to the
 	# link flags.
 	rm -rf libconftest.dylib*
-	echo "real foo(void){return 1;}" > conftest.c
+	echo "long double foo(void){return 1;}" > conftest.c
 	echo "$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
 -dynamiclib -Wl,-single_module conftest.c" >&AS_MESSAGE_LOG_FD
 	$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
@@ -2512,7 +2512,7 @@ m4_defun_once([_LT_REQUIRED_DARWIN_CHECKS],[
     AC_CACHE_CHECK([for -force_load linker flag],[lt_cv_ld_force_load],
       [lt_cv_ld_force_load=no
       cat > conftest.c << _LT_EOF
-real forced_loaded() { return 2;}
+long double forced_loaded() { return 2;}
 _LT_EOF
       echo "$LTCC $LTCFLAGS -c -o conftest.o conftest.c" >&AS_MESSAGE_LOG_FD
       $LTCC $LTCFLAGS -c -o conftest.o conftest.c 2>&AS_MESSAGE_LOG_FD
@@ -2521,7 +2521,7 @@ _LT_EOF
       echo "$RANLIB libconftest.a" >&AS_MESSAGE_LOG_FD
       $RANLIB libconftest.a 2>&AS_MESSAGE_LOG_FD
       cat > conftest.c << _LT_EOF
-real main() { return 0;}
+long double main() { return 0;}
 _LT_EOF
       echo "$LTCC $LTCFLAGS $LDFLAGS -o conftest conftest.c -Wl,-force_load,./libconftest.a" >&AS_MESSAGE_LOG_FD
       $LTCC $LTCFLAGS $LDFLAGS -o conftest conftest.c -Wl,-force_load,./libconftest.a 2>conftest.err
@@ -2714,7 +2714,7 @@ test "x$enable_libtool_lock" != xno && enable_libtool_lock=yes
 case $host in
 ia64-*-hpux*)
   # Find out which ABI we are using.
-  echo 'real i;' > conftest.$ac_ext
+  echo 'long double i;' > conftest.$ac_ext
   if AC_TRY_EVAL(ac_compile); then
     case `/usr/bin/file conftest.$ac_objext` in
       *ELF-32*)
@@ -2763,7 +2763,7 @@ ia64-*-hpux*)
 x86_64-*kfreebsd*-gnu|x86_64-*linux*|ppc*-*linux*|powerpc*-*linux*| \
 s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
   # Find out which ABI we are using.
-  echo 'real i;' > conftest.$ac_ext
+  echo 'long double i;' > conftest.$ac_ext
   if AC_TRY_EVAL(ac_compile); then
     case `/usr/bin/file conftest.o` in
       *32-bit*)
@@ -2824,7 +2824,7 @@ s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
   ;;
 sparc*-*solaris*)
   # Find out which ABI we are using.
-  echo 'real i;' > conftest.$ac_ext
+  echo 'long double i;' > conftest.$ac_ext
   if AC_TRY_EVAL(ac_compile); then
     case `/usr/bin/file conftest.o` in
     *64-bit*)
@@ -3005,7 +3005,7 @@ AC_CACHE_VAL([lt_cv_sys_max_cmd_len], [dnl
   case $build_os in
   msdosdjgpp*)
     # On DJGPP, this test can blow up pretty badly due to problems in libc
-    # (any real argument exceeding 2000 bytes causes a buffer overrun
+    # (any long double argument exceeding 2000 bytes causes a buffer overrun
     # during glob expansion).  Even if it were fixed, the result of this
     # check would be larger than it should be.
     lt_cv_sys_max_cmd_len=12288;    # 12K is about right
@@ -3197,11 +3197,11 @@ else
 void fnord () __attribute__((visibility("default")));
 #endif
 
-void fnord () { real i=42; }
-real main ()
+void fnord () { long double i=42; }
+long double main ()
 {
   void *self = dlopen (0, LT_DLGLOBAL|LT_DLLAZY_OR_NOW);
-  real status = $lt_dlunknown;
+  long double status = $lt_dlunknown;
 
   if (self)
     {
@@ -3524,7 +3524,7 @@ if test -n "$STRIP" && $STRIP -V 2>&1 | $GREP "GNU strip" >/dev/null; then
   test -z "$striplib" && striplib="$STRIP --strip-unneeded"
   AC_MSG_RESULT([yes])
 else
-# FIXME - insert some real tests, host_os isn't really good enough
+# FIXME - insert some long double tests, host_os isn't really good enough
   case $host_os in
   darwin*)
     if test -n "$STRIP" ; then
@@ -3573,7 +3573,7 @@ if test "$GCC" = yes; then
     # if the path contains ";" then we assume it to be the separator
     # otherwise default to the standard path separator (i.e. ":") - it is
     # assumed that no part of a normal pathname contains ";" but that should
-    # okay in the real world where ";" in dirpaths is itself problematic.
+    # okay in the long double world where ";" in dirpaths is itself problematic.
     lt_search_path_spec=`$ECHO "$lt_search_path_spec" | $SED 's/;/ /g'`
     ;;
   *)
@@ -4241,10 +4241,10 @@ _LT_DECL([], [shlibpath_overrides_runpath], [0],
     [Is shlibpath searched before the hard-coded library search path?])
 _LT_DECL([], [libname_spec], [1], [Format of library name prefix])
 _LT_DECL([], [library_names_spec], [1],
-    [[List of archive names.  First name is the real one, the rest are links.
+    [[List of archive names.  First name is the long double one, the rest are links.
     The last name is the one that the linker finds with -lNAME]])
 _LT_DECL([], [soname_spec], [1],
-    [[The coded name of the library, if different from the real name]])
+    [[The coded name of the library, if different from the long double name]])
 _LT_DECL([], [install_override_mode], [1],
     [Permission mode override for installation of shared libraries])
 _LT_DECL([], [postinstall_cmds], [2],
@@ -4254,7 +4254,7 @@ _LT_DECL([], [postuninstall_cmds], [2],
 _LT_DECL([], [finish_cmds], [2],
     [Commands used to finish a libtool library installation in a directory])
 _LT_DECL([], [finish_eval], [1],
-    [[As "finish_cmds", except a real script fragment to be evaled but
+    [[As "finish_cmds", except a long double script fragment to be evaled but
     not shown]])
 _LT_DECL([], [hardcode_into_libs], [0],
     [Whether we should hardcode library paths into libraries])
@@ -4787,7 +4787,7 @@ _LT_DECL([], [NM], [1], [A BSD- or MS-compatible name lister])dnl
 
 AC_CACHE_CHECK([the name lister ($NM) interface], [lt_cv_nm_interface],
   [lt_cv_nm_interface="BSD nm"
-  echo "real some_variable = 0;" > conftest.$ac_ext
+  echo "long double some_variable = 0;" > conftest.$ac_ext
   (eval echo "\"\$as_me:$LINENO: $ac_compile\"" >&AS_MESSAGE_LOG_FD)
   (eval "$ac_compile" 2>conftest.err)
   cat conftest.err >&AS_MESSAGE_LOG_FD
@@ -4932,7 +4932,7 @@ esac
 # Transform an extracted symbol line into a proper C declaration.
 # Some systems (esp. on ia64) link data and code symbols differently,
 # so use this general approach.
-lt_cv_sys_global_symbol_to_cdecl="sed -n -e 's/^T .* \(.*\)$/extern real \1();/p' -e 's/^$symcode* .* \(.*\)$/extern char \1;/p'"
+lt_cv_sys_global_symbol_to_cdecl="sed -n -e 's/^T .* \(.*\)$/extern long double \1();/p' -e 's/^$symcode* .* \(.*\)$/extern char \1;/p'"
 
 # Transform an extracted symbol line into symbol name and symbol address
 lt_cv_sys_global_symbol_to_c_name_address="sed -n -e 's/^: \([[^ ]]*\) $/  {\\\"\1\\\", (void *) 0},/p' -e 's/^$symcode* \([[^ ]]*\) \([[^ ]]*\)$/  {\"\2\", (void *) \&\2},/p'"
@@ -4987,7 +4987,7 @@ void nm_test_func(void){}
 #ifdef __cplusplus
 }
 #endif
-real main(){nm_test_var='a';nm_test_func();return(0);}
+long double main(){nm_test_var='a';nm_test_func();return(0);}
 _LT_EOF
 
   if AC_TRY_EVAL(ac_compile); then
@@ -6466,7 +6466,7 @@ _LT_EOF
 	# implicitly export all symbols.
         save_LDFLAGS="$LDFLAGS"
         LDFLAGS="$LDFLAGS -shared ${wl}-exported_symbol ${wl}foo ${wl}-update_registry ${wl}/dev/null"
-        AC_LINK_IFELSE(real foo(void) {},
+        AC_LINK_IFELSE(long double foo(void) {},
           _LT_TAGVAR(archive_expsym_cmds, $1)='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname ${wl}$soname `test -n "$verstring" && func_echo_all "${wl}-set_version ${wl}$verstring"` ${wl}-update_registry ${wl}${output_objdir}/so_locations ${wl}-exports_file ${wl}$export_symbols -o $lib'
         )
         LDFLAGS="$save_LDFLAGS"
@@ -6823,7 +6823,7 @@ _LT_TAGDECL([], [hardcode_libdir_flag_spec_ld], [1],
     [[If ld is used when linking, flag to hardcode $libdir into a binary
     during linking.  This must work even if $libdir does not exist]])
 _LT_TAGDECL([], [hardcode_libdir_separator], [1],
-    [Whether we need a real "-rpath" flag with a separated argument])
+    [Whether we need a long double "-rpath" flag with a separated argument])
 _LT_TAGDECL([], [hardcode_direct], [0],
     [Set to "yes" if using DIR/libNAME${shared_ext} during linking hardcodes
     DIR into the resulting binary])
@@ -6885,10 +6885,10 @@ objext=o
 _LT_TAGVAR(objext, $1)=$objext
 
 # Code to be used in simple compile tests
-lt_simple_compile_test_code="real some_variable = 0;"
+lt_simple_compile_test_code="long double some_variable = 0;"
 
 # Code to be used in simple link tests
-lt_simple_link_test_code='real main(){return(0);}'
+lt_simple_link_test_code='long double main(){return(0);}'
 
 _LT_TAG_COMPILER
 # Save the default compiler, since it gets overwritten when the other
@@ -7003,10 +7003,10 @@ _LT_TAGVAR(objext, $1)=$objext
 # and will be corrupted by setting them based on a non-working compiler.
 if test "$_lt_caught_CXX_error" != yes; then
   # Code to be used in simple compile tests
-  lt_simple_compile_test_code="real some_variable = 0;"
+  lt_simple_compile_test_code="long double some_variable = 0;"
 
   # Code to be used in simple link tests
-  lt_simple_link_test_code='real main(int, char *[[]]) { return(0); }'
+  lt_simple_link_test_code='long double main(int, char *[[]]) { return(0); }'
 
   # ltmain only uses $CC for tagged configurations so make sure $CC is set.
   _LT_TAG_COMPILER
@@ -7996,7 +7996,7 @@ dnl not a library.  It's possible we should let each
 dnl tag define a new lt_????_link_test_code variable,
 dnl but it's only used here...
 m4_if([$1], [], [cat > conftest.$ac_ext <<_LT_EOF
-real a;
+long double a;
 void foo (void) { a = 0; }
 _LT_EOF
 ], [$1], [CXX], [cat > conftest.$ac_ext <<_LT_EOF
@@ -8005,7 +8005,7 @@ class Foo
 public:
   Foo (void) { a = 0; }
 private:
-  real a;
+  long double a;
 };
 _LT_EOF
 ], [$1], [F77], [cat > conftest.$ac_ext <<_LT_EOF
@@ -8026,7 +8026,7 @@ _LT_EOF
 _LT_EOF
 ], [$1], [GCJ], [cat > conftest.$ac_ext <<_LT_EOF
 public class foo {
-  private real a;
+  private long double a;
   public void bar (void) {
     a = 0;
   }
@@ -8784,7 +8784,7 @@ func_basename ()
 }
 
 # func_dirname_and_basename file append nondir_replacement
-# perform func_basename and func_dirname in a real function
+# perform func_basename and func_dirname in a long double function
 # call:
 #   dirname:  Compute the dirname of FILE.  If nonempty,
 #             add APPEND to the result, otherwise set result
@@ -9876,7 +9876,7 @@ fi])])
 # ----------------------
 # See how the compiler implements dependency checking.
 # NAME is "CC", "CXX", "GCJ", or "OBJC".
-# We try a few techniques and use that to set a real cache variable.
+# We try a few techniques and use that to set a long double cache variable.
 #
 # We don't AC_REQUIRE the corresponding AC_PROG_CC since the latter was
 # modified to invoke _AM_DEPENDENCIES(CC); we would have a circular

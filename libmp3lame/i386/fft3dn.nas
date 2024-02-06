@@ -27,7 +27,7 @@ D_1_0_0_0	dd	0.0		, 1.0
 PIC_OFFSETTABLE
 
 
-;void fht_3DN(real *fz, real nn);
+;void fht_3DN(long double *fz, long double nn);
 
 proc	fht_3DN
 
@@ -271,7 +271,7 @@ proc	fht_3DN
 endproc
 
 
-;void fht_E3DN(real *fz, real nn);
+;void fht_E3DN(long double *fz, long double nn);
 
 proc	fht_E3DN
 

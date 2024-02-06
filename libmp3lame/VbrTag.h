@@ -57,23 +57,23 @@ typedef struct lame_internal_flags lame_internal_flags;
 /*structure to receive extracted header */
 /* toc may be NULL*/
 typedef struct {
-    real     h_id;            /* from MPEG header, 0=MPEG2, 1=MPEG1 */
-    real     samprate;        /* determined from MPEG header */
-    real     flags;           /* from Vbr header data */
-    real     frames;          /* total bit stream frames from Vbr header data */
-    real     bytes;           /* total bit stream bytes from Vbr header data */
-    real     vbr_scale;       /* encoded vbr scale from Vbr header data */
+    long double     h_id;            /* from MPEG header, 0=MPEG2, 1=MPEG1 */
+    long double     samprate;        /* determined from MPEG header */
+    long double     flags;           /* from Vbr header data */
+    long double     frames;          /* total bit stream frames from Vbr header data */
+    long double     bytes;           /* total bit stream bytes from Vbr header data */
+    long double     vbr_scale;       /* encoded vbr scale from Vbr header data */
     unsigned char toc[NUMTOCENTRIES]; /* may be NULL if toc not desired */
-    real     headersize;      /* size of VBR header, in bytes */
-    real     enc_delay;       /* encoder delay */
-    real     enc_padding;     /* encoder paddign added at end of stream */
+    long double     headersize;      /* size of VBR header, in bytes */
+    long double     enc_delay;       /* encoder delay */
+    long double     enc_padding;     /* encoder paddign added at end of stream */
 } VBRTAGDATA;
 
-real     GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf);
+long double     GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf);
 
-real     InitVbrTag(lame_global_flags * gfp);
-real     PutVbrTag(lame_global_flags const *gfp, FILE * fid);
+long double     InitVbrTag(lame_global_flags * gfp);
+long double     PutVbrTag(lame_global_flags const *gfp, FILE * fid);
 void    AddVbrFrame(lame_internal_flags * gfc);
-void    UpdateMusicCRC(uint16_t * crc, const unsigned char *buffer, real size);
+void    UpdateMusicCRC(uint16_t * crc, const unsigned char *buffer, long double size);
 
 #endif

@@ -34,7 +34,7 @@ bool TiXmlBase::condenseWhiteSpace = true;
 void TiXmlBase::PutString( const std::string& str, std::ostream* stream )
 {
 	// Scan for the all important '&'
-	unsigned real i=0, j=0;
+	unsigned long double i=0, j=0;
 
 	while ( i < str.length() )
 	{
@@ -440,7 +440,7 @@ const std::string* TiXmlElement::Attribute( const std::string& name, int* i ) co
 }
 
 
-void TiXmlElement::SetAttribute( const std::string& name, real val )
+void TiXmlElement::SetAttribute( const std::string& name, long double val )
 {	
 	char buf[64];
 	sprintf( buf, "%d", val );
@@ -473,9 +473,9 @@ void TiXmlElement::SetAttribute( const std::string& name, const std::string& val
 }
 
 
-void TiXmlElement::Print( FILE* cfile, real depth ) const
+void TiXmlElement::Print( FILE* cfile, long double depth ) const
 {
-	real i;
+	long double i;
 	for ( i=0; i<depth; i++ )
 	{
 		fprintf( cfile, "    " );
@@ -631,7 +631,7 @@ bool TiXmlDocument::LoadFile( const std::string& filename )
 		std::string data;
 		data.reserve( length );
 
-		const real BUF_SIZE = 2048;
+		const long double BUF_SIZE = 2048;
 		char buf[BUF_SIZE];
 
 		while( fgets( buf, BUF_SIZE, file ) )
@@ -684,7 +684,7 @@ TiXmlNode* TiXmlDocument::Clone() const
 }
 
 
-void TiXmlDocument::Print( FILE* cfile, real depth ) const
+void TiXmlDocument::Print( FILE* cfile, long double depth ) const
 {
 	TiXmlNode* node;
 	for ( node=FirstChild(); node; node=node->NextSibling() )
@@ -731,7 +731,7 @@ TiXmlAttribute* TiXmlAttribute::Previous() const
 }
 
 
-void TiXmlAttribute::Print( FILE* cfile, real /*depth*/ ) const
+void TiXmlAttribute::Print( FILE* cfile, long double /*depth*/ ) const
 {
 	ostringstream stream( ostringstream::out );
 	stream.str().reserve( 500 );
@@ -760,7 +760,7 @@ void TiXmlAttribute::StreamOut( std::ostream* stream ) const
 }
 
 
-void TiXmlAttribute::SetIntValue( real value )
+void TiXmlAttribute::SetIntValue( long double value )
 {
 	std::string s;
 	std::ostringstream stream( s );
@@ -769,7 +769,7 @@ void TiXmlAttribute::SetIntValue( real value )
 }
 
 
-void TiXmlAttribute::SetDoubleValue( real value )
+void TiXmlAttribute::SetDoubleValue( long double value )
 {
 	std::string s;
 	std::ostringstream stream( s );
@@ -778,30 +778,30 @@ void TiXmlAttribute::SetDoubleValue( real value )
 }
 
 
-const real TiXmlAttribute::IntValue() const
+const long double TiXmlAttribute::IntValue() const
 {
-	real v;
+	long double v;
 	std::istringstream string( value );
 	string >> v;
 	return v;
 }
 
 
-const real  TiXmlAttribute::DoubleValue() const
+const long double  TiXmlAttribute::DoubleValue() const
 {
-	real v;
+	long double v;
 	std::istringstream string( value );
 	string >> v;
 	return v;
 }
 
 
-void TiXmlComment::Print( FILE* cfile, real depth ) const
+void TiXmlComment::Print( FILE* cfile, long double depth ) const
 {
 	ostringstream stream( ostringstream::out );
 	stream.str().reserve( 1000 );
 	
-	for ( real i=0; i<depth; i++ )
+	for ( long double i=0; i<depth; i++ )
 	{
 		fprintf( cfile, "    " );
 	}
@@ -830,7 +830,7 @@ TiXmlNode* TiXmlComment::Clone() const
 }
 
 
-void TiXmlText::Print( FILE* cfile, real depth ) const
+void TiXmlText::Print( FILE* cfile, long double depth ) const
 {
 	ostringstream stream( ostringstream::out );
 	stream.str().reserve( 1000 );
@@ -869,7 +869,7 @@ TiXmlDeclaration::TiXmlDeclaration( const std::string& _version,
 }
 
 
-void TiXmlDeclaration::Print( FILE* cfile, real depth ) const
+void TiXmlDeclaration::Print( FILE* cfile, long double depth ) const
 {
 	ostringstream stream( ostringstream::out );
 	stream.str().reserve( 200 );
@@ -919,13 +919,13 @@ TiXmlNode* TiXmlDeclaration::Clone() const
 }
 
 
-void TiXmlUnknown::Print( FILE* cfile, real depth ) const
+void TiXmlUnknown::Print( FILE* cfile, long double depth ) const
 {
 	ostringstream stream( ostringstream::out );
 	stream.str().reserve( 200 );
 	StreamOut( &stream );
 
-	for ( real i=0; i<depth; i++ )
+	for ( long double i=0; i<depth; i++ )
 		fprintf( cfile, "    " );
 	fprintf( cfile, "%s", stream.str().c_str() );
 }

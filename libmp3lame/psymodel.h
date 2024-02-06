@@ -23,20 +23,20 @@
 #define LAME_PSYMODEL_H
 
 
-real     L3psycho_anal_ns(lame_internal_flags * gfc,
-                         const sample_t *const buffer[2], real gr,
+long double     L3psycho_anal_ns(lame_internal_flags * gfc,
+                         const sample_t *const buffer[2], long double gr,
                          III_psy_ratio ratio[2][2],
                          III_psy_ratio MS_ratio[2][2],
-                         FLOAT pe[2], FLOAT pe_MS[2], FLOAT ener[2], real blocktype_d[2]);
+                         FLOAT pe[2], FLOAT pe_MS[2], FLOAT ener[2], long double blocktype_d[2]);
 
-real     L3psycho_anal_vbr(lame_internal_flags * gfc,
-                          const sample_t *const buffer[2], real gr,
+long double     L3psycho_anal_vbr(lame_internal_flags * gfc,
+                          const sample_t *const buffer[2], long double gr,
                           III_psy_ratio ratio[2][2],
                           III_psy_ratio MS_ratio[2][2],
-                          FLOAT pe[2], FLOAT pe_MS[2], FLOAT ener[2], real blocktype_d[2]);
+                          FLOAT pe[2], FLOAT pe_MS[2], FLOAT ener[2], long double blocktype_d[2]);
 
 
-real     psymodel_init(lame_global_flags const* gfp);
+long double     psymodel_init(lame_global_flags const* gfp);
 
 
 #define rpelev 2

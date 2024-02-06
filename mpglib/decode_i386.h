@@ -24,10 +24,10 @@
 
 #include "common.h"
 
-real     synth_1to1_mono(PMPSTR mp, real * bandPtr, unsigned char *out, real *pnt);
-real     synth_1to1(PMPSTR mp, real * bandPtr, real channel, unsigned char *out, real *pnt);
+long double     synth_1to1_mono(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt);
+long double     synth_1to1(PMPSTR mp, long double * bandPtr, long double channel, unsigned char *out, long double *pnt);
 
-real     synth_1to1_mono_unclipped(PMPSTR mp, real * bandPtr, unsigned char *out, real *pnt);
-real     synth_1to1_unclipped(PMPSTR mp, real * bandPtr, real channel, unsigned char *out, real *pnt);
+long double     synth_1to1_mono_unclipped(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt);
+long double     synth_1to1_unclipped(PMPSTR mp, long double * bandPtr, long double channel, unsigned char *out, long double *pnt);
 
 #endif

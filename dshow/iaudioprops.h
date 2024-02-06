@@ -194,7 +194,7 @@ extern "C" {
         STDMETHOD(set_StrictISO) (THIS_
             DWORD dwFlag
         ) PURE;
-        // Control 'Disable real block' flag
+        // Control 'Disable long double block' flag
         STDMETHOD(get_NoShortBlock) (THIS_
             DWORD *dwDisable
         ) PURE;

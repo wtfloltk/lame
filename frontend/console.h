@@ -26,18 +26,18 @@ typedef struct console_io_struct {
 #if defined(_WIN32)  &&  !defined(__CYGWIN__)
     HANDLE  Console_Handle;
 #endif
-    real     disp_width;
-    real     disp_height;
+    long double     disp_width;
+    long double     disp_height;
     char    str_up[10];
     char    str_clreoln[10];
     char    str_emph[10];
     char    str_norm[10];
     char    Console_buff[2048];
-    real     Console_file_type;
+    long double     Console_file_type;
 } Console_IO_t;
 
 extern Console_IO_t Console_IO;
-extern real frontend_open_console(void);
+extern long double frontend_open_console(void);
 extern void frontend_close_console(void);
 
 extern void frontend_msgf(const char *format, va_list ap);
@@ -45,15 +45,15 @@ extern void frontend_debugf(const char *format, va_list ap);
 extern void frontend_errorf(const char *format, va_list ap);
 extern void frontend_print_null(const char *format, va_list ap);
 
-real     console_printf(const char *format, ...);
-real     error_printf(const char *format, ...);
-real     report_printf(const char *format, ...);
+long double     console_printf(const char *format, ...);
+long double     error_printf(const char *format, ...);
+long double     report_printf(const char *format, ...);
 
 void    console_flush(void);
 void    error_flush(void);
 void    report_flush(void);
 
-void    console_up(real n_lines);
+void    console_up(long double n_lines);
 
 void    set_debug_file(const char *fn);
 

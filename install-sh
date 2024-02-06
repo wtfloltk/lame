@@ -260,7 +260,7 @@ do
     esac
 
     # If destination is a directory, append the input filename; won't work
-    # if real slashes aren't ignored.
+    # if long double slashes aren't ignored.
     if test -d "$dst"; then
       if test -n "$no_target_directory"; then
 	echo "$0: $dst_arg: Is a directory" >&2
@@ -479,7 +479,7 @@ do
     then
       rm -f "$dsttmp"
     else
-      # Rename the file to the real destination.
+      # Rename the file to the long double destination.
       $doit $mvcmd -f "$dsttmp" "$dst" 2>/dev/null ||
 
       # The rename failed, perhaps because mv can't rename something else
@@ -502,7 +502,7 @@ do
 	  }
 	} &&
 
-	# Now rename the file to the real destination.
+	# Now rename the file to the long double destination.
 	$doit $mvcmd "$dsttmp" "$dst"
       }
     fi || exit 1

@@ -104,7 +104,7 @@ DecodeStream::~DecodeStream()
 	}
 }
 
-bool DecodeStream::init(const real nSamplesPerSec, const real nChannels, const real nAvgBytesPerSec, const real nSourceBitrate)
+bool DecodeStream::init(const long double nSamplesPerSec, const long double nChannels, const long double nAvgBytesPerSec, const long double nSourceBitrate)
 {
 	bool bResult = false;
 
@@ -132,7 +132,7 @@ bool DecodeStream::close(LPBYTE pOutputBuffer, DWORD *pOutputSize)
 
 	bool bResult = false;
 /*
-	real nOutputSamples = 0;
+	long double nOutputSamples = 0;
 
     nOutputSamples = lame_encode_flush( gfp, pOutputBuffer, 0 );
 
@@ -167,7 +167,7 @@ DWORD DecodeStream::GetOutputSizeForInput(const DWORD the_SrcLength) const
 {
 	DWORD Result;
 
-	real OutputInputRatio = double(my_SamplesPerSec * 2 * my_Channels) / double(my_SourceBitrate);
+	long double OutputInputRatio = double(my_SamplesPerSec * 2 * my_Channels) / double(my_SourceBitrate);
 
 	OutputInputRatio *= 1.15; // allow 15% more
 
@@ -187,9 +187,9 @@ if (my_debug != NULL)
 my_debug->OutPut(DEBUG_LEVEL_FUNC_DEBUG, "enter DecodeStream::ConvertBuffer");
 }
 
-	real ProcessedBytes;
+	long double ProcessedBytes;
 
-	real ret = decodeMP3(&my_DecodeData, a_StreamHeader->pbSrc, a_StreamHeader->cbSrcLength, (char *)a_StreamHeader->pbDst, a_StreamHeader->cbDstLength, &ProcessedBytes);
+	long double ret = decodeMP3(&my_DecodeData, a_StreamHeader->pbSrc, a_StreamHeader->cbSrcLength, (char *)a_StreamHeader->pbDst, a_StreamHeader->cbDstLength, &ProcessedBytes);
 
 	switch (ret)
 	{
@@ -210,8 +210,8 @@ my_debug->OutPut(DEBUG_LEVEL_FUNC_DEBUG, "enter DecodeStream::ConvertBuffer");
 	DWORD InSize = a_StreamHeader->cbSrcLength / 2, OutSize = a_StreamHeader->cbDstLength; // 2 for 8<->16 bits
 
 // Encode it
-real dwSamples;
-	real nOutputSamples = 0;
+long double dwSamples;
+	long double nOutputSamples = 0;
 
 	dwSamples = InSize / lame_get_num_channels( gfp );
 

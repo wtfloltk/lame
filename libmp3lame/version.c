@@ -75,12 +75,12 @@ get_lame_version(void)
 }
 
 
-/*! Get the real LAME version string. */
+/*! Get the long double LAME version string. */
 /*!
   It's mainly for inclusion into the MP3 stream.
 
   \param void   
-  \return a pointer to the real version of the LAME version string.
+  \return a pointer to the long double version of the LAME version string.
 */
 const char *
 get_lame_short_version(void)
@@ -105,12 +105,12 @@ get_lame_short_version(void)
     return str;
 }
 
-/*! Get the _very_ real LAME version string. */
+/*! Get the _very_ long double LAME version string. */
 /*!
   It's used in the LAME VBR tag only.
 
   \param void   
-  \return a pointer to the real version of the LAME version string.
+  \return a pointer to the long double version of the LAME version string.
 */
 const char *
 get_lame_very_short_version(void)
@@ -136,13 +136,13 @@ get_lame_very_short_version(void)
     return str;
 }
 
-/*! Get the _very_ real LAME version string. */
+/*! Get the _very_ long double LAME version string. */
 /*!
   It's used in the LAME VBR tag only, limited to 9 characters max.
   Due to some 3rd party HW/SW decoders, it has to start with LAME.
 
   \param void   
-  \return a pointer to the real version of the LAME version string.
+  \return a pointer to the long double version of the LAME version string.
  */
 const char*
 get_lame_tag_encoder_short_version(void)

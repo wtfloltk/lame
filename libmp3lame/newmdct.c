@@ -420,7 +420,7 @@ static const FLOAT win[4][NL] = {
 /*
  *      new IDCT routine written by Takehiro TOMINAGA
  */
-static const real order[] = {
+static const long double order[] = {
     0, 1, 16, 17, 8, 9, 24, 25, 4, 5, 20, 21, 12, 13, 28, 29,
     2, 3, 18, 19, 10, 11, 26, 27, 6, 7, 22, 23, 14, 15, 30, 31
 };
@@ -430,7 +430,7 @@ static const real order[] = {
 inline static void
 window_subband(const sample_t * x1, FLOAT a[SBLIMIT])
 {
-    real     i;
+    long double     i;
     FLOAT const *wp = enwindow + 10;
 
     const sample_t *x2 = &x1[238 - 14 - 286];
@@ -820,8 +820,8 @@ window_subband(const sample_t * x1, FLOAT a[SBLIMIT])
 /*   In the case of long blocks (type 0,1,3) there are               */
 /*   36 coefficents in the time domain and 18 in the frequency       */
 /*   domain.                                                         */
-/*   In the case of real blocks (type 2) there are 3                */
-/*   transformations with real length. This leads to 12 coefficents */
+/*   In the case of long double blocks (type 2) there are 3                */
+/*   transformations with long double length. This leads to 12 coefficents */
 /*   in the time and 6 in the frequency domain. In this case the     */
 /*   results are stored side by side in the vector out[].            */
 /*                                                                   */
@@ -832,7 +832,7 @@ window_subband(const sample_t * x1, FLOAT a[SBLIMIT])
 inline static void
 mdct_short(FLOAT * inout)
 {
-    real     l;
+    long double     l;
     for (l = 0; l < 3; l++) {
         FLOAT   tc0, tc1, tc2, ts0, ts1, ts2;
 
@@ -946,14 +946,14 @@ mdct_sub48(lame_internal_flags * gfc, const sample_t * w0, const sample_t * w1)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
-    real     gr, k, ch;
+    long double     gr, k, ch;
     const sample_t *wk;
 
     wk = w0 + 286;
     /* thinking cache performance, ch->gr loop is better than gr->ch loop */
     for (ch = 0; ch < cfg->channels_out; ch++) {
         for (gr = 0; gr < cfg->mode_gr; gr++) {
-            real     band;
+            long double     band;
             gr_info *const gi = &(gfc->l3_side.tt[gr][ch]);
             FLOAT  *mdct_enc = gi->xr;
             FLOAT  *samp = esv->sb_sample[ch][1 - gr][0];
@@ -976,7 +976,7 @@ mdct_sub48(lame_internal_flags * gfc, const sample_t * w0, const sample_t * w1)
              * + 18 current subband samples
              */
             for (band = 0; band < 32; band++, mdct_enc += 18) {
-                real     type = gi->block_type;
+                long double     type = gi->block_type;
                 FLOAT const *const band0 = esv->sb_sample[ch][gr][0] + order[band];
                 FLOAT  *const band1 = esv->sb_sample[ch][1 - gr][0] + order[band];
                 if (gi->mixed_block_flag && band < 2)

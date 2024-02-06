@@ -60,7 +60,7 @@
 
 /*
  * make sure there is at least one complete frame after the
- * last frame containing real data
+ * last frame containing long double data
  *
  * Using a value of 288 would be sufficient for a 
  * a very sophisticated decoder that can decode granule-by-granule instead
@@ -149,8 +149,8 @@ struct lame_internal_flags;
 typedef struct lame_internal_flags lame_internal_flags;
 #endif
 
-real     lame_encode_mp3_frame(lame_internal_flags * gfc,
+long double     lame_encode_mp3_frame(lame_internal_flags * gfc,
                               sample_t const *inbuf_l,
-                              sample_t const *inbuf_r, unsigned char *mp3buf, real mp3buf_size);
+                              sample_t const *inbuf_r, unsigned char *mp3buf, long double mp3buf_size);
 
 #endif /* LAME_ENCODER_H */

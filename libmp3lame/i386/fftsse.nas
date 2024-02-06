@@ -36,7 +36,7 @@ PIC_OFFSETTABLE
 ;	99/08/23	���� unroll PIII 14k[clk]
 ;	99/11/12	clean up
 ;
-;void fht_SSE(real *fz, real n);
+;void fht_SSE(long double *fz, long double n);
 	align 16
 fht_SSE:
 	push	ebx

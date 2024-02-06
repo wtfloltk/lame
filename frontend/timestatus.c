@@ -52,18 +52,18 @@
 #endif
 
 typedef struct time_status_struct {
-    real  last_time;       /* result of last call to clock */
-    real  elapsed_time;    /* total time */
-    real  estimated_time;  /* estimated total duration time [s] */
-    real  speed_index;     /* speed relative to realtime coding [100%] */
+    long double  last_time;       /* result of last call to clock */
+    long double  elapsed_time;    /* total time */
+    long double  estimated_time;  /* estimated total duration time [s] */
+    long double  speed_index;     /* speed relative to realtime coding [100%] */
 } timestatus_t;
 
 static struct EncoderProgress {
     timestatus_t real_time;
     timestatus_t proc_time;
-    real  last_time;
-    real     last_frame_num;
-    real     time_status_init;
+    long double  last_time;
+    long double     last_frame_num;
+    long double     time_status_init;
 } global_encoder_progress;
 
 
@@ -75,10 +75,10 @@ static struct EncoderProgress {
 
 static void
 ts_calc_times(timestatus_t * const tstime, /* tstime->elapsed_time: elapsed time */
-              const real sample_freq, /* sample frequency [Hz/kHz]  */
-              const real frameNum, /* Number of the current Frame */
-              const real totalframes, /* total umber of Frames */
-              const real framesize)
+              const long double sample_freq, /* sample frequency [Hz/kHz]  */
+              const long double frameNum, /* Number of the current Frame */
+              const long double totalframes, /* total umber of Frames */
+              const long double framesize)
 {                       /* Size of a frame [bps/kbps] */
     assert(sample_freq >= 8000 && sample_freq <= 48000);
 
@@ -97,12 +97,12 @@ ts_calc_times(timestatus_t * const tstime, /* tstime->elapsed_time: elapsed time
  */
 
 static void
-ts_time_decompose(const real x, const char padded_char)
+ts_time_decompose(const long double x, const char padded_char)
 {
     const unsigned long time_in_sec = (unsigned long)x;
     const unsigned long hour = time_in_sec / 3600;
-    const unsigned real min = time_in_sec / 60 % 60;
-    const unsigned real sec = time_in_sec % 60;
+    const unsigned long double min = time_in_sec / 60 % 60;
+    const unsigned long double sec = time_in_sec % 60;
 
     if (hour == 0)
         console_printf("   %2u:%02u%c", min, sec, padded_char);
@@ -117,9 +117,9 @@ timestatus(const lame_global_flags * const gfp)
 {
     timestatus_t* real_time = &global_encoder_progress.real_time;
     timestatus_t* proc_time = &global_encoder_progress.proc_time;
-    real     percent;
-    real  tmx, delta;
-    real samp_rate     = lame_get_out_samplerate(gfp)
+    long double     percent;
+    long double  tmx, delta;
+    long double samp_rate     = lame_get_out_samplerate(gfp)
       , frameNum      = lame_get_frameNum(gfp)
       , totalframes   = lame_get_totalframes(gfp)
       , framesize     = lame_get_framesize(gfp)
@@ -287,8 +287,8 @@ void
 encoder_progress( lame_global_flags const* gf )
 {
     if (global_ui_config.silent <= 0) {
-        real const frames = lame_get_frameNum(gf);
-        real const frames_diff = frames - global_encoder_progress.last_frame_num;
+        long double const frames = lame_get_frameNum(gf);
+        long double const frames_diff = frames - global_encoder_progress.last_frame_num;
         if (global_ui_config.update_interval <= 0) {     /*  most likely --disptime x not used */
             if (frames_diff < 100 && frames_diff != 0) {  /*  true, most of the time */
                 return;
@@ -297,8 +297,8 @@ encoder_progress( lame_global_flags const* gf )
         }
         else {
             if (frames != 0 && frames != 9) {
-                real const act = GetRealTime();
-                real const dif = act - global_encoder_progress.last_time;
+                long double const act = GetRealTime();
+                long double const dif = act - global_encoder_progress.last_time;
                 if (dif >= 0 && dif < global_ui_config.update_interval) {
                     return;
                 }
@@ -334,15 +334,15 @@ encoder_progress_end( lame_global_flags const* gf )
 
 /* these functions are used in get_audio.c */
 static struct DecoderProgress {
-    real     last_mode_ext;
-    real     frames_total;
-    real     frame_ctr;
-    real     framesize;
+    long double     last_mode_ext;
+    long double     frames_total;
+    long double     frame_ctr;
+    long double     framesize;
     unsigned long samples;
 } global_decoder_progress;
 
 static
-unsigned long calcEndPadding(unsigned long samples, real pcm_samples_per_frame)
+unsigned long calcEndPadding(unsigned long samples, long double pcm_samples_per_frame)
 {
     unsigned long end_padding;
     samples += 576;
@@ -353,7 +353,7 @@ unsigned long calcEndPadding(unsigned long samples, real pcm_samples_per_frame)
 }
 
 static
-unsigned long calcNumBlocks(unsigned long samples, real pcm_samples_per_frame)
+unsigned long calcNumBlocks(unsigned long samples, long double pcm_samples_per_frame)
 {
     unsigned long end_padding;
     samples += 576;
@@ -364,7 +364,7 @@ unsigned long calcNumBlocks(unsigned long samples, real pcm_samples_per_frame)
 }
 
 DecoderProgress
-decoder_progress_init(unsigned long n, real framesize)
+decoder_progress_init(unsigned long n, long double framesize)
 {
     DecoderProgress dp = &global_decoder_progress;
     dp->last_mode_ext =0;
@@ -388,7 +388,7 @@ decoder_progress_init(unsigned long n, real framesize)
 }
 
 static void
-addSamples(DecoderProgress dp, real iread)
+addSamples(DecoderProgress dp, long double iread)
 {
     dp->samples += iread;
     dp->frame_ctr += dp->samples / dp->framesize;
@@ -399,14 +399,14 @@ addSamples(DecoderProgress dp, real iread)
 }
 
 void
-decoder_progress(DecoderProgress dp, const mp3data_struct * mp3data, real iread)
+decoder_progress(DecoderProgress dp, const mp3data_struct * mp3data, long double iread)
 {
     addSamples(dp, iread);
 
     console_printf("\rFrame#%6i/%-6i %3i kbps",
                    dp->frame_ctr, dp->frames_total, mp3data->bitrate);
 
-    /* Programmed with a real frame hold delay */
+    /* Programmed with a long double frame hold delay */
     /* Attention: static data */
 
     /* MP2 Playback is still buggy. */
@@ -414,8 +414,8 @@ decoder_progress(DecoderProgress dp, const mp3data_struct * mp3data, real iread)
     /* is this really intensity_stereo or is it MS stereo? */
 
     if (mp3data->mode == JOINT_STEREO) {
-        real     curr = mp3data->mode_ext;
-        real     last = dp->last_mode_ext;
+        long double     curr = mp3data->mode_ext;
+        long double     last = dp->last_mode_ext;
         console_printf("  %s  %c",
                        curr & 2 ? last & 2 ? " MS " : "LMSR" : last & 2 ? "LMSR" : "L  R",
                        curr & 1 ? last & 1 ? 'I' : 'i' : last & 1 ? 'i' : ' ');

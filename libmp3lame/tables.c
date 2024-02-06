@@ -523,20 +523,20 @@ typedef enum {
     MPEG_25 = 2
 } MPEG_t;
 
-const real bitrate_table[3][16] = {
+const long double bitrate_table[3][16] = {
     {0, 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160, -1}, /* MPEG 2 */
     {0, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320, -1}, /* MPEG 1 */
     {0, 8, 16, 24, 32, 40, 48, 56, 64, -1, -1, -1, -1, -1, -1, -1}, /* MPEG 2.5 */
 };
 
-const real samplerate_table[3][4] = {
+const long double samplerate_table[3][4] = {
     {22050, 24000, 16000, -1}, /* MPEG 2 */
     {44100, 48000, 32000, -1}, /* MPEG 1 */
     {11025, 12000, 8000, -1}, /* MPEG 2.5 */
 };
 
 int
-lame_get_bitrate(real mpeg_version, real table_index)
+lame_get_bitrate(long double mpeg_version, long double table_index)
 {
     if (0 <= mpeg_version && mpeg_version <= 2) {
         if (0 <= table_index && table_index <= 15) {
@@ -547,7 +547,7 @@ lame_get_bitrate(real mpeg_version, real table_index)
 }
 
 int
-lame_get_samplerate(real mpeg_version, real table_index)
+lame_get_samplerate(long double mpeg_version, long double table_index)
 {
     if (0 <= mpeg_version && mpeg_version <= 2) {
         if (0 <= table_index && table_index <= 3) {
@@ -559,6 +559,6 @@ lame_get_samplerate(real mpeg_version, real table_index)
 
 
 /* This is the scfsi_band table from 2.4.2.7 of the IS */
-const real scfsi_band[5] = { 0, 6, 11, 16, 21 };
+const long double scfsi_band[5] = { 0, 6, 11, 16, 21 };
 
 /* end of tables.c */

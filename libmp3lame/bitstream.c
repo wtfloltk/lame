@@ -44,7 +44,7 @@
 
 
 
-/* unsigned real is at least this large:  */
+/* unsigned long double is at least this large:  */
 /* we work with ints, so when doing bit manipulation, we limit
  * ourselves to MAX_LENGTH-2 just to be on the safe side */
 #define MAX_LENGTH      32
@@ -52,13 +52,13 @@
 
 
 #ifdef DEBUG
-static real hogege;
+static long double hogege;
 #endif
 
 
 
 static int
-calcFrameLength(SessionConfig_t const *const cfg, real kbps, real pad)
+calcFrameLength(SessionConfig_t const *const cfg, long double kbps, long double pad)
 {
   return 8 * ((cfg->version + 1) * 72000 * kbps / cfg->samplerate_out + pad);
 }
@@ -72,7 +72,7 @@ getframebits(const lame_internal_flags * gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncResult_t const *const eov = &gfc->ov_enc;
-    real     bit_rate;
+    long double     bit_rate;
 
     /* get bitrate in kbps [?] */
     if (eov->bitrate_index)
@@ -88,9 +88,9 @@ getframebits(const lame_internal_flags * gfc)
 }
 
 int
-get_max_frame_buffer_size_by_constraint(SessionConfig_t const * cfg, real constraint)
+get_max_frame_buffer_size_by_constraint(SessionConfig_t const * cfg, long double constraint)
 {
-    real     maxmp3buf = 0;
+    long double     maxmp3buf = 0;
     if (cfg->avg_bitrate > 320) {
         /* in freeformat the buffer is constant */
         if (constraint == MDB_STRICT_ISO) {
@@ -102,7 +102,7 @@ get_max_frame_buffer_size_by_constraint(SessionConfig_t const * cfg, real constr
         }
     }
     else {
-        real     max_kbps;
+        long double     max_kbps;
         if (cfg->samplerate_out < 16000) {
             max_kbps = bitrate_table[cfg->version][8]; /* default: allow 64 kbps (MPEG-2.5) */
         }
@@ -149,7 +149,7 @@ putheader_bits(lame_internal_flags * gfc)
 
 /*write j bits into the bit stream */
 inline static void
-putbits2(lame_internal_flags * gfc, real val, real j)
+putbits2(lame_internal_flags * gfc, long double val, long double j)
 {
     EncStateVar_t const *const esv = &gfc->sv_enc;
     Bit_stream_struc *bs;
@@ -158,7 +158,7 @@ putbits2(lame_internal_flags * gfc, real val, real j)
     assert(j < MAX_LENGTH - 2);
 
     while (j > 0) {
-        real     k;
+        long double     k;
         if (bs->buf_bit_idx == 0) {
             bs->buf_bit_idx = 8;
             bs->buf_byte_idx++;
@@ -185,7 +185,7 @@ putbits2(lame_internal_flags * gfc, real val, real j)
 
 /*write j bits into the bit stream, ignoring frame headers */
 inline static void
-putbits_noheaders(lame_internal_flags * gfc, real val, real j)
+putbits_noheaders(lame_internal_flags * gfc, long double val, long double j)
 {
     Bit_stream_struc *bs;
     bs = &gfc->bs;
@@ -193,7 +193,7 @@ putbits_noheaders(lame_internal_flags * gfc, real val, real j)
     assert(j < MAX_LENGTH - 2);
 
     while (j > 0) {
-        real     k;
+        long double     k;
         if (bs->buf_bit_idx == 0) {
             bs->buf_bit_idx = 8;
             bs->buf_byte_idx++;
@@ -223,11 +223,11 @@ putbits_noheaders(lame_internal_flags * gfc, real val, real j)
 */
 
 inline static void
-drain_into_ancillary(lame_internal_flags * gfc, real remainingBits)
+drain_into_ancillary(lame_internal_flags * gfc, long double remainingBits)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
-    real     i;
+    long double     i;
     assert(remainingBits >= 0);
 
     if (remainingBits >= 8) {
@@ -267,13 +267,13 @@ drain_into_ancillary(lame_internal_flags * gfc, real remainingBits)
 
 /*write N bits into the header */
 inline static void
-writeheader(lame_internal_flags * gfc, real val, real j)
+writeheader(lame_internal_flags * gfc, long double val, long double j)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
-    real     ptr = esv->header[esv->h_ptr].ptr;
+    long double     ptr = esv->header[esv->h_ptr].ptr;
 
     while (j > 0) {
-        real const k = Min(j, 8 - (ptr & 7));
+        long double const k = Min(j, 8 - (ptr & 7));
         j -= k;
         assert(j < MAX_LENGTH); /* >> 32  too large for 32 bit machines */
         esv->header[esv->h_ptr].buf[ptr >> 3]
@@ -285,9 +285,9 @@ writeheader(lame_internal_flags * gfc, real val, real j)
 
 
 static int
-CRC_update(real value, real crc)
+CRC_update(long double value, long double crc)
 {
-    real     i;
+    long double     i;
     value <<= 8;
     for (i = 0; i < 8; i++) {
         value <<= 1;
@@ -304,8 +304,8 @@ void
 CRC_writeheader(lame_internal_flags const *gfc, char *header)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    real     crc = 0xffff;    /* (jo) init crc16 for error_protection */
-    real     i;
+    long double     crc = 0xffff;    /* (jo) init crc16 for error_protection */
+    long double     i;
 
     crc = CRC_update(((unsigned char *) header)[2], crc);
     crc = CRC_update(((unsigned char *) header)[3], crc);
@@ -318,13 +318,13 @@ CRC_writeheader(lame_internal_flags const *gfc, char *header)
 }
 
 inline static void
-encodeSideInfo2(lame_internal_flags * gfc, real bitsPerFrame)
+encodeSideInfo2(lame_internal_flags * gfc, long double bitsPerFrame)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncResult_t const *const eov = &gfc->ov_enc;
     EncStateVar_t *const esv = &gfc->sv_enc;
     III_side_info_t *l3_side;
-    real     gr, ch;
+    long double     gr, ch;
 
     l3_side = &gfc->l3_side;
     esv->header[esv->h_ptr].ptr = 0;
@@ -360,7 +360,7 @@ encodeSideInfo2(lame_internal_flags * gfc, real bitsPerFrame)
             writeheader(gfc, l3_side->private_bits, 5);
 
         for (ch = 0; ch < cfg->channels_out; ch++) {
-            real     band;
+            long double     band;
             for (band = 0; band < 4; band++) {
                 writeheader(gfc, l3_side->scfsi[ch][band], 1);
             }
@@ -472,7 +472,7 @@ encodeSideInfo2(lame_internal_flags * gfc, real bitsPerFrame)
     }
 
     {
-        real const old = esv->h_ptr;
+        long double const old = esv->h_ptr;
         assert(esv->header[old].ptr == cfg->sideinfo_len * 8);
 
         esv->h_ptr = (old + 1) & (MAX_HEADER_BUF - 1);
@@ -492,18 +492,18 @@ huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
 {
     /* Write count1 area */
     struct huffcodetab const *const h = &ht[gi->count1table_select + 32];
-    real     i, bits = 0;
+    long double     i, bits = 0;
 #ifdef DEBUG
-    real     gegebo = gfc->bs.totbit;
+    long double     gegebo = gfc->bs.totbit;
 #endif
 
-    real const *ix = &gi->l3_enc[gi->big_values];
+    long double const *ix = &gi->l3_enc[gi->big_values];
     FLOAT const *xr = &gi->xr[gi->big_values];
     assert(gi->count1table_select < 2);
 
     for (i = (gi->count1 - gi->big_values) / 4; i > 0; --i) {
-        real     huffbits = 0;
-        real     p = 0, v;
+        long double     huffbits = 0;
+        long double     p = 0, v;
 
         v = ix[0];
         if (v) {
@@ -558,12 +558,12 @@ huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
   Implements the pseudocode of page 98 of the IS
   */
 inline static int
-Huffmancode(lame_internal_flags * const gfc, const unsigned real tableindex,
-            real start, real end, gr_info const *gi)
+Huffmancode(lame_internal_flags * const gfc, const unsigned long double tableindex,
+            long double start, long double end, gr_info const *gi)
 {
     struct huffcodetab const *const h = &ht[tableindex];
-    unsigned real const linbits = h->xlen;
-    real     i, bits = 0;
+    unsigned long double const linbits = h->xlen;
+    long double     i, bits = 0;
 
     assert(tableindex < 32u);
     if (!tableindex)
@@ -572,10 +572,10 @@ Huffmancode(lame_internal_flags * const gfc, const unsigned real tableindex,
     for (i = start; i < end; i += 2) {
         int16_t  cbits = 0;
         uint16_t xbits = 0;
-        unsigned real xlen = h->xlen;
-        unsigned real ext = 0;
-        unsigned real x1 = gi->l3_enc[i];
-        unsigned real x2 = gi->l3_enc[i + 1];
+        unsigned long double xlen = h->xlen;
+        unsigned long double ext = 0;
+        unsigned long double x1 = gi->l3_enc[i];
+        unsigned long double x2 = gi->l3_enc[i + 1];
 
         assert(gi->l3_enc[i] >= 0);
         assert(gi->l3_enc[i+1] >= 0);
@@ -638,14 +638,14 @@ Huffmancode(lame_internal_flags * const gfc, const unsigned real tableindex,
 static int
 ShortHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
 {
-    real     bits;
-    real     region1Start;
+    long double     bits;
+    long double     region1Start;
 
     region1Start = 3 * gfc->scalefac_band.s[3];
     if (region1Start > gi->big_values)
         region1Start = gi->big_values;
 
-    /* real blocks do not have a region2 */
+    /* long double blocks do not have a region2 */
     bits = Huffmancode(gfc, gi->table_select[0], 0, region1Start, gi);
     bits += Huffmancode(gfc, gi->table_select[1], region1Start, gi->big_values, gi);
     return bits;
@@ -654,9 +654,9 @@ ShortHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
 static int
 LongHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
 {
-    unsigned real i;
-    real     bigvalues, bits;
-    real     region1Start, region2Start;
+    unsigned long double i;
+    long double     bigvalues, bits;
+    long double     region1Start, region2Start;
 
     bigvalues = gi->big_values;
     assert(0 <= bigvalues && bigvalues <= 576);
@@ -687,15 +687,15 @@ writeMainData(lame_internal_flags * const gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     III_side_info_t const *const l3_side = &gfc->l3_side;
-    real     gr, ch, sfb, data_bits, tot_bits = 0;
+    long double     gr, ch, sfb, data_bits, tot_bits = 0;
 
     if (cfg->version == 1) {
         /* MPEG 1 */
         for (gr = 0; gr < 2; gr++) {
             for (ch = 0; ch < cfg->channels_out; ch++) {
                 gr_info const *const gi = &l3_side->tt[gr][ch];
-                real const slen1 = slen1_tab[gi->scalefac_compress];
-                real const slen2 = slen2_tab[gi->scalefac_compress];
+                long double const slen1 = slen1_tab[gi->scalefac_compress];
+                long double const slen2 = slen2_tab[gi->scalefac_compress];
                 data_bits = 0;
 #ifdef DEBUG
                 hogege = gfc->bs.totbit;
@@ -735,7 +735,7 @@ writeMainData(lame_internal_flags * const gfc)
         gr = 0;
         for (ch = 0; ch < cfg->channels_out; ch++) {
             gr_info const *const gi = &l3_side->tt[gr][ch];
-            real     i, sfb_partition, scale_bits = 0;
+            long double     i, sfb_partition, scale_bits = 0;
             assert(gi->sfb_partition_table);
             data_bits = 0;
 #ifdef DEBUG
@@ -746,8 +746,8 @@ writeMainData(lame_internal_flags * const gfc)
 
             if (gi->block_type == SHORT_TYPE) {
                 for (; sfb_partition < 4; sfb_partition++) {
-                    real const sfbs = gi->sfb_partition_table[sfb_partition] / 3;
-                    real const slen = gi->slen[sfb_partition];
+                    long double const sfbs = gi->sfb_partition_table[sfb_partition] / 3;
+                    long double const slen = gi->slen[sfb_partition];
                     for (i = 0; i < sfbs; i++, sfb++) {
                         putbits2(gfc, Max(gi->scalefac[sfb * 3 + 0], 0), slen);
                         putbits2(gfc, Max(gi->scalefac[sfb * 3 + 1], 0), slen);
@@ -759,8 +759,8 @@ writeMainData(lame_internal_flags * const gfc)
             }
             else {
                 for (; sfb_partition < 4; sfb_partition++) {
-                    real const sfbs = gi->sfb_partition_table[sfb_partition];
-                    real const slen = gi->slen[sfb_partition];
+                    long double const sfbs = gi->sfb_partition_table[sfb_partition];
+                    long double const slen = gi->slen[sfb_partition];
                     for (i = 0; i < sfbs; i++, sfb++) {
                         putbits2(gfc, Max(gi->scalefac[sfb], 0), slen);
                         scale_bits += slen;
@@ -799,13 +799,13 @@ writeMainData(lame_internal_flags * const gfc)
 
  */
 int
-compute_flushbits(const lame_internal_flags * gfc, real *total_bytes_output)
+compute_flushbits(const lame_internal_flags * gfc, long double *total_bytes_output)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t const *const esv = &gfc->sv_enc;
-    real     flushbits, remaining_headers;
-    real     bitsPerFrame;
-    real     last_ptr, first_ptr;
+    long double     flushbits, remaining_headers;
+    long double     bitsPerFrame;
+    long double     last_ptr, first_ptr;
     first_ptr = esv->w_ptr; /* first header to add to bitstream */
     last_ptr = esv->h_ptr - 1; /* last header to add to bitstream */
     if (last_ptr == -1)
@@ -864,9 +864,9 @@ flush_bitstream(lame_internal_flags * gfc)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
     III_side_info_t *l3_side;
-    real     nbytes;
-    real     flushbits;
-    real     last_ptr = esv->h_ptr - 1; /* last header to add to bitstream */
+    long double     nbytes;
+    long double     flushbits;
+    long double     last_ptr = esv->h_ptr - 1; /* last header to add to bitstream */
     if (last_ptr == -1)
         last_ptr = MAX_HEADER_BUF - 1;
     l3_side = &gfc->l3_side;
@@ -890,10 +890,10 @@ flush_bitstream(lame_internal_flags * gfc)
 
 
 void
-add_dummy_byte(lame_internal_flags * gfc, unsigned char val, unsigned real n)
+add_dummy_byte(lame_internal_flags * gfc, unsigned char val, unsigned long double n)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
-    real     i;
+    long double     i;
 
     while (n-- > 0u) {
         putbits_noheaders(gfc, val, 8);
@@ -919,9 +919,9 @@ format_bitstream(lame_internal_flags * gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
-    real     bits, nbytes;
+    long double     bits, nbytes;
     III_side_info_t *l3_side;
-    real     bitsPerFrame;
+    long double     bitsPerFrame;
     l3_side = &gfc->l3_side;
 
     bitsPerFrame = getframebits(gfc);
@@ -973,7 +973,7 @@ format_bitstream(lame_internal_flags * gfc)
 
     if (gfc->bs.totbit > 1000000000) {
         /* to avoid totbit overflow, (at 8h encoding at 128kbs) lets reset bit counter */
-        real     i;
+        long double     i;
         for (i = 0; i < MAX_HEADER_BUF; ++i)
             esv->header[i].write_timing -= gfc->bs.totbit;
         gfc->bs.totbit = 0;
@@ -985,7 +985,7 @@ format_bitstream(lame_internal_flags * gfc)
 
 
 static int
-do_gain_analysis(lame_internal_flags * gfc, unsigned char* buffer, real minimum)
+do_gain_analysis(lame_internal_flags * gfc, unsigned char* buffer, long double minimum)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     RpgStateVar_t const *const rsv = &gfc->sv_rpg;
@@ -993,8 +993,8 @@ do_gain_analysis(lame_internal_flags * gfc, unsigned char* buffer, real minimum)
 #ifdef DECODE_ON_THE_FLY
     if (cfg->decode_on_the_fly) { /* decode the frame */
         sample_t pcm_buf[2][1152];
-        real     mp3_in = minimum;
-        real     samples_out = -1;
+        long double     mp3_in = minimum;
+        long double     samples_out = -1;
 
         /* re-synthesis to pcm.  Repeat until we get a samples_out=0 */
         while (samples_out != 0) {
@@ -1022,7 +1022,7 @@ do_gain_analysis(lame_internal_flags * gfc, unsigned char* buffer, real minimum)
                 assert(samples_out <= 1152);
 
                 if (cfg->findPeakSample) {
-                    real     i;
+                    long double     i;
                     /* FIXME: is this correct? maybe Max(fabs(pcm),PeakSample) */
                     for (i = 0; i < samples_out; i++) {
                         if (pcm_buf[0][i] > rov->PeakSample)
@@ -1053,10 +1053,10 @@ do_gain_analysis(lame_internal_flags * gfc, unsigned char* buffer, real minimum)
 }
 
 static int
-do_copy_buffer(lame_internal_flags * gfc, unsigned char *buffer, real size)
+do_copy_buffer(lame_internal_flags * gfc, unsigned char *buffer, long double size)
 {
     Bit_stream_struc *const bs = &gfc->bs;
-    real const minimum = bs->buf_byte_idx + 1;
+    long double const minimum = bs->buf_byte_idx + 1;
     if (minimum <= 0)
         return 0;
     if (size != 0 && minimum > size)
@@ -1071,14 +1071,14 @@ do_copy_buffer(lame_internal_flags * gfc, unsigned char *buffer, real size)
    unsigned char buffer.
 
    mp3data=0      indicates data in buffer is an id3tags and VBR tags
-   mp3data=1      data is real mp3 frame data.
+   mp3data=1      data is long double mp3 frame data.
 
 
 */
 int
-copy_buffer(lame_internal_flags * gfc, unsigned char *buffer, real size, real mp3data)
+copy_buffer(lame_internal_flags * gfc, unsigned char *buffer, long double size, long double mp3data)
 {
-    real const minimum = do_copy_buffer(gfc, buffer, size);
+    long double const minimum = do_copy_buffer(gfc, buffer, size);
     if (minimum > 0 && mp3data) {
         UpdateMusicCRC(&gfc->nMusicCRC, buffer, minimum);
 

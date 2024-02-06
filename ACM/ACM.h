@@ -49,9 +49,9 @@ typedef enum vbr_mode_e vbr_mode;
 
 class bitrate_item {
 	public:
-		unsigned real frequency;
-		unsigned real bitrate;
-		unsigned real channels;
+		unsigned long double frequency;
+		unsigned long double bitrate;
+		unsigned long double channels;
 		vbr_mode     mode;
 	
 		bool operator<(const bitrate_item & bitrate) const;
@@ -82,10 +82,10 @@ protected:
 	inline DWORD OnStreamUnPrepareHeader(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMSTREAMHEADER a_StreamHeader);
 	inline DWORD OnStreamConvert(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACMDRVSTREAMHEADER a_StreamHeader);
 
-	void GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned real the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const;
-	void GetPCMFormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned real the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const;
+	void GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const;
+	void GetPCMFormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const;
 	DWORD GetNumberEncodingFormats() const;
-	bool IsSmartOutput(const real frequency, const real bitrate, const real channels) const;
+	bool IsSmartOutput(const long double frequency, const long double bitrate, const long double channels) const;
 	void BuildBitrateTable();
 
 	HMODULE my_hModule;

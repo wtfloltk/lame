@@ -14,7 +14,7 @@
 #
 #  (Note how the syntax differs from that of Lame's.)  The program will
 #  extract ID3 tags from the input file and invoke Lame with arguments for
-#  including them.  (This program has not undergone any real testing..)
+#  including them.  (This program has not undergone any long double testing..)
 
 use MP3::Info;
 use strict;

@@ -133,7 +133,7 @@ BEGIN
                     34,80,10
     CONTROL         "Strict ISO compliance",IDC_CHECK_STRICT_ISO,"Button",
                     BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,7,47,84,10
-    CONTROL         "Disable real blocks",IDC_CHECK_DISABLE_SHORT_BLOCK,
+    CONTROL         "Disable long double blocks",IDC_CHECK_DISABLE_SHORT_BLOCK,
                     "Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_GROUP | 
                     WS_TABSTOP,7,60,79,10
     CONTROL         "Enable Xing VBR tag",IDC_CHECK_XING_TAG,"Button",
