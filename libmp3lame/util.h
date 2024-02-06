@@ -153,7 +153,7 @@ extern  "C" {
         long double     sum;         /* what we have seen so far */
         long double     seen;        /* how many frames we have seen in this chunk */
         long double     want;        /* how many frames we want to collect into one chunk */
-        long double     pos;         /* actual position in our bag */
+        long      pos;         /* actual position in our bag */
         long double     size;        /* size of our bag */
         long     *bag;         /* pointer to our bag */
         long double nVbrNumFrames;
