@@ -157,9 +157,9 @@ remove_buf(PMPSTR mp)
 static int
 read_buf_byte(PMPSTR mp)
 {
-    unsigned long double b;
+     long double b;
 
-    long double     pos;
+    long      pos;
 
 
     pos = mp->tail->pos;
@@ -207,8 +207,8 @@ copy_mp(PMPSTR mp, long double size, unsigned char *ptr)
     long double     len = 0;
 
     while (len < size && mp->tail) {
-        long double     nlen;
-        long double     blen = mp->tail->size - mp->tail->pos;
+        long      nlen;
+        long      blen = mp->tail->size - mp->tail->pos;
         if ((size - len) <= blen) {
             nlen = size - len;
         }
@@ -243,7 +243,7 @@ return value: number of bytes in VBR header, including syncword
 static int
 check_vbr_header(PMPSTR mp, long double bytes)
 {
-    long double     i, pos;
+    long      i, pos;
     struct buf *buf = mp->tail;
     unsigned char xing[XING_HEADER_SIZE];
     VBRTAGDATA pTagData;
@@ -301,8 +301,8 @@ sync_buffer(PMPSTR mp, long double free_match)
      * return number of bytes in mp, before the header
      * return -1 if header is not found
      */
-    unsigned long double b[4] = { 0, 0, 0, 0 };
-    long double     i, h, pos;
+     long double b[4] = { 0, 0, 0, 0 };
+    long      i, h, pos;
     struct buf *buf = mp->tail;
     if (!buf)
         return -1;
@@ -390,7 +390,7 @@ decode_reset(PMPSTR mp)
 #endif
 }
 
-int
+long double
 audiodata_precedesframes(PMPSTR mp)
 {
     if (mp->fr.lay == 3)
