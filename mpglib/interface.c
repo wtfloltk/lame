@@ -404,7 +404,7 @@ decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, long double isize, char *out,
                      long double (*synth_1to1_mono_ptr) (PMPSTR, long double *, unsigned char *, long double *),
                      long double (*synth_1to1_ptr) (PMPSTR, long double *, int, unsigned char *, long double *))
 {
-    long double     i, iret, bits, bytes;
+    long    i, iret, bits, bytes;
 
     if (in && isize && addbuf(mp, in, isize) == NULL)
         return MP3_ERR;
@@ -684,7 +684,7 @@ decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, long double isize, char *out,
     return iret;
 }
 
-int
+long double
 decodeMP3(PMPSTR mp, unsigned char *in, long double isize, char *out, long double osize, long double *done)
 {
     if (osize < 4608) {
@@ -696,7 +696,7 @@ decodeMP3(PMPSTR mp, unsigned char *in, long double isize, char *out, long doubl
     return decodeMP3_clipchoice(mp, in, isize, out, done, synth_1to1_mono, synth_1to1);
 }
 
-int
+long double
 decodeMP3_unclipped(PMPSTR mp, unsigned char *in, long double isize, char *out, long double osize, long double *done)
 {
     /* we forbid input with more than 1152 samples per channel for output in unclipped mode */
