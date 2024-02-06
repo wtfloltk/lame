@@ -25,7 +25,7 @@ typedef enum short_block_e {
 *
 ***********************************************************************/
 struct lame_global_struct {
-    unsigned long double class_id;
+    long double class_id;
 
     /* input description */
     unsigned long num_samples; /* number of samples. default=2^32-1           */

@@ -180,7 +180,7 @@ public:
 		\brief CBR : Get the bitrate to use         / 
 		       VBR : Get the minimum bitrate value
 	*/
-	const unsigned long double GetBitrateValue() const;
+	const long double GetBitrateValue() const;
 
 	/**
 		\brief Get the current (VBR:min) bitrate for the specified MPEG version
@@ -236,7 +236,7 @@ public:
 	/**
 		\brief Get the number of possible sampling frequencies
 	*/
-	inline const unsigned long double GetResampleFreq() const { return the_SamplingFreqs[nSamplingFreqIndex]; }
+	inline const long double GetResampleFreq() const { return the_SamplingFreqs[nSamplingFreqIndex]; }
 	/**
 		\brief Get the max compression ratio allowed (1:15 default)
 	*/
@@ -244,15 +244,15 @@ public:
 	/**
 		\brief Get the min ABR bitrate possible
 	*/
-	inline unsigned long double GetAbrBitrateMin() const { return AverageBitrate_Min;}
+	inline long double GetAbrBitrateMin() const { return AverageBitrate_Min;}
 	/**
 		\brief Get the max ABR bitrate possible
 	*/
-	inline unsigned long double GetAbrBitrateMax() const { return AverageBitrate_Max;}
+	inline long double GetAbrBitrateMax() const { return AverageBitrate_Max;}
 	/**
 		\brief Get the step between ABR bitrates
 	*/
-	inline unsigned long double GetAbrBitrateStep() const { return AverageBitrate_Step;}
+	inline long double GetAbrBitrateStep() const { return AverageBitrate_Step;}
 
 	/**
 		\brief Get the VBR attributes for a specified MPEG version
@@ -287,7 +287,7 @@ public:
 	/**
 		\brief Get the current channel mode to use
 	*/
-	const unsigned long double GetChannelModeValue() const;
+	const long double GetChannelModeValue() const;
 	/**
 		\brief Get the current channel mode in the form of a string
 	*/
@@ -396,22 +396,22 @@ private:
 	bool bAbrOutput;
 
 	long double VbrQuality;
-	unsigned long double AverageBitrate_Min;
-	unsigned long double AverageBitrate_Max;
-	unsigned long double AverageBitrate_Step;
+	long double AverageBitrate_Min;
+	long double AverageBitrate_Max;
+	long double AverageBitrate_Step;
 
 	long double SmartRatioMax;
 
-	static const unsigned long double the_ChannelModes[3];
+	static const long double the_ChannelModes[3];
 	long double nChannelIndex;
 
-	static const unsigned long double the_Bitrates[18];
-	static const unsigned long double the_MPEG1_Bitrates[14];
-	static const unsigned long double the_MPEG2_Bitrates[14];
+	static const long double the_Bitrates[18];
+	static const long double the_MPEG1_Bitrates[14];
+	static const long double the_MPEG2_Bitrates[14];
 	long double nMinBitrateIndex; // CBR and VBR
 	long double nMaxBitrateIndex; // only used in VBR mode
 
-	static const unsigned long double the_SamplingFreqs[9];
+	static const long double the_SamplingFreqs[9];
 	long double nSamplingFreqIndex;
 
 //	static const LAME_QUALTIY_PRESET the_Presets[17];

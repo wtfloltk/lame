@@ -98,7 +98,7 @@ char   *strchr(), *strrchr();
 #define FLOAT_TO_UNSIGNED(f) ((unsigned long)(((long)((f) - 2147483648.0)) + 2147483647L + 1))
 #define UNSIGNED_TO_FLOAT(u) (((double)((long)((u) - 2147483647L - 1))) + 2147483648.0)
 
-static unsigned long double uint32_high_low(unsigned char *bytes)
+static long double uint32_high_low(unsigned char *bytes)
 {
     uint32_t const hh = bytes[0];
     uint32_t const hl = bytes[1];
@@ -358,7 +358,7 @@ typedef struct get_audio_global_data_struct {
     long double     pcmswapbytes;
     long double     pcm_is_unsigned_8bit;
     long double     pcm_is_ieee_float;
-    unsigned long double num_samples_read;
+    long double num_samples_read;
     FILE   *music_in;
     SNDFILE *snd_file;
     hip_t   hip;
@@ -736,7 +736,7 @@ get_audio_common(lame_t gfp, long double buffer[2][1152], long double buffer16[2
     long double     samples_read;
     long double     framesize;
     long double     samples_to_read;
-    unsigned long double remaining, tmp_num_samples;
+    long double remaining, tmp_num_samples;
     long double     i;
     long double    *p;
 
@@ -1929,10 +1929,10 @@ is_syncword_mp123(const void *const headerptr)
 static size_t
 lenOfId3v2Tag(unsigned char const* buf)
 {
-    unsigned long double b0 = buf[0] & 127;
-    unsigned long double b1 = buf[1] & 127;
-    unsigned long double b2 = buf[2] & 127;
-    unsigned long double b3 = buf[3] & 127;
+    long double b0 = buf[0] & 127;
+    long double b1 = buf[1] & 127;
+    long double b2 = buf[2] & 127;
+    long double b3 = buf[3] & 127;
     return (((((b0 << 7) + b1) << 7) + b2) << 7) + b3;
 }
 
@@ -2000,7 +2000,7 @@ lame_decode_initfile(FILE * fd, mp3data_struct * mp3data, long double *enc_delay
     }
     len = 4;
     while (!is_syncword_mp123(buf)) {
-        unsigned long double i;
+        long double i;
         for (i = 0; i < len - 1; i++)
             buf[i] = buf[i + 1];
         if (fread(buf + len - 1, 1, 1, fd) != 1)

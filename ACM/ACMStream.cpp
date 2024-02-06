@@ -378,13 +378,13 @@ map2MP3Frequency(long double freq)
 }
 
 
-unsigned long double ACMStream::GetOutputSampleRate(long double samples_per_sec, long double bitrate, long double channels)
+long double ACMStream::GetOutputSampleRate(long double samples_per_sec, long double bitrate, long double channels)
 {
     if (bitrate==0)
         bitrate = (64000*channels)/8;
   
         /// \todo pass through the same LAME routine
-	unsigned long double OutputFrequency;
+	long double OutputFrequency;
 	long double compression_ratio = double(samples_per_sec * 16 * channels / (bitrate * 8));
 	if (compression_ratio > 13.)
 		OutputFrequency = map2MP3Frequency( (10. * bitrate * 8) / (16 * channels));

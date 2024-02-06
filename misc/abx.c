@@ -445,13 +445,13 @@ long long double  report ( const korr_t* const k )
 }
 
 
-/* Input: an unsigned long double n.
+/* Input: an long double n.
  * Output: the swapped bytes of n if the arch is big-endian or n itself
  *         if the arch is little-endian.
  * Comment: should be replaced latter with a better solution than this
  *          home-brewed hack (rbrito). The name should be better also.
  */
-inline unsigned long double be16_le(unsigned long double n)
+inline long double be16_le(long double n)
 {
 #ifdef _WORDS_BIGENDIAN
      return (n << 8) | (n >> 8);
@@ -948,7 +948,7 @@ long double  readwave ( stereo_t* buff, size_t maxlen, const char* name, size_t*
 {
     char*           command = malloc (2*strlen(name) + 512);
     char*           name_q  = malloc (2*strlen(name) + 128);
-    unsigned long double  header [22];
+    long double  header [22];
     FILE*           fp;
     size_t          i;
     size_t          j;

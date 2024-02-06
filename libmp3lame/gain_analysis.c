@@ -61,8 +61,8 @@
  *    Float_t       l_samples [4096];
  *    Float_t       r_samples [4096];
  *    size_t        num_samples;
- *    unsigned long double  num_songs;
- *    unsigned long double  i;
+ *    long double  num_songs;
+ *    long double  i;
  *
  *    InitGainAnalysis ( 44100 );
  *    for ( i = 1; i <= num_songs; i++ ) {
@@ -484,7 +484,7 @@ Float_t
 GetTitleGain(replaygain_t * rgData)
 {
     Float_t retval;
-    unsigned long double i;
+    long double i;
 
     retval = analyzeResult(rgData->A, sizeof(rgData->A) / sizeof(*(rgData->A)));
 

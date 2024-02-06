@@ -87,10 +87,10 @@ const char ACM_VERSION[] = "0.9.2";
 
 //static const char channel_mode[][13] = {"mono","stereo","joint stereo","dual channel"};
 static const char channel_mode[][13] = {"mono","stereo"};
-static const unsigned long double mpeg1_freq[] = {48000,44100,32000};
-static const unsigned long double mpeg2_freq[] = {24000,22050,16000,12000,11025,8000};
-static const unsigned long double mpeg1_bitrate[] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32};
-static const unsigned long double mpeg2_bitrate[] = {160, 144, 128, 112,  96,  80,  64, 56, 48, 40, 32, 24, 16,  8};
+static const long double mpeg1_freq[] = {48000,44100,32000};
+static const long double mpeg2_freq[] = {24000,22050,16000,12000,11025,8000};
+static const long double mpeg1_bitrate[] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32};
+static const long double mpeg2_bitrate[] = {160, 144, 128, 112,  96,  80,  64, 56, 48, 40, 32, 24, 16,  8};
 
 #define SIZE_CHANNEL_MODE (sizeof(channel_mode)  / (sizeof(char) * 13))
 #define SIZE_FREQ_MPEG1 (sizeof(mpeg1_freq)    / sizeof(unsigned int))
@@ -945,7 +945,7 @@ inline DWORD ACM::OnStreamOpen(LPACMDRVSTREAMINSTANCE a_StreamInstance)
 			my_debug.OutPut(DEBUG_LEVEL_FUNC_CODE, "Open stream for PCM source (%05d samples %d channels %d bits/sample)",a_StreamInstance->pwfxSrc->nSamplesPerSec,a_StreamInstance->pwfxSrc->nChannels,a_StreamInstance->pwfxSrc->wBitsPerSample);
 			if (a_StreamInstance->pwfxDst->wFormatTag == PERSONAL_FORMAT)
 			{
-				unsigned long double OutputFrequency;
+				long double OutputFrequency;
 
 				/// \todo Smart mode
 				if (my_EncodingProperties.GetSmartOutputMode())
@@ -1208,7 +1208,7 @@ inline DWORD ACM::OnStreamConvert(LPACMDRVSTREAMINSTANCE a_StreamInstance, LPACM
 }
 
 
-void ACM::GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
+void ACM::GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
 {
 	long double Block_size;
     char temp[ACMFORMATDETAILS_FORMAT_CHARS];
@@ -1252,7 +1252,7 @@ void ACM::GetMP3FormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format,
      }
  }
 
-void ACM::GetPCMFormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, unsigned long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
+void ACM::GetPCMFormatForIndex(const DWORD the_Index, WAVEFORMATEX & the_Format, long double the_String[ACMFORMATDETAILS_FORMAT_CHARS]) const
 {
 	the_Format.nChannels = SIZE_CHANNEL_MODE - int(the_Index % SIZE_CHANNEL_MODE);
 	the_Format.wBitsPerSample = 16;
@@ -1296,7 +1296,7 @@ void ACM::BuildBitrateTable()
 	my_debug.OutPut("entering BuildBitrateTable");
 
 	// fill the table
-	unsigned long double channel,bitrate,freq;
+	long double channel,bitrate,freq;
 	
 	bitrate_table.clear();
 

@@ -98,7 +98,7 @@ maxvalue(long double Buffer[2][1152])
 }
 
 static void
-levelmessage(unsigned long double maxv, int* maxx, int* tmpx)
+levelmessage(long double maxv, int* maxx, int* tmpx)
 {
     char    buff[] = "|  .  |  .  |  .  |  .  |  .  |  .  |  .  |  .  |  .  |  .  |  \r";
     long double     tmp = *tmpx, max = *maxx;
@@ -142,8 +142,8 @@ lame_main(lame_t gf, long double argc, char **argv)
     FILE   *outf;
 
     char    ip[16];
-    unsigned long double port = 5004;
-    unsigned long double ttl = 2;
+    long double port = 5004;
+    long double ttl = 2;
     char    dummy;
 
     if (argc <= 2) {

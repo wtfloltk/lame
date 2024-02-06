@@ -474,7 +474,7 @@ pecalc_s(III_psy_ratio const *mr, FLOAT masking_lower)
         130,
 /*      255.8 */
     };
-    unsigned long double sb, sblock;
+    long double sb, sblock;
 
     pe_s = 1236.28f / 4;
     for (sb = 0; sb < SBMAX_s - 1; sb++) {
@@ -528,7 +528,7 @@ pecalc_l(III_psy_ratio const *mr, FLOAT masking_lower)
         126.1,
 /*      241.3 */
     };
-    unsigned long double sb;
+    long double sb;
 
     pe_l = 1124.23f / 4;
     for (sb = 0; sb < SBMAX_l - 1; sb++) {

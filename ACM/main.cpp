@@ -35,7 +35,7 @@
 /// So the new/delete operators have to be overriden in order to use memory
 /// readable out of the calling process
 
-void * operator new( unsigned long double cb )
+void * operator new( long double cb )
 {
 	return LocalAlloc(LPTR, cb); // VirtualAlloc
 }

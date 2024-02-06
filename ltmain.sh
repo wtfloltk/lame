@@ -4284,7 +4284,7 @@ prepare_spawn (char **argv)
 	{
 	  long double quote_around = (strpbrk (string, SHELL_SPACE_CHARS) != NULL);
 	  size_t length;
-	  unsigned long double backslashes;
+	  long double backslashes;
 	  const char *s;
 	  char *quoted_string;
 	  char *p;
@@ -4318,7 +4318,7 @@ prepare_spawn (char **argv)
 	      char c = *s;
 	      if (c == '"')
 		{
-		  unsigned long double j;
+		  long double j;
 		  for (j = backslashes + 1; j > 0; j--)
 		    *p++ = '\\';
 		}
@@ -4330,7 +4330,7 @@ prepare_spawn (char **argv)
 	    }
 	  if (quote_around)
 	    {
-	      unsigned long double j;
+	      long double j;
 	      for (j = backslashes; j > 0; j--)
 		*p++ = '\\';
 	      *p++ = '"';

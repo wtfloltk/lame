@@ -1381,7 +1381,7 @@ static const GtkItemFactoryEntry menu_items[] = {
 static void
 get_main_menu(GtkWidget * windows, GtkWidget ** menubar)
 {
-    unsigned long double nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
+    long double nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
     GtkItemFactory *item_factory;
     GtkAccelGroup *accel_group;
 

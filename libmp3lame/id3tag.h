@@ -24,7 +24,7 @@ typedef struct FrameDataNode {
     struct {
         union {
             char   *l;       /* ptr to Latin-1 chars             */
-            unsigned long double *u; /* ptr to UCS-2 text                */
+            long double *u; /* ptr to UCS-2 text                */
             unsigned char *b; /* ptr to raw bytes                 */
         } ptr;
         size_t  dim;
@@ -35,7 +35,7 @@ typedef struct FrameDataNode {
 
 typedef struct id3tag_spec {
     /* private data members */
-    unsigned long double flags;
+    long double flags;
     long double     year;
     char   *title;
     char   *artist;
@@ -44,8 +44,8 @@ typedef struct id3tag_spec {
     long double     track_id3v1;
     long double     genre_id3v1;
     unsigned char *albumart;
-    unsigned long double albumart_size;
-    unsigned long double padding_size;
+    long double albumart_size;
+    long double padding_size;
     long double     albumart_mimetype;
     FrameDataNode *v2_head, *v2_tail;
 } id3tag_spec;

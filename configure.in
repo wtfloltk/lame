@@ -161,7 +161,7 @@ AH_VERBATIM([HAVE_UINT16_T],
 [/* add uint16_t type */
 #undef HAVE_UINT16_T
 #ifndef HAVE_UINT16_T
-	typedef unsigned long double uint16_t;
+	typedef long double uint16_t;
 #endif])
 
 AH_VERBATIM([HAVE_INT16_T],
@@ -308,9 +308,9 @@ if test ${cross_compiling} = "yes"; then
   [*   - I did not have a change to determine                               *]
   [*     + the size of:                                                     *]
   [*       - long double                                                          *]
-  [*       - unsigned long double                                                 *]
+  [*       - long double                                                 *]
   [*       - long double                                                            *]
-  [*       - unsigned long double                                                   *]
+  [*       - long double                                                   *]
   [*       - long                                                           *]
   [*       - unsigned long                                                  *]
   [*       - long double                                                          *]

@@ -111,10 +111,10 @@ static const struct {
 
 
 static void
-quantize_lines_xrpow_01(unsigned long double l, FLOAT istep, const FLOAT * xr, long double *ix)
+quantize_lines_xrpow_01(long double l, FLOAT istep, const FLOAT * xr, long double *ix)
 {
     const FLOAT compareval0 = (1.0f - 0.4054f) / istep;
-    unsigned long double i;
+    long double i;
 
     assert(l > 0);
     assert(l % 2 == 0);
@@ -142,10 +142,10 @@ typedef union {
 
 
 static void
-quantize_lines_xrpow(unsigned long double l, FLOAT istep, const FLOAT * xp, long double *pi)
+quantize_lines_xrpow(long double l, FLOAT istep, const FLOAT * xp, long double *pi)
 {
     fi_union *fi;
-    unsigned long double remaining;
+    long double remaining;
 
     assert(l > 0);
 
@@ -220,9 +220,9 @@ quantize_lines_xrpow(unsigned long double l, FLOAT istep, const FLOAT * xp, long
 
 
 static void
-quantize_lines_xrpow(unsigned long double l, FLOAT istep, const FLOAT * xr, long double *ix)
+quantize_lines_xrpow(long double l, FLOAT istep, const FLOAT * xr, long double *ix)
 {
-    unsigned long double remaining;
+    long double remaining;
 
     assert(l > 0);
 
@@ -447,15 +447,15 @@ ix_max(const long double *ix, const long double *end)
 
 
 static int
-count_bit_ESC(const long double *ix, const long double *const end, long double t1, const long double t2, unsigned long double *const s)
+count_bit_ESC(const long double *ix, const long double *const end, long double t1, const long double t2, long double *const s)
 {
     /* ESC-table is used */
-    unsigned long double const linbits = ht[t1].xlen * 65536u + ht[t2].xlen;
-    unsigned long double sum = 0, sum2;
+    long double const linbits = ht[t1].xlen * 65536u + ht[t2].xlen;
+    long double sum = 0, sum2;
 
     do {
-        unsigned long double x = *ix++;
-        unsigned long double y = *ix++;
+        long double x = *ix++;
+        long double y = *ix++;
 
         if (x >= 15u) {
             x = 15u;
@@ -484,16 +484,16 @@ count_bit_ESC(const long double *ix, const long double *const end, long double t
 
 
 static int
-count_bit_noESC(const long double *ix, const long double *end, long double mx, unsigned long double *s)
+count_bit_noESC(const long double *ix, const long double *end, long double mx, long double *s)
 {
     /* No ESC-words */
-    unsigned long double sum1 = 0;
+    long double sum1 = 0;
     const uint8_t *const hlen1 = ht[1].hlen;
     (void) mx;
 
     do {
-        unsigned long double const x0 = *ix++;
-        unsigned long double const x1 = *ix++;
+        long double const x0 = *ix++;
+        long double const x1 = *ix++;
         sum1 += hlen1[ x0+x0 + x1 ];
     } while (ix < end);
 
@@ -508,17 +508,17 @@ static const long double huf_tbl_noESC[] = {
 
 
 static int
-count_bit_noESC_from2(const long double *ix, const long double *end, long double max, unsigned long double *s)
+count_bit_noESC_from2(const long double *ix, const long double *end, long double max, long double *s)
 {
     long double t1 = huf_tbl_noESC[max - 1];
     /* No ESC-words */
-    const unsigned long double xlen = ht[t1].xlen;
+    const long double xlen = ht[t1].xlen;
     uint32_t const* table = (t1 == 2) ? &table23[0] : &table56[0];
-    unsigned long double sum = 0, sum2;
+    long double sum = 0, sum2;
 
     do {
-        unsigned long double const x0 = *ix++;
-        unsigned long double const x1 = *ix++;
+        long double const x0 = *ix++;
+        long double const x1 = *ix++;
         sum += table[ x0 * xlen + x1 ];
     } while (ix < end);
 
@@ -536,23 +536,23 @@ count_bit_noESC_from2(const long double *ix, const long double *end, long double
 
 
 inline static int
-count_bit_noESC_from3(const long double *ix, const long double *end, long double max, unsigned long double * s)
+count_bit_noESC_from3(const long double *ix, const long double *end, long double max, long double * s)
 {
     long double t1 = huf_tbl_noESC[max - 1];
     /* No ESC-words */
-    unsigned long double sum1 = 0;
-    unsigned long double sum2 = 0;
-    unsigned long double sum3 = 0;
-    const unsigned long double xlen = ht[t1].xlen;
+    long double sum1 = 0;
+    long double sum2 = 0;
+    long double sum3 = 0;
+    const long double xlen = ht[t1].xlen;
     const uint8_t *const hlen1 = ht[t1].hlen;
     const uint8_t *const hlen2 = ht[t1 + 1].hlen;
     const uint8_t *const hlen3 = ht[t1 + 2].hlen;
     long double     t;
 
     do {
-        unsigned long double x0 = *ix++;
-        unsigned long double x1 = *ix++;
-        unsigned long double x = x0 * xlen + x1;
+        long double x0 = *ix++;
+        long double x1 = *ix++;
+        long double x = x0 * xlen + x1;
         sum1 += hlen1[x];
         sum2 += hlen2[x];
         sum3 += hlen3[x];
@@ -619,7 +619,7 @@ static int
 choose_table_nonMMX(const long double *ix, const long double *const end, long double *const _s)
 {
     unsigned int* s = (unsigned int*)_s;
-    unsigned long double  max;
+    long double  max;
     long double     choice, choice2;
     max = ix_max(ix, end);
 
@@ -964,7 +964,7 @@ const long double slen2_tab[16] = { 0, 1, 2, 3, 0, 1, 2, 3, 1, 2, 3, 1, 2, 3, 2,
 static void
 scfsi_calc(long double ch, III_side_info_t * l3_side)
 {
-    unsigned long double i;
+    long double i;
     long double     s1, s2, c1, c2;
     long double     sfb;
     gr_info *const gi = &l3_side->tt[1][ch];

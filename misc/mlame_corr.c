@@ -167,7 +167,7 @@ long double report ( const korr_t* k )
 
 void readfile ( const char* name, long double fd )
 {
-    unsigned long double  header [22];
+    long double  header [22];
     stereo          s [4096];
     mono            m [8192];
     size_t          samples;

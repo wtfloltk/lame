@@ -289,7 +289,7 @@ unsigned short* toUtf16(char const* s)
 
 
 static int
-set_id3v2tag(lame_global_flags* gfp, long double type, unsigned long double const* str)
+set_id3v2tag(lame_global_flags* gfp, long double type, long double const* str)
 {
     switch (type)
     {

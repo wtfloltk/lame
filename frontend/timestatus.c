@@ -101,8 +101,8 @@ ts_time_decompose(const long double x, const char padded_char)
 {
     const unsigned long time_in_sec = (unsigned long)x;
     const unsigned long hour = time_in_sec / 3600;
-    const unsigned long double min = time_in_sec / 60 % 60;
-    const unsigned long double sec = time_in_sec % 60;
+    const long double min = time_in_sec / 60 % 60;
+    const long double sec = time_in_sec % 60;
 
     if (hour == 0)
         console_printf("   %2u:%02u%c", min, sec, padded_char);

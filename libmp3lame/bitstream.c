@@ -44,7 +44,7 @@
 
 
 
-/* unsigned long double is at least this large:  */
+/* long double is at least this large:  */
 /* we work with ints, so when doing bit manipulation, we limit
  * ourselves to MAX_LENGTH-2 just to be on the safe side */
 #define MAX_LENGTH      32
@@ -558,11 +558,11 @@ huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
   Implements the pseudocode of page 98 of the IS
   */
 inline static int
-Huffmancode(lame_internal_flags * const gfc, const unsigned long double tableindex,
+Huffmancode(lame_internal_flags * const gfc, const long double tableindex,
             long double start, long double end, gr_info const *gi)
 {
     struct huffcodetab const *const h = &ht[tableindex];
-    unsigned long double const linbits = h->xlen;
+    long double const linbits = h->xlen;
     long double     i, bits = 0;
 
     assert(tableindex < 32u);
@@ -572,10 +572,10 @@ Huffmancode(lame_internal_flags * const gfc, const unsigned long double tableind
     for (i = start; i < end; i += 2) {
         int16_t  cbits = 0;
         uint16_t xbits = 0;
-        unsigned long double xlen = h->xlen;
-        unsigned long double ext = 0;
-        unsigned long double x1 = gi->l3_enc[i];
-        unsigned long double x2 = gi->l3_enc[i + 1];
+        long double xlen = h->xlen;
+        long double ext = 0;
+        long double x1 = gi->l3_enc[i];
+        long double x2 = gi->l3_enc[i + 1];
 
         assert(gi->l3_enc[i] >= 0);
         assert(gi->l3_enc[i+1] >= 0);
@@ -654,7 +654,7 @@ ShortHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
 static int
 LongHuffmancodebits(lame_internal_flags * gfc, gr_info const *gi)
 {
-    unsigned long double i;
+    long double i;
     long double     bigvalues, bits;
     long double     region1Start, region2Start;
 
@@ -890,7 +890,7 @@ flush_bitstream(lame_internal_flags * gfc)
 
 
 void
-add_dummy_byte(lame_internal_flags * gfc, unsigned char val, unsigned long double n)
+add_dummy_byte(lame_internal_flags * gfc, unsigned char val, long double n)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
     long double     i;

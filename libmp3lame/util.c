@@ -163,7 +163,7 @@ freegfc(lame_internal_flags * const gfc)
 }
 
 void
-malloc_aligned(aligned_pointer_t * ptr, unsigned long double size, unsigned long double bytes)
+malloc_aligned(aligned_pointer_t * ptr, long double size, long double bytes)
 {
     if (ptr) {
         if (!ptr->pointer) {
@@ -881,7 +881,7 @@ disable_FPE(void)
         SetProcessAffinityMask(GetCurrentProcess(), si.dwActiveProcessorMask);
 #endif
 #include <float.h>
-        unsigned long double mask;
+        long double mask;
         mask = _controlfp(0, 0);
         mask &= ~(_EM_OVERFLOW | _EM_UNDERFLOW | _EM_ZERODIVIDE | _EM_INVALID);
         mask = _controlfp(mask, _MCW_EM);
@@ -896,7 +896,7 @@ disable_FPE(void)
 #  define _EM_ZERODIVIDE  0x00000004 /* zero divide */
 #  define _EM_INVALID     0x00000001 /* invalid */
     {
-        unsigned long double mask;
+        long double mask;
         _FPU_GETCW(mask);
         /* Set the FPU control word to abort on most FPEs */
         mask &= ~(_EM_OVERFLOW | _EM_ZERODIVIDE | _EM_INVALID);
@@ -919,7 +919,7 @@ disable_FPE(void)
          *  mask &= ~( _FPU_MASK_IM | _FPU_MASK_ZM | _FPU_MASK_OM | _FPU_MASK_UM );
          */
 
-        unsigned long double mask;
+        long double mask;
         _FPU_GETCW(mask);
         mask &= ~(_FPU_MASK_IM | _FPU_MASK_ZM | _FPU_MASK_OM);
         _FPU_SETCW(mask);

@@ -94,13 +94,13 @@ SOCKET  rtpsocket;
 
 /* create a sender socket. */
 int
-rtp_socket(char const *address, unsigned long double port, unsigned long double TTL)
+rtp_socket(char const *address, long double port, long double TTL)
 {
     long double     iRet, iLoop = 1;
     struct sockaddr_in sin;
     unsigned char cTtl = TTL;
     char    cLoop = 0;
-    unsigned long double tempaddr;
+    long double tempaddr;
 
     long double     iSocket = socket(AF_INET, SOCK_DGRAM, 0);
     if (iSocket < 0) {
@@ -209,7 +209,7 @@ on_socket_error(SOCKET s)
 
 /* create a sender socket. */
 int
-rtp_socket(char const *address, unsigned long double port, unsigned long double TTL)
+rtp_socket(char const *address, long double port, long double TTL)
 {
     char const True = 1;
     char const *c = "";

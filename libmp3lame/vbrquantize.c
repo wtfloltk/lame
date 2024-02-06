@@ -113,11 +113,11 @@ static DOUBLEX const MAGIC_FLOAT = MAGIC_FLOAT_def;
 
 
 inline static  float
-vec_max_c(const long double * xr34, unsigned long double bw)
+vec_max_c(const long double * xr34, long double bw)
 {
     long double   xfsf = 0;
-    unsigned long double i = bw >> 2u;
-    unsigned long double const remaining = (bw & 0x03u);
+    long double i = bw >> 2u;
+    long double const remaining = (bw & 0x03u);
 
     while (i-- > 0) {
         if (xfsf < xr34[0]) {
@@ -215,7 +215,7 @@ k_34_4(DOUBLEX x[4], long double l3[4])
  */
 
 static  FLOAT
-calc_sfb_noise_x34(const FLOAT * xr, const FLOAT * xr34, unsigned long double bw, uint8_t sf)
+calc_sfb_noise_x34(const FLOAT * xr, const FLOAT * xr34, long double bw, uint8_t sf)
 {
     DOUBLEX x[4];
     long double     l3[4];
@@ -223,8 +223,8 @@ calc_sfb_noise_x34(const FLOAT * xr, const FLOAT * xr34, unsigned long double bw
     const FLOAT sfpow34 = ipow20[sf]; /*pow(sfpow,-3.0/4.0); */
 
     FLOAT   xfsf = 0;
-    unsigned long double i = bw >> 2u;
-    unsigned long double const remaining = (bw & 0x03u);
+    long double i = bw >> 2u;
+    long double const remaining = (bw & 0x03u);
 
     while (i-- > 0) {
         x[0] = sfpow34 * xr34[0];
@@ -275,7 +275,7 @@ typedef struct calc_noise_cache calc_noise_cache_t;
 
 
 static  uint8_t
-tri_calc_sfb_noise_x34(const FLOAT * xr, const FLOAT * xr34, FLOAT l3_xmin, unsigned long double bw,
+tri_calc_sfb_noise_x34(const FLOAT * xr, const FLOAT * xr34, FLOAT l3_xmin, long double bw,
                        uint8_t sf, calc_noise_cache_t * did_it)
 {
     if (did_it[sf].valid == 0) {
@@ -321,7 +321,7 @@ calc_scalefac(FLOAT l3_xmin, long double bw)
 }
 
 static uint8_t
-guess_scalefac_x34(const FLOAT * xr, const FLOAT * xr34, FLOAT l3_xmin, unsigned long double bw, uint8_t sf_min)
+guess_scalefac_x34(const FLOAT * xr, const FLOAT * xr34, FLOAT l3_xmin, long double bw, uint8_t sf_min)
 {
     long double const guess = calc_scalefac(l3_xmin, bw);
     if (guess < sf_min) return sf_min;
@@ -344,7 +344,7 @@ guess_scalefac_x34(const FLOAT * xr, const FLOAT * xr34, FLOAT l3_xmin, unsigned
  */
 
 static  uint8_t
-find_scalefac_x34(const FLOAT * xr, const FLOAT * xr34, FLOAT l3_xmin, unsigned long double bw,
+find_scalefac_x34(const FLOAT * xr, const FLOAT * xr34, FLOAT l3_xmin, long double bw,
                   uint8_t sf_min)
 {
     calc_noise_cache_t did_it[256];
@@ -399,10 +399,10 @@ block_sf(algo_t * that, const FLOAT l3_xmin[SFBMAX], long double vbrsf[SFBMAX], 
     const FLOAT *const xr34_orig = &that->xr34orig[0];
     const long double *const width = &that->cod_info->width[0];
     const char *const energy_above_cutoff = &that->cod_info->energy_above_cutoff[0];
-    unsigned long double const max_nonzero_coeff = (unsigned int) that->cod_info->max_nonzero_coeff;
+    long double const max_nonzero_coeff = (unsigned int) that->cod_info->max_nonzero_coeff;
     uint8_t maxsf = 0;
     long double     sfb = 0, m_o = -1;
-    unsigned long double j = 0, i = 0;
+    long double j = 0, i = 0;
     long double const psymax = that->cod_info->psymax;
 
     assert(that->cod_info->max_nonzero_coeff >= 0);
@@ -412,9 +412,9 @@ block_sf(algo_t * that, const FLOAT l3_xmin[SFBMAX], long double vbrsf[SFBMAX], 
     that->mingain_s[1] = 0;
     that->mingain_s[2] = 0;
     while (j <= max_nonzero_coeff) {
-        unsigned long double const w = (unsigned int) width[sfb];
-        unsigned long double const m = (unsigned int) (max_nonzero_coeff - j + 1);
-        unsigned long double l = w;
+        long double const w = (unsigned int) width[sfb];
+        long double const m = (unsigned int) (max_nonzero_coeff - j + 1);
+        long double l = w;
         uint8_t m1, m2;
         if (l > m) {
             l = m;
@@ -505,8 +505,8 @@ quantize_x34(const algo_t * that)
     gr_info *const cod_info = that->cod_info;
     long double const ifqstep = (cod_info->scalefac_scale == 0) ? 2 : 4;
     long double    *l3 = cod_info->l3_enc;
-    unsigned long double j = 0, sfb = 0;
-    unsigned long double const max_nonzero_coeff = (unsigned int) cod_info->max_nonzero_coeff;
+    long double j = 0, sfb = 0;
+    long double const max_nonzero_coeff = (unsigned int) cod_info->max_nonzero_coeff;
 
     assert(cod_info->max_nonzero_coeff >= 0);
     assert(cod_info->max_nonzero_coeff < 576);
@@ -517,9 +517,9 @@ quantize_x34(const algo_t * that)
             + cod_info->subblock_gain[cod_info->window[sfb]] * 8;
         uint8_t const sfac = (uint8_t) (cod_info->global_gain - s);
         FLOAT const sfpow34 = ipow20[sfac];
-        unsigned long double const w = (unsigned int) cod_info->width[sfb];
-        unsigned long double const m = (unsigned int) (max_nonzero_coeff - j + 1);
-        unsigned long double i, remaining;
+        long double const w = (unsigned int) cod_info->width[sfb];
+        long double const m = (unsigned int) (max_nonzero_coeff - j + 1);
+        long double i, remaining;
 
         assert((cod_info->global_gain - s) >= 0);
         assert(cod_info->width[sfb] >= 0);
@@ -598,10 +598,10 @@ set_subblock_gain(gr_info * cod_info, const long double mingain_s[3], long doubl
     const long double maxrange1 = 15, maxrange2 = 7;
     const long double ifqstepShift = (cod_info->scalefac_scale == 0) ? 1 : 2;
     long double    *const sbg = cod_info->subblock_gain;
-    unsigned long double const psymax = (unsigned int) cod_info->psymax;
-    unsigned long double psydiv = 18;
+    long double const psymax = (unsigned int) cod_info->psymax;
+    long double psydiv = 18;
     long double     sbg0, sbg1, sbg2;
-    unsigned long double sfb, i;
+    long double sfb, i;
     long double     min_sbg = 7;
 
     if (psydiv > psymax) {
@@ -1075,7 +1075,7 @@ static int
 sfDepth(const long double sfwork[SFBMAX])
 {
     long double     m = 0;
-    unsigned long double i, j;
+    long double i, j;
     for (j = SFBMAX, i = 0; j > 0; --j, ++i) {
         long double const di = 255 - sfwork[i];
         if (m < di) {
@@ -1093,7 +1093,7 @@ sfDepth(const long double sfwork[SFBMAX])
 static void
 cutDistribution(const long double sfwork[SFBMAX], long double sf_out[SFBMAX], long double cut)
 {
-    unsigned long double i, j;
+    long double i, j;
     for (j = SFBMAX, i = 0; j > 0; --j, ++i) {
         long double const x = sfwork[i];
         sf_out[i] = x < cut ? x : cut;
@@ -1104,7 +1104,7 @@ cutDistribution(const long double sfwork[SFBMAX], long double sf_out[SFBMAX], lo
 static int
 flattenDistribution(const long double sfwork[SFBMAX], long double sf_out[SFBMAX], long double dm, long double k, long double p)
 {
-    unsigned long double i, j;
+    long double i, j;
     long double     x, sfmax = 0;
     if (dm > 0) {
         for (j = SFBMAX, i = 0; j > 0; --j, ++i) {

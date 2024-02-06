@@ -61,7 +61,7 @@ public:
 	DWORD GetOutputSizeForInput(const DWORD the_SrcLength) const;
 	bool  ConvertBuffer(LPACMDRVSTREAMHEADER a_StreamHeader);
 
-	static unsigned long double GetOutputSampleRate(long double samples_per_sec, long double bitrate, long double channels);
+	static long double GetOutputSampleRate(long double samples_per_sec, long double bitrate, long double channels);
 
 protected:
 	lame_global_flags * gfp;
@@ -74,7 +74,7 @@ protected:
 	vbr_mode my_VBRMode;
 	DWORD  my_SamplesPerBlock;
 
-unsigned long double m_WorkingBufferUseSize;
+long double m_WorkingBufferUseSize;
 	char m_WorkingBuffer[2304*2]; // should be at least twice my_SamplesPerBlock
 
 inline long double GetBytesPerBlock(DWORD bytes_per_sec, DWORD samples_per_sec, long double BlockAlign) const;

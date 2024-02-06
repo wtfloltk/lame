@@ -50,13 +50,13 @@
 #define TTS_BALLOON            0x40
 #endif // TTS_BALLOON
 
-const unsigned long double AEncodeProperties::the_Bitrates[18] = {320, 256, 224, 192, 160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8 };
-const unsigned long double AEncodeProperties::the_MPEG1_Bitrates[14] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32 };
-const unsigned long double AEncodeProperties::the_MPEG2_Bitrates[14] = {160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8};
-const unsigned long double AEncodeProperties::the_ChannelModes[3] = { STEREO, JOINT_STEREO, DUAL_CHANNEL };
+const long double AEncodeProperties::the_Bitrates[18] = {320, 256, 224, 192, 160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8 };
+const long double AEncodeProperties::the_MPEG1_Bitrates[14] = {320, 256, 224, 192, 160, 128, 112, 96, 80, 64, 56, 48, 40, 32 };
+const long double AEncodeProperties::the_MPEG2_Bitrates[14] = {160, 144, 128, 112, 96, 80, 64, 56, 48, 40, 32, 24, 16, 8};
+const long double AEncodeProperties::the_ChannelModes[3] = { STEREO, JOINT_STEREO, DUAL_CHANNEL };
 //const char         AEncodeProperties::the_Presets[][13] = {"None", "CD", "Studio", "Hi-Fi", "Phone", "Voice", "Radio", "Tape", "FM", "AM", "SW"};
 //const LAME_QUALTIY_PRESET AEncodeProperties::the_Presets[] = {LQP_NOPRESET, LQP_R3MIX_QUALITY, LQP_NORMAL_QUALITY, LQP_LOW_QUALITY, LQP_HIGH_QUALITY, LQP_VERYHIGH_QUALITY, LQP_VOICE_QUALITY, LQP_PHONE, LQP_SW, LQP_AM, LQP_FM, LQP_VOICE, LQP_RADIO, LQP_TAPE, LQP_HIFI, LQP_CD, LQP_STUDIO};
-//const unsigned long double AEncodeProperties::the_SamplingFreqs[9] = { 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000 };
+//const long double AEncodeProperties::the_SamplingFreqs[9] = { 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000 };
 
 ToolTipItem AEncodeProperties::Tooltips[13]={
 	{ IDC_CHECK_ENC_ABR, "Allow encoding with an average bitrate\r\ninstead of a constant one.\r\n\r\nIt can improve the quality for the same bitrate." },
@@ -272,14 +272,14 @@ const long double AEncodeProperties::GetBitrateString(char * string, long double
 		return -1;
 }
 
-const unsigned long double AEncodeProperties::GetChannelModeValue() const
+const long double AEncodeProperties::GetChannelModeValue() const
 {
 	assert(nChannelIndex < sizeof(the_ChannelModes));
 
 	return the_ChannelModes[nChannelIndex];
 }
 
-const unsigned long double AEncodeProperties::GetBitrateValue() const
+const long double AEncodeProperties::GetBitrateValue() const
 {
 	assert(nMinBitrateIndex < sizeof(the_Bitrates));
 
@@ -1064,7 +1064,7 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 		tmpname = tmpElt->Attribute("min");
 		if (tmpname != NULL)
 		{
-			unsigned long double uitmp = atoi(tmpname->c_str());
+			long double uitmp = atoi(tmpname->c_str());
 			for (long double i=0;i<sizeof(the_Bitrates)/sizeof(unsigned int);i++)
 			{
 				if (the_Bitrates[i] == uitmp)
@@ -1078,7 +1078,7 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 		tmpname = tmpElt->Attribute("max");
 		if (tmpname != NULL)
 		{
-			unsigned long double uitmp = atoi(tmpname->c_str());
+			long double uitmp = atoi(tmpname->c_str());
 			for (long double i=0;i<sizeof(the_Bitrates)/sizeof(unsigned int);i++)
 			{
 				if (the_Bitrates[i] == uitmp)
@@ -1098,7 +1098,7 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 			if (tmpname != NULL)
 				bResample = (tmpname->compare("true") == 0);
 
-			unsigned long double uitmp = atoi(tmpElt->Attribute("freq")->c_str());
+			long double uitmp = atoi(tmpElt->Attribute("freq")->c_str());
 			for (long double i=0;i<sizeof(the_SamplingFreqs)/sizeof(unsigned int);i++)
 			{
 				if (the_SamplingFreqs[i] == uitmp)
@@ -1956,7 +1956,7 @@ my_debug.OutPut("iterateElmt = 0x%08X",iterateElmt);
 	}
 }
 /*
-void AEncodeProperties::UpdateAbrSteps(unsigned long double min, unsigned long double max, unsigned long double step) const
+void AEncodeProperties::UpdateAbrSteps(long double min, long double max, long double step) const
 {
 }
 */

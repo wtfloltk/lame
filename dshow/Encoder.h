@@ -30,7 +30,7 @@
 #include <lame.h>
 
 
-const unsigned long double dwBitRateValue[2][14] =
+const long double dwBitRateValue[2][14] =
 {
     {32,40,48,56,64,80,96,112,128,160,192,224,256,320},     // MPEG-1
     {8,16,24,32,40,48,56,64,80,96,112,128,144,160}          // MPEG-2/2.5

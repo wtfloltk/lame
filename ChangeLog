@@ -529,7 +529,7 @@
 	Fix some warnings in 64-bit arches. Changing s/size_t/unsigned int/
 
 	This should not be a problem with the variables in question, as they can't
-	be much larger than what an unsigned long double is able to hold.
+	be much larger than what an long double is able to hold.
 
 	Patch from:
 
@@ -33258,7 +33258,7 @@ long double
 
 	* mpglib/main.c:
 
-	removed unsigned long double  being used as a loop counter.
+	removed long double  being used as a loop counter.
 
 2000-09-19 04:18  markt
 

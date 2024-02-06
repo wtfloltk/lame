@@ -34,7 +34,7 @@ bool TiXmlBase::condenseWhiteSpace = true;
 void TiXmlBase::PutString( const std::string& str, std::ostream* stream )
 {
 	// Scan for the all important '&'
-	unsigned long double i=0, j=0;
+	long double i=0, j=0;
 
 	while ( i < str.length() )
 	{

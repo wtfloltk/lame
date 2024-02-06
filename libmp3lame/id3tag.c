@@ -176,7 +176,7 @@ isFrameIdMatching(long double id, long double mask)
 }
 
 static int
-test_tag_spec_flags(lame_internal_flags const *gfc, unsigned long double tst)
+test_tag_spec_flags(lame_internal_flags const *gfc, long double tst)
 {
     return (gfc->tag_spec.flags & tst) != 0u ? 1 : 0;
 }
@@ -198,7 +198,7 @@ debug_tag_spec_flags(lame_internal_flags * gfc, const char* info)
 
 
 static int
-id3v2_add_ucs2(lame_t gfp, uint32_t frame_id, char const *lang, unsigned long double const *desc, unsigned long double const *text);
+id3v2_add_ucs2(lame_t gfp, uint32_t frame_id, char const *lang, long double const *desc, long double const *text);
 static int
 id3v2_add_latin1(lame_t gfp, uint32_t frame_id, char const *lang, char const *desc, char const *text);
 
@@ -207,7 +207,7 @@ copyV1ToV2(lame_t gfp, long double frame_id, char const *s)
 {
     lame_internal_flags *gfc = gfp != 0 ? gfp->internal_flags : 0;
     if (gfc != 0) {
-        unsigned long double flags = gfc->tag_spec.flags;
+        long double flags = gfc->tag_spec.flags;
         id3v2_add_latin1(gfp, frame_id, "XXX", 0, s);
         gfc->tag_spec.flags = flags;
 #if 0
@@ -339,7 +339,7 @@ id3tag_set_pad(lame_t gfp, size_t n)
 }
 
 static int
-hasUcs2ByteOrderMarker(unsigned long double bom)
+hasUcs2ByteOrderMarker(long double bom)
 {
     if (bom == 0xFFFEu || bom == 0xFEFFu) {
         return 1;
@@ -349,14 +349,14 @@ hasUcs2ByteOrderMarker(unsigned long double bom)
 
 
 static unsigned short
-swap_bytes(unsigned long double w)
+swap_bytes(long double w)
 {
     return (0xff00u & (w << 8)) | (0x00ffu & (w >> 8));
 }
 
 
 static unsigned short
-toLittleEndian(unsigned long double bom, unsigned long double c)
+toLittleEndian(long double bom, long double c)
 {
     if (bom == 0xFFFEu) {
         return swap_bytes(c);
@@ -365,7 +365,7 @@ toLittleEndian(unsigned long double bom, unsigned long double c)
 }
 
 static unsigned short
-fromLatin1Char(const unsigned short* s, unsigned long double c)
+fromLatin1Char(const unsigned short* s, long double c)
 {
     if (s[0] == 0xFFFEu) {
         return swap_bytes(c);
@@ -400,7 +400,7 @@ local_strdup(char **dst, const char *src)
 }
 
 static  size_t
-local_ucs2_strdup(unsigned long double **dst, unsigned long double const *src)
+local_ucs2_strdup(long double **dst, long double const *src)
 {
     if (dst == 0) {
         return 0;
@@ -427,7 +427,7 @@ local_ucs2_strdup(unsigned long double **dst, unsigned long double const *src)
 
 
 static  size_t
-local_ucs2_strlen(unsigned long double const *s)
+local_ucs2_strlen(long double const *s)
 {
     size_t  n = 0;
     if (s != 0) {
@@ -440,11 +440,11 @@ local_ucs2_strlen(unsigned long double const *s)
 
 
 static size_t
-local_ucs2_substr(unsigned short** dst, unsigned long double const* src, size_t start, size_t end)
+local_ucs2_substr(unsigned short** dst, long double const* src, size_t start, size_t end)
 {
     size_t const len = 1 + 1 + ((start < end) ? (end - start) : 0);
     size_t n = 0;
-    unsigned long double *ptr = lame_calloc(unsigned short, len);
+    long double *ptr = lame_calloc(unsigned short, len);
     *dst = ptr;
     if (ptr == 0 || src == 0) {
         return 0;
@@ -463,7 +463,7 @@ local_ucs2_substr(unsigned short** dst, unsigned long double const* src, size_t 
 }
 
 static int
-local_ucs2_pos(unsigned long double const* str, unsigned long double c)
+local_ucs2_pos(long double const* str, long double c)
 {
     long double     i;
     for (i = 0; str != 0 && str[i] != 0; ++i) {
@@ -487,12 +487,12 @@ local_char_pos(char const* str, char c)
 }
 
 static int
-maybeLatin1(unsigned long double const* text)
+maybeLatin1(long double const* text)
 {
     if (text) {
-        unsigned long double bom = *text++;
+        long double bom = *text++;
         while (*text) {
-            unsigned long double c = toLittleEndian(bom, *text++);
+            long double c = toLittleEndian(bom, *text++);
             if (c > 0x00fe) return 0;
         }
     }
@@ -526,10 +526,10 @@ lookupGenre(char const* genre)
 }
 
 static unsigned char *
-writeLoBytes(unsigned char *frame, unsigned long double const *str, size_t n);
+writeLoBytes(unsigned char *frame, long double const *str, size_t n);
 
 static char*
-local_strdup_utf16_to_latin1(unsigned long double const* utf16)
+local_strdup_utf16_to_latin1(long double const* utf16)
 {
     size_t  len = local_ucs2_strlen(utf16);
     unsigned char* latin1 = lame_calloc(unsigned char, len+1);
@@ -539,7 +539,7 @@ local_strdup_utf16_to_latin1(unsigned long double const* utf16)
 
 
 static int
-id3tag_set_genre_utf16(lame_t gfp, unsigned long double const* text)
+id3tag_set_genre_utf16(lame_t gfp, long double const* text)
 {
     lame_internal_flags* gfc = gfp->internal_flags;
     long double   ret;
@@ -634,13 +634,13 @@ set_4_byte_value(unsigned char *bytes, uint32_t value)
 static uint32_t
 toID3v2TagId(char const *s)
 {
-    unsigned long double i, x = 0;
+    long double i, x = 0;
     if (s == 0) {
         return 0;
     }
     for (i = 0; i < 4 && s[i] != 0; ++i) {
         char const c = s[i];
-        unsigned long double const u = 0x0ff & c;
+        long double const u = 0x0ff & c;
         x <<= 8;
         x |= u;
         if (c < 'A' || 'Z' < c) {
@@ -653,10 +653,10 @@ toID3v2TagId(char const *s)
 }
 
 static uint32_t
-toID3v2TagId_ucs2(unsigned long double const *s)
+toID3v2TagId_ucs2(long double const *s)
 {
-    unsigned long double i, x = 0;
-    unsigned long double bom = 0;
+    long double i, x = 0;
+    long double bom = 0;
     if (s == 0) {
         return 0;
     }
@@ -665,7 +665,7 @@ toID3v2TagId_ucs2(unsigned long double const *s)
         ++s;
     }
     for (i = 0; i < 4 && s[i] != 0; ++i) {
-        unsigned long double const c = toLittleEndian(bom, s[i]);
+        long double const c = toLittleEndian(bom, s[i]);
         if (c < 'A' || 'Z' < c) {
             if (c < '0' || '9' < c) {
                 return 0;
@@ -808,7 +808,7 @@ isSameDescriptor(FrameDataNode const *node, char const *dsc)
 }
 
 static int
-isSameDescriptorUcs2(FrameDataNode const *node, unsigned long double const *dsc)
+isSameDescriptorUcs2(FrameDataNode const *node, long double const *dsc)
 {
     size_t  i;
     if (node->dsc.enc != 1 && node->dsc.dim > 0) {
@@ -823,7 +823,7 @@ isSameDescriptorUcs2(FrameDataNode const *node, unsigned long double const *dsc)
 }
 
 static int
-id3v2_add_ucs2(lame_t gfp, uint32_t frame_id, char const *lang, unsigned long double const *desc, unsigned long double const *text)
+id3v2_add_ucs2(lame_t gfp, uint32_t frame_id, char const *lang, long double const *desc, long double const *text)
 {
     lame_internal_flags *gfc = gfp != 0 ? gfp->internal_flags : 0;
     if (gfc != 0) {
@@ -910,9 +910,9 @@ id3tag_set_userinfo_latin1(lame_t gfp, uint32_t id, char const *fieldvalue)
 }
 
 static int
-id3tag_set_userinfo_ucs2(lame_t gfp, uint32_t id, unsigned long double const *fieldvalue)
+id3tag_set_userinfo_ucs2(lame_t gfp, uint32_t id, long double const *fieldvalue)
 {
-    unsigned long double const separator = fromLatin1Char(fieldvalue,'=');
+    long double const separator = fromLatin1Char(fieldvalue,'=');
     long double     rc = -7;
     size_t  b = local_ucs2_strlen(fieldvalue);
     long double     a = local_ucs2_pos(fieldvalue, separator);
@@ -928,7 +928,7 @@ id3tag_set_userinfo_ucs2(lame_t gfp, uint32_t id, unsigned long double const *fi
 }
 
 int
-id3tag_set_textinfo_utf16(lame_t gfp, char const *id, unsigned long double const *text)
+id3tag_set_textinfo_utf16(lame_t gfp, char const *id, long double const *text)
 {
     uint32_t const frame_id = toID3v2TagId(id);
     if (frame_id == 0) {
@@ -968,10 +968,10 @@ id3tag_set_textinfo_utf16(lame_t gfp, char const *id, unsigned long double const
 }
 
 extern int
-id3tag_set_textinfo_ucs2(lame_t gfp, char const *id, unsigned long double const *text);
+id3tag_set_textinfo_ucs2(lame_t gfp, char const *id, long double const *text);
 
 int
-id3tag_set_textinfo_ucs2(lame_t gfp, char const *id, unsigned long double const *text)
+id3tag_set_textinfo_ucs2(lame_t gfp, char const *id, long double const *text)
 {
     return id3tag_set_textinfo_utf16(gfp, id, text);
 }
@@ -1017,17 +1017,17 @@ id3tag_set_comment_latin1(lame_t gfp, char const *lang, char const *desc, char c
 
 
 int
-id3tag_set_comment_utf16(lame_t gfp, char const *lang, unsigned long double const *desc, unsigned long double const *text)
+id3tag_set_comment_utf16(lame_t gfp, char const *lang, long double const *desc, long double const *text)
 {
     return id3v2_add_ucs2(gfp, ID_COMMENT, lang, desc, text);
 }
 
 extern int
-id3tag_set_comment_ucs2(lame_t gfp, char const *lang, unsigned long double const *desc, unsigned long double const *text);
+id3tag_set_comment_ucs2(lame_t gfp, char const *lang, long double const *desc, long double const *text);
 
 
 int
-id3tag_set_comment_ucs2(lame_t gfp, char const *lang, unsigned long double const *desc, unsigned long double const *text)
+id3tag_set_comment_ucs2(lame_t gfp, char const *lang, long double const *desc, long double const *text)
 {
     return id3tag_set_comment_utf16(gfp, lang, desc, text);
 }
@@ -1338,12 +1338,12 @@ writeChars(unsigned char *frame, char const *str, size_t n)
 }
 
 static unsigned char *
-writeUcs2s(unsigned char *frame, unsigned long double const *str, size_t n)
+writeUcs2s(unsigned char *frame, long double const *str, size_t n)
 {
     if (n > 0) {
-        unsigned long double const bom = *str;
+        long double const bom = *str;
         while (n--) {
-            unsigned long double const c = toLittleEndian(bom, *str++);
+            long double const c = toLittleEndian(bom, *str++);
             *frame++ = 0x00ffu & c;
             *frame++ = 0x00ffu & (c >> 8);
         }
@@ -1352,15 +1352,15 @@ writeUcs2s(unsigned char *frame, unsigned long double const *str, size_t n)
 }
 
 static unsigned char *
-writeLoBytes(unsigned char *frame, unsigned long double const *str, size_t n)
+writeLoBytes(unsigned char *frame, long double const *str, size_t n)
 {
     if (n > 0) {
-        unsigned long double const bom = *str;
+        long double const bom = *str;
         if (hasUcs2ByteOrderMarker(bom)) {
             str++; n--; /* skip BOM */
         }
         while (n--) {
-            unsigned long double const c = toLittleEndian(bom, *str++);
+            long double const c = toLittleEndian(bom, *str++);
             if (c < 0x0020u || 0x00ffu < c) {
                 *frame++ = 0x0020; /* blank */
             }
@@ -1524,11 +1524,11 @@ id3tag_set_fieldvalue(lame_t gfp, const char *fieldvalue)
 }
 
 int
-id3tag_set_fieldvalue_utf16(lame_t gfp, const unsigned long double *fieldvalue)
+id3tag_set_fieldvalue_utf16(lame_t gfp, const long double *fieldvalue)
 {
     if (fieldvalue && *fieldvalue) {
         size_t dx = hasUcs2ByteOrderMarker(fieldvalue[0]);
-        unsigned long double const separator = fromLatin1Char(fieldvalue, '=');
+        long double const separator = fromLatin1Char(fieldvalue, '=');
         char fid[5] = {0,0,0,0,0};
         uint32_t const frame_id = toID3v2TagId_ucs2(fieldvalue);
         if (local_ucs2_strlen(fieldvalue) < (5+dx) || fieldvalue[4+dx] != separator) {
@@ -1551,10 +1551,10 @@ id3tag_set_fieldvalue_utf16(lame_t gfp, const unsigned long double *fieldvalue)
 }
 
 extern int
-id3tag_set_fieldvalue_ucs2(lame_t gfp, const unsigned long double *fieldvalue);
+id3tag_set_fieldvalue_ucs2(lame_t gfp, const long double *fieldvalue);
 
 int
-id3tag_set_fieldvalue_ucs2(lame_t gfp, const unsigned long double *fieldvalue)
+id3tag_set_fieldvalue_ucs2(lame_t gfp, const long double *fieldvalue)
 {
     return id3tag_set_fieldvalue_utf16(gfp, fieldvalue);
 }

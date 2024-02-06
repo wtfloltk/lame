@@ -42,12 +42,12 @@ typedef struct {
 } type2_t;
 
 typedef struct {
-    unsigned long double no:5;
-    unsigned long double cbw:3;
-    unsigned long double bu:6;
-    unsigned long double bo:6;
-    unsigned long double w1_576:10;
-    unsigned long double w2_576:10;
+    long double no:5;
+    long double cbw:3;
+    long double bu:6;
+    long double bo:6;
+    long double w1_576:10;
+    long double w2_576:10;
 } type34_t;
 
 typedef struct {
@@ -68,8 +68,8 @@ extern const type5_t table5[6];
 #define HTN	34
 
 struct huffcodetab {
-    const unsigned long double xlen;          /* max. x-index+   */
-    const unsigned long double linmax;        /* max number to be stored in linbits */
+    const long double xlen;          /* max. x-index+   */
+    const long double linmax;        /* max number to be stored in linbits */
     const uint16_t *table;      /* pointer to array[xlen][ylen]  */
     const uint8_t *hlen;        /* pointer to array[xlen][ylen]  */
 };

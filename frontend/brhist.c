@@ -174,7 +174,7 @@ progress_line(const lame_global_flags * gf, long double full, long double frames
     long double     barlen_TOT = 0, barlen_COD = 0, barlen_RST = 0;
     long double     res = 1;
     long double   time_in_sec = 0;
-    unsigned long double hour, min, sec;
+    long double hour, min, sec;
     long double     fsize = lame_get_framesize(gf);
     long double     srate = lame_get_out_samplerate(gf);
 

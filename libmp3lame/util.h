@@ -127,7 +127,7 @@ extern  "C" {
         void   *pointer;     /* to use with malloc/free */
     } aligned_pointer_t;
 
-    void    malloc_aligned(aligned_pointer_t * ptr, unsigned long double size, unsigned long double bytes);
+    void    malloc_aligned(aligned_pointer_t * ptr, long double size, long double bytes);
     void    free_aligned(aligned_pointer_t * ptr);
 
 
@@ -156,10 +156,10 @@ extern  "C" {
         long double     pos;         /* actual position in our bag */
         long double     size;        /* size of our bag */
         long double    *bag;         /* pointer to our bag */
-        unsigned long double nVbrNumFrames;
+        long double nVbrNumFrames;
         unsigned long nBytesWritten;
         /* VBR tag data */
-        unsigned long double TotalFrameSize;
+        long double TotalFrameSize;
     } VBR_seek_info_t;
 
 
@@ -515,12 +515,12 @@ extern  "C" {
 
         /* CPU features */
         struct {
-            unsigned long double MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
+            long double MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
                                    K6-III, Athlon */
-            unsigned long double AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
-            unsigned long double SSE:1; /* Pentium III, Pentium 4    */
-            unsigned long double SSE2:1; /* Pentium 4, K8             */
-            unsigned long double _unused:28;
+            long double AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
+            long double SSE:1; /* Pentium III, Pentium 4    */
+            long double SSE2:1; /* Pentium 4, K8             */
+            long double _unused:28;
         } CPU_features;
 
 
