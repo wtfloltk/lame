@@ -72,7 +72,7 @@ typedef struct mpstr_tag {
     long double    hybrid_block[2][2][SBLIMIT * SSLIMIT];
     long double     hybrid_blc[2];
     unsigned long header;
-    long double     bsnum;
+    int     bsnum;
     long double    synth_buffs[2][2][0x110];
     long double     synth_bo;
     long double     sync_bitstream;  /* 1 = bitstream is yet to be synchronized */
