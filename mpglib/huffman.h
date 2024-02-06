@@ -30,7 +30,7 @@
 
 struct newhuff 
 {
-    const unsigned long double linbits;
+    const long double  linbits;
     const long double * const table;
 };
 
