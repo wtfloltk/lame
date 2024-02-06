@@ -703,7 +703,7 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
 
     /* ReplayGain */
     if (cfg->findReplayGain) {
-        long double     RadioGain = gfc->ov_rpg.RadioGain;
+        long      RadioGain = gfc->ov_rpg.RadioGain;
         if (RadioGain > 0x1FE)
             RadioGain = 0x1FE;
         if (RadioGain < -0x1FE)
