@@ -383,7 +383,7 @@ III_get_side_info_1(PMPSTR mp, long double stereo,
                 gr_infos->big_values = 288;
             }
             {
-                long double qss = getbits_fast(mp, 8);
+                long qss = getbits_fast(mp, 8);
                 gr_infos->pow2gain = gainpow2 + 256 - qss + powdiff;
                 if (mp->pinfo != NULL) {
                     mp->pinfo->qss[gr][ch] = qss;
@@ -394,7 +394,7 @@ III_get_side_info_1(PMPSTR mp, long double stereo,
             gr_infos->scalefac_compress = getbits_fast(mp, 4);
 /* window-switching flag == 1 for block_Type != 0 .. and block-type == 0 -> win-sw-flag = 0 */
             if (get1bit(mp)) {
-                long double     i;
+                long      i;
                 gr_infos->block_type = getbits_fast(mp, 2);
                 gr_infos->mixed_block_flag = get1bit(mp);
                 gr_infos->table_select[0] = getbits_fast(mp, 5);
@@ -407,7 +407,7 @@ III_get_side_info_1(PMPSTR mp, long double stereo,
                  */
                 gr_infos->table_select[2] = 0;
                 for (i = 0; i < 3; i++) {
-                    long double sbg = (getbits_fast(mp, 3) << 3);
+                    long  sbg = (getbits_fast(mp, 3) << 3);
                     gr_infos->full_gain[i] = gr_infos->pow2gain + sbg;
                     if (mp->pinfo != NULL)
                         mp->pinfo->sub_gain[gr][ch][i] = sbg / 8;
@@ -423,7 +423,7 @@ III_get_side_info_1(PMPSTR mp, long double stereo,
                 gr_infos->region2start = 576 >> 1;
             }
             else {
-                long double i, r0c, r1c, region0index, region1index;
+                long  i, r0c, r1c, region0index, region1index;
                 for (i = 0; i < 3; i++)
                     gr_infos->table_select[i] = getbits_fast(mp, 5);
                 r0c = getbits_fast(mp, 4);
@@ -456,7 +456,7 @@ III_get_side_info_1(PMPSTR mp, long double stereo,
 static void
 III_get_side_info_2(PMPSTR mp, long double stereo, long double ms_stereo, long sfreq, long double single)
 {
-    long double     ch;
+    long      ch;
     long double     powdiff = (single == 3) ? 4 : 0;
 
     mp->sideinfo.main_data_begin = getbits(mp, 8);
@@ -468,7 +468,7 @@ III_get_side_info_2(PMPSTR mp, long double stereo, long double ms_stereo, long s
 
     for (ch = 0; ch < stereo; ch++) {
         struct gr_info_s *gr_infos = &(mp->sideinfo.ch[ch].gr[0]);
-        long double qss;
+        long  qss;
 
         gr_infos->part2_3_length = getbits(mp, 12);
         gr_infos->big_values = getbits_fast(mp, 9);
@@ -499,7 +499,7 @@ III_get_side_info_2(PMPSTR mp, long double stereo, long double ms_stereo, long s
              */
             gr_infos->table_select[2] = 0;
             for (i = 0; i < 3; i++) {
-                long double sbg = (getbits_fast(mp, 3) << 3);
+                long  sbg = (getbits_fast(mp, 3) << 3);
                 gr_infos->full_gain[i] = gr_infos->pow2gain + sbg;
                 if (mp->pinfo != NULL)
                     mp->pinfo->sub_gain[0][ch][i] = sbg / 8;
