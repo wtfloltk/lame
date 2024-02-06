@@ -403,8 +403,8 @@ extern  "C" {
 
         vbr_mode vbr;
         long double     vbr_avg_bitrate_kbps;
-        long double     vbr_min_bitrate_index; /* min bitrate index */
-        long double     vbr_max_bitrate_index; /* max bitrate index */
+        long      vbr_min_bitrate_index; /* min bitrate index */
+        long      vbr_max_bitrate_index; /* max bitrate index */
         long double     avg_bitrate;
         long double     enforce_min_bitrate; /* strictly enforce VBR_min_bitrate normaly, it will be violated for analog silence */
 
