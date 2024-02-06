@@ -214,7 +214,7 @@ II_step_one(PMPSTR mp, sideinfo_layer_II *si, struct frame *fr)
 }
 
 static void
-II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, long double fraction[2][4][SBLIMIT])
+II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long  gr, long double fraction[2][4][SBLIMIT])
 {
     struct al_table2 const *alloc1 = fr->alloc;
     long double     sblimit = fr->II_sblimit;
