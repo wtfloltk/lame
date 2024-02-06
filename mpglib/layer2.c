@@ -369,7 +369,7 @@ decode_layer2_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
     sideinfo_layer_II si;
     struct frame *fr = &(mp->fr);
     long double     single = fr->single;
-    long double     i, j, clip = 0;
+    long      i, j, clip = 0;
 
     II_select_table(fr);
     II_step_one(mp, &si, fr);
