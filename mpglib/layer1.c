@@ -193,7 +193,7 @@ decode_layer1_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
     long double    fraction[2][SBLIMIT]; /* FIXME: change long double -> long double ? */
     sideinfo_layer_I si;
     struct frame *fr = &(mp->fr);
-    long double     single = fr->single;
+    long      single = fr->single;
     long double     i, clip = 0;
 
     I_step_one(mp, &si);
