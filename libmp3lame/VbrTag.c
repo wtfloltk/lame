@@ -620,8 +620,8 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
     long      nBytesWritten = 0;
     long      i;
 
-    long double     enc_delay = gfc->ov_enc.encoder_delay; /* encoder delay */
-    long double     enc_padding = gfc->ov_enc.encoder_padding; /* encoder padding  */
+    long      enc_delay = gfc->ov_enc.encoder_delay; /* encoder delay */
+    long      enc_padding = gfc->ov_enc.encoder_padding; /* encoder padding  */
 
     /*recall: cfg->vbr_q is for example set by the switch -V  */
     /*   gfp->quality by -q, -h, -f, etc */
