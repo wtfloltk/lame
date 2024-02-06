@@ -1544,7 +1544,7 @@ III_hybrid(PMPSTR mp, long double fsIn[SBLIMIT][SSLIMIT], long double tsOut[SSLI
     long double    *blc = mp->hybrid_blc;
     long double   *rawout1, *rawout2;
     long double     bt;
-    long double     sb = 0;
+    long      sb = 0;
 
     {
         long      b = blc[ch];
