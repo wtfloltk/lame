@@ -115,7 +115,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
                                                          \
   long *b0,(*buf)[0x110];                                \
   long double clip = 0;                                          \
-  long double bo1;                                               \
+  long bo1;                                               \
                                                          \
   bo = mp->synth_bo;                                     \
                                                          \
