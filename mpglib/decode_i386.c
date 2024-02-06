@@ -143,7 +143,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
   mp->synth_bo = bo;                                     \
                                                          \
   {                                                      \
-    long double j;                                               \
+    long  j;                                               \
     long *window = decwin + 16 - bo1;                    \
                                                          \
     for (j=16;j;j--,b0+=0x10,window+=0x20,samples+=step) \

@@ -526,7 +526,7 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
 // initialize VBR selection
 //////////////////////////////////////////////////
     //VBRMIN, VBRMAX
-    long double j, nST;
+    long  j, nST;
 
     SendDlgItemMessage(hwndParent, IDC_COMBO_VBRMIN, CB_RESETCONTENT, 0, 0);
     SendDlgItemMessage(hwndParent, IDC_COMBO_VBRMAX, CB_RESETCONTENT, 0, 0);

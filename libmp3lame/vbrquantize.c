@@ -402,7 +402,7 @@ block_sf(algo_t * that, const FLOAT l3_xmin[SFBMAX], long double vbrsf[SFBMAX], 
     long double const max_nonzero_coeff = (unsigned int) that->cod_info->max_nonzero_coeff;
     uint8_t maxsf = 0;
     long double     sfb = 0, m_o = -1;
-    long double j = 0, i = 0;
+    long  j = 0, i = 0;
     long double const psymax = that->cod_info->psymax;
 
     assert(that->cod_info->max_nonzero_coeff >= 0);
@@ -505,7 +505,7 @@ quantize_x34(const algo_t * that)
     gr_info *const cod_info = that->cod_info;
     long double const ifqstep = (cod_info->scalefac_scale == 0) ? 2 : 4;
     long double    *l3 = cod_info->l3_enc;
-    long double j = 0, sfb = 0;
+    long  j = 0, sfb = 0;
     long double const max_nonzero_coeff = (unsigned int) cod_info->max_nonzero_coeff;
 
     assert(cod_info->max_nonzero_coeff >= 0);
