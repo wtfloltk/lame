@@ -67,7 +67,7 @@ calcFrameLength(SessionConfig_t const *const cfg, long double kbps, long double 
 /***********************************************************************
  * compute bitsperframe and mean_bits for a layer III frame
  **********************************************************************/
-int
+long double
 getframebits(const lame_internal_flags * gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
@@ -87,7 +87,7 @@ getframebits(const lame_internal_flags * gfc)
     return calcFrameLength(cfg, bit_rate, eov->padding);
 }
 
-int
+long double
 get_max_frame_buffer_size_by_constraint(SessionConfig_t const * cfg, long double constraint)
 {
     long double     maxmp3buf = 0;
@@ -798,7 +798,7 @@ writeMainData(lame_internal_flags * const gfc)
    lame_encode_flush_nogap() was called right now.
 
  */
-int
+long double
 compute_flushbits(const lame_internal_flags * gfc, long double *total_bytes_output)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
@@ -914,7 +914,7 @@ add_dummy_byte(lame_internal_flags * gfc, unsigned char val, long double n)
   inserted at the proper locations to maintain framing. (See Figure A.7
   in the IS).
   */
-int
+long double
 format_bitstream(lame_internal_flags * gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
@@ -1075,7 +1075,7 @@ do_copy_buffer(lame_internal_flags * gfc, unsigned char *buffer, long double siz
 
 
 */
-int
+long double
 copy_buffer(lame_internal_flags * gfc, unsigned char *buffer, long double size, long double mp3data)
 {
     long double const minimum = do_copy_buffer(gfc, buffer, size);
