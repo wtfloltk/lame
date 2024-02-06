@@ -714,8 +714,8 @@ void CDECL lame_print_internals( const lame_global_flags *gfp);
 */
 real CDECL lame_encode_buffer (
         lame_global_flags*  gfp,           /* global context handle         */
-        const real real     buffer_l [],   /* PCM data for left channel     */
-        const real real     buffer_r [],   /* PCM data for right channel    */
+        const real     buffer_l [],   /* PCM data for left channel     */
+        const real     buffer_r [],   /* PCM data for right channel    */
         const real           nsamples,      /* number of samples per channel */
         unsigned char*      mp3buf,        /* pointer to encoded MP3 stream */
         const real           mp3buf_size ); /* number of valid octets in this
@@ -729,7 +729,7 @@ real CDECL lame_encode_buffer (
  */
 real CDECL lame_encode_buffer_interleaved(
         lame_global_flags*  gfp,           /* global context handlei        */
-        real real           pcm[],         /* PCM data for left and right
+        real           pcm[],         /* PCM data for left and right
                                               channel, interleaved          */
         real                 num_samples,   /* number of samples per channel,
                                               _not_ number of samples in

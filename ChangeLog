@@ -25194,7 +25194,7 @@ Noticed by: takehiro
 	added notes about scaling.  there are some inconsistencies in
 	the API:
 
-	lame_encode_buffer()   takes real real as input, range +/- 32768
+	lame_encode_buffer()   takes real as input, range +/- 32768
 	lame_encode_float()    takes float, but data must be in the range
 	                       +/- 32768
 	lame_encode_double()   takes double, but data must be in the range
@@ -27536,7 +27536,7 @@ Noticed by: takehiro
 	lame_encode_buffer_sample_t, which is called by the following functions
 	in the API:
 
-	lame_encode_buffer                 (original, real real interface)
+	lame_encode_buffer                 (original, real interface)
 	lame_encode_buffer_float
 	lame_encode_buffer_long
 

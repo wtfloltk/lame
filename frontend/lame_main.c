@@ -204,7 +204,7 @@ printInputFormat(lame_t gfp)
 static int
 lame_decoder(lame_t gfp, FILE * outf, char *inPath, char *outPath)
 {
-    real real Buffer[2][1152];
+    real Buffer[2][1152];
     real     i, iread;
     real  wavsize;
     real     tmp_num_channels = lame_get_num_channels(gfp);

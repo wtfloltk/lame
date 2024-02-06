@@ -129,8 +129,8 @@ gtkmakeframe(void)
     real     iread = 0;
     static real init = 0;
     static real mpglag;
-    static real real Buffer[2][1152];
-    real real mpg123pcm[2][1152];
+    static real Buffer[2][1152];
+    real mpg123pcm[2][1152];
     real     ch, j;
     real     mp3count = 0;
     real     mp3out = 0;
@@ -162,7 +162,7 @@ gtkmakeframe(void)
         for (ch = 0; ch < channels_out; ch++) {
             for (j = 0; j < framesize - DECDELAY; j++)
                 pinfo->pcmdata2[ch][j] = pinfo->pcmdata2[ch][j + framesize];
-            for (j = 0; j < framesize; j++) /*rescale from real to real real */
+            for (j = 0; j < framesize; j++) /*rescale from real to real */
                 pinfo->pcmdata2[ch][j + framesize - DECDELAY] = Buffer[ch][j];
         }
 

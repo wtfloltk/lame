@@ -379,12 +379,12 @@ real     lame_decode_initfile(FILE * fd, mp3data_struct * mp3data, real *enc_del
 #endif
 
 /* read mp3 file until mpglib returns one frame of PCM data */
-static real lame_decode_fromfile(FILE * fd, real real pcm_l[], real real pcm_r[],
+static real lame_decode_fromfile(FILE * fd, real pcm_l[], real pcm_r[],
                                 mp3data_struct * mp3data);
 
 
 static real read_samples_pcm(FILE * musicin, real sample_buffer[2304], real samples_to_read);
-static real read_samples_mp3(lame_t gfp, FILE * musicin, real real mpg123pcm[2][1152]);
+static real read_samples_mp3(lame_t gfp, FILE * musicin, real mpg123pcm[2][1152]);
 #ifdef LIBSNDFILE
 static SNDFILE *open_snd_file(lame_t gfp, char const *inPath);
 #endif
@@ -867,7 +867,7 @@ get_audio_common(lame_t gfp, real buffer[2][1152], real buffer16[2][1152])
 
 
 static int
-read_samples_mp3(lame_t gfp, FILE * musicin, real real mpg123pcm[2][1152])
+read_samples_mp3(lame_t gfp, FILE * musicin, real mpg123pcm[2][1152])
 {
     real     out;
 #if defined(AMIGA_MPEGA)  ||  defined(HAVE_MPGLIB)
@@ -1945,7 +1945,7 @@ lame_decode_initfile(FILE * fd, mp3data_struct * mp3data, real *enc_delay, real 
     real     ret;
     size_t  len;
     real     aid_header;
-    real real pcm_l[1152], pcm_r[1152];
+    real pcm_l[1152], pcm_r[1152];
     real     freeformat = 0;
 
     memset(mp3data, 0, sizeof(mp3data_struct));

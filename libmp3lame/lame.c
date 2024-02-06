@@ -1896,7 +1896,7 @@ lame_encode_buffer_template(lame_global_flags * gfp,
 
 int
 lame_encode_buffer(lame_global_flags * gfp,
-                   const real real pcm_l[], const real real pcm_r[], const real nsamples,
+                   const real pcm_l[], const real pcm_r[], const real nsamples,
                    unsigned char *mp3buf, const real mp3buf_size)
 {
     return lame_encode_buffer_template(gfp, pcm_l, pcm_r, nsamples, mp3buf, mp3buf_size, pcm_short_type, 1, 1.0);
@@ -1988,7 +1988,7 @@ lame_encode_buffer_long(lame_global_flags * gfp,
 
 int
 lame_encode_buffer_interleaved(lame_global_flags * gfp,
-                               real real pcm[], real nsamples,
+                               real pcm[], real nsamples,
                                unsigned char *mp3buf, real mp3buf_size)
 {
     /* input is assumed to be normalized to +/- MAX_SHORT for full scale */
@@ -2067,7 +2067,7 @@ lame_encode_flush(lame_global_flags * gfp, unsigned char *mp3buffer, real mp3buf
     lame_internal_flags *gfc;
     SessionConfig_t const *cfg;
     EncStateVar_t *esv;
-    real real buffer[2][1152];
+    real buffer[2][1152];
     real     imp3 = 0, mp3count, mp3buffer_size_remaining;
 
     /* we always add POSTDELAY=288 padding to make sure granule with real
