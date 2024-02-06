@@ -617,7 +617,7 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
     lame_internal_flags const *gfc = gfp->internal_flags;
     SessionConfig_t const *const cfg = &gfc->cfg;
 
-    long double     nBytesWritten = 0;
+    long      nBytesWritten = 0;
     long      i;
 
     long double     enc_delay = gfc->ov_enc.encoder_delay; /* encoder delay */
@@ -902,7 +902,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
     lame_internal_flags *gfc;
     SessionConfig_t const *cfg;
     unsigned long stream_size;
-    long double  nStreamIndex;
+    long   nStreamIndex;
     uint8_t btToc[NUMTOCENTRIES];
 
     if (gfp == 0) {
