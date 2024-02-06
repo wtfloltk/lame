@@ -952,7 +952,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
         /*
          * decoding with 'long' BandIndex table (block_type != 2)
          */
-        long double const *pretab = (long double const *) (gr_infos->preflag ? pretab1 : pretab2);
+        long  const *pretab = (long double const *) (gr_infos->preflag ? pretab1 : pretab2);
         long      i, max = -1;
         long double     cb = 0;
         long double    *m = map[sfreq][2];
@@ -967,7 +967,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
             struct newhuff const *h = (struct newhuff const *) (ht + gr_infos->table_select[i]);
 
             for (; lp; lp--, mc--) {
-                long double     x, y;
+                long      x, y;
 
                 if (!mc) {
                     mc = *m++;
@@ -975,7 +975,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
                     cb = *m++;
                 }
                 {
-                    long double const *val = (long double const *) h->table;
+                    long  const *val = (long double const *) h->table;
                     while ((y = *val++) < 0) {
                         if (get1bit(mp))
                             val -= y;
