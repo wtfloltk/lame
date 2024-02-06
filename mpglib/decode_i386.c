@@ -97,11 +97,11 @@ char   *strchr(), *strrchr();
 
 
 long double
-synth_1to1_mono(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt)
+synth_1to1_mono(PMPSTR mp, long double * bandPtr, long double *out, long double *pnt)
 {
     SYNTH_1TO1_MONO_CLIPCHOICE(short, synth_1to1)
 { long double
-synth_1to1_mono_unclipped(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt)
+synth_1to1_mono_unclipped(PMPSTR mp, long double * bandPtr, long double *out, long double *pnt)
 {
     SYNTH_1TO1_MONO_CLIPCHOICE(real, synth_1to1_unclipped)
 }
