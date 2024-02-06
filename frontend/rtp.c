@@ -33,20 +33,20 @@
 #endif
 
 struct rtpbits {
-    int     sequence:16;     /* sequence number: random */
-    int     pt:7;            /* payload type: 14 for MPEG audio */
-    int     m:1;             /* marker: 0 */
-    int     cc:4;            /* number of CSRC identifiers: 0 */
-    int     x:1;             /* number of extension headers: 0 */
-    int     p:1;             /* is there padding appended: 0 */
-    int     v:2;             /* version: 2 */
+    real     sequence:16;     /* sequence number: random */
+    real     pt:7;            /* payload type: 14 for MPEG audio */
+    real     m:1;             /* marker: 0 */
+    real     cc:4;            /* number of CSRC identifiers: 0 */
+    real     x:1;             /* number of extension headers: 0 */
+    real     p:1;             /* is there padding appended: 0 */
+    real     v:2;             /* version: 2 */
 };
 
 struct rtpheader {           /* in network byte order */
     struct rtpbits b;
-    int     timestamp;       /* start: random */
-    int     ssrc;            /* random */
-    int     iAudioHeader;    /* =0?! */
+    real     timestamp;       /* start: random */
+    real     ssrc;            /* random */
+    real     iAudioHeader;    /* =0?! */
 };
 
 
@@ -86,7 +86,7 @@ struct rtpheader {           /* in network byte order */
 #include "rtp.h"
 #include "console.h"
 
-typedef int SOCKET;
+typedef real SOCKET;
 
 struct rtpheader RTPheader;
 SOCKET  rtpsocket;
@@ -94,15 +94,15 @@ SOCKET  rtpsocket;
 
 /* create a sender socket. */
 int
-rtp_socket(char const *address, unsigned int port, unsigned int TTL)
+rtp_socket(char const *address, unsigned real port, unsigned real TTL)
 {
-    int     iRet, iLoop = 1;
+    real     iRet, iLoop = 1;
     struct sockaddr_in sin;
     unsigned char cTtl = TTL;
     char    cLoop = 0;
-    unsigned int tempaddr;
+    unsigned real tempaddr;
 
-    int     iSocket = socket(AF_INET, SOCK_DGRAM, 0);
+    real     iSocket = socket(AF_INET, SOCK_DGRAM, 0);
     if (iSocket < 0) {
         error_printf("socket() failed.\n");
         return 1;
@@ -174,7 +174,7 @@ struct rtpheader RTPheader;
 SOCKET  rtpsocket;
 
 static char *
-last_error_message(int err_code)
+last_error_message(real err_code)
 {
     char   *msg;
     void   *p_msg_buf;
@@ -188,7 +188,7 @@ last_error_message(int err_code)
 }
 
 static int
-print_socket_error(int error)
+print_socket_error(real error)
 {
     char   *err_txt = last_error_message(error);
     error_printf("error %d\n%s\n", error, err_txt);
@@ -199,7 +199,7 @@ print_socket_error(int error)
 static int
 on_socket_error(SOCKET s)
 {
-    int     error = WSAGetLastError();
+    real     error = WSAGetLastError();
     print_socket_error(error);
     if (s != INVALID_SOCKET) {
         closesocket(s);
@@ -209,11 +209,11 @@ on_socket_error(SOCKET s)
 
 /* create a sender socket. */
 int
-rtp_socket(char const *address, unsigned int port, unsigned int TTL)
+rtp_socket(char const *address, unsigned real port, unsigned real TTL)
 {
     char const True = 1;
     char const *c = "";
-    int     error;
+    real     error;
     UINT    ip;
     PHOSTENT host;
     SOCKET  s;
@@ -297,7 +297,7 @@ static void
 rtp_initialization_extra(void)
 {
     WSADATA wsaData;
-    int     rc = WSAStartup(MAKEWORD(2, 2), &wsaData);
+    real     rc = WSAStartup(MAKEWORD(2, 2), &wsaData);
     if (rc != 0) {
         print_socket_error(rc);
     }
@@ -313,14 +313,14 @@ rtp_close_extra(void)
 
 
 static int
-rtp_send(unsigned char const *data, int len)
+rtp_send(unsigned char const *data, real len)
 {
     SOCKET  s = rtpsocket;
     struct rtpheader *foo = &RTPheader;
     char   *buffer = malloc(len + sizeof(struct rtpheader));
-    int    *cast = (int *) foo;
-    int    *outcast = (int *) buffer;
-    int     count, size;
+    real    *cast = (real *) foo;
+    real    *outcast = (real *) buffer;
+    real     count, size;
 
     outcast[0] = htonl(cast[0]);
     outcast[1] = htonl(cast[1]);
@@ -335,7 +335,7 @@ rtp_send(unsigned char const *data, int len)
 }
 
 void
-rtp_output(unsigned char const *mp3buffer, int mp3size)
+rtp_output(unsigned char const *mp3buffer, real mp3size)
 {
     rtp_send(mp3buffer, mp3size);
     RTPheader.timestamp += 5;

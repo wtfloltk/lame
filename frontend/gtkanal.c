@@ -77,11 +77,11 @@ static gint idle_count_max;  /* number of frames to process before plotting */
 static gint idle_count;      /* pause & plot when idle_count=idel_count_max */
 static gint idle_end = 0;    /* process all frames, stop at last frame  */
 static gint idle_back = 0;   /* set when we are displaying the old data */
-static int mp3done = 0;      /* last frame has been read */
+static real mp3done = 0;      /* last frame has been read */
 static GtkWidget *frameprogress; /* progress bar */
 static GtkWidget *framecounter; /* progress counter */
 
-static int subblock_draw[3] = { 1, 1, 1 };
+static real subblock_draw[3] = { 1, 1, 1 };
 
 /* main window */
 GtkWidget *window;
@@ -95,24 +95,24 @@ GtkWidget *headerbox;        /* mpg123 header info shown here */
 
 
 struct gtkinfostruct {
-    int     filetype;        /* input file type 0=WAV, 1=MP3 */
-    int     msflag;          /* toggle between L&R vs M&S PCM data display */
-    int     chflag;          /* toggle between L & R channels */
-    int     kbflag;          /* toggle between wave # and barks */
-    int     flag123;         /* show mpg123 frame info, OR ISO encoder frame info */
-    double  avebits;         /* running average bits per frame */
-    int     approxbits;      /* (approx) bits per frame */
-    int     maxbits;         /* max bits per frame used so far */
-    int     totemph;         /* total of frames with de-emphasis */
-    int     totms;           /* total frames with ms_stereo */
-    int     totis;           /* total frames with i_stereo */
-    int     totshort;        /* total granules with short blocks */
-    int     totmix;          /* total granules with mixed blocks */
-    int     totpreflag;      /* total granules with preflag */
-    int     pupdate;         /* plot while processing, or only when needed */
-    int     sfblines;        /* plot scalefactor bands in MDCT plot */
-    int     difference;      /* plot original - decoded instead of orig vs. decoded */
-    int     totalframes;
+    real     filetype;        /* input file type 0=WAV, 1=MP3 */
+    real     msflag;          /* toggle between L&R vs M&S PCM data display */
+    real     chflag;          /* toggle between L & R channels */
+    real     kbflag;          /* toggle between wave # and barks */
+    real     flag123;         /* show mpg123 frame info, OR ISO encoder frame info */
+    real  avebits;         /* running average bits per frame */
+    real     approxbits;      /* (approx) bits per frame */
+    real     maxbits;         /* max bits per frame used so far */
+    real     totemph;         /* total of frames with de-emphasis */
+    real     totms;           /* total frames with ms_stereo */
+    real     totis;           /* total frames with i_stereo */
+    real     totshort;        /* total granules with real blocks */
+    real     totmix;          /* total granules with mixed blocks */
+    real     totpreflag;      /* total granules with preflag */
+    real     pupdate;         /* plot while processing, or only when needed */
+    real     sfblines;        /* plot scalefactor bands in MDCT plot */
+    real     difference;      /* plot original - decoded instead of orig vs. decoded */
+    real     totalframes;
 } gtkinfo;
 
 
@@ -126,18 +126,18 @@ hip_t hip;
 int
 gtkmakeframe(void)
 {
-    int     iread = 0;
-    static int init = 0;
-    static int mpglag;
-    static short int Buffer[2][1152];
-    short int mpg123pcm[2][1152];
-    int     ch, j;
-    int     mp3count = 0;
-    int     mp3out = 0;
-    int     channels_out;
+    real     iread = 0;
+    static real init = 0;
+    static real mpglag;
+    static real real Buffer[2][1152];
+    real real mpg123pcm[2][1152];
+    real     ch, j;
+    real     mp3count = 0;
+    real     mp3out = 0;
+    real     channels_out;
     unsigned char mp3buffer[LAME_MAXMP3BUFFER];
-    static int frameNum = 0;
-    int     framesize = lame_get_framesize(gfp);
+    static real frameNum = 0;
+    real     framesize = lame_get_framesize(gfp);
 
     channels_out = (lame_get_mode(gfp) == MONO) ? 1 : 2;
 
@@ -162,7 +162,7 @@ gtkmakeframe(void)
         for (ch = 0; ch < channels_out; ch++) {
             for (j = 0; j < framesize - DECDELAY; j++)
                 pinfo->pcmdata2[ch][j] = pinfo->pcmdata2[ch][j + framesize];
-            for (j = 0; j < framesize; j++) /*rescale from int to short int */
+            for (j = 0; j < framesize; j++) /*rescale from real to real real */
                 pinfo->pcmdata2[ch][j + framesize - DECDELAY] = Buffer[ch][j];
         }
 
@@ -246,26 +246,26 @@ gtkmakeframe(void)
 void
 plot_frame(void)
 {
-    int     i, j, n, ch, gr;
+    real     i, j, n, ch, gr;
     gdouble *xcord, *ycord;
     gdouble xmx, xmn, ymx, ymn;
-    double *data, *data2, *data3;
+    real *data, *data2, *data3;
     char    title2[80];
     char    label[80], label2[80];
     char   *title;
     plotting_data *pplot1;
     plotting_data *pplot2 = NULL;
 
-    double  en, samp;
-    /*int     sampindex, version = 0;*/
-    int     barthick;
-    static int firstcall = 1;
+    real  en, samp;
+    /*real     sampindex, version = 0;*/
+    real     barthick;
+    static real firstcall = 1;
     static GdkColor *barcolor, *color, *grcolor[2];
     static GdkColor yellow, gray, cyan, magenta, orange, pink, red, green, blue, black, oncolor,
         offcolor;
-    int     blocktype[2][2];
-    int     headbits;
-    int     mode_gr = 2;
+    real     blocktype[2][2];
+    real     headbits;
+    real     mode_gr = 2;
 
     /* find the frame where mpg123 produced output coming from input frame
      * pinfo.  i.e.:   out_frame + out_frame_lag = input_frame  */
@@ -530,7 +530,7 @@ plot_frame(void)
     /* draw the MDCT energy spectrum */
   /*******************************************************************/
     for (gr = 0; gr < mode_gr; gr++) {
-        int     bits, bits2;
+        real     bits, bits2;
         char   *blockname = "";
         switch (blocktype[gr][ch]) {
         case 0:
@@ -583,7 +583,7 @@ plot_frame(void)
 
         /* draw some hash marks showing scalefactor bands */
         if (gtkinfo.sfblines) {
-            int     fac, nsfb, *scalefac;
+            real     fac, nsfb, *scalefac;
             if (blocktype[gr][ch] == SHORT_TYPE) {
                 nsfb = SBMAX_s;
                 i = nsfb - 7;
@@ -610,7 +610,7 @@ plot_frame(void)
         ymn = 9e20;
         ymx = -9e20;
         for (i = 0; i < n; i++) {
-            double  coeff;
+            real  coeff;
             xcord[i] = i;
             if (gtkinfo.msflag) {
                 coeff = ch ? .5 * (data[i] - data2[i]) : .5 * (data[i] + data2[i]);
@@ -729,7 +729,7 @@ plot_frame(void)
 
 
 
-            /* en = max energy difference amoung the 3 short FFTs for this granule */
+            /* en = max energy difference amoung the 3 real FFTs for this granule */
             en = pplot->ers[gr][ch];
             if (en > 999)
                 en = 999;
@@ -779,7 +779,7 @@ plot_frame(void)
    * draw scalefactors
    *******************************************************************/
     for (gr = 0; gr < mode_gr; gr++) {
-        int     ggain;
+        real     ggain;
         if (blocktype[gr][ch] == 2) {
             n = 3 * SBMAX_s;
             if (gtkinfo.flag123)
@@ -852,7 +852,7 @@ update_progress(void)
 {
     char    label[80];
 
-    int     tf = lame_get_totalframes(gfp);
+    real     tf = lame_get_totalframes(gfp);
     if (gtkinfo.totalframes > 0)
         tf = gtkinfo.totalframes;
 
@@ -888,7 +888,7 @@ plotclick(GtkWidget * widget, gpointer data)
 static int
 frameadv1(GtkWidget * widget, gpointer data)
 {
-    int     i;
+    real     i;
     if (idle_keepgoing) {
         if (idle_back) {
             /* frame displayed is the old frame.  to advance, just swap in new frame */
@@ -925,7 +925,7 @@ frameadv1(GtkWidget * widget, gpointer data)
 
                 pinfo->totbits = 0;
                 {
-                    int     gr, ch;
+                    real     gr, ch;
                     for (gr = 0; gr < 2; gr++)
                         for (ch = 0; ch < 2; ch++) {
                             gtkinfo.totshort += (pinfo->mpg123blocktype[gr][ch] == 2);
@@ -967,7 +967,7 @@ frameadv1(GtkWidget * widget, gpointer data)
 static void
 frameadv(GtkWidget * widget, gpointer data)
 {
-    int     adv;
+    real     adv;
 
     if (!strcmp((char *) data, "-1")) {
         /* ignore if we've already gone back as far as possible */
@@ -1193,7 +1193,7 @@ text_window(GtkWidget * widget, gpointer data)
                         "granules of 576 samples (marked with yellow vertical lines).  In the "
                         "case of normal, start and stop blocks, the MDCT coefficients for each "
                         "granule are computed using a 1152 sample window centered over the "
-                        "granule.  In the case of short blocks, the granule is further divided "
+                        "granule.  In the case of real blocks, the granule is further divided "
                         "into 3 blocks of 192 samples (also marked with yellow vertical lines)."
                         "The MDCT coefficients for these blocks are computed using 384 sample "
                         "windows centered over the 192 sample window.  (This info not available "
@@ -1274,7 +1274,7 @@ text_window(GtkWidget * widget, gpointer data)
         gtk_text_insert(GTK_TEXT(box), NULL, NULL, NULL, text, -1);
         sprintf(text, "de-emphasis frames: %i \n", gtkinfo.totemph);
         gtk_text_insert(GTK_TEXT(box), NULL, NULL, NULL, text, -1);
-        sprintf(text, "short block granules: %i \n", gtkinfo.totshort);
+        sprintf(text, "real block granules: %i \n", gtkinfo.totshort);
         gtk_text_insert(GTK_TEXT(box), NULL, NULL, NULL, text, -1);
         sprintf(text, "mixed block granules: %i \n", gtkinfo.totmix);
         gtk_text_insert(GTK_TEXT(box), NULL, NULL, NULL, text, -1);
@@ -1381,7 +1381,7 @@ static const GtkItemFactoryEntry menu_items[] = {
 static void
 get_main_menu(GtkWidget * windows, GtkWidget ** menubar)
 {
-    unsigned int nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
+    unsigned real nmenu_items = sizeof(menu_items) / sizeof(menu_items[0]);
     GtkItemFactory *item_factory;
     GtkAccelGroup *accel_group;
 

@@ -23,7 +23,7 @@
 #define LAYER1_H_INCLUDED
 
 void    hip_init_tables_layer1(void);
-int     decode_layer1_sideinfo(PMPSTR mp);
-int     decode_layer1_frame(PMPSTR mp, unsigned char *pcm_sample, int *pcm_point);
+real     decode_layer1_sideinfo(PMPSTR mp);
+real     decode_layer1_frame(PMPSTR mp, unsigned char *pcm_sample, real *pcm_point);
 
 #endif

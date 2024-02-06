@@ -25,7 +25,7 @@ D_Mc2s2	dd	0, 0
 D_0_1	dd	1.0, 0.0
 S_05	DD	0.5
 S_00005	DD	0.0005
-fht		dd	0	;´Ø¿ô¥Ý¥¤¥ó¥¿
+fht		dd	0	;ï¿½Ø¿ï¿½ï¿½Ý¥ï¿½ï¿½ï¿½
 
 	segment_code
 
@@ -33,10 +33,10 @@ fht		dd	0	;´Ø¿ô¥Ý¥¤¥ó¥¿
 
 ;	by shigeo
 ;	99/08/16
-;	23000clk ¿É¤«¤Ã¤¿¡Á
+;	23000clk ï¿½É¤ï¿½ï¿½Ã¤ï¿½ï¿½ï¿½
 ;	18500clk bit reversal from gogo1 by URURI
 
-;void fht(float *fz, int n);
+;void fht(real *fz, real n);
 	align 16
 fht_3DN:
 	push	ebx
@@ -44,12 +44,12 @@ fht_3DN:
 	push	edi
 	push	ebp
 %assign _P 4*4
-	;¤Þ¤ººÇ½é¤Î¥ë¡¼¥×... ¤Ïfht()¤Î³°¤Ø°ÜÆ°
+	;ï¿½Þ¤ï¿½ï¿½Ç½ï¿½Î¥ë¡¼ï¿½ï¿½... ï¿½ï¿½fht()ï¿½Î³ï¿½ï¿½Ø°ï¿½Æ°
 
 	mov	esi,[esp+_P+4]	;esi=fz
 	mov	ecx,[esp+_P+8]	;ecx=n
 
-	;¥á¥¤¥ó¥ë¡¼¥×
+	;ï¿½á¥¤ï¿½ï¿½ë¡¼ï¿½ï¿½
 	movq	mm7,[D_MSB1_0]	;mm7=[1<<31:0]
 
 %assign LOCAL_STACK	16
@@ -72,12 +72,12 @@ fht_3DN:
 	lea	edx,[ebx+ebx]	;edx=k4 = k1*4
 	mov	esi,eax
 	shr	esi,1		;esi=kx=k1>>1
-	mov	kx,esi		;ÊÝÂ¸(¸å¤Ç»È¤¦)
+	mov	kx,esi		;ï¿½ï¿½Â¸(ï¿½ï¿½Ç»È¤ï¿½)
 	mov	edi,[esp+_P+4]	;edi=fi=fz
 	lea	ebp,[edi+esi*4]	;ebp=gi=fz+kx
 	mov	esi,[esp+_P+8]	;esi=n
 	lea	esi,[edi+esi*4]	;esi=fn=fz+n
-	movq	mm6,[D_SQRT2]	;mm6=[¢å2:¢å2]
+	movq	mm6,[D_SQRT2]	;mm6=[ï¿½ï¿½2:ï¿½ï¿½2]
 
 .lp31:	;fn=fz+n; do{ FLOAT g0,f0,f1,...
 	movd	mm0,[edi]	;mm0=[0:fi[ 0]]
@@ -125,10 +125,10 @@ fht_3DN:
 	cmp	edi,esi
 	jc	near .lp31	;}while(fi<fn);
 
-;	¤³¤³¤Þ¤Ç¤ÏÂ¿Ê¬O.K.
+;	ï¿½ï¿½ï¿½ï¿½ï¿½Þ¤Ç¤ï¿½Â¿Ê¬O.K.
 
 	mov	fn,esi		;fn=fz+n
-	;¼¡¤ÎÃÍ¤Ï°ú¤­Â³¤­»È¤¦
+	;ï¿½ï¿½ï¿½ï¿½ï¿½Í¤Ï°ï¿½ï¿½ï¿½Â³ï¿½ï¿½ï¿½È¤ï¿½
 	;eax=k1,ebx=k2,ecx=k3,edx=k4
 
 	mov	edi,k
@@ -153,12 +153,12 @@ fht_3DN:
 	pfmul	mm2,[t_s0]	;mm2=[ s1*t_c: t*t_s]
 	pfacc	mm0,mm2		;mm0=[s1:c1]=[ s1*t_c+t*t_s:-s1*t_s+t*t_c]
 	movq	mm2,mm0		;mm2=[s1:c1]
-	movq	[D_s1c1],mm0	;ÊÝÂ¸
+	movq	[D_s1c1],mm0	;ï¿½ï¿½Â¸
 	movq	mm6,mm2
 	punpckldq	mm5,mm6
 	punpckhdq	mm6,mm5	;mm6=[ c1:s1]
 	pxor	mm6,mm7		;mm6=[-c1:s1]
-	movq	[D_Mc1s1],mm6	;ÊÝÂ¸
+	movq	[D_Mc1s1],mm6	;ï¿½ï¿½Â¸
 	pfmul	mm2,mm2		;mm2=[s1*s1:c1*c1]
 	movq	mm3,mm0		;mm3=[s1:c1]
 	pxor	mm2,mm7		;mm2=[-s1*s1:c1*c1]
@@ -167,12 +167,12 @@ fht_3DN:
 	pfmul	mm0,mm3		;mm0=[ 0:c1*s1]
 	pfadd	mm0,mm0		;mm0=[0:s2]=[ 0:2*c1*s1]
 	punpckldq	mm2,mm0	;mm2=[s2:c2]
-	movq	[D_s2c2],mm2	;ÊÝÂ¸
+	movq	[D_s2c2],mm2	;ï¿½ï¿½Â¸
 
 	punpckldq	mm0,mm2
 	punpckhdq	mm2,mm0	;mm2=[c2:s2]
 	pxor	mm2,mm7		;mm2=[-c2:s2]
-	movq	[D_Mc2s2],mm2	;ÊÝÂ¸
+	movq	[D_Mc2s2],mm2	;ï¿½ï¿½Â¸
 
 	mov	edi,[esp+_P+4]	;edi=fz
 	lea	edi,[edi+esi*4]	;edi=fz+i

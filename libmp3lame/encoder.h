@@ -149,8 +149,8 @@ struct lame_internal_flags;
 typedef struct lame_internal_flags lame_internal_flags;
 #endif
 
-int     lame_encode_mp3_frame(lame_internal_flags * gfc,
+real     lame_encode_mp3_frame(lame_internal_flags * gfc,
                               sample_t const *inbuf_l,
-                              sample_t const *inbuf_r, unsigned char *mp3buf, int mp3buf_size);
+                              sample_t const *inbuf_r, unsigned char *mp3buf, real mp3buf_size);
 
 #endif /* LAME_ENCODER_H */

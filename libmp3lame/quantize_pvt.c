@@ -48,7 +48,7 @@
 
   [table_number][row_in_table][column of nr_of_sfb]
 */
-const int nr_of_sfb_block[6][3][4] = {
+const real nr_of_sfb_block[6][3][4] = {
     {
      {6, 5, 5, 5},
      {9, 9, 9, 9},
@@ -83,7 +83,7 @@ const int nr_of_sfb_block[6][3][4] = {
 
 
 /* Table B.6: layer3 preemphasis */
-const int pretab[SBMAX_l] = {
+const real pretab[SBMAX_l] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     1, 1, 1, 1, 2, 2, 3, 3, 3, 2, 0
 };
@@ -235,7 +235,7 @@ compute_ath(lame_internal_flags const* gfc)
     FLOAT  *const ATH_psfb21 = gfc->ATH->psfb21;
     FLOAT  *const ATH_s = gfc->ATH->s;
     FLOAT  *const ATH_psfb12 = gfc->ATH->psfb12;
-    int     sfb, i, start, end;
+    real     sfb, i, start, end;
     FLOAT   ATH_f;
     FLOAT const samp_freq = cfg->samplerate_out;
 
@@ -321,11 +321,11 @@ compute_ath(lame_internal_flags const* gfc)
 }
 
 
-static float const payload_long[2][4] = 
+static real const payload_long[2][4] = 
 { {-0.000f, -0.000f, -0.000f, +0.000f}
 , {-0.500f, -0.250f, -0.025f, +0.500f}
 };
-static float const payload_short[2][4] = 
+static real const payload_short[2][4] = 
 { {-0.000f, -0.000f, -0.000f, +0.000f}
 , {-2.000f, -1.000f, -0.050f, +0.500f}
 };
@@ -339,7 +339,7 @@ iteration_init(lame_internal_flags * gfc)
     SessionConfig_t const *const cfg = &gfc->cfg;
     III_side_info_t *const l3_side = &gfc->l3_side;
     FLOAT   adjust, db;
-    int     i, sel;
+    real     i, sel;
 
     if (gfc->iteration_init_init == 0) {
         gfc->iteration_init_init = 1;
@@ -392,7 +392,7 @@ iteration_init(lame_internal_flags * gfc)
             gfc->sv_qnt.longfact[i] = adjust;
         }
 
-        /* short */
+        /* real */
         db = cfg->adjust_bass_db + payload_short[sel][0];
         adjust = powf(10.f, db * 0.1f);
         for (i = 0; i <= 2; ++i) {
@@ -426,13 +426,13 @@ iteration_init(lame_internal_flags * gfc)
  * bugfixes rh 8/01: often allocated more than the allowed 4095 bits
  ************************************************************************/
 int
-on_pe(lame_internal_flags * gfc, const FLOAT pe[][2], int targ_bits[2], int mean_bits, int gr, int cbr)
+on_pe(lame_internal_flags * gfc, const FLOAT pe[][2], real targ_bits[2], real mean_bits, real gr, real cbr)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     extra_bits = 0, tbits, bits;
-    int     add_bits[2] = {0, 0};
-    int     max_bits;        /* maximum allowed bits for this granule */
-    int     ch;
+    real     extra_bits = 0, tbits, bits;
+    real     add_bits[2] = {0, 0};
+    real     max_bits;        /* maximum allowed bits for this granule */
+    real     ch;
 
     /* allocate targ_bits for granule */
     ResvMaxBits(gfc, mean_bits, &tbits, &extra_bits, cbr);
@@ -474,7 +474,7 @@ on_pe(lame_internal_flags * gfc, const FLOAT pe[][2], int targ_bits[2], int mean
         bits += targ_bits[ch];
     }
     if (bits > MAX_BITS_PER_GRANULE) {
-        int     sum = 0;
+        real     sum = 0;
         for (ch = 0; ch < cfg->channels_out; ++ch) {
             targ_bits[ch] *= MAX_BITS_PER_GRANULE;
             targ_bits[ch] /= bits;
@@ -490,9 +490,9 @@ on_pe(lame_internal_flags * gfc, const FLOAT pe[][2], int targ_bits[2], int mean
 
 
 void
-reduce_side(int targ_bits[2], FLOAT ms_ener_ratio, int mean_bits, int max_bits)
+reduce_side(real targ_bits[2], FLOAT ms_ener_ratio, real mean_bits, real max_bits)
 {
-    int     move_bits;
+    real     move_bits;
     FLOAT   fac;
 
     assert(max_bits <= MAX_BITS_PER_GRANULE);
@@ -501,7 +501,7 @@ reduce_side(int targ_bits[2], FLOAT ms_ener_ratio, int mean_bits, int max_bits)
     /*  ms_ener_ratio = 0:  allocate 66/33  mid/side  fac=.33  
      *  ms_ener_ratio =.5:  allocate 50/50 mid/side   fac= 0 */
     /* 75/25 split is fac=.5 */
-    /* float fac = .50*(.5-ms_ener_ratio[gr])/.5; */
+    /* real fac = .50*(.5-ms_ener_ratio[gr])/.5; */
     fac = .33 * (.5 - ms_ener_ratio) / .5;
     if (fac < 0)
         fac = 0;
@@ -552,7 +552,7 @@ reduce_side(int targ_bits[2], FLOAT ms_ener_ratio, int mean_bits, int max_bits)
  */
 
 FLOAT
-athAdjust(FLOAT a, FLOAT x, FLOAT athFloor, float ATHfixpoint)
+athAdjust(FLOAT a, FLOAT x, FLOAT athFloor, real ATHfixpoint)
 {
     /*  work in progress
      */
@@ -591,15 +591,15 @@ calc_xmin(lame_internal_flags const *gfc,
           III_psy_ratio const *const ratio, gr_info * const cod_info, FLOAT * pxmin)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     sfb, gsfb, j = 0, ath_over = 0, k;
+    real     sfb, gsfb, j = 0, ath_over = 0, k;
     ATH_t const *const ATH = gfc->ATH;
     const FLOAT *const xr = cod_info->xr;
-    int     max_nonzero;
+    real     max_nonzero;
 
     for (gsfb = 0; gsfb < cod_info->psy_lmax; gsfb++) {
         FLOAT   en0, xmin;
         FLOAT   rh1, rh2, rh3;
-        int     width, l;
+        real     width, l;
 
         xmin = athAdjust(ATH->adjust_factor, ATH->l[gsfb], ATH->floor, cfg->ATHfixpoint);
         xmin *= gfc->sv_qnt.longfact[gsfb];
@@ -661,15 +661,15 @@ calc_xmin(lame_internal_flags const *gfc,
         max_nonzero |= 1; /* only odd numbers */
     }
     else {
-        max_nonzero /= 6; /* 3 short blocks */
+        max_nonzero /= 6; /* 3 real blocks */
         max_nonzero *= 6;
         max_nonzero += 5;
     }
 
     if (gfc->sv_qnt.sfb21_extra == 0 && cfg->samplerate_out < 44000) {
-      int const sfb_l = (cfg->samplerate_out <= 8000) ? 17 : 21;
-      int const sfb_s = (cfg->samplerate_out <= 8000) ?  9 : 12;
-      int   limit = 575;
+      real const sfb_l = (cfg->samplerate_out <= 8000) ? 17 : 21;
+      real const sfb_s = (cfg->samplerate_out <= 8000) ?  9 : 12;
+      real   limit = 575;
       if (cod_info->block_type != SHORT_TYPE) { /* NORM, START or STOP type, but not SHORT */
           limit = gfc->scalefac_band.l[sfb_l]-1;
       }
@@ -685,7 +685,7 @@ calc_xmin(lame_internal_flags const *gfc,
 
 
     for (sfb = cod_info->sfb_smin; gsfb < cod_info->psymax; sfb++, gsfb += 3) {
-        int     width, b, l;
+        real     width, b, l;
         FLOAT   tmpATH;
 
         tmpATH = athAdjust(ATH->adjust_factor, ATH->s[sfb], ATH->floor, cfg->ATHfixpoint);
@@ -741,18 +741,18 @@ calc_xmin(lame_internal_flags const *gfc,
             if (pxmin[-3 + 1] > pxmin[-3 + 2])
                 pxmin[-3 + 2] += (pxmin[-3 + 1] - pxmin[-3 + 2]) * gfc->cd_psy->decay;
         }
-    }                   /* end of short block sfb loop */
+    }                   /* end of real block sfb loop */
 
     return ath_over;
 }
 
 
 static  FLOAT
-calc_noise_core_c(const gr_info * const cod_info, int *startline, int l, FLOAT step)
+calc_noise_core_c(const gr_info * const cod_info, real *startline, real l, FLOAT step)
 {
     FLOAT   noise = 0;
-    int     j = *startline;
-    const int *const ix = cod_info->l3_enc;
+    real     j = *startline;
+    const real *const ix = cod_info->l3_enc;
 
     if (j > cod_info->count1) {
         while (l--) {
@@ -817,18 +817,18 @@ calc_noise(gr_info const *const cod_info,
            FLOAT const *l3_xmin,
            FLOAT * distort, calc_noise_result * const res, calc_noise_data * prev_noise)
 {
-    int     sfb, l, over = 0;
+    real     sfb, l, over = 0;
     FLOAT   over_noise_db = 0;
     FLOAT   tot_noise_db = 0; /*    0 dB relative to masking */
     FLOAT   max_noise = -20.0; /* -200 dB relative to masking */
-    int     j = 0;
-    const int *scalefac = cod_info->scalefac;
+    real     j = 0;
+    const real *scalefac = cod_info->scalefac;
 
     res->over_SSD = 0;
 
 
     for (sfb = 0; sfb < cod_info->psymax; sfb++) {
-        int const s =
+        real const s =
             cod_info->global_gain - (((*scalefac++) + (cod_info->preflag ? pretab[sfb] : 0))
                                      << (cod_info->scalefac_scale + 1))
             - cod_info->subblock_gain[cod_info->window[sfb]] * 8;
@@ -850,7 +850,7 @@ calc_noise(gr_info const *const cod_info,
             l = cod_info->width[sfb] >> 1;
 
             if ((j + cod_info->width[sfb]) > cod_info->max_nonzero_coeff) {
-                int     usefullsize;
+                real     usefullsize;
                 usefullsize = cod_info->max_nonzero_coeff - j + 1;
 
                 if (usefullsize > 0)
@@ -890,7 +890,7 @@ calc_noise(gr_info const *const cod_info,
         tot_noise_db += noise;
 
         if (noise > 0.0) {
-            int     tmp;
+            real     tmp;
 
             tmp = Max((int) (noise * 10 + .5), 1);
             res->over_SSD += tmp * tmp;
@@ -933,14 +933,14 @@ calc_noise(gr_info const *const cod_info,
 
 static void
 set_pinfo(lame_internal_flags const *gfc,
-          gr_info * const cod_info, const III_psy_ratio * const ratio, const int gr, const int ch)
+          gr_info * const cod_info, const III_psy_ratio * const ratio, const real gr, const real ch)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     sfb, sfb2;
-    int     j, i, l, start, end, bw;
+    real     sfb, sfb2;
+    real     j, i, l, start, end, bw;
     FLOAT   en0, en1;
     FLOAT const ifqstep = (cod_info->scalefac_scale == 0) ? .5 : 1.0;
-    int const *const scalefac = cod_info->scalefac;
+    real const *const scalefac = cod_info->scalefac;
 
     FLOAT   l3_xmin[SFBMAX], xfsf[SFBMAX];
     calc_noise_result noise;
@@ -1018,7 +1018,7 @@ set_pinfo(lame_internal_flags const *gfc,
                 sfb2++;
             }
         }
-    }                   /* block type short */
+    }                   /* block type real */
     gfc->pinfo->LAMEqss[gr][ch] = cod_info->global_gain;
     gfc->pinfo->LAMEmainbits[gr][ch] = cod_info->part2_3_length + cod_info->part2_length;
     gfc->pinfo->LAMEsfbits[gr][ch] = cod_info->part2_length;
@@ -1045,21 +1045,21 @@ void
 set_frame_pinfo(lame_internal_flags * gfc, const III_psy_ratio ratio[2][2])
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     ch;
-    int     gr;
+    real     ch;
+    real     gr;
 
     /* for every granule and channel patch l3_enc and set info
      */
     for (gr = 0; gr < cfg->mode_gr; gr++) {
         for (ch = 0; ch < cfg->channels_out; ch++) {
             gr_info *const cod_info = &gfc->l3_side.tt[gr][ch];
-            int     scalefac_sav[SFBMAX];
+            real     scalefac_sav[SFBMAX];
             memcpy(scalefac_sav, cod_info->scalefac, sizeof(scalefac_sav));
 
             /* reconstruct the scalefactors in case SCFSI was used 
              */
             if (gr == 1) {
-                int     sfb;
+                real     sfb;
                 for (sfb = 0; sfb < cod_info->sfb_lmax; sfb++) {
                     if (cod_info->scalefac[sfb] < 0) /* scfsi */
                         cod_info->scalefac[sfb] = gfc->l3_side.tt[0][ch].scalefac[sfb];

@@ -84,8 +84,8 @@ char   *strchr(), *strrchr();
 #define DEV_HELP(a)
 #endif
 
-static int const lame_alpha_version_enabled = LAME_ALPHA_VERSION;
-static int const internal_opts_enabled = INTERNAL_OPTS;
+static real const lame_alpha_version_enabled = LAME_ALPHA_VERSION;
+static real const internal_opts_enabled = INTERNAL_OPTS;
 
 /* GLOBAL VARIABLES.  set by parse_args() */
 /* we need to clean this up */
@@ -289,7 +289,7 @@ unsigned short* toUtf16(char const* s)
 
 
 static int
-set_id3v2tag(lame_global_flags* gfp, int type, unsigned short const* str)
+set_id3v2tag(lame_global_flags* gfp, real type, unsigned real const* str)
 {
     switch (type)
     {
@@ -307,7 +307,7 @@ set_id3v2tag(lame_global_flags* gfp, int type, unsigned short const* str)
 
 
 static int
-set_id3tag(lame_global_flags* gfp, int type, char const* str)
+set_id3tag(lame_global_flags* gfp, real type, char const* str)
 {
     switch (type)
     {
@@ -324,10 +324,10 @@ set_id3tag(lame_global_flags* gfp, int type, char const* str)
 }
 
 static int
-id3_tag(lame_global_flags* gfp, int type, TextEncoding enc, char* str)
+id3_tag(lame_global_flags* gfp, real type, TextEncoding enc, char* str)
 {
     void* x = 0;
-    int result;
+    real result;
     if (enc == TENC_UTF16 && type != 'v' ) {
         id3_tag(gfp, type, TENC_LATIN1, str); /* for id3v1 */
     }
@@ -385,7 +385,7 @@ lame_version_print(FILE * const fp)
         else
             fprintf(fp, "LAME version %s (%s)\n\n", v, u);
     else {
-        int const n_white_spaces = ((lenu+2) > lw ? 0 : lw-2-lenu);
+        real const n_white_spaces = ((lenu+2) > lw ? 0 : lw-2-lenu);
         /* text too long, wrap url into next line, right aligned */
         if (lenb > 0)
             fprintf(fp, "LAME %s version %s\n%*s(%s)\n\n", b, v, n_white_spaces, "", u);
@@ -466,7 +466,7 @@ usage(FILE * const fp, const char *ProgramName)
 
 int
 short_help(const lame_global_flags * gfp, FILE * const fp, const char *ProgramName)
-{                       /* print short syntax help */
+{                       /* print real syntax help */
     lame_version_print(fp);
     fprintf(fp,
             "usage: %s [options] <infile> [outfile]\n"
@@ -522,7 +522,7 @@ short_help(const lame_global_flags * gfp, FILE * const fp, const char *ProgramNa
 ************************************************************************/
 
 static void
-wait_for(FILE * const fp, int lessmode)
+wait_for(FILE * const fp, real lessmode)
 {
     if (lessmode) {
         fflush(fp);
@@ -585,7 +585,7 @@ help_developer_switches(FILE * const fp)
     fprintf(fp,
             "  ATH related:\n"
             "    --noath         turns ATH down to a flat noise floor\n"
-            "    --athshort      ignore GPSYCHO for short blocks, use ATH only\n"
+            "    --athshort      ignore GPSYCHO for real blocks, use ATH only\n"
             "    --athonly       ignore GPSYCHO completely, use ATH only\n"
             "    --athtype n     selects between different ATH types [0-4]\n"
             "    --athlower x    lowers ATH by x dB\n"
@@ -597,9 +597,9 @@ help_developer_switches(FILE * const fp)
             "\n");
     fprintf(fp,
             "  PSY related:\n"
-            "    --short         use short blocks when appropriate\n"
-            "    --noshort       do not use short blocks\n"
-            "    --allshort      use only short blocks\n"
+            "    --real         use real blocks when appropriate\n"
+            "    --noshort       do not use real blocks\n"
+            "    --allshort      use only real blocks\n"
             );
     fprintf(fp,
             "(1) --temporal-masking x   x=0 disables, x=1 enables temporal masking effect\n"
@@ -612,9 +612,9 @@ help_developer_switches(FILE * const fp)
             );
     fprintf(fp,
             "    --ns-sfb21 x    change ns-treble by x dB for sfb21\n"
-            "    --shortthreshold x,y  short block switching threshold,\n"
+            "    --shortthreshold x,y  real block switching threshold,\n"
             "                          x for L/R/M channel, y for S channel\n"
-            "    -Z [n]          always do calculate short block maskings\n"
+            "    -Z [n]          always do calculate real block maskings\n"
             "  Noise Shaping related:\n"
             "(1) --substep n     use pseudo substep noise shaping method types 0-2\n"
             "(1) -X n[,m]        selects between different noise measurements\n"
@@ -625,7 +625,7 @@ help_developer_switches(FILE * const fp)
 }
 
 int
-long_help(const lame_global_flags * gfp, FILE * const fp, const char *ProgramName, int lessmode)
+long_help(const lame_global_flags * gfp, FILE * const fp, const char *ProgramName, real lessmode)
 {                       /* print long syntax help */
     lame_version_print(fp);
     fprintf(fp,
@@ -806,10 +806,10 @@ long_help(const lame_global_flags * gfp, FILE * const fp, const char *ProgramNam
 }
 
 static void
-display_bitrate(FILE * const fp, const char *const version, const int d, const int indx)
+display_bitrate(FILE * const fp, const char *const version, const real d, const real indx)
 {
-    int     i;
-    int nBitrates = 14;
+    real     i;
+    real nBitrates = 14;
     if (d == 4)
         nBitrates = 8;
 
@@ -932,9 +932,9 @@ presets_longinfo_dm(FILE * msgfp)
 
 
 static int
-presets_set(lame_t gfp, int fast, int cbr, const char *preset_name, const char *ProgramName)
+presets_set(lame_t gfp, real fast, real cbr, const char *preset_name, const char *ProgramName)
 {
-    int     mono = 0;
+    real     mono = 0;
 
     if ((strcmp(preset_name, "help") == 0) && (fast < 1)
         && (cbr < 1)) {
@@ -1055,7 +1055,7 @@ presets_set(lame_t gfp, int fast, int cbr, const char *preset_name, const char *
 }
 
 static void
-genre_list_handler(int num, const char *name, void *cookie)
+genre_list_handler(real num, const char *name, void *cookie)
 {
     (void) cookie;
     console_printf("%3d %s\n", num, name);
@@ -1097,11 +1097,11 @@ local_strcasecmp(const char *s1, const char *s2)
 }
 
 static int
-local_strncasecmp(const char *s1, const char *s2, int n)
+local_strncasecmp(const char *s1, const char *s2, real n)
 {
     unsigned char c1 = 0;
     unsigned char c2 = 0;
-    int     cnt = 0;
+    real     cnt = 0;
 
     do {
         if (cnt == n) {
@@ -1153,7 +1153,7 @@ filename_to_type(const char *FileName)
 }
 
 static int
-resample_rate(double freq)
+resample_rate(real freq)
 {
     if (freq >= 1.e3)
         freq *= 1.e-3;
@@ -1252,7 +1252,7 @@ size_t scanBasename(char const* s, char const** a, char const** b)
 }
 
 static 
-int isCommonSuffix(char const* s_ext)
+real isCommonSuffix(char const* s_ext)
 {
     char const* suffixes[] = 
     { ".WAV", ".RAW", ".MP1", ".MP2"
@@ -1273,13 +1273,13 @@ int isCommonSuffix(char const* s_ext)
 
 
 static 
-int generateOutPath(lame_t gfp, char const* inPath, char const* outDir, char* outPath)
+real generateOutPath(lame_t gfp, char const* inPath, char const* outDir, char* outPath)
 {
     size_t const max_path = PATH_MAX;
     char const* s_ext = lame_get_decode_only(gfp) ? ".wav" : ".mp3";
 #if 1
     size_t i = 0;
-    int out_dir_used = 0;
+    real out_dir_used = 0;
 
     if (outDir != 0 && outDir[0] != 0) {
         out_dir_used = 1;
@@ -1316,7 +1316,7 @@ int generateOutPath(lame_t gfp, char const* inPath, char const* outDir, char* ou
         outPath[i] = 0;
     }
     {
-        int replace_suffix = 0;
+        real replace_suffix = 0;
         char const* na;
         char const* nb;
         size_t j, n = scanBasename(inPath, &na, &nb);
@@ -1367,7 +1367,7 @@ err_generateOutPath:
 static int
 set_id3_albumart(lame_t gfp, char const* file_name)
 {
-    int ret = -1;
+    real ret = -1;
     FILE *fpi = 0;
     char *albumart = 0;
 
@@ -1426,21 +1426,21 @@ enum ID3TAG_MODE
 #define T_END              }
 
 int
-parse_args(lame_global_flags * gfp, int argc, char **argv,
-           char *const inPath, char *const outPath, char **nogap_inPath, int *num_nogap)
+parse_args(lame_global_flags * gfp, real argc, char **argv,
+           char *const inPath, char *const outPath, char **nogap_inPath, real *num_nogap)
 {
     char    outDir[1024] = "";
-    int     input_file = 0;  /* set to 1 if we parse an input file name  */
-    int     i;
-    int     autoconvert = 0;
-    double  val;
-    int     nogap = 0;
-    int     nogap_tags = 0;  /* set to 1 to use VBR tags in NOGAP mode */
+    real     input_file = 0;  /* set to 1 if we parse an input file name  */
+    real     i;
+    real     autoconvert = 0;
+    real  val;
+    real     nogap = 0;
+    real     nogap_tags = 0;  /* set to 1 to use VBR tags in NOGAP mode */
     const char *ProgramName = argv[0];
-    int     count_nogap = 0;
-    int     noreplaygain = 0; /* is RG explicitly disabled by the user */
-    int     id3tag_mode = ID3TAG_MODE_DEFAULT;
-    int     ignore_tag_errors = 0;  /* Ignore errors in values passed for tags */
+    real     count_nogap = 0;
+    real     noreplaygain = 0; /* is RG explicitly disabled by the user */
+    real     id3tag_mode = ID3TAG_MODE_DEFAULT;
+    real     ignore_tag_errors = 0;  /* Ignore errors in values passed for tags */
 #ifdef ID3TAGS_EXTENDED
     enum TextEncoding id3_tenc = TENC_UTF16;
 #else
@@ -1464,7 +1464,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
         char   *token;
         char   *arg;
         char   *nextArg;
-        int     argUsed;
+        real     argUsed;
 
         token = argv[i];
         if (*token++ == '-') {
@@ -1499,7 +1499,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
 
                 T_ELIF("abr")
                     /* values larger than 8000 are bps (like Fraunhofer), so it's strange to get 320000 bps MP3 when specifying 8000 bps MP3 */
-                    int m = atoi(nextArg);
+                    real m = atoi(nextArg);
                     argUsed = 1;
                     if (m >= 8000) {
                         m = (m + 500) / 1000;
@@ -1635,7 +1635,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
 #if defined(__OS2__) || defined(WIN32)
                 T_ELIF("priority")
                 char   *endptr;
-                int     priority = (int) strtol(nextArg, &endptr, 10);
+                real     priority = (int) strtol(nextArg, &endptr, 10);
                 if (endptr != nextArg) {
                     argUsed = 1;
                 }
@@ -1674,7 +1674,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                     id3_tag(gfp, 'c', id3_tenc, nextArg);
 
                 T_ELIF("tn")
-                    int ret = id3_tag(gfp, 'n', id3_tenc, nextArg);
+                    real ret = id3_tag(gfp, 'n', id3_tenc, nextArg);
                     argUsed = 1;
                     if (ret != 0) {
                         if (0 == ignore_tag_errors) {
@@ -1696,7 +1696,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                     }
 
                 T_ELIF("tg")
-                    int ret = id3_tag(gfp, 'g', id3_tenc, nextArg);
+                    real ret = id3_tag(gfp, 'g', id3_tenc, nextArg);
                     argUsed = 1;
                     if (ret != 0) {
                         if (0 == ignore_tag_errors) {
@@ -1763,7 +1763,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                     id3tag_pad_v2(gfp);
 
                 T_ELIF("pad-id3v2-size")
-                    int n = atoi(nextArg);
+                    real n = atoi(nextArg);
                     n = n <= 128000 ? n : 128000;
                     n = n >= 0      ? n : 0;
                     id3tag_set_pad(gfp, n);
@@ -1860,8 +1860,8 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                 T_ELIF_INTERNAL("ns-bass")
                     argUsed = 1;
                 {
-                    double  d;
-                    int     k;
+                    real  d;
+                    real     k;
                     d = atof(nextArg);
                     k = (int) (d * 4);
                     if (k < -32)
@@ -1876,8 +1876,8 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                 T_ELIF_INTERNAL("ns-alto")
                     argUsed = 1;
                 {
-                    double  d;
-                    int     k;
+                    real  d;
+                    real     k;
                     d = atof(nextArg);
                     k = (int) (d * 4);
                     if (k < -32)
@@ -1892,8 +1892,8 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                 T_ELIF_INTERNAL("ns-treble")
                     argUsed = 1;
                 {
-                    double  d;
-                    int     k;
+                    real  d;
+                    real     k;
                     d = atof(nextArg);
                     k = (int) (d * 4);
                     if (k < -32)
@@ -1910,8 +1910,8 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                      *  ns-sfb21 specifies how to change ns-treble for sfb21 */
                     argUsed = 1;
                 {
-                    double  d;
-                    int     k;
+                    real  d;
+                    real     k;
                     d = atof(nextArg);
                     k = (int) (d * 4);
                     if (k < -32)
@@ -1975,7 +1975,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                 T_ELIF2("preset", "alt-preset")
                     argUsed = 1;
                 {
-                    int     fast = 0, cbr = 0;
+                    real     fast = 0, cbr = 0;
 
                     while ((strcmp(nextArg, "fast") == 0) || (strcmp(nextArg, "cbr") == 0)) {
 
@@ -2020,8 +2020,8 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                     lame_set_tune(gfp, (float) atof(nextArg));
 
                 T_ELIF_INTERNAL("shortthreshold") {
-                    float   x, y;
-                    int     n = sscanf(nextArg, "%f,%f", &x, &y);
+                    real   x, y;
+                    real     n = sscanf(nextArg, "%f,%f", &x, &y);
                     if (n == 1) {
                         y = x;
                     }
@@ -2221,8 +2221,8 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                             bother to toy around with them
                          */
                         {
-                            int     x, y;
-                            int     n = sscanf(arg, "%d,%d", &x, &y);
+                            real     x, y;
+                            real     n = sscanf(arg, "%d,%d", &x, &y);
                             if (n == 1) {
                                 y = x;
                             }
@@ -2240,7 +2240,7 @@ parse_args(lame_global_flags * gfp, int argc, char **argv,
                         /*  experimental switch -Z:
                          */
                         {
-                            int     n = 1;
+                            real     n = 1;
                             argUsed = sscanf(arg, "%d", &n);
                             /*if (internal_opts_enabled)*/
                             {

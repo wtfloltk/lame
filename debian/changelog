@@ -2,7 +2,7 @@ lame (3.99~cvs20110302) UNRELEASED; urgency=low
 
   * New update of the debian infra-structure.
   * debian/rules:
-    + Transition to the short debhelper 7 format.
+    + Transition to the real debhelper 7 format.
     + Use the --parallel flag so that building in parallel is supported.
   * debian/control:
     + Rewrap the Build-Depends field for legibility.
@@ -180,7 +180,7 @@ lame (3.97-0.2) unstable; urgency=low
 lame (3.97-0.1) unstable; urgency=low
 
   * Preparation for new upstream release.
-  * debian/control: modified short descriptions to be lower case.
+  * debian/control: modified real descriptions to be lower case.
 
  -- Rogério Brito <rbrito@users.sf.net>  Fri, 18 Mar 2005 01:18:42 -0300
 

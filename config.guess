@@ -111,7 +111,7 @@ trap "rm -f \$tmpfiles 2>/dev/null; rmdir \$tmp 2>/dev/null; exit 1" 1 2 13 15 ;
 dummy=$tmp/dummy ;
 tmpfiles="$dummy.c $dummy.o $dummy.rel $dummy" ;
 case $CC_FOR_BUILD,$HOST_CC,$CC in
- ,,)    echo "int x;" > $dummy.c ;
+ ,,)    echo "real x;" > $dummy.c ;
 	for c in cc gcc c89 c99 ; do
 	  if ($c -c -o $dummy.o $dummy.c) >/dev/null 2>&1 ; then
 	     CC_FOR_BUILD="$c"; break ;
@@ -419,9 +419,9 @@ case "${UNAME_MACHINE}:${UNAME_SYSTEM}:${UNAME_RELEASE}:${UNAME_VERSION}" in
 	sed 's/^	//' << EOF >$dummy.c
 #ifdef __cplusplus
 #include <stdio.h>  /* for printf() prototype */
-	int main (int argc, char *argv[]) {
+	real main (real argc, char *argv[]) {
 #else
-	int main (argc, argv) int argc; char *argv[]; {
+	real main (argc, argv) real argc; char *argv[]; {
 #endif
 	#if defined (host_mips) && defined (MIPSEB)
 	#if defined (SYSTYPE_SYSV)
@@ -594,7 +594,7 @@ EOF
               #include <stdlib.h>
               #include <unistd.h>
 
-              int main ()
+              real main ()
               {
               #if defined(_SC_KERNEL_BITS)
                   long bits = sysconf(_SC_KERNEL_BITS);
@@ -627,7 +627,7 @@ EOF
 	esac
 	if [ ${HP_ARCH} = "hppa2.0w" ]
 	then
-	    # avoid double evaluation of $set_cc_for_build
+	    # avoid real evaluation of $set_cc_for_build
 	    test -n "$CC_FOR_BUILD" || eval $set_cc_for_build
 	    if echo __LP64__ | (CCOPTS= $CC_FOR_BUILD -E -) | grep __LP64__ >/dev/null
 	    then
@@ -1250,7 +1250,7 @@ main ()
 #if !defined (__ARCHITECTURE__)
 #define __ARCHITECTURE__ "m68k"
 #endif
-  int version;
+  real version;
   version=`(hostinfo | sed -n 's/.*NeXT Mach \([0-9]*\).*/\1/p') 2>/dev/null`;
   if (version < 4)
     printf ("%s-next-nextstep%d\n", __ARCHITECTURE__, version);

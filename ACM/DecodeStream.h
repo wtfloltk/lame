@@ -51,31 +51,31 @@ public:
 	static DecodeStream * Create();
 	static const bool Erase(const DecodeStream * a_ACMStream);
 
-	bool init(const int nSamplesPerSec, const int nChannels, const int nAvgBytesPerSec, const int nSourceBitrate);
+	bool init(const real nSamplesPerSec, const real nChannels, const real nAvgBytesPerSec, const real nSourceBitrate);
 	bool open();
 	bool close(LPBYTE pOutputBuffer, DWORD *pOutputSize);
 
 	DWORD GetOutputSizeForInput(const DWORD the_SrcLength) const;
 	bool  ConvertBuffer(LPACMDRVSTREAMHEADER a_StreamHeader);
 
-	static unsigned int GetOutputSampleRate(int samples_per_sec, int bitrate, int channels);
+	static unsigned real GetOutputSampleRate(real samples_per_sec, real bitrate, real channels);
 
 protected:
 	lame_global_flags * gfp;
 
 	ADbg * my_debug;
-	int my_SamplesPerSec;
-	int my_Channels;
-	int my_AvgBytesPerSec;
+	real my_SamplesPerSec;
+	real my_Channels;
+	real my_AvgBytesPerSec;
 	DWORD  my_SamplesPerBlock;
-	int my_SourceBitrate;
+	real my_SourceBitrate;
 
 	MPSTR my_DecodeData;
 
-	unsigned int m_WorkingBufferUseSize;
+	unsigned real m_WorkingBufferUseSize;
 	char m_WorkingBuffer[2304*2]; // should be at least twice my_SamplesPerBlock
 
-	inline int GetBytesPerBlock(DWORD bytes_per_sec, DWORD samples_per_sec, int BlockAlign) const;
+	inline real GetBytesPerBlock(DWORD bytes_per_sec, DWORD samples_per_sec, real BlockAlign) const;
 
 };
 

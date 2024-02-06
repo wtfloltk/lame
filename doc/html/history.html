@@ -180,7 +180,7 @@ black = usability, portability, other
       </li>
       <li>Fix for Bugtracker item <i>[ 3021935 ] ID3 tag TXXX cannot be used more than once</i>
       </li>
-      <li>Fix for Bugtracker item <i>[ 3025801 ] gain_analysis.h needs int constants</i>
+      <li>Fix for Bugtracker item <i>[ 3025801 ] gain_analysis.h needs real constants</i>
       </li>
       <li>Fix for Bugtracker item <i>[ 3277412 ] Segmentation fault at layer2.c:105 with --decode</i>
       </li>
@@ -241,7 +241,7 @@ black = usability, portability, other
     <ul>
       <li>The <b>ignore-tag-errors</b> switch had no effect when embedding album art, fixed.</li>
       <li>Library API change: lame_decode functions are now obsolete but still present, please use hip_decode instead.
-      The reason for this change is: lame_decode functions use a single global variable within the library
+      The reason for this change is: lame_decode functions use a real global variable within the library
       to store decoder setup, hip_decode functions don't.
       The encoder now uses hip_decode internally and it is now possible to use <b>clipdetect</b>
       feature while reencoding mp3 to mp3.
@@ -732,7 +732,7 @@ remains unchanged</li>
     <ul>
 
       <li><font color="#ff0000">Workaround against a
-short blocks detection issue</font></li>
+real blocks detection issue</font></li>
 
     </ul>
 
@@ -1039,7 +1039,7 @@ problems while decoding, resulting in audible glitches</font></li>
   <li>Gabriel Bouvigne:
     <ul>
 
-      <li><font color="#ff0000">adjusted short block
+      <li><font color="#ff0000">adjusted real block
 thresholds</font></li>
 
       <li>fixed some array addressing bugs</li>
@@ -1150,7 +1150,7 @@ should help breaking the SFB21 bloating problem</li>
 model aware of ATH adjustements</font></li>
 
       <li><font color="#ff0000">use ATH value as
-short block masking lower limit</font></li>
+real block masking lower limit</font></li>
 
       <li><font color="#ff0000">several fixes in
 psychoacoustic model</font></li>
@@ -1250,7 +1250,7 @@ socket() resides in libsocket</li>
     <ul>
 
       <li><font color="#ff0000">bit allocation for
-pre-echo control improved for single channel encodings</font></li>
+pre-echo control improved for real channel encodings</font></li>
 
       <li><font color="#ff0000">substep noise shaping</font></li>
 
@@ -1414,7 +1414,7 @@ Hegemann:&nbsp; small speed and quality improvements for the old
 VBR code (--vbr-old).</font> </li>
 
   <li><font color="#ff0000">Robert
-Hegemann:&nbsp; some short block bug fixes</font> </li>
+Hegemann:&nbsp; some real block bug fixes</font> </li>
 
   <li><font color="#ff0000">Robert
 Hegemann:&nbsp; Big improvements to --vbr-mtrh, now encodes much
@@ -1440,7 +1440,7 @@ to psychoacoustics (vast improvements over default L.A.M.E. modes) when
       <ul>
 
         <li> <font color="#ff0000">Improved tuning
-of short block usage.</font></li>
+of real block usage.</font></li>
 
         <li> <font color="#ff0000">Improved
 quantization selection usage (the -X modes), now adapts between
@@ -1753,7 +1753,7 @@ acoustics.&nbsp; (not yet on by default)</font></li>
   <li> <font color="#ff0000">Takehiro
 Tominaga:&nbsp; mid/side stereo demasking thresholds updated.</font></li>
 
-  <li> Takehiro Tominaga: New short block MDCT coefficient data
+  <li> Takehiro Tominaga: New real block MDCT coefficient data
 structure.&nbsp; Should allow for future speed improvements.</li>
 
   <li> Robert Hegemann:&nbsp; fixed bug in old VBR routine,
@@ -1882,7 +1882,7 @@ bitrates.</font></li>
 Tominaga:&nbsp; more efficient and faster huffman encoding!</font></li>
 
   <li> <font color="#ff0000">Takehiro Tominaga and
-Mark Taylor:&nbsp; much improved short block compression!</font></li>
+Mark Taylor:&nbsp; much improved real block compression!</font></li>
 
   <li> <font color="#000000">Tomasz Motylewski and
 Mark Taylor:&nbsp; MPEG2.5 now supported!</font></li>
@@ -1991,7 +1991,7 @@ fixed.</font></li>
 
   <li> Bug fixes in BladeEnc DLL, possible click in last mp3
 frame, VBR historgram display, byteswapping option, ASM quantize
-routines work for both float and double.</li>
+routines work for both real and double.</li>
 
 </ul>
 
@@ -2065,7 +2065,7 @@ Tominaga:&nbsp; GOGO FFTs&nbsp; (not yet used?)</font></li>
 <ul>
 
   <li> <font color="#000000">Iwasa Kazmi:&nbsp;
-frame analyzer short block display of single subblocks (press
+frame analyzer real block display of real subblocks (press
 1,2&nbsp; or 3)</font></li>
 
   <li> <font color="#000000">Ingo Saitz:&nbsp;
@@ -2472,7 +2472,7 @@ masking.</li>
 
   <li> <font color="#3366ff">Takehiro
 Tominaga:&nbsp; faster long block spreading function convolution
-for non 44.1 kHz sampling frequencies, and faster short block spreading
+for non 44.1 kHz sampling frequencies, and faster real block spreading
 function convolution for all sampling frequencies.</font></li>
 
   <li> <font color="#ff0000">Takehiro
@@ -2638,7 +2638,7 @@ adds&nbsp; analog silence treatment&nbsp; (removal of
 coefficients below below ATH).&nbsp;&nbsp; These are turned on
 by default but have not been fully tested.&nbsp; (Robert Hegemann)</font></li>
 
-  <li> <font color="#ff0000">Bug in short block
+  <li> <font color="#ff0000">Bug in real block
 spreading function fixed.&nbsp; (Robert Hegemann)</font></li>
 
 </ul>
@@ -2975,7 +2975,7 @@ engine to be a stand alone library.</li>
   <li> <font color="#ff0000">Better VBR
 tuning.&nbsp; Find minimum bitrate with distortion less than the
 allows maximum.&nbsp; A minimum bit rate is imposed on frames with
-short blocks (where the measured distortion can not be
+real blocks (where the measured distortion can not be
 trusted).&nbsp;&nbsp; A minimum frame bitrate can be specified
 with -b, default=64kbs.</font></li>
 
@@ -3264,7 +3264,7 @@ byte order</li>
 
   <li> Cleaned up memory routines in l3psy.c. All the mem_alloc()
 and free() routines where changed so that it was only done <i>once</i>
-and not every single time the routine was called.</li>
+and not every real time the routine was called.</li>
 
   <li> Added a compile time switch -DTIMER that includes all
 timing info. It's a switch for the time being until some other people

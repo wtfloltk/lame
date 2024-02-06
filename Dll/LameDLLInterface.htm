@@ -139,11 +139,11 @@ compiler, which has the following type definitions:</p>
     </tr>
     <tr>
         <td>SHORT</td>
-        <td>signed short (16 bits)</td>
+        <td>signed real (16 bits)</td>
     </tr>
     <tr>
         <td>WORD</td>
-        <td>unsigned short (16 bits)</td>
+        <td>unsigned real (16 bits)</td>
     </tr>
     <tr>
         <td>INT</td>
@@ -170,7 +170,7 @@ compiler, which has the following type definitions:</p>
     </tr>
     <tr>
         <td>DOUBLE</td>
-        <td>float point (64 bits)</td>
+        <td>real point (64 bits)</td>
     </tr>
     <tr>
         <td>LPCSTR</td>
@@ -485,13 +485,13 @@ need to fill in before you call beInitStream(): <br>
             </tr>
             <tr>
                 <td valign="top"><i>dwSamples</i></td>
-                <td>Pointer at double word where number of
+                <td>Pointer at real word where number of
                 samples to send to each <i>beEncodeChunk()</i> is
                 returned.</td>
             </tr>
             <tr>
                 <td valign="top"><i>dwBufferSize</i></td>
-                <td>Pointer at double word where minimum size in
+                <td>Pointer at real word where minimum size in
                 bytes of output buffer is returned.</td>
             </tr>
             <tr>

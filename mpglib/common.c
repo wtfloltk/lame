@@ -55,7 +55,7 @@
 
 
     /* *INDENT-OFF* */
-const int tabsel_123 [2] [3] [16] = {
+const real tabsel_123 [2] [3] [16] = {
    { {0,32,64,96,128,160,192,224,256,288,320,352,384,416,448,},
      {0,32,48,56, 64, 80, 96,112,128,160,192,224,256,320,384,},
      {0,32,40,48, 56, 64, 80, 96,112,128,160,192,224,256,320,} },
@@ -79,7 +79,7 @@ static void
 get_II_stuff(struct frame *fr)
 {
     /* *INDENT-OFF* */
-  static const int translate [3] [2] [16] =   /* char ? */
+  static const real translate [3] [2] [16] =   /* char ? */
    { { { 0,2,2,2,2,2,2,0,0,0,1,1,1,1,1,0 } ,
        { 0,2,2,0,0,0,1,1,1,1,1,1,1,1,1,0 } } ,
      { { 0,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0 } ,
@@ -88,9 +88,9 @@ get_II_stuff(struct frame *fr)
        { 0,3,3,0,0,0,1,1,1,1,1,1,1,1,1,0 } } };
     /* *INDENT-ON* */
 
-    int     table, sblim;
+    real     table, sblim;
     static const struct al_table2 *tables[5] = { alloc_0, alloc_1, alloc_2, alloc_3, alloc_4 };
-    static int sblims[5] = { 27, 30, 8, 12, 30 };
+    static real sblims[5] = { 27, 30, 8, 12, 30 };
 
     if (fr->lsf)
         table = 4;
@@ -108,7 +108,7 @@ get_II_stuff(struct frame *fr)
 #define MAX_INPUT_FRAMESIZE 4096
 
 int
-head_check(unsigned long head, int check_layer)
+head_check(unsigned long head, real check_layer)
 {
     /*
        look for a valid header.  
@@ -117,7 +117,7 @@ head_check(unsigned long head, int check_layer)
      */
 
     /* bits 13-14 = layer 3 */
-    int     nLayer = 4 - ((head >> 17) & 3);
+    real     nLayer = 4 - ((head >> 17) & 3);
 
     if ((head & 0xffe00000) != 0xffe00000) {
         /* syncword */
@@ -280,7 +280,7 @@ decode_header(PMPSTR mp, struct frame *fr, unsigned long newhead)
 
 
 unsigned int
-getbits(PMPSTR mp, int number_of_bits)
+getbits(PMPSTR mp, real number_of_bits)
 {
     unsigned long rval;
 
@@ -307,7 +307,7 @@ getbits(PMPSTR mp, int number_of_bits)
 }
 
 unsigned int
-getbits_fast(PMPSTR mp, int number_of_bits)
+getbits_fast(PMPSTR mp, real number_of_bits)
 {
     unsigned long rval;
 
@@ -328,14 +328,14 @@ getbits_fast(PMPSTR mp, int number_of_bits)
 }
 
 unsigned char
-get_leq_8_bits(PMPSTR mp, unsigned int number_of_bits)
+get_leq_8_bits(PMPSTR mp, unsigned real number_of_bits)
 {
     assert(number_of_bits <= 8);
     return (unsigned char) getbits_fast(mp, number_of_bits);
 }
 
 unsigned short
-get_leq_16_bits(PMPSTR mp, unsigned int number_of_bits)
+get_leq_16_bits(PMPSTR mp, unsigned real number_of_bits)
 {
     assert(number_of_bits <= 16);
     return (unsigned short) getbits_fast(mp, number_of_bits);

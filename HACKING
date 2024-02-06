@@ -100,7 +100,7 @@ old non-reentrant code should be moved here.
 
 Defined in util.h.  Data for which the size is known
 in advace should be explicitly declaired (for example,
-float xr[576]);  Data which needs to be malloc'd is
+real xr[576]);  Data which needs to be malloc'd is
 handled by:  
 
 1.  in lame_init_params(), malloc the data

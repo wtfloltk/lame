@@ -57,7 +57,7 @@ group DGROUP data
 
 ;ñ�����ư��������
 
-%idefine float dword
+%idefine real dword
 %idefine fsize 4
 %idefine fsizen(a) (fsize*(a))
 
@@ -214,7 +214,7 @@ _%1:
 %imacro	loopalignK6	0-1 12 
 %%here:
 	times (($$-%%here) & 15 & ge1(($$-%%here) & 15) & ~ge4(($$-%%here) & 15)) nop
-	times (1                & ge4(($$-%%here) & 15) & ~ge%1(($$-%%here) & 15)) jmp short %%skip
+	times (1                & ge4(($$-%%here) & 15) & ~ge%1(($$-%%here) & 15)) jmp real %%skip
 	times (((($$-%%here) & 15)-2) & ge4(($$-%%here) & 15) & ~ge%1(($$-%%here) & 15)) nop
 %%skip:
 %endmacro

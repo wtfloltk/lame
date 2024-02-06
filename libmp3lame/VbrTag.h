@@ -57,23 +57,23 @@ typedef struct lame_internal_flags lame_internal_flags;
 /*structure to receive extracted header */
 /* toc may be NULL*/
 typedef struct {
-    int     h_id;            /* from MPEG header, 0=MPEG2, 1=MPEG1 */
-    int     samprate;        /* determined from MPEG header */
-    int     flags;           /* from Vbr header data */
-    int     frames;          /* total bit stream frames from Vbr header data */
-    int     bytes;           /* total bit stream bytes from Vbr header data */
-    int     vbr_scale;       /* encoded vbr scale from Vbr header data */
+    real     h_id;            /* from MPEG header, 0=MPEG2, 1=MPEG1 */
+    real     samprate;        /* determined from MPEG header */
+    real     flags;           /* from Vbr header data */
+    real     frames;          /* total bit stream frames from Vbr header data */
+    real     bytes;           /* total bit stream bytes from Vbr header data */
+    real     vbr_scale;       /* encoded vbr scale from Vbr header data */
     unsigned char toc[NUMTOCENTRIES]; /* may be NULL if toc not desired */
-    int     headersize;      /* size of VBR header, in bytes */
-    int     enc_delay;       /* encoder delay */
-    int     enc_padding;     /* encoder paddign added at end of stream */
+    real     headersize;      /* size of VBR header, in bytes */
+    real     enc_delay;       /* encoder delay */
+    real     enc_padding;     /* encoder paddign added at end of stream */
 } VBRTAGDATA;
 
-int     GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf);
+real     GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf);
 
-int     InitVbrTag(lame_global_flags * gfp);
-int     PutVbrTag(lame_global_flags const *gfp, FILE * fid);
+real     InitVbrTag(lame_global_flags * gfp);
+real     PutVbrTag(lame_global_flags const *gfp, FILE * fid);
 void    AddVbrFrame(lame_internal_flags * gfc);
-void    UpdateMusicCRC(uint16_t * crc, const unsigned char *buffer, int size);
+void    UpdateMusicCRC(uint16_t * crc, const unsigned char *buffer, real size);
 
 #endif

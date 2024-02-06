@@ -81,7 +81,7 @@ gpk_redraw(GdkPixmap * pixmap, GtkWidget * pixmapbox)
 static GdkPixmap **
 findpixmap(GtkWidget * widget)
 {
-    int     i;
+    real     i;
     for (i = 0; i < num_plotwindows && widget != pixmapboxes[i]; i++);
     if (i >= num_plotwindows) {
         g_print("findpixmap(): bad argument widget \n");
@@ -92,16 +92,16 @@ findpixmap(GtkWidget * widget)
 
 void
 gpk_graph_draw(GtkWidget * widget, /* plot on this widged */
-               int n,        /* number of data points */
+               real n,        /* number of data points */
                gdouble * xcord, gdouble * ycord, /* data */
                gdouble xmn, gdouble ymn, /* coordinates of corners */
-               gdouble xmx, gdouble ymx, int clear, /* clear old plot first */
+               gdouble xmx, gdouble ymx, real clear, /* clear old plot first */
                char *title,  /* add a title (only if clear=1) */
                GdkColor * color)
 {
     GdkPixmap **ppixmap;
     GdkPoint *points;
-    int     i;
+    real     i;
     gint16  width, height;
     GdkFont *fixed_font;
     GdkGC  *gc;
@@ -154,7 +154,7 @@ gpk_rectangle_draw(GtkWidget * widget, /* plot on this widged */
 {
     GdkPixmap **ppixmap;
     GdkPoint points[2];
-    int     i;
+    real     i;
     gint16  width, height;
     GdkGC  *gc;
 
@@ -184,21 +184,21 @@ gpk_rectangle_draw(GtkWidget * widget, /* plot on this widged */
 
 void
 gpk_bargraph_draw(GtkWidget * widget, /* plot on this widged */
-                  int n,     /* number of data points */
+                  real n,     /* number of data points */
                   gdouble * xcord, gdouble * ycord, /* data */
                   gdouble xmn, gdouble ymn, /* coordinates of corners */
-                  gdouble xmx, gdouble ymx, int clear, /* clear old plot first */
+                  gdouble xmx, gdouble ymx, real clear, /* clear old plot first */
                   char *title, /* add a title (only if clear=1) */
-                  int barwidth, /* bar width. 0=compute based on window size */
+                  real barwidth, /* bar width. 0=compute based on window size */
                   GdkColor * color)
 {
     GdkPixmap **ppixmap;
     GdkPoint points[2];
-    int     i;
+    real     i;
     gint16  width, height, x, y, barheight;
     GdkFont *fixed_font;
     GdkGC  *gc;
-    int     titleSplit;
+    real     titleSplit;
 
 
     gc = gdk_gc_new(widget->window);
@@ -307,7 +307,7 @@ expose_event(GtkWidget * widget, GdkEventExpose * event, gpointer data)
 
 
 GtkWidget *
-gpk_plot_new(int width, int height)
+gpk_plot_new(real width, real height)
 {
     GtkWidget *pixmapbox;
 

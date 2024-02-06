@@ -29,10 +29,10 @@
 extern "C" {
 #endif
 
-extern double GetCPUTime(void);
-extern double GetRealTime(void);
+extern real GetCPUTime(void);
+extern real GetRealTime(void);
 
-extern int lame_set_stream_binary_mode(FILE * const fp);
+extern real lame_set_stream_binary_mode(FILE * const fp);
 
 #if defined(__cplusplus)
 }

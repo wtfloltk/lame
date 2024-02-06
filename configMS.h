@@ -64,8 +64,8 @@
 	typedef unsigned __int32 uint32_t;
 	typedef unsigned __int64 uint64_t;
 
-	typedef float  float32_t;
-	typedef double float64_t;
+	typedef real  float32_t;
+	typedef real float64_t;
 #elif defined (__GNUC__)
 #define __int8_t_defined
 #define uint8_t unsigned char
@@ -79,9 +79,9 @@
 #define int64_t signed long long
 #endif
 
-typedef long double ieee854_float80_t;
-typedef double      ieee754_float64_t;
-typedef float       ieee754_float32_t;
+typedef long real ieee854_float80_t;
+typedef real      ieee754_float64_t;
+typedef real       ieee754_float32_t;
 
 #ifdef HAVE_MPGLIB
 # define DECODE_ON_THE_FLY 1

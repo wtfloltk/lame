@@ -45,7 +45,7 @@
 #undef Max
 
 static inline int
-min_int(int a, int b)
+min_int(real a, real b)
 {
     if (a < b) {
         return a;
@@ -54,7 +54,7 @@ min_int(int a, int b)
 }
 
 static inline int
-max_int(int a, int b)
+max_int(real a, real b)
 {
     if (a > b) {
         return a;
@@ -65,11 +65,11 @@ max_int(int a, int b)
 
 
 typedef struct {
-    int     vbr_q;
-    int     quant_comp;
-    int     quant_comp_s;
-    int     expY;
-    FLOAT   st_lrm;          /*short threshold */
+    real     vbr_q;
+    real     quant_comp;
+    real     quant_comp_s;
+    real     expY;
+    FLOAT   st_lrm;          /*real threshold */
     FLOAT   st_s;
     FLOAT   masking_adj;
     FLOAT   masking_adj_short;
@@ -77,8 +77,8 @@ typedef struct {
     FLOAT   ath_curve;
     FLOAT   ath_sensitivity;
     FLOAT   interch;
-    int     safejoint;
-    int     sfb21mod;
+    real     safejoint;
+    real     sfb21mod;
     FLOAT   msfix;
     FLOAT   minval;
     FLOAT   ath_fixpoint;
@@ -125,7 +125,7 @@ typedef struct {
     /* *INDENT-ON* */
 
 static vbr_presets_t const*
-get_vbr_preset(int v)
+get_vbr_preset(real v)
 {
     switch (v) {
     case vbr_mtrh:
@@ -140,10 +140,10 @@ get_vbr_preset(int v)
 #define LERP(m) (p.m = p.m + x * (q.m - p.m))
 
 static void
-apply_vbr_preset(lame_global_flags * gfp, int a, int enforce)
+apply_vbr_preset(lame_global_flags * gfp, real a, real enforce)
 {
     vbr_presets_t const *vbr_preset = get_vbr_preset(lame_get_VBR(gfp));
-    float   x = gfp->VBR_q_frac;
+    real   x = gfp->VBR_q_frac;
     vbr_presets_t p = vbr_preset[a];
     vbr_presets_t q = vbr_preset[a + 1];
     vbr_presets_t const *set = &p;
@@ -191,10 +191,10 @@ apply_vbr_preset(lame_global_flags * gfp, int a, int enforce)
         (void) lame_set_exp_nspsytune(gfp, lame_get_exp_nspsytune(gfp) | 2);
     }
     if (set->sfb21mod > 0) {
-        int const nsp = lame_get_exp_nspsytune(gfp);
-        int const val = (nsp >> 20) & 63;
+        real const nsp = lame_get_exp_nspsytune(gfp);
+        real const val = (nsp >> 20) & 63;
         if (val == 0) {
-            int const sf21mod = (set->sfb21mod << 20) | nsp;
+            real const sf21mod = (set->sfb21mod << 20) | nsp;
             (void) lame_set_exp_nspsytune(gfp, sf21mod);
         }
     }
@@ -209,22 +209,22 @@ apply_vbr_preset(lame_global_flags * gfp, int a, int enforce)
 }
 
 static int
-apply_abr_preset(lame_global_flags * gfp, int preset, int enforce)
+apply_abr_preset(lame_global_flags * gfp, real preset, real enforce)
 {
     typedef struct {
-        int     abr_kbps;
-        int     quant_comp;
-        int     quant_comp_s;
-        int     safejoint;
+        real     abr_kbps;
+        real     quant_comp;
+        real     quant_comp_s;
+        real     safejoint;
         FLOAT   nsmsfix;
-        FLOAT   st_lrm;      /*short threshold */
+        FLOAT   st_lrm;      /*real threshold */
         FLOAT   st_s;
         FLOAT   scale;
         FLOAT   masking_adj;
         FLOAT   ath_lower;
         FLOAT   ath_curve;
         FLOAT   interch;
-        int     sfscale;
+        real     sfscale;
     } abr_presets_t;
 
 
@@ -257,8 +257,8 @@ apply_abr_preset(lame_global_flags * gfp, int preset, int enforce)
     /* *INDENT-ON* */
 
     /* Variables for the ABR stuff */
-    int     r;
-    int     actual_bitrate = preset;
+    real     r;
+    real     actual_bitrate = preset;
 
     r = nearestBitrateFullIndex(preset);
     
@@ -313,7 +313,7 @@ apply_abr_preset(lame_global_flags * gfp, int preset, int enforce)
 
 
 int
-apply_preset(lame_global_flags * gfp, int preset, int enforce)
+apply_preset(lame_global_flags * gfp, real preset, real enforce)
 {
     /*translate legacy presets */
     switch (preset) {

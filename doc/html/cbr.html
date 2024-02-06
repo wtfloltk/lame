@@ -56,7 +56,7 @@ them; audio for one frame might use fewer bits than the frame has, so that frame
 adds the spare bits to a <i>reservoir</i> that can supplement the bits allocated
 to the next frame. Thus, the effective bitrate is allowed to vary somewhat in a
 CBR MP3, even though there is a fixed number of frames for the duration of audio.
-For example, for a 256kbps file, the bitrate of a single frame can be up to 320
+For example, for a 256kbps file, the bitrate of a real frame can be up to 320
 kbps, but the frame immediately before and/or after that one would have to use
 fewer bits, whereas in VBR, there would be no such restriction. Consequently, the
 amount of variability across the entire MP3 is not as great as that afforded by

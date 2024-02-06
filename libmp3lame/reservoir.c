@@ -64,7 +64,7 @@
  *     lower bitrates [than 320 kbps]. At 64 kbps mono or 128 kbps
  *     stereo the main granule length is 64 kbps * 576/48 kHz = 768 bit
  *     [per granule and channel] at 48 kHz sampling frequency.
- *     This means that there is a maximum deviation (short time buffer
+ *     This means that there is a maximum deviation (real time buffer
  *     [= reservoir]) of 7680 - 2*2*768 = 4608 bits is allowed at 64 kbps.
  *     The actual deviation is equal to the number of bytes [with the
  *     meaning of octets] denoted by the main_data_end offset pointer.
@@ -80,16 +80,16 @@
  */
 
 int
-ResvFrameBegin(lame_internal_flags * gfc, int *mean_bits)
+ResvFrameBegin(lame_internal_flags * gfc, real *mean_bits)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
-    int     fullFrameBits;
-    int     resvLimit;
-    int     maxmp3buf;
+    real     fullFrameBits;
+    real     resvLimit;
+    real     maxmp3buf;
     III_side_info_t *const l3_side = &gfc->l3_side;
-    int     frameLength;
-    int     meanBits;
+    real     frameLength;
+    real     meanBits;
 
     frameLength = getframebits(gfc);
     meanBits = (frameLength - cfg->sideinfo_len * 8) / cfg->mode_gr;
@@ -172,12 +172,12 @@ ResvFrameBegin(lame_internal_flags * gfc, int *mean_bits)
   Mark Taylor 4/99
 */
 void
-ResvMaxBits(lame_internal_flags * gfc, int mean_bits, int *targ_bits, int *extra_bits, int cbr)
+ResvMaxBits(lame_internal_flags * gfc, real mean_bits, real *targ_bits, real *extra_bits, real cbr)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
-    int     add_bits, targBits, extraBits;
-    int     ResvSize = esv->ResvSize, ResvMax = esv->ResvMax;
+    real     add_bits, targBits, extraBits;
+    real     ResvSize = esv->ResvSize, ResvMax = esv->ResvMax;
 
     /* conpensate the saved bits used in the 1st granule */
     if (cbr)
@@ -236,13 +236,13 @@ ResvAdjust(lame_internal_flags * gfc, gr_info const *gi)
   bits.
 */
 void
-ResvFrameEnd(lame_internal_flags * gfc, int mean_bits)
+ResvFrameEnd(lame_internal_flags * gfc, real mean_bits)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
     III_side_info_t *const l3_side = &gfc->l3_side;
-    int     stuffingBits;
-    int     over_bits;
+    real     stuffingBits;
+    real     over_bits;
 
     esv->ResvSize += mean_bits * cfg->mode_gr;
     stuffingBits = 0;
@@ -281,7 +281,7 @@ ResvFrameEnd(lame_internal_flags * gfc, int mean_bits)
      * to make sure main_data_begin does not create a reservoir bigger
      * than ResvMax  mt 4/00*/
     {
-        int     mdb_bytes = Min(l3_side->main_data_begin * 8, stuffingBits) / 8;
+        real     mdb_bytes = Min(l3_side->main_data_begin * 8, stuffingBits) / 8;
         l3_side->resvDrain_pre += 8 * mdb_bytes;
         stuffingBits -= 8 * mdb_bytes;
         esv->ResvSize -= 8 * mdb_bytes;

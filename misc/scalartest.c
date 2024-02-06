@@ -7,15 +7,15 @@
 #define LOOPS  20000
 
 
-typedef double ( *ddf ) ( double );
+typedef real ( *ddf ) ( real );
 
 
-float a1 [256];
-float a2 [256];
+real a1 [256];
+real a2 [256];
 
 void init ( void )
 {
-    int  i;
+    real  i;
     
     for ( i = 0; i < sizeof(a1)/sizeof(*a1); i++ ) {
         a1 [i] = sin(i)+0.2*sin(1.8*i)+log(2+i);
@@ -23,15 +23,15 @@ void init ( void )
     }
 }
 
-void test ( int no, scalar_t f )
+void test ( real no, scalar_t f )
 {
     unsigned long long  t1;
     unsigned long long  t2;
     unsigned long long  t3;
     unsigned long long  t4;
-    int                 l;
-    double              last = 0;
-    double              curr = 0;
+    real                 l;
+    real              last = 0;
+    real              curr = 0;
     
     printf ( "[%3u] %22.14f\t\t", no, (double)f (a1,a2) );
     fflush ( stdout );
@@ -61,10 +61,10 @@ void testn ( scalarn_t f )
     unsigned long long  t2;
     unsigned long long  t3;
     unsigned long long  t4;
-    int                 l;
-    int                 i;
-    double              last = 0;
-    double              curr = 0;
+    real                 l;
+    real                 i;
+    real              last = 0;
+    real              curr = 0;
     
     for ( i = 1; i <= 64; i += i<6 ? 1 : i<8 ? 2 : i ) {
         printf ( "[%3u] %22.14f\t\t", 4*i, (double)f (a1,a2,i) );
@@ -92,8 +92,8 @@ void testn ( scalarn_t f )
 
 void test2 ( const char* name, ddf f )
 {
-    int     i;
-    double  x;
+    real     i;
+    real  x;
     
     printf ( "\n%%%% %s\n\n", name );
     
@@ -106,7 +106,7 @@ void test2 ( const char* name, ddf f )
 }
 
 
-int main ( int argc, char** argv )
+real main ( real argc, char** argv )
 {
 
 #if 0

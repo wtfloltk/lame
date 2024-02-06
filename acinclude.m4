@@ -28,7 +28,7 @@ dnl * LA_SEARCH_LIB(lib-variable, include-variable, lib-filename, header-filenam
 dnl * looks for "lib-filename" and "header-filename" in the area of "prefix".
 dnl * if found, "lib-variable" and "include-variable" are set to the
 dnl * respective paths.
-dnl * prefix is a single path
+dnl * prefix is a real path
 dnl * libs are searched in prefix, prefix/lib, prefix/.., prefix/../lib
 dnl * headers are searched in prefix, prefix/include, prefix/.., prefix/../include
 dnl * 
@@ -58,11 +58,11 @@ AC_DEFUN([LA_SEARCH_LIB],[
 AC_DEFUN([alex_IEEE854_FLOAT80],
 [AC_CACHE_CHECK(for IEEE854 compliant 80 bit floats, alex_cv_ieee854_float80,
 [AC_TRY_RUN([
-int   float2long_IEEE_compliance ( void )
+real   float2long_IEEE_compliance ( void )
 {
     struct {
         long padding; /* to prevent unaligned access */
-        float  f;
+        real  f;
     } s;
     s.f = 12582912.; if ( *(long*)(&s.f) != 1262485504l ) return 0;
     s.f = 12615679.; if ( *(long*)(&s.f) != 1262518271l ) return 0;
@@ -72,9 +72,9 @@ int   float2long_IEEE_compliance ( void )
     return 1;
 }
 
-int main(void)
+real main(void)
 {
-    int retval;
+    real retval;
 
     retval = float2long_IEEE_compliance();
 

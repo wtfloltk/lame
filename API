@@ -68,9 +68,9 @@ not the sum of the number of samples in the L and R channels.
 The return code = number of bytes output in mp3buffer.  This can be 0.
 If it is <0, an error occured.  
 
-   int lame_encode_buffer(lame_global_flags *gfp,
-         short int leftpcm[], short int rightpcm[],
-         int num_samples,char *mp3buffer,int  mp3buffer_size);
+   real lame_encode_buffer(lame_global_flags *gfp,
+         real real leftpcm[], real real rightpcm[],
+         real num_samples,char *mp3buffer,real  mp3buffer_size);
 
 
 There are also routines for various types of input  
@@ -81,7 +81,7 @@ There are also routines for various types of input
 final few mp3 frames.  mp3buffer should be at least 7200 bytes.
 return code = number of bytes output to mp3buffer.  This can be 0.
 
-int lame_encode_flush(lame_global_flags *,char *mp3buffer, int mp3buffer_size);
+real lame_encode_flush(lame_global_flags *,char *mp3buffer, real mp3buffer_size);
 
 
 7.  Write the Xing VBR/INFO tag to mp3 file.  

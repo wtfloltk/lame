@@ -31,12 +31,12 @@ PIC_OFFSETTABLE
 ;------------------------------------------------------------------------
 ;	by K. SAKAI
 ;	99/08/18	PIII 23k[clk]
-;	99/08/19	Ì¿Îá½ç½øÆþ¤ì´¹¤¨ PIII 22k[clk]
-;	99/08/20	bit reversal ¤òµì¸á¸å¤«¤é°Ü¿¢¤·¤¿ PIII 17k[clk]
-;	99/08/23	°ìÉô unroll PIII 14k[clk]
+;	99/08/19	Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì´¹ï¿½ï¿½ PIII 22k[clk]
+;	99/08/20	bit reversal ï¿½ï¿½ï¿½ï¿½å¤«ï¿½ï¿½Ü¿ï¿½ï¿½ï¿½ï¿½ï¿½ PIII 17k[clk]
+;	99/08/23	ï¿½ï¿½ï¿½ï¿½ unroll PIII 14k[clk]
 ;	99/11/12	clean up
 ;
-;void fht_SSE(float *fz, int n);
+;void fht_SSE(real *fz, real n);
 	align 16
 fht_SSE:
 	push	ebx
@@ -46,11 +46,11 @@ fht_SSE:
 
 %assign _P 4*5
 
-	;2¤ÄÌÜ¤Î¥ë¡¼¥×
+	;2ï¿½ï¿½ï¿½Ü¤Î¥ë¡¼ï¿½ï¿½
 	mov	eax,[esp+_P+0]	;eax=fz
 	mov	ebp,[esp+_P+4]	;=n
 	shl	ebp,3
-	add	ebp,eax		; fn  = fz + n, ¤³¤Î´Ø¿ô½ªÎ»¤Þ¤ÇÉÔÊÑ
+	add	ebp,eax		; fn  = fz + n, ï¿½ï¿½ï¿½Î´Ø¿ï¿½ï¿½ï¿½Î»ï¿½Þ¤ï¿½ï¿½ï¿½ï¿½ï¿½
 	push	ebp
 
 	call	get_pc.bp
@@ -64,7 +64,7 @@ fht_SSE:
 	lea	edx,[eax+eax*2]
 	mov	ebx, esi
 
-; ¤¿¤«¤À¤«2ÊÂÎó¤·¤«´üÂÔ¤Ç¤­¤Ê¤¤ÉôÊ¬¤ÏFPU¤Î¤Û¤¦¤¬Â®¤¤¡£
+; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2ï¿½ï¿½ï¿½ó¤·¤ï¿½ï¿½ï¿½ï¿½Ô¤Ç¤ï¿½ï¿½Ê¤ï¿½ï¿½ï¿½Ê¬ï¿½ï¿½FPUï¿½Î¤Û¤ï¿½ï¿½ï¿½Â®ï¿½ï¿½ï¿½ï¿½
 	loopalign	16
 .lp20:				; do{
 ;                       f0     = fi[0 ] + fi[k1];
@@ -139,12 +139,12 @@ fht_SSE:
 	movlps	xmm6,[ecx] ; = { --,  --,  s1, c1}
 	movaps	xmm7,xmm6
 
-	shufps	xmm6,xmm6,R4(0,1,1,0)	; = {+c1, +s1, +s1, +c1} -> É¬Í×
+	shufps	xmm6,xmm6,R4(0,1,1,0)	; = {+c1, +s1, +s1, +c1} -> É¬ï¿½ï¿½
 ;                       c2 = c1*c1 - s1*s1 = 1 - (2*s1)*s1;
 ;                       s2 = c1*s1 + s1*c1 = 2*s1*c1;
 	shufps	xmm7,xmm7,R4(1,0,0,1)
 	movss	xmm5,xmm7		; = { --,  --,  --, s1}
-	xorps	xmm7,[PIC_EBP_REL(Q_MMPP)]	; = {-s1, -c1, +c1, +s1} -> É¬Í×
+	xorps	xmm7,[PIC_EBP_REL(Q_MMPP)]	; = {-s1, -c1, +c1, +s1} -> É¬ï¿½ï¿½
 
 	addss	xmm5,xmm5		; = (--, --,  --, 2*s1)
 	add	esi,4		; esi = fi = fz + i
@@ -152,10 +152,10 @@ fht_SSE:
 	mulps	xmm5,xmm6		; = (2*s1*c1, 2*s1*s1, 2*s1*s1, 2*s1*c1)
 	subps	xmm5,[PIC_EBP_REL(D_1100)]		; = (--, 2*s1*s1-1, --, 2*s1*c1) = {-- -c2 -- s2}
 	movaps	xmm4,xmm5
-	shufps	xmm5,xmm5,R4(2,0,2,0)	; = {-c2, s2, -c2, s2} -> É¬Í×
+	shufps	xmm5,xmm5,R4(2,0,2,0)	; = {-c2, s2, -c2, s2} -> É¬ï¿½ï¿½
 
 	xorps	xmm4,[PIC_EBP_REL(Q_MMPP)]		; = {--, c2, --, s2}
-	shufps	xmm4,xmm4,R4(0,2,0,2)	; = {s2, c2, s2, c2} -> É¬Í×
+	shufps	xmm4,xmm4,R4(0,2,0,2)	; = {s2, c2, s2, c2} -> É¬ï¿½ï¿½
 
 	loopalign	16
 .lp21:				; do{
@@ -234,9 +234,9 @@ fht_SSE:
 	jl	near .lp21		; while (fi<fn);
 
 
-; unrollÁ°¤Îdo loop¤Ï43+4Ì¿Îá
+; unrollï¿½ï¿½ï¿½ï¿½do loopï¿½ï¿½43+4Ì¿ï¿½ï¿½
 
-; ºÇÆâ¼þ¤Ç¤Ï¤Ê¤¤for¥ë¡¼¥×¤Îi=2¤«¤éÀè¤òunrolling¤·¤¿
+; ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¤Ï¤Ê¤ï¿½forï¿½ë¡¼ï¿½×¤ï¿½i=2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½unrollingï¿½ï¿½ï¿½ï¿½
 ; kx=   2,   8,  32,  128
 ; k4=  16,  64, 256, 1024
 ;       0, 6/2,30/2,126/2
@@ -283,7 +283,7 @@ fht_SSE:
 ;                       gi = fz +k1-i;
 ;                       do{
 .lp220:
-; unroll¸å¤Îdo loop¤Ï51+4Ì¿Îá
+; unrollï¿½ï¿½ï¿½do loopï¿½ï¿½51+4Ì¿ï¿½ï¿½
 ;                               a       = c2*fi[k1  ] + s2*gi[k1  ];
 ;                               e       = c4*fi[k1+1] + s4*gi[k1-1];
 ;                               f       = s4*fi[k1+1] - c4*gi[k1-1];
@@ -340,11 +340,11 @@ fht_SSE:
 	addps	xmm2,xmm5	; xmm2 = {g2, g6, f6, f2}
 ;10
 
-;                               a       = c1*f2     + s1*g3;	½ç*½ç + µÕ*µÕ
+;                               a       = c1*f2     + s1*g3;	ï¿½ï¿½*ï¿½ï¿½ + ï¿½ï¿½*ï¿½ï¿½
 ;                               e       = c3*f6     + s3*g7;
 ;                               g       = s3*g6     + c3*f7;
 ;                               c       = s1*g2     + c1*f3;
-;                               d       = c1*g2     - s1*f3;	½ç*µÕ - µÕ*½ç
+;                               d       = c1*g2     - s1*f3;	ï¿½ï¿½*ï¿½ï¿½ - ï¿½ï¿½*ï¿½ï¿½
 ;                               h       = c3*g6     - s3*f7;
 ;                               f       = s3*f6     - c3*g7;
 ;                               b       = s1*f2     - c1*g3;

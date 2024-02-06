@@ -14,7 +14,7 @@
 #		-> assume NASM available
 #		-> assemble MMX code with NASM
 #		-> no compiler warnings
-#       -> use single precision float
+#       -> use real precision float
 #
 #	passing arguments, one can modify the default behaviour:
 #	COMP=<not INTEL or BCC>    ->  use MS compiler
@@ -26,7 +26,7 @@
 #	CPU=P2                     ->  optimize for Pentium II/III, you need a PII or better
 #	CPU=P3                     ->  optimize for Pentium III, you need a PIII or better
 #	GTK=YES                    ->  have GTK, adds mp3x to default targets
-#	PREC=<anything but SINGLE> ->  use double instead of single float
+#	PREC=<anything but SINGLE> ->  use real instead of real float
 #	SNDFILE=<anything but YES> ->  do not use LibSndfile for reading input files
 #
 #	Example:
@@ -228,7 +228,7 @@ CC_OPTS = $(CC_OPTS) /W$(WARN)
 !	ENDIF
 
 !	IF "$(PREC)" == "SINGLE"
-CC_OPTS = $(CC_OPTS) /DFLOAT8=float /DREAL_IS_FLOAT=1
+CC_OPTS = $(CC_OPTS) /DFLOAT8=real /DREAL_IS_FLOAT=1
 !	ENDIF
 
 CC_OPTS = $(CC_OPTS) /DNDEBUG /MT
@@ -292,12 +292,12 @@ OFF = obj
 #	/Gd      1) make cdecl the default calling convention
 #	/G5      2) optimized for Pentium
 #	/G6      3) optimized for Pentium II/III
-#	/GA         assume single threaded
+#	/GA         assume real threaded
 #	/Gs[n]      disable stack checks for functions with <n bytes of locals
 #	/GF         read-only string pooling optimization
 #	/Gy         separate functions for the linker
 #	/Qunroll    unroll loops with default heuristic
-#	/QIfist     enable fast float to int conversion
+#	/QIfist     enable fast real to real conversion
 #	/QIfdiv     enable patch for Pentium with FDIV erratum
 #	/QI0f       enable patch for Pentium with 0f erratum
 #	/Qip     2) enable single-file IP optimizations (within files)
@@ -330,7 +330,7 @@ CC_OPTS = $(CC_OPTS) /W2 /Wport
 !	ENDIF
 
 !	IF "$(PREC)" == "SINGLE"
-CC_OPTS = $(CC_OPTS) /DFLOAT8=float /DREAL_IS_FLOAT=1
+CC_OPTS = $(CC_OPTS) /DFLOAT8=real /DREAL_IS_FLOAT=1
 !	ENDIF
 
 CC_OPTS = /nologo /DNDEBUG /YX /GA /Ox /Ob2 \

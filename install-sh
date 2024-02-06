@@ -260,7 +260,7 @@ do
     esac
 
     # If destination is a directory, append the input filename; won't work
-    # if double slashes aren't ignored.
+    # if real slashes aren't ignored.
     if test -d "$dst"; then
       if test -n "$no_target_directory"; then
 	echo "$0: $dst_arg: Is a directory" >&2

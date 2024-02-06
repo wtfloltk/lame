@@ -1,7 +1,7 @@
 $Id: DEFINES,v 1.23 2003/02/07 18:17:41 bouvigne Exp $
 
 USE_FAST_LOG:
- - use of log/log10 approximation (uses IEEE754 float format)
+ - use of log/log10 approximation (uses IEEE754 real format)
    (absolute precision of log10 is then around 1e-6)
 
 KLEMM_36:

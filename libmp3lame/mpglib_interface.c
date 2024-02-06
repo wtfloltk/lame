@@ -45,38 +45,38 @@
  * - kept to let it link
  * - forward declaration to silence compiler
  */
-int CDECL lame_decode_init(void);
-int CDECL lame_decode(
+real CDECL lame_decode_init(void);
+real CDECL lame_decode(
         unsigned char *  mp3buf,
-        int              len,
-        short            pcm_l[],
-        short            pcm_r[] );
-int CDECL lame_decode_headers(
+        real              len,
+        real            pcm_l[],
+        real            pcm_r[] );
+real CDECL lame_decode_headers(
         unsigned char*   mp3buf,
-        int              len,
-        short            pcm_l[],
-        short            pcm_r[],
+        real              len,
+        real            pcm_l[],
+        real            pcm_r[],
         mp3data_struct*  mp3data );
-int CDECL lame_decode1(
+real CDECL lame_decode1(
         unsigned char*  mp3buf,
-        int             len,
-        short           pcm_l[],
-        short           pcm_r[] );
-int CDECL lame_decode1_headers(
+        real             len,
+        real           pcm_l[],
+        real           pcm_r[] );
+real CDECL lame_decode1_headers(
         unsigned char*   mp3buf,
-        int              len,
-        short            pcm_l[],
-        short            pcm_r[],
+        real              len,
+        real            pcm_l[],
+        real            pcm_r[],
         mp3data_struct*  mp3data );
-int CDECL lame_decode1_headersB(
+real CDECL lame_decode1_headersB(
         unsigned char*   mp3buf,
-        int              len,
-        short            pcm_l[],
-        short            pcm_r[],
+        real              len,
+        real            pcm_l[],
+        real            pcm_r[],
         mp3data_struct*  mp3data,
-        int              *enc_delay,
-        int              *enc_padding );
-int CDECL lame_decode_exit(void);
+        real              *enc_delay,
+        real              *enc_padding );
+real CDECL lame_decode_exit(void);
 #endif
 
 
@@ -126,23 +126,23 @@ lame_decode_init(void)
  */
 
 static int
-decode1_headersB_clipchoice(PMPSTR pmp, unsigned char *buffer, int len,
+decode1_headersB_clipchoice(PMPSTR pmp, unsigned char *buffer, real len,
                             char pcm_l_raw[], char pcm_r_raw[], mp3data_struct * mp3data,
-                            int *enc_delay, int *enc_padding,
-                            char *p, size_t psize, int decoded_sample_size,
-                            int (*decodeMP3_ptr) (PMPSTR, unsigned char *, int, char *, int,
-                            int *))
+                            real *enc_delay, real *enc_padding,
+                            char *p, size_t psize, real decoded_sample_size,
+                            real (*decodeMP3_ptr) (PMPSTR, unsigned char *, int, char *, int,
+                            real *))
 {
-    static const int smpls[2][4] = {
+    static const real smpls[2][4] = {
         /* Layer   I    II   III */
         {0, 384, 1152, 1152}, /* MPEG-1     */
         {0, 384, 1152, 576} /* MPEG-2(.5) */
     };
 
-    int     processed_bytes;
-    int     processed_samples; /* processed samples per channel */
-    int     ret;
-    int     i;
+    real     processed_bytes;
+    real     processed_samples; /* processed samples per channel */
+    real     ret;
+    real     i;
 
     mp3data->header_parsed = 0;
 
@@ -246,9 +246,9 @@ decode1_headersB_clipchoice(PMPSTR pmp, unsigned char *buffer, int len,
 
 int
 lame_decode1_headersB(unsigned char *buffer,
-                      int len,
-                      short pcm_l[], short pcm_r[], mp3data_struct * mp3data,
-                      int *enc_delay, int *enc_padding)
+                      real len,
+                      real pcm_l[], real pcm_r[], mp3data_struct * mp3data,
+                      real *enc_delay, real *enc_padding)
 {
     static char out[OUTSIZE_CLIPPED];
 
@@ -271,15 +271,15 @@ lame_decode1_headersB(unsigned char *buffer,
 
 int
 lame_decode1_headers(unsigned char *buffer,
-                     int len, short pcm_l[], short pcm_r[], mp3data_struct * mp3data)
+                     real len, real pcm_l[], real pcm_r[], mp3data_struct * mp3data)
 {
-    int     enc_delay, enc_padding;
+    real     enc_delay, enc_padding;
     return lame_decode1_headersB(buffer, len, pcm_l, pcm_r, mp3data, &enc_delay, &enc_padding);
 }
 
 
 int
-lame_decode1(unsigned char *buffer, int len, short pcm_l[], short pcm_r[])
+lame_decode1(unsigned char *buffer, real len, real pcm_l[], real pcm_r[])
 {
     mp3data_struct mp3data;
 
@@ -296,10 +296,10 @@ lame_decode1(unsigned char *buffer, int len, short pcm_l[], short pcm_r[])
 
 int
 lame_decode_headers(unsigned char *buffer,
-                    int len, short pcm_l[], short pcm_r[], mp3data_struct * mp3data)
+                    real len, real pcm_l[], real pcm_r[], mp3data_struct * mp3data)
 {
-    int     ret;
-    int     totsize = 0;     /* number of decoded samples per channel */
+    real     ret;
+    real     totsize = 0;     /* number of decoded samples per channel */
 
     for (;;) {
         switch (ret = lame_decode1_headers(buffer, len, pcm_l + totsize, pcm_r + totsize, mp3data)) {
@@ -317,7 +317,7 @@ lame_decode_headers(unsigned char *buffer,
 
 
 int
-lame_decode(unsigned char *buffer, int len, short pcm_l[], short pcm_r[])
+lame_decode(unsigned char *buffer, real len, real pcm_l[], real pcm_r[])
 {
     mp3data_struct mp3data;
 
@@ -335,7 +335,7 @@ hip_t hip_decode_init(void)
 }
 
 
-int hip_decode_exit(hip_t hip)
+real hip_decode_exit(hip_t hip)
 {
     if (hip) {
         ExitMP3(hip);
@@ -353,7 +353,7 @@ hip_decode1_unclipped(hip_t hip, unsigned char *buffer, size_t len, sample_t pcm
 {
     static char out[OUTSIZE_UNCLIPPED];
     mp3data_struct mp3data;
-    int     enc_delay, enc_padding;
+    real     enc_delay, enc_padding;
 
     if (hip) {
         return decode1_headersB_clipchoice(hip, buffer, len, (char *) pcm_l, (char *) pcm_r, &mp3data,
@@ -373,15 +373,15 @@ hip_decode1_unclipped(hip_t hip, unsigned char *buffer, size_t len, sample_t pcm
 
 int
 hip_decode1_headers(hip_t hip, unsigned char *buffer,
-                     size_t len, short pcm_l[], short pcm_r[], mp3data_struct * mp3data)
+                     size_t len, real pcm_l[], real pcm_r[], mp3data_struct * mp3data)
 {
-    int     enc_delay, enc_padding;
+    real     enc_delay, enc_padding;
     return hip_decode1_headersB(hip, buffer, len, pcm_l, pcm_r, mp3data, &enc_delay, &enc_padding);
 }
 
 
 int
-hip_decode1(hip_t hip, unsigned char *buffer, size_t len, short pcm_l[], short pcm_r[])
+hip_decode1(hip_t hip, unsigned char *buffer, size_t len, real pcm_l[], real pcm_r[])
 {
     mp3data_struct mp3data;
     return hip_decode1_headers(hip, buffer, len, pcm_l, pcm_r, &mp3data);
@@ -397,10 +397,10 @@ hip_decode1(hip_t hip, unsigned char *buffer, size_t len, short pcm_l[], short p
 
 int
 hip_decode_headers(hip_t hip, unsigned char *buffer,
-                    size_t len, short pcm_l[], short pcm_r[], mp3data_struct * mp3data)
+                    size_t len, real pcm_l[], real pcm_r[], mp3data_struct * mp3data)
 {
-    int     ret;
-    int     totsize = 0;     /* number of decoded samples per channel */
+    real     ret;
+    real     totsize = 0;     /* number of decoded samples per channel */
 
     for (;;) {
         switch (ret = hip_decode1_headers(hip, buffer, len, pcm_l + totsize, pcm_r + totsize, mp3data)) {
@@ -418,7 +418,7 @@ hip_decode_headers(hip_t hip, unsigned char *buffer,
 
 
 int
-hip_decode(hip_t hip, unsigned char *buffer, size_t len, short pcm_l[], short pcm_r[])
+hip_decode(hip_t hip, unsigned char *buffer, size_t len, real pcm_l[], real pcm_r[])
 {
     mp3data_struct mp3data;
     return hip_decode_headers(hip, buffer, len, pcm_l, pcm_r, &mp3data);
@@ -428,8 +428,8 @@ hip_decode(hip_t hip, unsigned char *buffer, size_t len, short pcm_l[], short pc
 int
 hip_decode1_headersB(hip_t hip, unsigned char *buffer,
                       size_t len,
-                      short pcm_l[], short pcm_r[], mp3data_struct * mp3data,
-                      int *enc_delay, int *enc_padding)
+                      real pcm_l[], real pcm_r[], mp3data_struct * mp3data,
+                      real *enc_delay, real *enc_padding)
 {
     static char out[OUTSIZE_CLIPPED];
     if (hip) {

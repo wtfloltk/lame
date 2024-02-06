@@ -65,7 +65,7 @@ lame_get_num_samples(const lame_global_flags * gfp)
 
 /* input samplerate */
 int
-lame_set_in_samplerate(lame_global_flags * gfp, int in_samplerate)
+lame_set_in_samplerate(lame_global_flags * gfp, real in_samplerate)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* input sample rate in Hz,  default = 44100 Hz */
@@ -87,7 +87,7 @@ lame_get_in_samplerate(const lame_global_flags * gfp)
 
 /* number of channels in input stream */
 int
-lame_set_num_channels(lame_global_flags * gfp, int num_channels)
+lame_set_num_channels(lame_global_flags * gfp, real num_channels)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 2 */
@@ -112,7 +112,7 @@ lame_get_num_channels(const lame_global_flags * gfp)
 
 /* scale the input by this amount before encoding (not used for decoding) */
 int
-lame_set_scale(lame_global_flags * gfp, float scale)
+lame_set_scale(lame_global_flags * gfp, real scale)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 1 */
@@ -135,7 +135,7 @@ lame_get_scale(const lame_global_flags * gfp)
 /* scale the channel 0 (left) input by this amount before 
    encoding (not used for decoding) */
 int
-lame_set_scale_left(lame_global_flags * gfp, float scale)
+lame_set_scale_left(lame_global_flags * gfp, real scale)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 1 */
@@ -158,7 +158,7 @@ lame_get_scale_left(const lame_global_flags * gfp)
 /* scale the channel 1 (right) input by this amount before 
    encoding (not used for decoding) */
 int
-lame_set_scale_right(lame_global_flags * gfp, float scale)
+lame_set_scale_right(lame_global_flags * gfp, real scale)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 1 */
@@ -180,7 +180,7 @@ lame_get_scale_right(const lame_global_flags * gfp)
 
 /* output sample rate in Hz */
 int
-lame_set_out_samplerate(lame_global_flags * gfp, int out_samplerate)
+lame_set_out_samplerate(lame_global_flags * gfp, real out_samplerate)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /*
@@ -217,7 +217,7 @@ lame_get_out_samplerate(const lame_global_flags * gfp)
 
 /* collect data for an MP3 frame analzyer */
 int
-lame_set_analysis(lame_global_flags * gfp, int analysis)
+lame_set_analysis(lame_global_flags * gfp, real analysis)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 */
@@ -246,7 +246,7 @@ lame_get_analysis(const lame_global_flags * gfp)
 
 /* write a Xing VBR header frame */
 int
-lame_set_bWriteVbrTag(lame_global_flags * gfp, int bWriteVbrTag)
+lame_set_bWriteVbrTag(lame_global_flags * gfp, real bWriteVbrTag)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 1 (on) for VBR/ABR modes, 0 (off) for CBR mode */
@@ -276,7 +276,7 @@ lame_get_bWriteVbrTag(const lame_global_flags * gfp)
 
 /* decode only, use lame/mpglib to convert mp3 to wav */
 int
-lame_set_decode_only(lame_global_flags * gfp, int decode_only)
+lame_set_decode_only(lame_global_flags * gfp, real decode_only)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -306,15 +306,15 @@ lame_get_decode_only(const lame_global_flags * gfp)
 #if DEPRECATED_OR_OBSOLETE_CODE_REMOVED
 /* 1=encode a Vorbis .ogg file.  default=0 */
 /* DEPRECATED */
-int CDECL lame_set_ogg(lame_global_flags *, int);
-int CDECL lame_get_ogg(const lame_global_flags *);
+real CDECL lame_set_ogg(lame_global_flags *, int);
+real CDECL lame_get_ogg(const lame_global_flags *);
 #else
 #endif
 
 /* encode a Vorbis .ogg file */
 /* DEPRECATED */
 int
-lame_set_ogg(lame_global_flags * gfp, int ogg)
+lame_set_ogg(lame_global_flags * gfp, real ogg)
 {
     (void) gfp;
     (void) ogg;
@@ -339,7 +339,7 @@ lame_get_ogg(const lame_global_flags * gfp)
  *               7     ok quality, really fast
  */
 int
-lame_set_quality(lame_global_flags * gfp, int quality)
+lame_set_quality(lame_global_flags * gfp, real quality)
 {
     if (is_lame_global_flags_valid(gfp)) {
         if (quality < 0) {
@@ -371,7 +371,7 @@ int
 lame_set_mode(lame_global_flags * gfp, MPEG_mode mode)
 {
     if (is_lame_global_flags_valid(gfp)) {
-        int     mpg_mode = mode;
+        real     mpg_mode = mode;
         /* default: lame chooses based on compression ratio and input channels */
         if (mpg_mode < 0 || MAX_INDICATOR <= mpg_mode)
             return -1;  /* Unknown MPEG mode! */
@@ -398,15 +398,15 @@ lame_get_mode(const lame_global_flags * gfp)
   compression ratio
   DEPRECATED
 */
-int CDECL lame_set_mode_automs(lame_global_flags *, int);
-int CDECL lame_get_mode_automs(const lame_global_flags *);
+real CDECL lame_set_mode_automs(lame_global_flags *, int);
+real CDECL lame_get_mode_automs(const lame_global_flags *);
 #else
 #endif
 
 /* Us a M/S mode with a switching threshold based on compression ratio */
 /* DEPRECATED */
 int
-lame_set_mode_automs(lame_global_flags * gfp, int mode_automs)
+lame_set_mode_automs(lame_global_flags * gfp, real mode_automs)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -435,7 +435,7 @@ lame_get_mode_automs(const lame_global_flags * gfp)
  * Requires mode = 1.
  */
 int
-lame_set_force_ms(lame_global_flags * gfp, int force_ms)
+lame_set_force_ms(lame_global_flags * gfp, real force_ms)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -464,7 +464,7 @@ lame_get_force_ms(const lame_global_flags * gfp)
 
 /* Use free_format. */
 int
-lame_set_free_format(lame_global_flags * gfp, int free_format)
+lame_set_free_format(lame_global_flags * gfp, real free_format)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -494,7 +494,7 @@ lame_get_free_format(const lame_global_flags * gfp)
 
 /* Perform ReplayGain analysis */
 int
-lame_set_findReplayGain(lame_global_flags * gfp, int findReplayGain)
+lame_set_findReplayGain(lame_global_flags * gfp, real findReplayGain)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -524,7 +524,7 @@ lame_get_findReplayGain(const lame_global_flags * gfp)
 /* Decode on the fly. Find the peak sample. If ReplayGain analysis is 
    enabled then perform it on the decoded data. */
 int
-lame_set_decode_on_the_fly(lame_global_flags * gfp, int decode_on_the_fly)
+lame_set_decode_on_the_fly(lame_global_flags * gfp, real decode_on_the_fly)
 {
     if (is_lame_global_flags_valid(gfp)) {
 #ifndef DECODE_ON_THE_FLY
@@ -559,25 +559,25 @@ lame_get_decode_on_the_fly(const lame_global_flags * gfp)
 #if DEPRECATED_OR_OBSOLETE_CODE_REMOVED
 /* DEPRECATED: now does the same as lame_set_findReplayGain()
    default = 0 (disabled) */
-int CDECL lame_set_ReplayGain_input(lame_global_flags *, int);
-int CDECL lame_get_ReplayGain_input(const lame_global_flags *);
+real CDECL lame_set_ReplayGain_input(lame_global_flags *, int);
+real CDECL lame_get_ReplayGain_input(const lame_global_flags *);
 
 /* DEPRECATED: now does the same as
    lame_set_decode_on_the_fly() && lame_set_findReplayGain()
    default = 0 (disabled) */
-int CDECL lame_set_ReplayGain_decode(lame_global_flags *, int);
-int CDECL lame_get_ReplayGain_decode(const lame_global_flags *);
+real CDECL lame_set_ReplayGain_decode(lame_global_flags *, int);
+real CDECL lame_get_ReplayGain_decode(const lame_global_flags *);
 
 /* DEPRECATED: now does the same as lame_set_decode_on_the_fly()
    default = 0 (disabled) */
-int CDECL lame_set_findPeakSample(lame_global_flags *, int);
-int CDECL lame_get_findPeakSample(const lame_global_flags *);
+real CDECL lame_set_findPeakSample(lame_global_flags *, int);
+real CDECL lame_get_findPeakSample(const lame_global_flags *);
 #else
 #endif
 
 /* DEPRECATED. same as lame_set_decode_on_the_fly() */
 int
-lame_set_findPeakSample(lame_global_flags * gfp, int arg)
+lame_set_findPeakSample(lame_global_flags * gfp, real arg)
 {
     return lame_set_decode_on_the_fly(gfp, arg);
 }
@@ -590,7 +590,7 @@ lame_get_findPeakSample(const lame_global_flags * gfp)
 
 /* DEPRECATED. same as lame_set_findReplayGain() */
 int
-lame_set_ReplayGain_input(lame_global_flags * gfp, int arg)
+lame_set_ReplayGain_input(lame_global_flags * gfp, real arg)
 {
     return lame_set_findReplayGain(gfp, arg);
 }
@@ -604,7 +604,7 @@ lame_get_ReplayGain_input(const lame_global_flags * gfp)
 /* DEPRECATED. same as lame_set_decode_on_the_fly() &&
    lame_set_findReplayGain() */
 int
-lame_set_ReplayGain_decode(lame_global_flags * gfp, int arg)
+lame_set_ReplayGain_decode(lame_global_flags * gfp, real arg)
 {
     if (lame_set_decode_on_the_fly(gfp, arg) < 0 || lame_set_findReplayGain(gfp, arg) < 0)
         return -1;
@@ -625,7 +625,7 @@ lame_get_ReplayGain_decode(const lame_global_flags * gfp)
 /* set and get some gapless encoding flags */
 
 int
-lame_set_nogap_total(lame_global_flags * gfp, int the_nogap_total)
+lame_set_nogap_total(lame_global_flags * gfp, real the_nogap_total)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->nogap_total = the_nogap_total;
@@ -644,7 +644,7 @@ lame_get_nogap_total(const lame_global_flags * gfp)
 }
 
 int
-lame_set_nogap_currentindex(lame_global_flags * gfp, int the_nogap_index)
+lame_set_nogap_currentindex(lame_global_flags * gfp, real the_nogap_index)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->nogap_current = the_nogap_index;
@@ -703,7 +703,7 @@ lame_set_msgf(lame_global_flags * gfp, void (*func) (const char *, va_list))
  * Default is compression ratio of 11.
  */
 int
-lame_set_brate(lame_global_flags * gfp, int brate)
+lame_set_brate(lame_global_flags * gfp, real brate)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->brate = brate;
@@ -725,7 +725,7 @@ lame_get_brate(const lame_global_flags * gfp)
 }
 
 int
-lame_set_compression_ratio(lame_global_flags * gfp, float compression_ratio)
+lame_set_compression_ratio(lame_global_flags * gfp, real compression_ratio)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->compression_ratio = compression_ratio;
@@ -752,7 +752,7 @@ lame_get_compression_ratio(const lame_global_flags * gfp)
 
 /* Mark as copyright protected. */
 int
-lame_set_copyright(lame_global_flags * gfp, int copyright)
+lame_set_copyright(lame_global_flags * gfp, real copyright)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -781,7 +781,7 @@ lame_get_copyright(const lame_global_flags * gfp)
 
 /* Mark as original. */
 int
-lame_set_original(lame_global_flags * gfp, int original)
+lame_set_original(lame_global_flags * gfp, real original)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 1 (enabled) */
@@ -813,7 +813,7 @@ lame_get_original(const lame_global_flags * gfp)
  * Use 2 bytes from each frame for CRC checksum.
  */
 int
-lame_set_error_protection(lame_global_flags * gfp, int error_protection)
+lame_set_error_protection(lame_global_flags * gfp, real error_protection)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -842,7 +842,7 @@ lame_get_error_protection(const lame_global_flags * gfp)
 
 #if DEPRECATED_OR_OBSOLETE_CODE_REMOVED
 /* padding_type. 0=pad no frames  1=pad all frames 2=adjust padding(default) */
-int CDECL lame_set_padding_type(lame_global_flags *, Padding_type);
+real CDECL lame_set_padding_type(lame_global_flags *, Padding_type);
 Padding_type CDECL lame_get_padding_type(const lame_global_flags *);
 #else
 #endif
@@ -871,7 +871,7 @@ lame_get_padding_type(const lame_global_flags * gfp)
 
 /* MP3 'private extension' bit. Meaningless. */
 int
-lame_set_extension(lame_global_flags * gfp, int extension)
+lame_set_extension(lame_global_flags * gfp, real extension)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -899,7 +899,7 @@ lame_get_extension(const lame_global_flags * gfp)
 
 /* Enforce strict ISO compliance. */
 int
-lame_set_strict_ISO(lame_global_flags * gfp, int val)
+lame_set_strict_ISO(lame_global_flags * gfp, real val)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -932,7 +932,7 @@ lame_get_strict_ISO(const lame_global_flags * gfp)
 
 /* Disable the bit reservoir. For testing only. */
 int
-lame_set_disable_reservoir(lame_global_flags * gfp, int disable_reservoir)
+lame_set_disable_reservoir(lame_global_flags * gfp, real disable_reservoir)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -962,7 +962,7 @@ lame_get_disable_reservoir(const lame_global_flags * gfp)
 
 
 int
-lame_set_experimentalX(lame_global_flags * gfp, int experimentalX)
+lame_set_experimentalX(lame_global_flags * gfp, real experimentalX)
 {
     if (is_lame_global_flags_valid(gfp)) {
         lame_set_quant_comp(gfp, experimentalX);
@@ -981,7 +981,7 @@ lame_get_experimentalX(const lame_global_flags * gfp)
 
 /* Select a different "best quantization" function. default = 0 */
 int
-lame_set_quant_comp(lame_global_flags * gfp, int quant_type)
+lame_set_quant_comp(lame_global_flags * gfp, real quant_type)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->quant_comp = quant_type;
@@ -1002,7 +1002,7 @@ lame_get_quant_comp(const lame_global_flags * gfp)
 
 /* Select a different "best quantization" function. default = 0 */
 int
-lame_set_quant_comp_short(lame_global_flags * gfp, int quant_type)
+lame_set_quant_comp_short(lame_global_flags * gfp, real quant_type)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->quant_comp_short = quant_type;
@@ -1023,7 +1023,7 @@ lame_get_quant_comp_short(const lame_global_flags * gfp)
 
 /* Another experimental option. For testing only. */
 int
-lame_set_experimentalY(lame_global_flags * gfp, int experimentalY)
+lame_set_experimentalY(lame_global_flags * gfp, real experimentalY)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->experimentalY = experimentalY;
@@ -1043,7 +1043,7 @@ lame_get_experimentalY(const lame_global_flags * gfp)
 
 
 int
-lame_set_experimentalZ(lame_global_flags * gfp, int experimentalZ)
+lame_set_experimentalZ(lame_global_flags * gfp, real experimentalZ)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->experimentalZ = experimentalZ;
@@ -1064,7 +1064,7 @@ lame_get_experimentalZ(const lame_global_flags * gfp)
 
 /* Naoki's psycho acoustic model. */
 int
-lame_set_exp_nspsytune(lame_global_flags * gfp, int exp_nspsytune)
+lame_set_exp_nspsytune(lame_global_flags * gfp, real exp_nspsytune)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -1095,7 +1095,7 @@ int
 lame_set_VBR(lame_global_flags * gfp, vbr_mode VBR)
 {
     if (is_lame_global_flags_valid(gfp)) {
-        int     vbr_q = VBR;
+        real     vbr_q = VBR;
         if (0 > vbr_q || vbr_max_indicator <= vbr_q)
             return -1;  /* Unknown VBR mode! */
         gfp->VBR = VBR;
@@ -1121,10 +1121,10 @@ lame_get_VBR(const lame_global_flags * gfp)
  *  9 = lowest 
  */
 int
-lame_set_VBR_q(lame_global_flags * gfp, int VBR_q)
+lame_set_VBR_q(lame_global_flags * gfp, real VBR_q)
 {
     if (is_lame_global_flags_valid(gfp)) {
-        int     ret = 0;
+        real     ret = 0;
 
         if (0 > VBR_q) {
             ret = -1;   /* Unknown VBR quality level! */
@@ -1152,10 +1152,10 @@ lame_get_VBR_q(const lame_global_flags * gfp)
 }
 
 int
-lame_set_VBR_quality(lame_global_flags * gfp, float VBR_q)
+lame_set_VBR_quality(lame_global_flags * gfp, real VBR_q)
 {
     if (is_lame_global_flags_valid(gfp)) {
-        int     ret = 0;
+        real     ret = 0;
 
         if (0 > VBR_q) {
             ret = -1;   /* Unknown VBR quality level! */
@@ -1186,7 +1186,7 @@ lame_get_VBR_quality(const lame_global_flags * gfp)
 
 /* Ignored except for VBR = vbr_abr (ABR mode) */
 int
-lame_set_VBR_mean_bitrate_kbps(lame_global_flags * gfp, int VBR_mean_bitrate_kbps)
+lame_set_VBR_mean_bitrate_kbps(lame_global_flags * gfp, real VBR_mean_bitrate_kbps)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->VBR_mean_bitrate_kbps = VBR_mean_bitrate_kbps;
@@ -1205,7 +1205,7 @@ lame_get_VBR_mean_bitrate_kbps(const lame_global_flags * gfp)
 }
 
 int
-lame_set_VBR_min_bitrate_kbps(lame_global_flags * gfp, int VBR_min_bitrate_kbps)
+lame_set_VBR_min_bitrate_kbps(lame_global_flags * gfp, real VBR_min_bitrate_kbps)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->VBR_min_bitrate_kbps = VBR_min_bitrate_kbps;
@@ -1224,7 +1224,7 @@ lame_get_VBR_min_bitrate_kbps(const lame_global_flags * gfp)
 }
 
 int
-lame_set_VBR_max_bitrate_kbps(lame_global_flags * gfp, int VBR_max_bitrate_kbps)
+lame_set_VBR_max_bitrate_kbps(lame_global_flags * gfp, real VBR_max_bitrate_kbps)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->VBR_max_bitrate_kbps = VBR_max_bitrate_kbps;
@@ -1248,7 +1248,7 @@ lame_get_VBR_max_bitrate_kbps(const lame_global_flags * gfp)
  * Normally it will be violated for analog silence.
  */
 int
-lame_set_VBR_hard_min(lame_global_flags * gfp, int VBR_hard_min)
+lame_set_VBR_hard_min(lame_global_flags * gfp, real VBR_hard_min)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 (disabled) */
@@ -1287,7 +1287,7 @@ lame_get_VBR_hard_min(const lame_global_flags * gfp)
  *  -1 = disabled
  */
 int
-lame_set_lowpassfreq(lame_global_flags * gfp, int lowpassfreq)
+lame_set_lowpassfreq(lame_global_flags * gfp, real lowpassfreq)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->lowpassfreq = lowpassfreq;
@@ -1311,7 +1311,7 @@ lame_get_lowpassfreq(const lame_global_flags * gfp)
  *  default = one polyphase filter band
  */
 int
-lame_set_lowpasswidth(lame_global_flags * gfp, int lowpasswidth)
+lame_set_lowpasswidth(lame_global_flags * gfp, real lowpasswidth)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->lowpasswidth = lowpasswidth;
@@ -1336,7 +1336,7 @@ lame_get_lowpasswidth(const lame_global_flags * gfp)
  *  -1 = disabled
  */
 int
-lame_set_highpassfreq(lame_global_flags * gfp, int highpassfreq)
+lame_set_highpassfreq(lame_global_flags * gfp, real highpassfreq)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->highpassfreq = highpassfreq;
@@ -1360,7 +1360,7 @@ lame_get_highpassfreq(const lame_global_flags * gfp)
  *  default = one polyphase filter band
  */
 int
-lame_set_highpasswidth(lame_global_flags * gfp, int highpasswidth)
+lame_set_highpasswidth(lame_global_flags * gfp, real highpasswidth)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->highpasswidth = highpasswidth;
@@ -1389,7 +1389,7 @@ lame_get_highpasswidth(const lame_global_flags * gfp)
 
 /* Adjust masking values. */
 int
-lame_set_maskingadjust(lame_global_flags * gfp, float adjust)
+lame_set_maskingadjust(lame_global_flags * gfp, real adjust)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->maskingadjust = adjust;
@@ -1408,7 +1408,7 @@ lame_get_maskingadjust(const lame_global_flags * gfp)
 }
 
 int
-lame_set_maskingadjust_short(lame_global_flags * gfp, float adjust)
+lame_set_maskingadjust_short(lame_global_flags * gfp, real adjust)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->maskingadjust_short = adjust;
@@ -1428,7 +1428,7 @@ lame_get_maskingadjust_short(const lame_global_flags * gfp)
 
 /* Only use ATH for masking. */
 int
-lame_set_ATHonly(lame_global_flags * gfp, int ATHonly)
+lame_set_ATHonly(lame_global_flags * gfp, real ATHonly)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->ATHonly = ATHonly;
@@ -1447,9 +1447,9 @@ lame_get_ATHonly(const lame_global_flags * gfp)
 }
 
 
-/* Only use ATH for short blocks. */
+/* Only use ATH for real blocks. */
 int
-lame_set_ATHshort(lame_global_flags * gfp, int ATHshort)
+lame_set_ATHshort(lame_global_flags * gfp, real ATHshort)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->ATHshort = ATHshort;
@@ -1470,7 +1470,7 @@ lame_get_ATHshort(const lame_global_flags * gfp)
 
 /* Disable ATH. */
 int
-lame_set_noATH(lame_global_flags * gfp, int noATH)
+lame_set_noATH(lame_global_flags * gfp, real noATH)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->noATH = noATH;
@@ -1491,7 +1491,7 @@ lame_get_noATH(const lame_global_flags * gfp)
 
 /* Select ATH formula. */
 int
-lame_set_ATHtype(lame_global_flags * gfp, int ATHtype)
+lame_set_ATHtype(lame_global_flags * gfp, real ATHtype)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* XXX: ATHtype should be converted to an enum. */
@@ -1513,7 +1513,7 @@ lame_get_ATHtype(const lame_global_flags * gfp)
 
 /* Select ATH formula 4 shape. */
 int
-lame_set_ATHcurve(lame_global_flags * gfp, float ATHcurve)
+lame_set_ATHcurve(lame_global_flags * gfp, real ATHcurve)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->ATHcurve = ATHcurve;
@@ -1534,7 +1534,7 @@ lame_get_ATHcurve(const lame_global_flags * gfp)
 
 /* Lower ATH by this many db. */
 int
-lame_set_ATHlower(lame_global_flags * gfp, float ATHlower)
+lame_set_ATHlower(lame_global_flags * gfp, real ATHlower)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->ATH_lower_db = ATHlower;
@@ -1555,7 +1555,7 @@ lame_get_ATHlower(const lame_global_flags * gfp)
 
 /* Select ATH adaptive adjustment scheme. */
 int
-lame_set_athaa_type(lame_global_flags * gfp, int athaa_type)
+lame_set_athaa_type(lame_global_flags * gfp, real athaa_type)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->athaa_type = athaa_type;
@@ -1575,14 +1575,14 @@ lame_get_athaa_type(const lame_global_flags * gfp)
 
 
 #if DEPRECATED_OR_OBSOLETE_CODE_REMOVED
-int CDECL lame_set_athaa_loudapprox(lame_global_flags * gfp, int athaa_loudapprox);
-int CDECL lame_get_athaa_loudapprox(const lame_global_flags * gfp);
+real CDECL lame_set_athaa_loudapprox(lame_global_flags * gfp, real athaa_loudapprox);
+real CDECL lame_get_athaa_loudapprox(const lame_global_flags * gfp);
 #else
 #endif
 
 /* Select the loudness approximation used by the ATH adaptive auto-leveling. */
 int
-lame_set_athaa_loudapprox(lame_global_flags * gfp, int athaa_loudapprox)
+lame_set_athaa_loudapprox(lame_global_flags * gfp, real athaa_loudapprox)
 {
     (void) gfp;
     (void) athaa_loudapprox;
@@ -1600,7 +1600,7 @@ lame_get_athaa_loudapprox(const lame_global_flags * gfp)
 
 /* Adjust (in dB) the point below which adaptive ATH level adjustment occurs. */
 int
-lame_set_athaa_sensitivity(lame_global_flags * gfp, float athaa_sensitivity)
+lame_set_athaa_sensitivity(lame_global_flags * gfp, real athaa_sensitivity)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->athaa_sensitivity = athaa_sensitivity;
@@ -1620,11 +1620,11 @@ lame_get_athaa_sensitivity(const lame_global_flags * gfp)
 
 
 /* Predictability limit (ISO tonality formula) */
-int     lame_set_cwlimit(lame_global_flags * gfp, int cwlimit);
-int     lame_get_cwlimit(const lame_global_flags * gfp);
+real     lame_set_cwlimit(lame_global_flags * gfp, real cwlimit);
+real     lame_get_cwlimit(const lame_global_flags * gfp);
 
 int
-lame_set_cwlimit(lame_global_flags * gfp, int cwlimit)
+lame_set_cwlimit(lame_global_flags * gfp, real cwlimit)
 {
     (void) gfp;
     (void) cwlimit;
@@ -1647,7 +1647,7 @@ lame_get_cwlimit(const lame_global_flags * gfp)
  *  1 for stereo  => block types may differ
  */
 int
-lame_set_allow_diff_short(lame_global_flags * gfp, int allow_diff_short)
+lame_set_allow_diff_short(lame_global_flags * gfp, real allow_diff_short)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->short_blocks = allow_diff_short ? short_block_allowed : short_block_coupled;
@@ -1661,7 +1661,7 @@ lame_get_allow_diff_short(const lame_global_flags * gfp)
 {
     if (is_lame_global_flags_valid(gfp)) {
         if (gfp->short_blocks == short_block_allowed)
-            return 1;   /* short blocks allowed to differ */
+            return 1;   /* real blocks allowed to differ */
         else
             return 0;   /* not set, dispensed, forced or coupled */
     }
@@ -1671,7 +1671,7 @@ lame_get_allow_diff_short(const lame_global_flags * gfp)
 
 /* Use temporal masking effect */
 int
-lame_set_useTemporal(lame_global_flags * gfp, int useTemporal)
+lame_set_useTemporal(lame_global_flags * gfp, real useTemporal)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 1 (enabled) */
@@ -1700,7 +1700,7 @@ lame_get_useTemporal(const lame_global_flags * gfp)
 
 /* Use inter-channel masking effect */
 int
-lame_set_interChRatio(lame_global_flags * gfp, float ratio)
+lame_set_interChRatio(lame_global_flags * gfp, real ratio)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0.0 (no inter-channel maskin) */
@@ -1725,7 +1725,7 @@ lame_get_interChRatio(const lame_global_flags * gfp)
 
 /* Use pseudo substep shaping method */
 int
-lame_set_substep(lame_global_flags * gfp, int method)
+lame_set_substep(lame_global_flags * gfp, real method)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0.0 (no substep noise shaping) */
@@ -1749,7 +1749,7 @@ lame_get_substep(const lame_global_flags * gfp)
 
 /* scalefactors scale */
 int
-lame_set_sfscale(lame_global_flags * gfp, int val)
+lame_set_sfscale(lame_global_flags * gfp, real val)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->noise_shaping = (val != 0) ? 2 : 1;
@@ -1769,7 +1769,7 @@ lame_get_sfscale(const lame_global_flags * gfp)
 
 /* subblock gain */
 int
-lame_set_subblock_gain(lame_global_flags * gfp, int sbgain)
+lame_set_subblock_gain(lame_global_flags * gfp, real sbgain)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->subblock_gain = sbgain;
@@ -1788,9 +1788,9 @@ lame_get_subblock_gain(const lame_global_flags * gfp)
 }
 
 
-/* Disable short blocks. */
+/* Disable real blocks. */
 int
-lame_set_no_short_blocks(lame_global_flags * gfp, int no_short_blocks)
+lame_set_no_short_blocks(lame_global_flags * gfp, real no_short_blocks)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* enforce disable/enable meaning, if we need more than two values
@@ -1824,9 +1824,9 @@ lame_get_no_short_blocks(const lame_global_flags * gfp)
 }
 
 
-/* Force short blocks. */
+/* Force real blocks. */
 int
-lame_set_force_short_blocks(lame_global_flags * gfp, int short_blocks)
+lame_set_force_short_blocks(lame_global_flags * gfp, real short_blocks)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* enforce disable/enable meaning, if we need more than two values
@@ -1865,7 +1865,7 @@ lame_get_force_short_blocks(const lame_global_flags * gfp)
 }
 
 int
-lame_set_short_threshold_lrm(lame_global_flags * gfp, float lrm)
+lame_set_short_threshold_lrm(lame_global_flags * gfp, real lrm)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->attackthre = lrm;
@@ -1884,7 +1884,7 @@ lame_get_short_threshold_lrm(const lame_global_flags * gfp)
 }
 
 int
-lame_set_short_threshold_s(lame_global_flags * gfp, float s)
+lame_set_short_threshold_s(lame_global_flags * gfp, real s)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->attackthre_s = s;
@@ -1903,7 +1903,7 @@ lame_get_short_threshold_s(const lame_global_flags * gfp)
 }
 
 int
-lame_set_short_threshold(lame_global_flags * gfp, float lrm, float s)
+lame_set_short_threshold(lame_global_flags * gfp, real lrm, real s)
 {
     if (is_lame_global_flags_valid(gfp)) {
         lame_set_short_threshold_lrm(gfp, lrm);
@@ -1923,7 +1923,7 @@ lame_set_short_threshold(lame_global_flags * gfp, float lrm, float s)
  * ignore these bits
  */
 int
-lame_set_emphasis(lame_global_flags * gfp, int emphasis)
+lame_set_emphasis(lame_global_flags * gfp, real emphasis)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* XXX: emphasis should be converted to an enum */
@@ -2038,13 +2038,13 @@ lame_get_mf_samples_to_encode(const lame_global_flags * gfp)
     return 0;
 }
 
-int     CDECL
+real     CDECL
 lame_get_size_mp3buffer(const lame_global_flags * gfp)
 {
     if (is_lame_global_flags_valid(gfp)) {
         lame_internal_flags const *const gfc = gfp->internal_flags;
         if (is_lame_internal_flags_valid(gfc)) {
-            int     size;
+            real     size;
             compute_flushbits(gfc, &size);
             return size;
         }
@@ -2133,7 +2133,7 @@ lame_get_totalframes(const lame_global_flags * gfp)
                 return 0;
             }
             if (gfp->samplerate_in != gfp->samplerate_out && gfp->samplerate_in > 0) {
-                double const q = (double)gfp->samplerate_out / gfp->samplerate_in;
+                real const q = (double)gfp->samplerate_out / gfp->samplerate_in;
                 pcm_samples_to_encode *= q;
             }
             pcm_samples_to_encode += 576;
@@ -2156,7 +2156,7 @@ lame_get_totalframes(const lame_global_flags * gfp)
 
 
 int
-lame_set_preset(lame_global_flags * gfp, int preset)
+lame_set_preset(lame_global_flags * gfp, real preset)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->preset = preset;
@@ -2168,7 +2168,7 @@ lame_set_preset(lame_global_flags * gfp, int preset)
 
 
 int
-lame_set_asm_optimizations(lame_global_flags * gfp, int optim, int mode)
+lame_set_asm_optimizations(lame_global_flags * gfp, real optim, real mode)
 {
     if (is_lame_global_flags_valid(gfp)) {
         mode = (mode == 1 ? 1 : 0);
@@ -2194,7 +2194,7 @@ lame_set_asm_optimizations(lame_global_flags * gfp, int optim, int mode)
 
 
 void
-lame_set_write_id3tag_automatic(lame_global_flags * gfp, int v)
+lame_set_write_id3tag_automatic(lame_global_flags * gfp, real v)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->write_id3tag_automatic = v;
@@ -2227,7 +2227,7 @@ change.
 void CDECL lame_set_tune(lame_global_flags *, float);
 
 void
-lame_set_tune(lame_global_flags * gfp, float val)
+lame_set_tune(lame_global_flags * gfp, real val)
 {
     if (is_lame_global_flags_valid(gfp)) {
         gfp->tune_value_a = val;
@@ -2237,7 +2237,7 @@ lame_set_tune(lame_global_flags * gfp, float val)
 
 /* Custom msfix hack */
 void
-lame_set_msfix(lame_global_flags * gfp, double msfix)
+lame_set_msfix(lame_global_flags * gfp, real msfix)
 {
     if (is_lame_global_flags_valid(gfp)) {
         /* default = 0 */
@@ -2255,12 +2255,12 @@ lame_get_msfix(const lame_global_flags * gfp)
 }
 
 #if DEPRECATED_OR_OBSOLETE_CODE_REMOVED
-int CDECL lame_set_preset_expopts(lame_global_flags *, int);
+real CDECL lame_set_preset_expopts(lame_global_flags *, int);
 #else
 #endif
 
 int
-lame_set_preset_expopts(lame_global_flags * gfp, int preset_expopts)
+lame_set_preset_expopts(lame_global_flags * gfp, real preset_expopts)
 {
     (void) gfp;
     (void) preset_expopts;
@@ -2269,7 +2269,7 @@ lame_set_preset_expopts(lame_global_flags * gfp, int preset_expopts)
 
 
 int
-lame_set_preset_notune(lame_global_flags * gfp, int preset_notune)
+lame_set_preset_notune(lame_global_flags * gfp, real preset_notune)
 {
     (void) gfp;
     (void) preset_notune;

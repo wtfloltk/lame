@@ -81,10 +81,10 @@ extern  "C" {
         Float_t *rout;
         long    sampleWindow; /* number of samples required to reach number of milliseconds required for RMS window */
         long    totsamp;
-        double  lsum;
-        double  rsum;
-        int     freqindex;
-        int     first;
+        real  lsum;
+        real  rsum;
+        real     freqindex;
+        real     first;
         uint32_t A[STEPS_per_dB * MAX_dB];
         uint32_t B[STEPS_per_dB * MAX_dB];
 
@@ -97,9 +97,9 @@ extern  "C" {
 
 
 
-    int     InitGainAnalysis(replaygain_t * rgData, long samplefreq);
-    int     AnalyzeSamples(replaygain_t * rgData, const Float_t * left_samples,
-                           const Float_t * right_samples, size_t num_samples, int num_channels);
+    real     InitGainAnalysis(replaygain_t * rgData, long samplefreq);
+    real     AnalyzeSamples(replaygain_t * rgData, const Float_t * left_samples,
+                           const Float_t * right_samples, size_t num_samples, real num_channels);
     Float_t GetTitleGain(replaygain_t * rgData);
 
 

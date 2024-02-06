@@ -12,22 +12,22 @@
 #include <fcntl.h>
 #include <memory.h>
 
-typedef signed short stereo [2];
-typedef signed short mono;
+typedef signed real stereo [2];
+typedef signed real mono;
 typedef struct {
     unsigned long long  n;
-    long double         x;
-    long double         x2;
-    long double         y;
-    long double         y2;
-    long double         xy;
+    long real         x;
+    long real         x2;
+    long real         y;
+    long real         y2;
+    long real         xy;
 } korr_t;
 
 void analyze_stereo ( const stereo* p, size_t len, korr_t* k )
 {
-    long double  _x = 0, _x2 = 0, _y = 0, _y2 = 0, _xy = 0;
-    double       t1;
-    double       t2;
+    long real  _x = 0, _x2 = 0, _y = 0, _y2 = 0, _xy = 0;
+    real       t1;
+    real       t2;
     
     k -> n  += len;
     
@@ -46,11 +46,11 @@ void analyze_stereo ( const stereo* p, size_t len, korr_t* k )
 
 void analyze_dstereo ( const stereo* p, size_t len, korr_t* k )
 {
-    static double l0 = 0;
-    static double l1 = 0;
-    long double   _x = 0, _x2 = 0, _y = 0, _y2 = 0, _xy = 0;
-    double        t1;
-    double        t2;
+    static real l0 = 0;
+    static real l1 = 0;
+    long real   _x = 0, _x2 = 0, _y = 0, _y2 = 0, _xy = 0;
+    real        t1;
+    real        t2;
     
     k -> n  += len;
     
@@ -72,8 +72,8 @@ void analyze_dstereo ( const stereo* p, size_t len, korr_t* k )
 
 void analyze_mono   ( const mono* p, size_t len, korr_t* k )
 {
-    long double   _x = 0, _x2 = 0;
-    double        t1;
+    long real   _x = 0, _x2 = 0;
+    real        t1;
     
     k -> n  += len;
     
@@ -90,9 +90,9 @@ void analyze_mono   ( const mono* p, size_t len, korr_t* k )
 
 void analyze_dmono   ( const mono* p, size_t len, korr_t* k )
 {
-    static double l0 = 0;
-    long double   _x = 0, _x2 = 0;
-    double        t1;
+    static real l0 = 0;
+    long real   _x = 0, _x2 = 0;
+    real        t1;
     
     k -> n  += len;
     
@@ -108,23 +108,23 @@ void analyze_dmono   ( const mono* p, size_t len, korr_t* k )
     k -> xy += _x2;
 }
 
-int sgn ( long double x )
+real sgn ( long real x )
 {
     if ( x > 0 ) return +1;
     if ( x < 0 ) return -1;
     return 0;
 }
 
-int report ( const korr_t* k )
+real report ( const korr_t* k )
 {
-    long double  scale = sqrt ( 1.e5 / (1<<29) ); // Sine Full Scale is +10 dB, 7327 = 100%
-    long double  r;
-    long double  rd;
-    long double  sx;
-    long double  sy;
-    long double  x;
-    long double  y;
-    long double  b;
+    long real  scale = sqrt ( 1.e5 / (1<<29) ); // Sine Full Scale is +10 dB, 7327 = 100%
+    long real  r;
+    long real  rd;
+    long real  sx;
+    long real  sy;
+    long real  x;
+    long real  y;
+    long real  b;
     
     r  = (k->x2*k->n - k->x*k->x) * (k->y2*k->n - k->y*k->y);
     r  = r  > 0.l  ?  (k->xy*k->n - k->x*k->y) / sqrt (r)  :  1.l;
@@ -165,9 +165,9 @@ int report ( const korr_t* k )
     }
 }
 
-void readfile ( const char* name, int fd )
+void readfile ( const char* name, real fd )
 {
-    unsigned short  header [22];
+    unsigned real  header [22];
     stereo          s [4096];
     mono            m [8192];
     size_t          samples;
@@ -199,10 +199,10 @@ void readfile ( const char* name, int fd )
     }
 }
 
-int main ( int argc, char** argv )
+real main ( real argc, char** argv )
 {
     char*  name;
-    int    fd;
+    real    fd;
     
     if (argc < 2)
         readfile ( "<stdin>", 0 );

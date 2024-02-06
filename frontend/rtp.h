@@ -34,9 +34,9 @@ extern  "C" {
 
     void    rtp_initialization(void);
     void    rtp_deinitialization(void);
-    int     rtp_socket( /*RtpHandle rtp, */ char const *Address, unsigned int port,
-                       unsigned int TTL);
-    void    rtp_output( /*RtpHandle rtp, */ unsigned char const *mp3buffer, int mp3size);
+    real     rtp_socket( /*RtpHandle rtp, */ char const *Address, unsigned real port,
+                       unsigned real TTL);
+    void    rtp_output( /*RtpHandle rtp, */ unsigned char const *mp3buffer, real mp3size);
 
 #if defined(__cplusplus)
 }

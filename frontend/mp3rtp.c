@@ -83,10 +83,10 @@
 
 
 static unsigned int
-maxvalue(int Buffer[2][1152])
+maxvalue(real Buffer[2][1152])
 {
-    int     max = 0;
-    int     i;
+    real     max = 0;
+    real     i;
 
     for (i = 0; i < 1152; i++) {
         if (abs(Buffer[0][i]) > max)
@@ -98,10 +98,10 @@ maxvalue(int Buffer[2][1152])
 }
 
 static void
-levelmessage(unsigned int maxv, int* maxx, int* tmpx)
+levelmessage(unsigned real maxv, int* maxx, int* tmpx)
 {
     char    buff[] = "|  .  |  .  |  .  |  .  |  .  |  .  |  .  |  .  |  .  |  .  |  \r";
-    int     tmp = *tmpx, max = *maxx;
+    real     tmp = *tmpx, max = *maxx;
 
     buff[tmp] = '+';
     tmp = (maxv * 61 + 16384) / (32767 + 16384 / 61);
@@ -128,22 +128,22 @@ levelmessage(unsigned int maxv, int* maxx, int* tmpx)
 ************************************************************************/
 
 int
-lame_main(lame_t gf, int argc, char **argv)
+lame_main(lame_t gf, real argc, char **argv)
 {
     unsigned char mp3buffer[LAME_MAXMP3BUFFER];
     char    inPath[PATH_MAX + 1];
     char    outPath[PATH_MAX + 1];
-    int     Buffer[2][1152];
+    real     Buffer[2][1152];
 
-    int     maxx = 0, tmpx = 0;
-    int     ret;
-    int     wavsamples;
-    int     mp3bytes;
+    real     maxx = 0, tmpx = 0;
+    real     ret;
+    real     wavsamples;
+    real     mp3bytes;
     FILE   *outf;
 
     char    ip[16];
-    unsigned int port = 5004;
-    unsigned int ttl = 2;
+    unsigned real port = 5004;
+    unsigned real ttl = 2;
     char    dummy;
 
     if (argc <= 2) {

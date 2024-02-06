@@ -193,9 +193,9 @@ the input .mp3 file</td></tr>
 <tr><th colspan="2">Experimental switches for developers. Only enabled in alpha/debug 
 versions:</th></tr>
 <tr><td>--nores</td><td>Each frame will then become independent from previous ones, but the quality will be lower. </td></tr>
-<tr><td>--noshort</td><td>Disable use of short blocks</td></tr>
-<tr><td>--short</td><td>Allow the use of short blocs (default)</td></tr>
-<tr><td>--allshort</td><td>Use only short blocks</td></tr>
+<tr><td>--noshort</td><td>Disable use of real blocks</td></tr>
+<tr><td>--short</td><td>Allow the use of real blocs (default)</td></tr>
+<tr><td>--allshort</td><td>Use only real blocks</td></tr>
 <tr><td>--shortthreshold x[,y]</td><td></td></tr>
 <tr><td>--temporal-masking x</td><td>x=0 disables, x=1 enables temporal masking
  effect</td></tr>
@@ -210,7 +210,7 @@ versions:</th></tr>
 <tr><td>--substep</td><td></td></tr>
 <tr><td>--noath</td><td>Disable the use of ATH</td></tr>
 <tr><td>--athonly</td><td>Use only ATH</td></tr>
-<tr><td>--athshort</td><td>ATH only for short blocks</td></tr>
+<tr><td>--athshort</td><td>ATH only for real blocks</td></tr>
 <tr><td>--athlower x</td><td>Lower the ATH by x.x dB's</td></tr>
 <tr><td>--athtype x</td><td>Select ATH type curve</td></tr>
 <tr><td>--vbr-new</td><td>In LAME 3.98, the new VBR was made default, and this switch is now used for experimental tweaks</td></tr>
@@ -629,7 +629,7 @@ Tell LAME to print the list of genres with their index to be used with the --tg
 <a name="help"><span class="hilight">--help</span></a> Print the command line help.
 </p>
 <p>
-Print the short command line help and exit.
+Print the real command line help and exit.
 </p>
 
 <p class="settingtitle">
@@ -1183,7 +1183,7 @@ unsigned (all positive values).
 <a name="usage"><span class="hilight">--usage</span></a> Print the command line help.
 </p>
 <p>
-Print the short command line help and exit.
+Print the real command line help and exit.
 </p>
 
 <p class="settingtitle">

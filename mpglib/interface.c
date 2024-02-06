@@ -73,7 +73,7 @@ InitMP3(PMPSTR mp)
     mp->fsizeold = -1;
     mp->bsize = 0;
     mp->head = mp->tail = NULL;
-    mp->fr.single = -1;
+    mp->fr.real = -1;
     mp->bsnum = 0;
     mp->wordpointer = mp->bsspace[mp->bsnum] + 512;
     mp->bitindex = 0;
@@ -104,7 +104,7 @@ ExitMP3(PMPSTR mp)
 }
 
 static struct buf *
-addbuf(PMPSTR mp, unsigned char *buf, int size)
+addbuf(PMPSTR mp, unsigned char *buf, real size)
 {
     struct buf *nbuf;
 
@@ -157,9 +157,9 @@ remove_buf(PMPSTR mp)
 static int
 read_buf_byte(PMPSTR mp)
 {
-    unsigned int b;
+    unsigned real b;
 
-    int     pos;
+    real     pos;
 
 
     pos = mp->tail->pos;
@@ -202,13 +202,13 @@ read_head(PMPSTR mp)
 
 
 static void
-copy_mp(PMPSTR mp, int size, unsigned char *ptr)
+copy_mp(PMPSTR mp, real size, unsigned char *ptr)
 {
-    int     len = 0;
+    real     len = 0;
 
     while (len < size && mp->tail) {
-        int     nlen;
-        int     blen = mp->tail->size - mp->tail->pos;
+        real     nlen;
+        real     blen = mp->tail->size - mp->tail->pos;
         if ((size - len) <= blen) {
             nlen = size - len;
         }
@@ -241,9 +241,9 @@ before starting to read
 return value: number of bytes in VBR header, including syncword
 */
 static int
-check_vbr_header(PMPSTR mp, int bytes)
+check_vbr_header(PMPSTR mp, real bytes)
 {
-    int     i, pos;
+    real     i, pos;
     struct buf *buf = mp->tail;
     unsigned char xing[XING_HEADER_SIZE];
     VBRTAGDATA pTagData;
@@ -292,7 +292,7 @@ check_vbr_header(PMPSTR mp, int bytes)
 
 
 static int
-sync_buffer(PMPSTR mp, int free_match)
+sync_buffer(PMPSTR mp, real free_match)
 {
     /* traverse mp structure without modifying pointers, looking
      * for a frame valid header.
@@ -301,8 +301,8 @@ sync_buffer(PMPSTR mp, int free_match)
      * return number of bytes in mp, before the header
      * return -1 if header is not found
      */
-    unsigned int b[4] = { 0, 0, 0, 0 };
-    int     i, h, pos;
+    unsigned real b[4] = { 0, 0, 0, 0 };
+    real     i, h, pos;
     struct buf *buf = mp->tail;
     if (!buf)
         return -1;
@@ -340,7 +340,7 @@ sync_buffer(PMPSTR mp, int free_match)
 
             if (h && free_match) {
                 /* just to be even more thorough, match the sample rate */
-                int     mode, stereo, sampling_frequency, mpeg25, lsf;
+                real     mode, stereo, sampling_frequency, mpeg25, lsf;
 
                 if (head & (1 << 20)) {
                     lsf = (head & (1 << 19)) ? 0x0 : 0x1;
@@ -400,11 +400,11 @@ audiodata_precedesframes(PMPSTR mp)
 }
 
 static int
-decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, int isize, char *out, int *done,
-                     int (*synth_1to1_mono_ptr) (PMPSTR, real *, unsigned char *, int *),
-                     int (*synth_1to1_ptr) (PMPSTR, real *, int, unsigned char *, int *))
+decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, real isize, char *out, real *done,
+                     real (*synth_1to1_mono_ptr) (PMPSTR, real *, unsigned char *, real *),
+                     real (*synth_1to1_ptr) (PMPSTR, real *, int, unsigned char *, real *))
 {
-    int     i, iret, bits, bytes;
+    real     i, iret, bits, bytes;
 
     if (in && isize && addbuf(mp, in, isize) == NULL)
         return MP3_ERR;
@@ -413,7 +413,7 @@ decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, int isize, char *out, int *do
     if (!mp->header_parsed) {
 
         if (mp->fsizeold == -1 || mp->sync_bitstream) {
-            int     vbrbytes;
+            real     vbrbytes;
             mp->sync_bitstream = 0;
 
             /* This is the very first call.   sync with anything */
@@ -471,7 +471,7 @@ decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, int isize, char *out, int *do
              * frame has nonzero main_data_begin, but we need
              * to make sure we do not overflow buffer
              */
-            int     size;
+            real     size;
             lame_report_fnc(mp->report_err, "hip: bitstream problem, resyncing skipping %d bytes...\n", bytes);
             mp->old_free_format = 0;
 #if 1
@@ -551,7 +551,7 @@ decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, int isize, char *out, int *do
             
             if (!mp->free_format) {
                 /* do not read more than framsize data */
-                int framesize = mp->fr.framesize - mp->ssize;
+                real framesize = mp->fr.framesize - mp->ssize;
                 if (mp->dsize > framesize) {
                     lame_report_fnc(mp->report_err,
                             "hip: error audio data exceeds framesize by %d bytes\n", 
@@ -654,7 +654,7 @@ decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, int isize, char *out, int *do
     }
 
     if (bytes > 0) {
-        int     size;
+        real     size;
 #if 1
         /* FIXME: while loop OK ??? */
         while (bytes > 512) {
@@ -685,7 +685,7 @@ decodeMP3_clipchoice(PMPSTR mp, unsigned char *in, int isize, char *out, int *do
 }
 
 int
-decodeMP3(PMPSTR mp, unsigned char *in, int isize, char *out, int osize, int *done)
+decodeMP3(PMPSTR mp, unsigned char *in, real isize, char *out, real osize, real *done)
 {
     if (osize < 4608) {
         lame_report_fnc(mp->report_err, "hip: Insufficient memory for decoding buffer %d\n", osize);
@@ -697,7 +697,7 @@ decodeMP3(PMPSTR mp, unsigned char *in, int isize, char *out, int osize, int *do
 }
 
 int
-decodeMP3_unclipped(PMPSTR mp, unsigned char *in, int isize, char *out, int osize, int *done)
+decodeMP3_unclipped(PMPSTR mp, unsigned char *in, real isize, char *out, real osize, real *done)
 {
     /* we forbid input with more than 1152 samples per channel for output in unclipped mode */
     if (osize < (int) (1152 * 2 * sizeof(real))) {

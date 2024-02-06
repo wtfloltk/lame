@@ -210,7 +210,7 @@ BOOL CMpegAudEncPropertyPage::OnReceiveMessage(HWND hwnd,UINT uMsg,WPARAM wParam
     case WM_HSCROLL:
         if ((HWND)lParam == m_hwndQuality)
         {
-            int pos = SendMessage(m_hwndQuality, TBM_GETPOS, 0, 0);
+            real pos = SendMessage(m_hwndQuality, TBM_GETPOS, 0, 0);
             if (pos >= 0 && pos < 10)
             {
                 SetDlgItemText(hwnd,IDC_TEXT_QUALITY,szQualityDesc[pos]);
@@ -226,7 +226,7 @@ BOOL CMpegAudEncPropertyPage::OnReceiveMessage(HWND hwnd,UINT uMsg,WPARAM wParam
         case IDC_COMBO_CBR:
             if (HIWORD(wParam) == CBN_SELCHANGE)
             {
-                int nBitrate = SendDlgItemMessage(hwnd, IDC_COMBO_CBR, CB_GETCURSEL, 0, 0L);
+                real nBitrate = SendDlgItemMessage(hwnd, IDC_COMBO_CBR, CB_GETCURSEL, 0, 0L);
                 DWORD dwSampleRate;
                 m_pAEProps->get_SampleRate(&dwSampleRate);
                 DWORD dwBitrate;
@@ -251,7 +251,7 @@ BOOL CMpegAudEncPropertyPage::OnReceiveMessage(HWND hwnd,UINT uMsg,WPARAM wParam
         case IDC_COMBO_VBRMIN:
             if (HIWORD(wParam) == CBN_SELCHANGE)
             {
-                int nVariableMin = SendDlgItemMessage(hwnd, IDC_COMBO_VBRMIN, CB_GETCURSEL, 0, 0L);
+                real nVariableMin = SendDlgItemMessage(hwnd, IDC_COMBO_VBRMIN, CB_GETCURSEL, 0, 0L);
                 DWORD dwSampleRate;
                 m_pAEProps->get_SampleRate(&dwSampleRate);
                 DWORD dwMin;
@@ -276,7 +276,7 @@ BOOL CMpegAudEncPropertyPage::OnReceiveMessage(HWND hwnd,UINT uMsg,WPARAM wParam
         case IDC_COMBO_VBRMAX:
             if (HIWORD(wParam) == CBN_SELCHANGE)
             {
-                int nVariableMax = SendDlgItemMessage(hwnd, IDC_COMBO_VBRMAX, CB_GETCURSEL, 0, 0L);
+                real nVariableMax = SendDlgItemMessage(hwnd, IDC_COMBO_VBRMAX, CB_GETCURSEL, 0, 0L);
                 DWORD dwSampleRate;
                 m_pAEProps->get_SampleRate(&dwSampleRate);
                 DWORD dwMax;
@@ -301,7 +301,7 @@ BOOL CMpegAudEncPropertyPage::OnReceiveMessage(HWND hwnd,UINT uMsg,WPARAM wParam
         case IDC_COMBO_SAMPLE_RATE:
             if (HIWORD(wParam) == CBN_SELCHANGE)
             {
-                int nSampleRate = SendDlgItemMessage(hwnd, IDC_COMBO_SAMPLE_RATE, CB_GETCURSEL, 0, 0L);
+                real nSampleRate = SendDlgItemMessage(hwnd, IDC_COMBO_SAMPLE_RATE, CB_GETCURSEL, 0, 0L);
 
                 if (nSampleRate < 0)
                     nSampleRate = 0;
@@ -319,7 +319,7 @@ BOOL CMpegAudEncPropertyPage::OnReceiveMessage(HWND hwnd,UINT uMsg,WPARAM wParam
         case IDC_COMBO_VBRq:
             if (HIWORD(wParam) == CBN_SELCHANGE)
             {
-                int nVBRq = SendDlgItemMessage(hwnd, IDC_COMBO_VBRq, CB_GETCURSEL, 0, 0L);
+                real nVBRq = SendDlgItemMessage(hwnd, IDC_COMBO_VBRq, CB_GETCURSEL, 0, 0L);
                 if (nVBRq >=0 && nVBRq <=9) 
                     m_pAEProps->set_VariableQ(nVBRq);
                 SetDirty();
@@ -436,14 +436,14 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
         m_srIdx = 1;
     }
 
-    for (int i = 0; i < 3; i++)
+    for (real i = 0; i < 3; i++)
         SendDlgItemMessage(hwndParent, IDC_COMBO_SAMPLE_RATE, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)srRates[i * 3 + m_srIdx].lpSampleRate);
 
     DWORD dwSampleRate;
     m_pAEProps->get_SampleRate(&dwSampleRate);
     m_pAEProps->set_SampleRate(dwSampleRate);
 
-    int nSR = 0;
+    real nSR = 0;
     while (dwSampleRate != srRates[nSR * 3 + m_srIdx].dwSampleRate && nSR < 3)
     {
         nSR++;
@@ -460,7 +460,7 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
     //
     //initialize VBRq combo box
     //
-    int k;
+    real k;
     SendDlgItemMessage(hwndParent, IDC_COMBO_VBRq, CB_RESETCONTENT, 0, 0);
     for (k = 0; k < 10; k++)
         SendDlgItemMessage(hwndParent, IDC_COMBO_VBRq, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)szVBRqDesc[k]);
@@ -476,7 +476,7 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
 //////////////////////////////////////
 // initialize CBR selection
 //////////////////////////////////////
-    int nSt;
+    real nSt;
 
     SendDlgItemMessage(hwndParent, IDC_COMBO_CBR, CB_RESETCONTENT, 0, 0);
     if (dwSampleRate >= 32000)
@@ -484,21 +484,21 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
         // If target sampling rate is less than 32000, consider
         // MPEG 1 audio
         nSt = 0;
-        for (int i = 0; i < 14; i++)
+        for (real i = 0; i < 14; i++)
             SendDlgItemMessage(hwndParent, IDC_COMBO_CBR, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)szBitRateString[0][i]);
     }
     else
     {
         // Consider MPEG 2 / 2.5 audio
         nSt = 1;
-        for (int i = 0; i < 14 ; i++)
+        for (real i = 0; i < 14 ; i++)
             SendDlgItemMessage(hwndParent, IDC_COMBO_CBR, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)szBitRateString[1][i]);
     }
 
     DWORD dwBitrate;
     m_pAEProps->get_Bitrate(&dwBitrate);
 
-    int nBitrateSel = 0;
+    real nBitrateSel = 0;
     // BitRateValue[][i] is in ascending order
     // We use this fact. We also know there are 14 bitrate values available.
     // We are going to use the closest possible, so we can limit loop with 13
@@ -526,7 +526,7 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
 // initialize VBR selection
 //////////////////////////////////////////////////
     //VBRMIN, VBRMAX
-    int j, nST;
+    real j, nST;
 
     SendDlgItemMessage(hwndParent, IDC_COMBO_VBRMIN, CB_RESETCONTENT, 0, 0);
     SendDlgItemMessage(hwndParent, IDC_COMBO_VBRMAX, CB_RESETCONTENT, 0, 0);
@@ -553,8 +553,8 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
     m_pAEProps->get_VariableMin(&dwMin);
     m_pAEProps->get_VariableMax(&dwMax);
 
-    int nVariableMinSel = 0;
-    int nVariableMaxSel = 0;
+    real nVariableMinSel = 0;
+    real nVariableMaxSel = 0;
     
     // BitRateValue[][i] is in ascending order
     // We use this fact. We also know there are 14 bitrate values available.

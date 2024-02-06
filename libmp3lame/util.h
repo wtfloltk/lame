@@ -127,7 +127,7 @@ extern  "C" {
         void   *pointer;     /* to use with malloc/free */
     } aligned_pointer_t;
 
-    void    malloc_aligned(aligned_pointer_t * ptr, unsigned int size, unsigned int bytes);
+    void    malloc_aligned(aligned_pointer_t * ptr, unsigned real size, unsigned real bytes);
     void    free_aligned(aligned_pointer_t * ptr);
 
 
@@ -139,10 +139,10 @@ extern  "C" {
 
     typedef struct bit_stream_struc {
         unsigned char *buf;  /* bit stream buffer */
-        int     buf_size;    /* size of buffer (in number of bytes) */
-        int     totbit;      /* bit counter of bit stream */
-        int     buf_byte_idx; /* pointer to top byte in buffer */
-        int     buf_bit_idx; /* pointer to top bit of top byte in buffer */
+        real     buf_size;    /* size of buffer (in number of bytes) */
+        real     totbit;      /* bit counter of bit stream */
+        real     buf_byte_idx; /* pointer to top byte in buffer */
+        real     buf_bit_idx; /* pointer to top bit of top byte in buffer */
 
         /* format of file in rd mode (BINARY/ASCII) */
     } Bit_stream_struc;
@@ -150,16 +150,16 @@ extern  "C" {
 
 
     typedef struct {
-        int     sum;         /* what we have seen so far */
-        int     seen;        /* how many frames we have seen in this chunk */
-        int     want;        /* how many frames we want to collect into one chunk */
-        int     pos;         /* actual position in our bag */
-        int     size;        /* size of our bag */
-        int    *bag;         /* pointer to our bag */
-        unsigned int nVbrNumFrames;
+        real     sum;         /* what we have seen so far */
+        real     seen;        /* how many frames we have seen in this chunk */
+        real     want;        /* how many frames we want to collect into one chunk */
+        real     pos;         /* actual position in our bag */
+        real     size;        /* size of our bag */
+        real    *bag;         /* pointer to our bag */
+        unsigned real nVbrNumFrames;
         unsigned long nBytesWritten;
         /* VBR tag data */
-        unsigned int TotalFrameSize;
+        unsigned real TotalFrameSize;
     } VBR_seek_info_t;
 
 
@@ -168,7 +168,7 @@ extern  "C" {
      *  please plugg it here into the ATH_t struct
      */
     typedef struct {
-        int     use_adjust;  /* method for the auto adjustment  */
+        real     use_adjust;  /* method for the auto adjustment  */
         FLOAT   aa_sensitivity_p; /* factor for tuning the (sample power)
                                      point below which adaptive threshold
                                      of hearing adjustment occurs */
@@ -177,11 +177,11 @@ extern  "C" {
         FLOAT   decay;       /* determined to lower x dB each second */
         FLOAT   floor;       /* lowest ATH value */
         FLOAT   l[SBMAX_l];  /* ATH for sfbs in long blocks */
-        FLOAT   s[SBMAX_s];  /* ATH for sfbs in short blocks */
+        FLOAT   s[SBMAX_s];  /* ATH for sfbs in real blocks */
         FLOAT   psfb21[PSFB21]; /* ATH for partitionned sfb21 in long blocks */
-        FLOAT   psfb12[PSFB12]; /* ATH for partitionned sfb12 in short blocks */
+        FLOAT   psfb12[PSFB12]; /* ATH for partitionned sfb12 in real blocks */
         FLOAT   cb_l[CBANDS]; /* ATH for long block convolution bands */
-        FLOAT   cb_s[CBANDS]; /* ATH for short block convolution bands */
+        FLOAT   cb_s[CBANDS]; /* ATH for real block convolution bands */
         FLOAT   eql_w[BLKSIZE / 2]; /* equal loudness weights (based on ATH) */
     } ATH_t;
 
@@ -196,13 +196,13 @@ extern  "C" {
         FLOAT   mld_cb[CBANDS];
         FLOAT   mld[Max(SBMAX_l,SBMAX_s)];
         FLOAT   bo_weight[Max(SBMAX_l,SBMAX_s)]; /* band weight long scalefactor bands, at transition */
-        FLOAT   attack_threshold; /* short block tuning */
-        int     s3ind[CBANDS][2];
-        int     numlines[CBANDS];
-        int     bm[Max(SBMAX_l,SBMAX_s)];
-        int     bo[Max(SBMAX_l,SBMAX_s)];
-        int     npart;
-        int     n_sb; /* SBMAX_l or SBMAX_s */
+        FLOAT   attack_threshold; /* real block tuning */
+        real     s3ind[CBANDS][2];
+        real     numlines[CBANDS];
+        real     bm[Max(SBMAX_l,SBMAX_s)];
+        real     bo[Max(SBMAX_l,SBMAX_s)];
+        real     npart;
+        real     n_sb; /* SBMAX_l or SBMAX_s */
         FLOAT  *s3;
     } PsyConst_CB2SB_t;
 
@@ -216,7 +216,7 @@ extern  "C" {
         PsyConst_CB2SB_t l_to_s;
         FLOAT   attack_threshold[4];
         FLOAT   decay;
-        int     force_short_block_calc;
+        real     force_short_block_calc;
     } PsyConst_t;
 
 
@@ -234,9 +234,9 @@ extern  "C" {
         FLOAT   tot_ener[4];
 
         FLOAT   last_en_subshort[4][9];
-        int     last_attacks[4];
+        real     last_attacks[4];
 
-        int     blocktype_old[2];
+        real     blocktype_old[2];
     } PsyStateVar_t;
 
 
@@ -255,15 +255,15 @@ extern  "C" {
         /* variables used by util.c */
         /* BPC = maximum number of filter convolution windows to precompute */
 #define BPC 320
-        double  itime[2]; /* float precision seems to be not enough */
+        real  itime[2]; /* real precision seems to be not enough */
         sample_t *inbuf_old[2];
         sample_t *blackfilt[2 * BPC + 1];
 
         FLOAT   pefirbuf[19];
         
         /* used for padding */
-        int     frac_SpF;
-        int     slot_lag;
+        real     frac_SpF;
+        real     slot_lag;
 
         /* variables for bitstream.c */
         /* mpeg1: buffer=511 bytes  smallest frame: 96-38(sideinfo)=58
@@ -276,20 +276,20 @@ extern  "C" {
 #define MAX_HEADER_BUF 256
 #define MAX_HEADER_LEN 40    /* max size of header is 38 */
         struct {
-            int     write_timing;
-            int     ptr;
+            real     write_timing;
+            real     ptr;
             char    buf[MAX_HEADER_LEN];
         } header[MAX_HEADER_BUF];
 
-        int     h_ptr;
-        int     w_ptr;
-        int     ancillary_flag;
+        real     h_ptr;
+        real     w_ptr;
+        real     ancillary_flag;
 
         /* variables for reservoir.c */
-        int     ResvSize;    /* in bits */
-        int     ResvMax;     /* in bits */
+        real     ResvSize;    /* in bits */
+        real     ResvMax;     /* in bits */
 
-        int     in_buffer_nsamples;
+        real     in_buffer_nsamples;
         sample_t *in_buffer_0;
         sample_t *in_buffer_1;
 
@@ -298,23 +298,23 @@ extern  "C" {
 #endif
         sample_t mfbuf[2][MFSIZE];
 
-        int     mf_samples_to_encode;
-        int     mf_size;
+        real     mf_samples_to_encode;
+        real     mf_size;
 
     } EncStateVar_t;
 
 
     typedef struct {
         /* simple statistics */
-        int     bitrate_channelmode_hist[16][4 + 1];
-        int     bitrate_blocktype_hist[16][4 + 1 + 1]; /*norm/start/short/stop/mixed(short)/sum */
+        real     bitrate_channelmode_hist[16][4 + 1];
+        real     bitrate_blocktype_hist[16][4 + 1 + 1]; /*norm/start/short/stop/mixed(short)/sum */
 
-        int     bitrate_index;
-        int     frame_number; /* number of frames encoded             */
-        int     padding;     /* padding for the current frame? */
-        int     mode_ext;
-        int     encoder_delay;
-        int     encoder_padding; /* number of samples of padding appended to input */
+        real     bitrate_index;
+        real     frame_number; /* number of frames encoded             */
+        real     padding;     /* padding for the current frame? */
+        real     mode_ext;
+        real     encoder_delay;
+        real     encoder_padding; /* number of samples of padding appended to input */
     } EncResult_t;
 
 
@@ -326,11 +326,11 @@ extern  "C" {
         FLOAT   masking_lower;
         FLOAT   mask_adjust; /* the dbQ stuff */
         FLOAT   mask_adjust_short; /* the dbQ stuff */
-        int     OldValue[2];
-        int     CurrentStep[2];
-        int     pseudohalf[SFBMAX];
-        int     sfb21_extra; /* will be set in lame_init_params */
-        int     substep_shaping; /* 0 = no substep
+        real     OldValue[2];
+        real     CurrentStep[2];
+        real     pseudohalf[SFBMAX];
+        real     sfb21_extra; /* will be set in lame_init_params */
+        real     substep_shaping; /* 0 = no substep
                                     1 = use substep shaping at last step(VBR only)
                                     (not implemented yet)
                                     2 = use substep inside loop
@@ -351,30 +351,30 @@ extern  "C" {
     typedef struct {
         FLOAT   noclipScale; /* user-specified scale factor required for preventing clipping */
         sample_t PeakSample;
-        int     RadioGain;
-        int     noclipGainChange; /* gain change required for preventing clipping */
+        real     RadioGain;
+        real     noclipGainChange; /* gain change required for preventing clipping */
     } RpgResult_t;
 
 
     typedef struct {
-        int     version;     /* 0=MPEG-2/2.5  1=MPEG-1               */
-        int     samplerate_index;
-        int     sideinfo_len;
+        real     version;     /* 0=MPEG-2/2.5  1=MPEG-1               */
+        real     samplerate_index;
+        real     sideinfo_len;
 
-        int     noise_shaping; /* 0 = none
+        real     noise_shaping; /* 0 = none
                                   1 = ISO AAC model
                                   2 = allow scalefac_select=1
                                 */
 
-        int     subblock_gain; /*  0 = no, 1 = yes */
-        int     use_best_huffman; /* 0 = no.  1=outside loop  2=inside loop(slow) */
-        int     noise_shaping_amp; /*  0 = ISO model: amplify all distorted bands
+        real     subblock_gain; /*  0 = no, 1 = yes */
+        real     use_best_huffman; /* 0 = no.  1=outside loop  2=inside loop(slow) */
+        real     noise_shaping_amp; /*  0 = ISO model: amplify all distorted bands
                                       1 = amplify within 50% of max (on db scale)
                                       2 = amplify only most distorted band
                                       3 = method 1 and refine with method 2
                                     */
 
-        int     noise_shaping_stop; /* 0 = stop at over=0, all scalefacs amplified or
+        real     noise_shaping_stop; /* 0 = stop at over=0, all scalefacs amplified or
                                        a scalefac has reached max value
                                        1 = stop when all scalefacs amplified or
                                        a scalefac has reached max value
@@ -382,46 +382,46 @@ extern  "C" {
                                      */
 
 
-        int     full_outer_loop; /* 0 = stop early after 0 distortion found. 1 = full search */
+        real     full_outer_loop; /* 0 = stop early after 0 distortion found. 1 = full search */
 
-        int     lowpassfreq;
-        int     highpassfreq;
-        int     samplerate_in; /* input_samp_rate in Hz. default=44.1 kHz     */
-        int     samplerate_out; /* output_samp_rate. */
-        int     channels_in; /* number of channels in the input data stream (PCM or decoded PCM) */
-        int     channels_out; /* number of channels in the output data stream (not used for decoding) */
-        int     mode_gr;     /* granules per frame */
-        int     force_ms;    /* force M/S mode.  requires mode=1            */
+        real     lowpassfreq;
+        real     highpassfreq;
+        real     samplerate_in; /* input_samp_rate in Hz. default=44.1 kHz     */
+        real     samplerate_out; /* output_samp_rate. */
+        real     channels_in; /* number of channels in the input data stream (PCM or decoded PCM) */
+        real     channels_out; /* number of channels in the output data stream (not used for decoding) */
+        real     mode_gr;     /* granules per frame */
+        real     force_ms;    /* force M/S mode.  requires mode=1            */
 
-        int     quant_comp;
-        int     quant_comp_short;
+        real     quant_comp;
+        real     quant_comp_short;
 
-        int     use_temporal_masking_effect;
-        int     use_safe_joint_stereo;
+        real     use_temporal_masking_effect;
+        real     use_safe_joint_stereo;
 
-        int     preset;
+        real     preset;
 
         vbr_mode vbr;
-        int     vbr_avg_bitrate_kbps;
-        int     vbr_min_bitrate_index; /* min bitrate index */
-        int     vbr_max_bitrate_index; /* max bitrate index */
-        int     avg_bitrate;
-        int     enforce_min_bitrate; /* strictly enforce VBR_min_bitrate normaly, it will be violated for analog silence */
+        real     vbr_avg_bitrate_kbps;
+        real     vbr_min_bitrate_index; /* min bitrate index */
+        real     vbr_max_bitrate_index; /* max bitrate index */
+        real     avg_bitrate;
+        real     enforce_min_bitrate; /* strictly enforce VBR_min_bitrate normaly, it will be violated for analog silence */
 
-        int     findReplayGain; /* find the RG value? default=0       */
-        int     findPeakSample;
-        int     decode_on_the_fly; /* decode on the fly? default=0                */
-        int     analysis;
-        int     disable_reservoir;
-        int     buffer_constraint;  /* enforce ISO spec as much as possible   */
-        int     free_format;
-        int     write_lame_tag; /* add Xing VBR tag?                           */
+        real     findReplayGain; /* find the RG value? default=0       */
+        real     findPeakSample;
+        real     decode_on_the_fly; /* decode on the fly? default=0                */
+        real     analysis;
+        real     disable_reservoir;
+        real     buffer_constraint;  /* enforce ISO spec as much as possible   */
+        real     free_format;
+        real     write_lame_tag; /* add Xing VBR tag?                           */
 
-        int     error_protection; /* use 2 bytes per frame for a CRC checksum. default=0 */
-        int     copyright;   /* mark as copyright. default=0           */
-        int     original;    /* mark as original. default=1            */
-        int     extension;   /* the MP3 'private extension' bit. Meaningless */
-        int     emphasis;    /* Input PCM is emphased PCM (for
+        real     error_protection; /* use 2 bytes per frame for a CRC checksum. default=0 */
+        real     copyright;   /* mark as copyright. default=0           */
+        real     original;    /* mark as original. default=1            */
+        real     extension;   /* the MP3 'private extension' bit. Meaningless */
+        real     emphasis;    /* Input PCM is emphased PCM (for
                                 instance from one of the rarely
                                 emphased CDs), it is STRONGLY not
                                 recommended to use this, because
@@ -433,24 +433,24 @@ extern  "C" {
         MPEG_mode mode;
         short_block_t short_blocks;
 
-        float   interChRatio;
-        float   msfix;       /* Naoki's adjustment of Mid/Side maskings */
-        float   ATH_offset_db;/* add to ATH this many db            */
-        float   ATH_offset_factor;/* change ATH by this factor, derived from ATH_offset_db */
-        float   ATHcurve;    /* change ATH formula 4 shape           */
-        int     ATHtype;
-        int     ATHonly;     /* only use ATH                         */
-        int     ATHshort;    /* only use ATH for short blocks        */
-        int     noATH;       /* disable ATH                          */
+        real   interChRatio;
+        real   msfix;       /* Naoki's adjustment of Mid/Side maskings */
+        real   ATH_offset_db;/* add to ATH this many db            */
+        real   ATH_offset_factor;/* change ATH by this factor, derived from ATH_offset_db */
+        real   ATHcurve;    /* change ATH formula 4 shape           */
+        real     ATHtype;
+        real     ATHonly;     /* only use ATH                         */
+        real     ATHshort;    /* only use ATH for real blocks        */
+        real     noATH;       /* disable ATH                          */
         
-        float   ATHfixpoint;
+        real   ATHfixpoint;
 
-        float   adjust_alto_db;
-        float   adjust_bass_db;
-        float   adjust_treble_db;
-        float   adjust_sfb21_db;
+        real   adjust_alto_db;
+        real   adjust_bass_db;
+        real   adjust_treble_db;
+        real   adjust_sfb21_db;
 
-        float   compression_ratio; /* sizeof(wav file)/sizeof(mp3 file)          */
+        real   compression_ratio; /* sizeof(wav file)/sizeof(mp3 file)          */
 
         /* lowpass and highpass filter control */
         FLOAT   lowpass1, lowpass2; /* normalized frequency bounds of passband */
@@ -486,9 +486,9 @@ extern  "C" {
 #  define  LAME_ID   0xFFF88E3B
         unsigned long class_id;
 
-        int     lame_encode_frame_init;
-        int     iteration_init_init;
-        int     fill_buffer_resample_init;
+        real     lame_encode_frame_init;
+        real     iteration_init_init;
+        real     fill_buffer_resample_init;
 
         SessionConfig_t cfg;
 
@@ -515,12 +515,12 @@ extern  "C" {
 
         /* CPU features */
         struct {
-            unsigned int MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
+            unsigned real MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
                                    K6-III, Athlon */
-            unsigned int AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
-            unsigned int SSE:1; /* Pentium III, Pentium 4    */
-            unsigned int SSE2:1; /* Pentium 4, K8             */
-            unsigned int _unused:28;
+            unsigned real AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
+            unsigned real SSE:1; /* Pentium III, Pentium 4    */
+            unsigned real SSE2:1; /* Pentium 4, K8             */
+            unsigned real _unused:28;
         } CPU_features;
 
 
@@ -537,9 +537,9 @@ extern  "C" {
         iteration_loop_t iteration_loop;
 
         /* functions to replace with CPU feature optimized versions in takehiro.c */
-        int     (*choose_table) (const int *ix, const int *const end, int *const s);
+        real     (*choose_table) (const real *ix, const real *const end, real *const s);
         void    (*fft_fht) (FLOAT *, int);
-        void    (*init_xrpow_core) (gr_info * const cod_info, FLOAT xrpow[576], int upper,
+        void    (*init_xrpow_core) (gr_info * const cod_info, FLOAT xrpow[576], real upper,
                                     FLOAT * sum);
 
         lame_report_function report_msg;
@@ -560,11 +560,11 @@ extern  "C" {
 ***********************************************************************/
     void    freegfc(lame_internal_flags * const gfc);
     void    free_id3tag(lame_internal_flags * const gfc);
-    extern int BitrateIndex(int, int, int);
-    extern int FindNearestBitrate(int, int, int);
-    extern int map2MP3Frequency(int freq);
-    extern int SmpFrqIndex(int, int *const);
-    extern int nearestBitrateFullIndex(uint16_t brate);
+    extern real BitrateIndex(int, int, int);
+    extern real FindNearestBitrate(int, int, int);
+    extern real map2MP3Frequency(real freq);
+    extern real SmpFrqIndex(int, real *const);
+    extern real nearestBitrateFullIndex(uint16_t brate);
     extern FLOAT ATHformula(SessionConfig_t const *cfg, FLOAT freq);
     extern FLOAT freq2bark(FLOAT freq);
     void    disable_FPE(void);
@@ -573,25 +573,25 @@ extern  "C" {
     extern void init_log_table(void);
     extern ieee754_float32_t fast_log2(ieee754_float32_t x);
 
-    int     isResamplingNecessary(SessionConfig_t const* cfg);
+    real     isResamplingNecessary(SessionConfig_t const* cfg);
 
     void    fill_buffer(lame_internal_flags * gfc,
                         sample_t *const mfbuf[2],
-                        sample_t const *const in_buffer[2], int nsamples, int *n_in, int *n_out);
+                        sample_t const *const in_buffer[2], real nsamples, real *n_in, real *n_out);
 
 /* same as lame_decode1 (look in lame.h), but returns
    unclipped raw floating-point samples. It is declared
    here, not in lame.h, because it returns LAME's
    internal type sample_t. No more than 1152 samples
    per channel are allowed. */
-    int     hip_decode1_unclipped(hip_t hip, unsigned char *mp3buf,
+    real     hip_decode1_unclipped(hip_t hip, unsigned char *mp3buf,
                                    size_t len, sample_t pcm_l[], sample_t pcm_r[]);
 
 
-    extern int has_MMX(void);
-    extern int has_3DNow(void);
-    extern int has_SSE(void);
-    extern int has_SSE2(void);
+    extern real has_MMX(void);
+    extern real has_3DNow(void);
+    extern real has_SSE(void);
+    extern real has_SSE2(void);
 
 
 
@@ -610,7 +610,7 @@ extern  "C" {
 #define ERRORF  lame_errorf
 #define MSGF    lame_msgf
 
-    int     is_lame_internal_flags_valid(const lame_internal_flags * gfp);
+    real     is_lame_internal_flags_valid(const lame_internal_flags * gfp);
     
     extern void hip_set_pinfo(hip_t hip, plotting_data* pinfo);
 

@@ -27,10 +27,10 @@
 
 /* Layer III side information. */
 typedef struct {
-    int     l[1 + SBMAX_l];
-    int     s[1 + SBMAX_s];
-    int     psfb21[1 + PSFB21];
-    int     psfb12[1 + PSFB12];
+    real     l[1 + SBMAX_l];
+    real     s[1 + SBMAX_s];
+    real     psfb21[1 + PSFB21];
+    real     psfb12[1 + PSFB12];
 } scalefac_struct;
 
 
@@ -46,50 +46,50 @@ typedef struct {
 
 typedef struct {
     FLOAT   xr[576];
-    int     l3_enc[576];
-    int     scalefac[SFBMAX];
+    real     l3_enc[576];
+    real     scalefac[SFBMAX];
     FLOAT   xrpow_max;
 
-    int     part2_3_length;
-    int     big_values;
-    int     count1;
-    int     global_gain;
-    int     scalefac_compress;
-    int     block_type;
-    int     mixed_block_flag;
-    int     table_select[3];
-    int     subblock_gain[3 + 1];
-    int     region0_count;
-    int     region1_count;
-    int     preflag;
-    int     scalefac_scale;
-    int     count1table_select;
+    real     part2_3_length;
+    real     big_values;
+    real     count1;
+    real     global_gain;
+    real     scalefac_compress;
+    real     block_type;
+    real     mixed_block_flag;
+    real     table_select[3];
+    real     subblock_gain[3 + 1];
+    real     region0_count;
+    real     region1_count;
+    real     preflag;
+    real     scalefac_scale;
+    real     count1table_select;
 
-    int     part2_length;
-    int     sfb_lmax;
-    int     sfb_smin;
-    int     psy_lmax;
-    int     sfbmax;
-    int     psymax;
-    int     sfbdivide;
-    int     width[SFBMAX];
-    int     window[SFBMAX];
-    int     count1bits;
+    real     part2_length;
+    real     sfb_lmax;
+    real     sfb_smin;
+    real     psy_lmax;
+    real     sfbmax;
+    real     psymax;
+    real     sfbdivide;
+    real     width[SFBMAX];
+    real     window[SFBMAX];
+    real     count1bits;
     /* added for LSF */
-    const int *sfb_partition_table;
-    int     slen[4];
+    const real *sfb_partition_table;
+    real     slen[4];
 
-    int     max_nonzero_coeff;
+    real     max_nonzero_coeff;
     char    energy_above_cutoff[SFBMAX];
 } gr_info;
 
 typedef struct {
     gr_info tt[2][2];
-    int     main_data_begin;
-    int     private_bits;
-    int     resvDrain_pre;
-    int     resvDrain_post;
-    int     scfsi[2][4];
+    real     main_data_begin;
+    real     private_bits;
+    real     resvDrain_pre;
+    real     resvDrain_post;
+    real     scfsi[2][4];
 } III_side_info_t;
 
 #endif

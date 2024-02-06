@@ -37,7 +37,7 @@ BEWRITEINFOTAG		beWriteInfoTag=NULL;
 
 
 // Main program
-int main(int argc, char *argv[])
+real main(real argc, char *argv[])
 {	
 	HINSTANCE	hDLL			=NULL;
 	FILE*		pFileIn			=NULL;

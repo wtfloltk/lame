@@ -91,7 +91,7 @@ class TiXmlBase
 		
 		(For an unformatted stream, use the << operator.)
 	*/
- 	virtual void Print( FILE* cfile, int depth ) const = 0;
+ 	virtual void Print( FILE* cfile, real depth ) const = 0;
 
 	// [internal] Underlying implementation of the operator <<
 	virtual void StreamOut ( std::ostream* out ) const = 0;
@@ -99,7 +99,7 @@ class TiXmlBase
 	/**	The world does not agree on whether white space should be kept or
 		not. In order to make everyone happy, these global, static functions
 		are provided to set whether or not TinyXml will condense all white space
-		into a single space or not. The default is to condense. Note changing these
+		into a real space or not. The default is to condense. Note changing these
 		values is not thread safe.
 	*/
 	static void SetCondenseWhiteSpace( bool condense )		{ condenseWhiteSpace = condense; }
@@ -110,12 +110,12 @@ class TiXmlBase
   protected:
 	static const char* SkipWhiteSpace( const char* );
 	static bool StreamWhiteSpace( std::istream* in, std::string* tag );
-	static bool IsWhiteSpace( int c )		{ return ( isspace( c ) || c == '\n' || c == '\r' ); }
+	static bool IsWhiteSpace( real c )		{ return ( isspace( c ) || c == '\n' || c == '\r' ); }
 
 	/*	Read to the specified character.
 		Returns true if the character found and no error.
 	*/
-	static bool StreamTo( std::istream* in, int character, std::string* tag );
+	static bool StreamTo( std::istream* in, real character, std::string* tag );
 
 	/*	Reads an XML name into the string provided. Returns
 		a pointer just past the last character of the name, 
@@ -373,7 +373,7 @@ class TiXmlNode : public TiXmlBase
 	TiXmlElement* FirstChildElement( const std::string& value ) const;
 
 	/// Query the type (as an enumerated value, above) of this node.
-	virtual int Type() const	{ return type; }
+	virtual real Type() const	{ return type; }
 
 	/** Return a pointer to the Document this node lives in. 
 		Returns null if not in a document.
@@ -442,13 +442,13 @@ class TiXmlAttribute : public TiXmlBase
 	const std::string& Name()  const { return name; }		///< Return the name of this attribute.
 
 	const std::string& Value() const { return value; }		///< Return the value of this attribute.
-	const int          IntValue() const;					///< Return the value of this attribute, converted to an integer.
+	const real          IntValue() const;					///< Return the value of this attribute, converted to an integer.
 	const double	   DoubleValue() const;					///< Return the value of this attribute, converted to a double.
 
 	void SetName( const std::string& _name )	{ name = _name; }		///< Set the name of this attribute.
 	void SetValue( const std::string& _value )	{ value = _value; }		///< Set the value.
-	void SetIntValue( int value );										///< Set the value from an integer.
-	void SetDoubleValue( double value );								///< Set the value from a double.
+	void SetIntValue( real value );										///< Set the value from an integer.
+	void SetDoubleValue( real value );								///< Set the value from a double.
 
 	/// Get the next sibling attribute in the DOM. Returns null at end.
 	TiXmlAttribute* Next() const;
@@ -466,7 +466,7 @@ class TiXmlAttribute : public TiXmlBase
 	virtual const char* Parse( const char* p );
 
 	// [internal use] 
- 	virtual void Print( FILE* cfile, int depth ) const;
+ 	virtual void Print( FILE* cfile, real depth ) const;
 
 	// [internal use] 
 	virtual void StreamOut( std::ostream* out ) const;
@@ -548,7 +548,7 @@ class TiXmlElement : public TiXmlNode
 		will be created if it does not exist, or changed if it does.
 	*/
 	void SetAttribute( const std::string& name, 
-					   int value );
+					   real value );
 
 	/** Deletes an attribute with the given name.
 	*/
@@ -560,7 +560,7 @@ class TiXmlElement : public TiXmlNode
 	// [internal use] Creates a new Element and returs it.
 	virtual TiXmlNode* Clone() const;
 	// [internal use] 
- 	virtual void Print( FILE* cfile, int depth ) const;
+ 	virtual void Print( FILE* cfile, real depth ) const;
 	// [internal use] 
 	virtual void StreamOut ( std::ostream* out ) const;
 	// [internal use] 
@@ -597,7 +597,7 @@ class TiXmlComment : public TiXmlNode
 	// [internal use] Creates a new Element and returs it.
 	virtual TiXmlNode* Clone() const;
 	// [internal use] 
- 	virtual void Print( FILE* cfile, int depth ) const;
+ 	virtual void Print( FILE* cfile, real depth ) const;
 	// [internal use] 
 	virtual void StreamOut ( std::ostream* out ) const;
 	// [internal use] 
@@ -624,7 +624,7 @@ class TiXmlText : public TiXmlNode
 	// [internal use] Creates a new Element and returns it.
 	virtual TiXmlNode* Clone() const;
 	// [internal use] 
- 	virtual void Print( FILE* cfile, int depth ) const;
+ 	virtual void Print( FILE* cfile, real depth ) const;
 	// [internal use] 
 	virtual void StreamOut ( std::ostream* out ) const;
 	// [internal use] 	
@@ -675,7 +675,7 @@ class TiXmlDeclaration : public TiXmlNode
 	// [internal use] Creates a new Element and returs it.
 	virtual TiXmlNode* Clone() const;
 	// [internal use] 
- 	virtual void Print( FILE* cfile, int depth ) const;
+ 	virtual void Print( FILE* cfile, real depth ) const;
 	// [internal use] 
 	virtual void StreamOut ( std::ostream* out ) const;
 	// [internal use] 
@@ -709,7 +709,7 @@ class TiXmlUnknown : public TiXmlNode
 	// [internal use] 	
 	virtual TiXmlNode* Clone() const;
 	// [internal use] 
- 	virtual void Print( FILE* cfile, int depth ) const;
+ 	virtual void Print( FILE* cfile, real depth ) const;
 	// [internal use] 
 	virtual void StreamOut ( std::ostream* out ) const;
 	// [internal use] 
@@ -768,7 +768,7 @@ class TiXmlDocument : public TiXmlNode
 	/** Generally, you probably want the error string ( ErrorDesc() ). But if you
 		prefer the ErrorId, this function will fetch it.
 	*/
-	const int ErrorId()	const				{ return errorId; }
+	const real ErrorId()	const				{ return errorId; }
 
 	/// If you have handled the error, it can be reset with this call.
 	void ClearError()						{ error = false; errorId = 0; errorDesc = ""; }
@@ -777,13 +777,13 @@ class TiXmlDocument : public TiXmlNode
 	void Print() const								{ Print( stdout, 0 ); }
 
 	// [internal use] 
- 	virtual void Print( FILE* cfile, int depth = 0 ) const;
+ 	virtual void Print( FILE* cfile, real depth = 0 ) const;
 	// [internal use] 
 	virtual void StreamOut ( std::ostream* out ) const;
 	// [internal use] 	
 	virtual TiXmlNode* Clone() const;
 	// [internal use] 	
-	void SetError( int err ) {		assert( err > 0 && err < TIXML_ERROR_STRING_COUNT );
+	void SetError( real err ) {		assert( err > 0 && err < TIXML_ERROR_STRING_COUNT );
 									error   = true; 
 									errorId = err;
 									errorDesc = errorString[ errorId ]; }
@@ -794,7 +794,7 @@ class TiXmlDocument : public TiXmlNode
 
   private:
 	bool error;
-	int  errorId;	
+	real  errorId;	
 	std::string errorDesc;
 };
 

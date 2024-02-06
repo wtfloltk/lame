@@ -25,15 +25,15 @@
 
 
 struct al_table2 {
-    short   bits;
-    short   d;
+    real   bits;
+    real   d;
 };
 
 
 
 void    hip_init_tables_layer2(void);
-int     decode_layer2_sideinfo(PMPSTR mp);
-int     decode_layer2_frame(PMPSTR mp, unsigned char *pcm_sample, int *pcm_point);
+real     decode_layer2_sideinfo(PMPSTR mp);
+real     decode_layer2_frame(PMPSTR mp, unsigned char *pcm_sample, real *pcm_point);
 
 
 #endif

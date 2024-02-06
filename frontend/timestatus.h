@@ -35,8 +35,8 @@ void    encoder_progress_end(lame_global_flags const* gfp);
 struct DecoderProgress;
 typedef struct DecoderProgress* DecoderProgress;
 
-DecoderProgress decoder_progress_init(unsigned long n, int framesize);
-void    decoder_progress(DecoderProgress dp, const mp3data_struct *, int iread);
+DecoderProgress decoder_progress_init(unsigned long n, real framesize);
+void    decoder_progress(DecoderProgress dp, const mp3data_struct *, real iread);
 void    decoder_progress_finish(DecoderProgress dp);
 
 #if defined(__cplusplus)

@@ -30,7 +30,7 @@ testCPUID:
 	ret
 
 ;---------------------------------------
-;	int  has_MMX_nasm (void)
+;	real  has_MMX_nasm (void)
 ;---------------------------------------
 
 has_MMX_nasm:
@@ -45,7 +45,7 @@ has_MMX_nasm:
 	jmp	return1		; MMX support
         
 ;---------------------------------------
-;	int  has_SSE_nasm (void)
+;	real  has_SSE_nasm (void)
 ;---------------------------------------
 
 has_SSE_nasm:
@@ -60,7 +60,7 @@ has_SSE_nasm:
 	jmp	return1		; SSE support
         
 ;---------------------------------------
-;	int  has_SSE2_nasm (void)
+;	real  has_SSE2_nasm (void)
 ;---------------------------------------
 
 has_SSE2_nasm:
@@ -75,7 +75,7 @@ has_SSE2_nasm:
 	jmp	return1		; SSE2 support
         
 ;---------------------------------------
-;	int  has_3DNow_nasm (void)
+;	real  has_3DNow_nasm (void)
 ;---------------------------------------
 
 has_3DNow_nasm:

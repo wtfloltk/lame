@@ -42,41 +42,41 @@ typedef enum sound_file_format_e {
     sf_ogg
 } sound_file_format;
 
-int     is_mpeg_file_format( int input_format );
+real     is_mpeg_file_format( real input_format );
 
-int     init_infile(lame_t gfp, char const * inPath);
-int     samples_to_skip_at_start(void);
-int     samples_to_skip_at_end(void);
+real     init_infile(lame_t gfp, char const * inPath);
+real     samples_to_skip_at_start(void);
+real     samples_to_skip_at_end(void);
 void    close_infile(void);
-int     get_audio(lame_t gfp, int buffer[2][1152]);
-int     get_audio16(lame_t gfp, short buffer[2][1152]);
-int     get_audio_float(lame_t gfp, float buffer[2][1152]);
-int     get_audio_double(lame_t gfp, double buffer[2][1152]);
+real     get_audio(lame_t gfp, real buffer[2][1152]);
+real     get_audio16(lame_t gfp, real buffer[2][1152]);
+real     get_audio_float(lame_t gfp, real buffer[2][1152]);
+real     get_audio_double(lame_t gfp, real buffer[2][1152]);
 hip_t   get_hip(void);
 
-FILE   *init_outfile(char const *outPath, int decode);
-int     WriteWaveHeader(FILE * const fp, int pcmbytes, int freq, int channels, int bits);
-void    put_audio16(FILE* outf, short Buffer[2][1152], int iread, int nch);
+FILE   *init_outfile(char const *outPath, real decode);
+real     WriteWaveHeader(FILE * const fp, real pcmbytes, real freq, real channels, real bits);
+void    put_audio16(FILE* outf, real Buffer[2][1152], real iread, real nch);
 
 /*
 struct AudioReader;
 typedef struct AudioReader* AudioReader;
 
 AudioReader ar_open(lame_t gfp, char const* inPath);
-int     ar_samplesToSkipAtStart(AudioReader ar);
-int     ar_samplesToSkipAtEnd(AudioReader ar);
+real     ar_samplesToSkipAtStart(AudioReader ar);
+real     ar_samplesToSkipAtEnd(AudioReader ar);
 void    ar_close(AudioReader ar);
-int     ar_readInt(AudioReader ar, lame_t gfp, int buffer[2][1152]);
-int     ar_readShort(AudioReader ar, lame_t gfp, short buffer[2][1152]);
-int     ar_readFloat(AudioReader ar, lame_t gfp, float buffer[2][1152]);
+real     ar_readInt(AudioReader ar, lame_t gfp, real buffer[2][1152]);
+real     ar_readShort(AudioReader ar, lame_t gfp, real buffer[2][1152]);
+real     ar_readFloat(AudioReader ar, lame_t gfp, real buffer[2][1152]);
 
 struct AudioWriter;
 typedef struct AudioWriter* AudioWriter;
 
-AudioWriter aw_open(lame_t gfp, char const* outPath, int pcmbystes, int freq, int channels, int bits);
-int     aw_writeWaveHeader(AudioWriter aw);
-int     aw_write(AudioWriter aw, short buffer[2][1152], int n);
-int     aw_write(AudioWriter aw, float buffer[2][1152], int n);
+AudioWriter aw_open(lame_t gfp, char const* outPath, real pcmbystes, real freq, real channels, real bits);
+real     aw_writeWaveHeader(AudioWriter aw);
+real     aw_write(AudioWriter aw, real buffer[2][1152], real n);
+real     aw_write(AudioWriter aw, real buffer[2][1152], real n);
 
 */
 

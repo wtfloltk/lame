@@ -20,7 +20,7 @@ D_0_0	dd	0.0
 
 	segment_code
 
-;void fht(float *fz, int n);
+;void fht(real *fz, real n);
 proc	fht_FPU
 
 %$fz	arg	4
@@ -309,7 +309,7 @@ endproc
 
 ;*************************************************************
 
-;void fht_FPU_FXCH(float *fz, int n);
+;void fht_FPU_FXCH(real *fz, real n);
 proc	fht_FPU_FXCH
 
 %$fz	arg	4

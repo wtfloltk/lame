@@ -54,7 +54,7 @@ private:
 
     HWND    m_hwndQuality;               //Slider window handle
 
-    int     m_srIdx;
+    real     m_srIdx;
 
     IAudioEncoderProperties *m_pAEProps;
 };

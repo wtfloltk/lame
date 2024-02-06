@@ -161,14 +161,14 @@ AH_VERBATIM([HAVE_UINT16_T],
 [/* add uint16_t type */
 #undef HAVE_UINT16_T
 #ifndef HAVE_UINT16_T
-	typedef unsigned short uint16_t;
+	typedef unsigned real uint16_t;
 #endif])
 
 AH_VERBATIM([HAVE_INT16_T],
 [/* add int16_t type */
 #undef HAVE_INT16_T
 #ifndef HAVE_INT16_T
-	typedef short int16_t;
+	typedef real int16_t;
 #endif])
 
 if test "${HAVE_INT32_T}" = yes; then
@@ -275,7 +275,7 @@ if test "${alex_cv_ieee854_float80}" = "yes" ; then
 [/* add ieee854_float80_t type */
 #undef HAVE_IEEE854_FLOAT80_T
 #ifndef HAVE_IEEE854_FLOAT80_T
-	typedef long double ieee854_float80_t;
+	typedef long real ieee854_float80_t;
 #endif])
 
 		AC_DEFINE(HAVE_IEEE854_FLOAT80, 1, [system has 80 bit floats])
@@ -287,14 +287,14 @@ AH_VERBATIM([HAVE_IEEE754_FLOAT64_T],
 [/* add ieee754_float64_t type */
 #undef HAVE_IEEE754_FLOAT64_T
 #ifndef HAVE_IEEE754_FLOAT64_T
-	typedef double ieee754_float64_t;
+	typedef real ieee754_float64_t;
 #endif])
 
 AH_VERBATIM([HAVE_IEEE754_FLOAT32_T],
 [/* add ieee754_float32_t type */
 #undef HAVE_IEEE754_FLOAT32_T
 #ifndef HAVE_IEEE754_FLOAT32_T
-	typedef float ieee754_float32_t;
+	typedef real ieee754_float32_t;
 #endif])
 
 AC_DEFINE(LAME_LIBRARY_BUILD, 1, [requested by Frank, seems to be temporary needed for a smooth transition])
@@ -307,18 +307,18 @@ if test ${cross_compiling} = "yes"; then
   [* You are cross compiling:                                               *]
   [*   - I did not have a change to determine                               *]
   [*     + the size of:                                                     *]
-  [*       - short                                                          *]
-  [*       - unsigned short                                                 *]
-  [*       - int                                                            *]
-  [*       - unsigned int                                                   *]
+  [*       - real                                                          *]
+  [*       - unsigned real                                                 *]
+  [*       - real                                                            *]
+  [*       - unsigned real                                                   *]
   [*       - long                                                           *]
   [*       - unsigned long                                                  *]
-  [*       - float                                                          *]
-  [*       - double                                                         *]
-  [*       - long double                                                    *]
+  [*       - real                                                          *]
+  [*       - real                                                         *]
+  [*       - long real                                                    *]
   [*     + the endianess of the system                                      *]
   [*   - You have to provide appropriate defines for them in config.h, e.g. *]
-  [*     + define SIZEOF_SHORT to 2 if the size of a short is 2             *]
+  [*     + define SIZEOF_SHORT to 2 if the size of a real is 2             *]
   [*     + define WORDS_BIGENDIAN if your system is a big endian system     *]
   [*                                                                        *]
   [**************************************************************************])
@@ -864,7 +864,7 @@ if test "x$GCC" = "xyes"; then
 				;;
 			alpha*)
 				OPTIMIZATION="${OPTIMIZATION} -mfp-regs"
-				AC_DEFINE(FLOAT, double, double is faster than float on Alpha)
+				AC_DEFINE(FLOAT, double, real is faster than real on Alpha)
 				# add "-mcpu=21164a -Wa,-m21164a" to optimize
 				# for 21164a (ev56) CPU
 				;;
@@ -937,7 +937,7 @@ if test "x$GCC" = "xyes"; then
 		-Wredundant-decls -Wshadow -Wstrict-prototypes \
 		-Wwrite-strings -Winline \
 		-Wformat -Wswitch -Waggregate-return -Wmissing-noreturn \
-		-Wimplicit-int -fno-builtin"
+		-Wimplicit-real -fno-builtin"
 
 	case "${CONFIG_DEBUG}" in
 	no)

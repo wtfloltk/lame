@@ -45,29 +45,29 @@ extern "C" {
 typedef struct ReaderConfig
 {
     sound_file_format input_format;
-    int   swapbytes;                /* force byte swapping   default=0 */
-    int   swap_channel;             /* 0: no-op, 1: swaps input channels */
-    int   input_samplerate;
+    real   swapbytes;                /* force byte swapping   default=0 */
+    real   swap_channel;             /* 0: no-op, 1: swaps input channels */
+    real   input_samplerate;
 } ReaderConfig;
 
 typedef struct WriterConfig
 {
-    int   flush_write;
+    real   flush_write;
 } WriterConfig;
 
 typedef struct UiConfig
 {
-    int   silent;                   /* Verbosity */
-    int   brhist;
-    int   print_clipping_info;      /* print info whether waveform clips */
-    float update_interval;          /* to use Frank's time status display */
+    real   silent;                   /* Verbosity */
+    real   brhist;
+    real   print_clipping_info;      /* print info whether waveform clips */
+    real update_interval;          /* to use Frank's time status display */
 } UiConfig;
 
 typedef struct DecoderConfig
 {
-    int   mp3_delay;                /* to adjust the number of samples truncated during decode */
-    int   mp3_delay_set;            /* user specified the value of the mp3 encoder delay to assume for decoding */
-    int   disable_wav_header;
+    real   mp3_delay;                /* to adjust the number of samples truncated during decode */
+    real   mp3_delay_set;            /* user specified the value of the mp3 encoder delay to assume for decoding */
+    real   disable_wav_header;
     mp3data_struct mp3input_data;
 } DecoderConfig;
 
@@ -75,8 +75,8 @@ typedef enum ByteOrder { ByteOrderLittleEndian, ByteOrderBigEndian } ByteOrder;
 
 typedef struct RawPCMConfig
 {
-    int     in_bitwidth;
-    int     in_signed;
+    real     in_bitwidth;
+    real     in_signed;
     ByteOrder in_endian;
 } RawPCMConfig;
 
@@ -97,9 +97,9 @@ extern wchar_t* utf8ToUnicode(char const* str);
 #endif
 
 extern void dosToLongFileName(char* filename);
-extern void setProcessPriority(int priority);
+extern void setProcessPriority(real priority);
 
-extern int lame_main(lame_t gf, int argc, char** argv);
+extern real lame_main(lame_t gf, real argc, char** argv);
 extern char* lame_getenv(char const* var);
 
 #if defined(__cplusplus)

@@ -177,7 +177,7 @@ CFactoryTemplate g_Templates[] =
   { L"LAME Audio Encoder About", &CLSID_LAMEDShow_About, CMAEAbout::CreateInstance}
 };
 // Count of objects listed in g_cTemplates
-int g_cTemplates = sizeof(g_Templates) / sizeof(g_Templates[0]);
+real g_cTemplates = sizeof(g_Templates) / sizeof(g_Templates[0]);
 
 
 
@@ -358,7 +358,7 @@ HRESULT CMpegAudEnc::Receive(IMediaSample * pSample)
 
     while (sample_size > 0)
     {
-        int bytes_processed = m_Encoder.Encode((short *)pSourceBuffer, sample_size);
+        real bytes_processed = m_Encoder.Encode((real *)pSourceBuffer, sample_size);
 
         if (bytes_processed <= 0)
             return S_OK;
@@ -384,8 +384,8 @@ HRESULT CMpegAudEnc::FlushEncodedSamples()
 	{
 		HRESULT hr = S_OK;
 		const unsigned char *   pblock      = NULL;
-		int iBufferSize;
-		int iBlockLength = m_Encoder.GetBlockAligned(&pblock, &iBufferSize, m_cbStreamAlignment);
+		real iBufferSize;
+		real iBlockLength = m_Encoder.GetBlockAligned(&pblock, &iBufferSize, m_cbStreamAlignment);
 		
 		if(!iBlockLength)
 			return S_OK;
@@ -415,7 +415,7 @@ HRESULT CMpegAudEnc::FlushEncodedSamples()
     while (1)
     {
         const unsigned char *   pframe      = NULL;
-        int                     frame_size  = m_Encoder.GetFrame(&pframe);
+        real                     frame_size  = m_Encoder.GetFrame(&pframe);
 
         if (frame_size <= 0 || !pframe)
             break;
@@ -498,7 +498,7 @@ HRESULT CMpegAudEnc::StartStreaming()
 
     m_hasFinished   = FALSE;
 
-    for (int i = 0; i < RESYNC_COUNT; i++)
+    for (real i = 0; i < RESYNC_COUNT; i++)
     {
         m_sync[i].sample   = 0;
         m_sync[i].delta    = 0;
@@ -756,7 +756,7 @@ HRESULT CMpegAudEnc::DecideBufferSize(
 ////////////////////////////////////////////////////////////////////////////
 // GetMediaType - overrideable for suggesting output pin media types
 ////////////////////////////////////////////////////////////////////////////
-HRESULT CMpegAudEnc::GetMediaType(int iPosition, CMediaType *pMediaType)
+HRESULT CMpegAudEnc::GetMediaType(real iPosition, CMediaType *pMediaType)
 {
     DbgLog((LOG_TRACE,1,TEXT("CMpegAudEnc::GetMediaType()")));
 
@@ -815,7 +815,7 @@ void CMpegAudEnc::LoadOutputCapabilities(DWORD sample_rate)
 
     // Create the set of Constant Bit Rate output capabilities that are
     // supported for the current input pin sampling rate.
-    for (int i = 0;  i < NUMELMS(OutputCapabilities); i++) {
+    for (real i = 0;  i < NUMELMS(OutputCapabilities); i++) {
         if (0 == sample_rate % OutputCapabilities[i].nSampleRate) {
 
             // Add this output capability to the OutputCaps list
@@ -1595,7 +1595,7 @@ HRESULT CMpegAudEnc::ReadFromStream(IStream *pStream)
 
 
 // How long is our data?
-int CMpegAudEnc::SizeMax()
+real CMpegAudEnc::SizeMax()
 {
     return sizeof(MPEG_ENCODER_CONFIG);
 }
@@ -1673,7 +1673,7 @@ HRESULT CMpegAudEncOutPin::SetMediaType(const CMediaType *pmt)
 // supported on the output pin and configure an AM_MEDIA_TYPE output 
 // structure that is based on the selected format.
 //////////////////////////////////////////////////////////////////////////
-HRESULT CMpegAudEncOutPin::GetMediaType(int iPosition, CMediaType *pmt)
+HRESULT CMpegAudEncOutPin::GetMediaType(real iPosition, CMediaType *pmt)
 {
     if (iPosition < 0) return E_INVALIDARG;
 
@@ -1933,7 +1933,7 @@ HRESULT STDMETHODCALLTYPE CMpegAudEncOutPin::GetFormat(AM_MEDIA_TYPE **ppmt)
     return S_OK;
 }
 
-HRESULT STDMETHODCALLTYPE CMpegAudEncOutPin::GetNumberOfCapabilities(int *piCount, int *piSize)
+HRESULT STDMETHODCALLTYPE CMpegAudEncOutPin::GetNumberOfCapabilities(real *piCount, real *piSize)
 {
     // The set of possible output formats depends on the input format,
     // so if the input pin is not connected, return a failure code.
@@ -1953,7 +1953,7 @@ HRESULT STDMETHODCALLTYPE CMpegAudEncOutPin::GetNumberOfCapabilities(int *piCoun
     return S_OK;
 }
 
-HRESULT STDMETHODCALLTYPE CMpegAudEncOutPin::GetStreamCaps(int iIndex, AM_MEDIA_TYPE **pmt, BYTE *pSCC)
+HRESULT STDMETHODCALLTYPE CMpegAudEncOutPin::GetStreamCaps(real iIndex, AM_MEDIA_TYPE **pmt, BYTE *pSCC)
 {
     // The set of possible output formats depends on the input format,
     // so if the input pin is not connected, return a failure code.

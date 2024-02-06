@@ -156,7 +156,7 @@ updateStats(lame_internal_flags * const gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncResult_t *eov = &gfc->ov_enc;
-    int     gr, ch;
+    real     gr, ch;
     assert(0 <= eov->bitrate_index && eov->bitrate_index < 16);
     assert(0 <= eov->mode_ext && eov->mode_ext < 4);
 
@@ -171,7 +171,7 @@ updateStats(lame_internal_flags * const gfc)
     }
     for (gr = 0; gr < cfg->mode_gr; ++gr) {
         for (ch = 0; ch < cfg->channels_out; ++ch) {
-            int     bt = gfc->l3_side.tt[gr][ch].block_type;
+            real     bt = gfc->l3_side.tt[gr][ch].block_type;
             if (gfc->l3_side.tt[gr][ch].mixed_block_flag)
                 bt = 4;
             eov->bitrate_blocktype_hist[eov->bitrate_index][bt]++;
@@ -190,14 +190,14 @@ lame_encode_frame_init(lame_internal_flags * gfc, const sample_t *const inbuf[2]
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
 
-    int     ch, gr;
+    real     ch, gr;
 
     if (gfc->lame_encode_frame_init == 0) {
         sample_t primebuff0[286 + 1152 + 576];
         sample_t primebuff1[286 + 1152 + 576];
-        int const framesize = 576 * cfg->mode_gr;
-        /* prime the MDCT/polyphase filterbank with a short block */
-        int     i, j;
+        real const framesize = 576 * cfg->mode_gr;
+        /* prime the MDCT/polyphase filterbank with a real block */
+        real     i, j;
         gfc->lame_encode_frame_init = 1;
         memset(primebuff0, 0, sizeof(primebuff0));
         memset(primebuff1, 0, sizeof(primebuff1));
@@ -244,7 +244,7 @@ lame_encode_frame_init(lame_internal_flags * gfc, const sample_t *const inbuf[2]
 *
 * encodeframe()           Layer 3
 *
-* encode a single frame
+* encode a real frame
 *
 ************************************************************************
 lame_encode_frame()
@@ -307,10 +307,10 @@ lame_encode_mp3_frame(       /* Output */
                          sample_t const *inbuf_l, /* Input */
                          sample_t const *inbuf_r, /* Input */
                          unsigned char *mp3buf, /* Output */
-                         int mp3buf_size)
+                         real mp3buf_size)
 {                       /* Output */
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     mp3count;
+    real     mp3count;
     III_psy_ratio masking_LR[2][2]; /*LR masking & energy */
     III_psy_ratio masking_MS[2][2]; /*MS masking & energy */
     const III_psy_ratio (*masking)[2]; /*pointer to selected maskings */
@@ -323,7 +323,7 @@ lame_encode_mp3_frame(       /* Output */
     0., 0.}};
     FLOAT (*pe_use)[2];
 
-    int     ch, gr;
+    real     ch, gr;
 
     inbuf[0] = inbuf_l;
     inbuf[1] = inbuf_r;
@@ -361,9 +361,9 @@ lame_encode_mp3_frame(       /* Output */
          * psy model has a 1 granule (576) delay that we must compensate for
          * (mt 6/99).
          */
-        int     ret;
+        real     ret;
         const sample_t *bufp[2] = {0, 0}; /* address of beginning of left & right granule */
-        int     blocktype[2];
+        real     blocktype[2];
 
         for (gr = 0; gr < cfg->mode_gr; gr++) {
 
@@ -492,7 +492,7 @@ lame_encode_mp3_frame(       /* Output */
             0.187098 * 5
         };
 
-        int     i;
+        real     i;
         FLOAT   f;
 
         for (i = 0; i < 18; i++)
@@ -535,9 +535,9 @@ lame_encode_mp3_frame(       /* Output */
     }
 
     if (cfg->analysis && gfc->pinfo != NULL) {
-        int     framesize = 576 * cfg->mode_gr;
+        real     framesize = 576 * cfg->mode_gr;
         for (ch = 0; ch < cfg->channels_out; ch++) {
-            int     j;
+            real     j;
             for (j = 0; j < FFTOFFSET; j++)
                 gfc->pinfo->pcmdata[ch][j] = gfc->pinfo->pcmdata[ch][j + framesize];
             for (j = FFTOFFSET; j < 1600; j++) {

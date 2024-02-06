@@ -109,7 +109,7 @@ free_global_data(lame_internal_flags * gfc)
 void
 freegfc(lame_internal_flags * const gfc)
 {                       /* bit stream structure */
-    int     i;
+    real     i;
 
 
     for (i = 0; i <= 2 * BPC; i++)
@@ -163,7 +163,7 @@ freegfc(lame_internal_flags * const gfc)
 }
 
 void
-malloc_aligned(aligned_pointer_t * ptr, unsigned int size, unsigned int bytes)
+malloc_aligned(aligned_pointer_t * ptr, unsigned real size, unsigned real bytes)
 {
     if (ptr) {
         if (!ptr->pointer) {
@@ -298,11 +298,11 @@ freq2cbw(FLOAT freq)
 #define ABS(A) (((A)>0) ? (A) : -(A))
 
 int
-FindNearestBitrate(int bRate, /* legal rates from 8 to 320 */
-                   int version, int samplerate)
+FindNearestBitrate(real bRate, /* legal rates from 8 to 320 */
+                   real version, real samplerate)
 {                       /* MPEG-1 or MPEG-2 LSF */
-    int     bitrate;
-    int     i;
+    real     bitrate;
+    real     i;
 
     if (samplerate < 16000)
         version = 2;
@@ -343,14 +343,14 @@ nearestBitrateFullIndex(uint16_t bitrate)
 {
     /* borrowed from DM abr presets */
 
-    const int full_bitrate_table[] =
+    const real full_bitrate_table[] =
         { 8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320 };
 
 
-    int     lower_range = 0, lower_range_kbps = 0, upper_range = 0, upper_range_kbps = 0;
+    real     lower_range = 0, lower_range_kbps = 0, upper_range = 0, upper_range_kbps = 0;
 
 
-    int     b;
+    real     b;
 
 
     /* We assume specified bitrate will be 320kbps */
@@ -388,7 +388,7 @@ nearestBitrateFullIndex(uint16_t bitrate)
  * Robert Hegemann 2000-07-01
  */
 int
-map2MP3Frequency(int freq)
+map2MP3Frequency(real freq)
 {
     if (freq <= 8000)
         return 8000;
@@ -411,11 +411,11 @@ map2MP3Frequency(int freq)
 }
 
 int
-BitrateIndex(int bRate,      /* legal rates from 32 to 448 kbps */
-             int version,    /* MPEG-1 or MPEG-2/2.5 LSF */
-             int samplerate)
+BitrateIndex(real bRate,      /* legal rates from 32 to 448 kbps */
+             real version,    /* MPEG-1 or MPEG-2/2.5 LSF */
+             real samplerate)
 {                       /* convert bitrate in kbps to index */
-    int     i;
+    real     i;
     if (samplerate < 16000)
         version = 2;
     for (i = 0; i <= 14; i++) {
@@ -431,7 +431,7 @@ BitrateIndex(int bRate,      /* legal rates from 32 to 448 kbps */
 /* convert samp freq in Hz to index */
 
 int
-SmpFrqIndex(int sample_freq, int *const version)
+SmpFrqIndex(real sample_freq, real *const version)
 {
     switch (sample_freq) {
     case 44100:
@@ -485,7 +485,7 @@ SmpFrqIndex(int sample_freq, int *const version)
 
 /* resampling via FIR filter, blackman window */
 inline static FLOAT
-blackman(FLOAT x, FLOAT fcn, int l)
+blackman(FLOAT x, FLOAT fcn, real l)
 {
     /* This algorithm from:
        SIGNAL PROCESSING ALGORITHMS IN FORTRAN AND C
@@ -517,7 +517,7 @@ blackman(FLOAT x, FLOAT fcn, int l)
 /* Joint work of Euclid and M. Hendry */
 
 static int
-gcd(int i, int j)
+gcd(real i, real j)
 {
     /*    assert ( i > 0  &&  j > 0 ); */
     return j ? gcd(j, i % j) : i;
@@ -528,18 +528,18 @@ gcd(int i, int j)
 static int
 fill_buffer_resample(lame_internal_flags * gfc,
                      sample_t * outbuf,
-                     int desired_len, sample_t const *inbuf, int len, int *num_used, int ch)
+                     real desired_len, sample_t const *inbuf, real len, real *num_used, real ch)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *esv = &gfc->sv_enc;
-    double  resample_ratio = (double)cfg->samplerate_in / (double)cfg->samplerate_out;
-    int     BLACKSIZE;
+    real  resample_ratio = (double)cfg->samplerate_in / (double)cfg->samplerate_out;
+    real     BLACKSIZE;
     FLOAT   offset, xvalue;
-    int     i, j = 0, k;
-    int     filter_l;
+    real     i, j = 0, k;
+    real     filter_l;
     FLOAT   fcn, intratio;
     FLOAT  *inbuf_old;
-    int     bpc;             /* number of convolution functions to pre-compute */
+    real     bpc;             /* number of convolution functions to pre-compute */
     bpc = cfg->samplerate_out / gcd(cfg->samplerate_out, cfg->samplerate_in);
     if (bpc > BPC)
         bpc = BPC;
@@ -580,8 +580,8 @@ fill_buffer_resample(lame_internal_flags * gfc,
     /* time of j'th element in inbuf = itime + j/ifreq; */
     /* time of k'th element in outbuf   =  j/ofreq */
     for (k = 0; k < desired_len; k++) {
-        double  time0 = k * resample_ratio; /* time of k'th output sample */
-        int     joff;
+        real  time0 = k * resample_ratio; /* time of k'th output sample */
+        real     joff;
 
         j = floor(time0 - esv->itime[ch]);
 
@@ -599,7 +599,7 @@ fill_buffer_resample(lame_internal_flags * gfc,
 
         xvalue = 0.;
         for (i = 0; i <= filter_l; ++i) {
-            int const j2 = i + j - filter_l / 2;
+            real const j2 = i + j - filter_l / 2;
             sample_t y;
             assert(j2 < len);
             assert(j2 + BLACKSIZE >= 0);
@@ -632,7 +632,7 @@ fill_buffer_resample(lame_internal_flags * gfc,
     }
     else {
         /* shift in *num_used samples into inbuf_old  */
-        int const n_shift = BLACKSIZE - *num_used; /* number of samples to shift */
+        real const n_shift = BLACKSIZE - *num_used; /* number of samples to shift */
 
         /* shift n_shift samples by *num_used, to make room for the
          * num_used new samples */
@@ -651,8 +651,8 @@ fill_buffer_resample(lame_internal_flags * gfc,
 int
 isResamplingNecessary(SessionConfig_t const* cfg)
 {
-    int const l = cfg->samplerate_out * 0.9995f;
-    int const h = cfg->samplerate_out * 1.0005f;
+    real const l = cfg->samplerate_out * 0.9995f;
+    real const h = cfg->samplerate_out * 1.0005f;
     return (cfg->samplerate_in < l) || (h < cfg->samplerate_in) ? 1 : 0;
 }
 
@@ -662,13 +662,13 @@ isResamplingNecessary(SessionConfig_t const* cfg)
 
 void
 fill_buffer(lame_internal_flags * gfc,
-            sample_t * const mfbuf[2], sample_t const * const in_buffer[2], int nsamples, int *n_in, int *n_out)
+            sample_t * const mfbuf[2], sample_t const * const in_buffer[2], real nsamples, real *n_in, real *n_out)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     mf_size = gfc->sv_enc.mf_size;
-    int     framesize = 576 * cfg->mode_gr;
-    int     nout, ch = 0;
-    int     nch = cfg->channels_out;
+    real     mf_size = gfc->sv_enc.mf_size;
+    real     framesize = 576 * cfg->mode_gr;
+    real     nout, ch = 0;
+    real     nch = cfg->channels_out;
 
     /* copy in new samples into mfbuf, with resampling if necessary */
     if (isResamplingNecessary(cfg)) {
@@ -767,10 +767,10 @@ lame_errorf(const lame_internal_flags* gfc, const char *format, ...)
  ***********************************************************************/
 
 #ifdef HAVE_NASM
-extern int has_MMX_nasm(void);
-extern int has_3DNow_nasm(void);
-extern int has_SSE_nasm(void);
-extern int has_SSE2_nasm(void);
+extern real has_MMX_nasm(void);
+extern real has_3DNow_nasm(void);
+extern real has_SSE_nasm(void);
+extern real has_SSE2_nasm(void);
 #endif
 
 int
@@ -874,14 +874,14 @@ disable_FPE(void)
            application => code disabled.
          */
 
-        /* set affinity to a single CPU.  Fix for EAC/lame on SMP systems from
+        /* set affinity to a real CPU.  Fix for EAC/lame on SMP systems from
            "Todd Richmond" <todd.richmond@openwave.com> */
         SYSTEM_INFO si;
         GetSystemInfo(&si);
         SetProcessAffinityMask(GetCurrentProcess(), si.dwActiveProcessorMask);
 #endif
 #include <float.h>
-        unsigned int mask;
+        unsigned real mask;
         mask = _controlfp(0, 0);
         mask &= ~(_EM_OVERFLOW | _EM_UNDERFLOW | _EM_ZERODIVIDE | _EM_INVALID);
         mask = _controlfp(mask, _MCW_EM);
@@ -896,7 +896,7 @@ disable_FPE(void)
 #  define _EM_ZERODIVIDE  0x00000004 /* zero divide */
 #  define _EM_INVALID     0x00000001 /* invalid */
     {
-        unsigned int mask;
+        unsigned real mask;
         _FPU_GETCW(mask);
         /* Set the FPU control word to abort on most FPEs */
         mask &= ~(_EM_OVERFLOW | _EM_ZERODIVIDE | _EM_INVALID);
@@ -919,7 +919,7 @@ disable_FPE(void)
          *  mask &= ~( _FPU_MASK_IM | _FPU_MASK_ZM | _FPU_MASK_OM | _FPU_MASK_UM );
          */
 
-        unsigned int mask;
+        unsigned real mask;
         _FPU_GETCW(mask);
         mask &= ~(_FPU_MASK_IM | _FPU_MASK_ZM | _FPU_MASK_OM);
         _FPU_SETCW(mask);
@@ -956,8 +956,8 @@ static ieee754_float32_t log_table[LOG2_SIZE + 1];
 void
 init_log_table(void)
 {
-    int     j;
-    static int init = 0;
+    real     j;
+    static real init = 0;
 
     /* Range for log2(x) over [1,2[ is [0,1[ */
     assert((1 << LOG2_SIZE_L2) == LOG2_SIZE);
@@ -977,9 +977,9 @@ fast_log2(ieee754_float32_t x)
     ieee754_float32_t log2val, partial;
     union {
         ieee754_float32_t f;
-        int     i;
+        real     i;
     } fi;
-    int     mantisse;
+    real     mantisse;
     fi.f = x;
     mantisse = fi.i & 0x7fffff;
     log2val = ((fi.i >> 23) & 0xFF) - 0x7f;

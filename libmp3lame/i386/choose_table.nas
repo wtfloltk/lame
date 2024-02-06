@@ -136,7 +136,7 @@ choose_jump_table_L:
 PIC_OFFSETTABLE
 
 	align	16
-; int choose_table(int *ix, int *end, int *s)
+; real choose_table(real *ix, real *end, real *s)
 choose_table_MMX:
 	push	ebp
 	call	get_pc.bp

@@ -40,7 +40,7 @@ real   *pnts[] = { cos64, cos32, cos16, cos8, cos4 };
 
 /* *INDENT-OFF* */
 
-static const double dewin[512] = {
+static const real dewin[512] = {
    0.000000000,-0.000015259,-0.000015259,-0.000015259,
   -0.000015259,-0.000015259,-0.000015259,-0.000030518,
   -0.000030518,-0.000030518,-0.000030518,-0.000045776,
@@ -112,7 +112,7 @@ static const double dewin[512] = {
 void
 make_decode_tables(long scaleval)
 {
-    int     i, j, k, kr, divv;
+    real     i, j, k, kr, divv;
     real   *table, *costab;
 
 

@@ -61,10 +61,10 @@ static const FLOAT costab[TRI_SIZE * 2] = {
 };
 
 static void
-fht(FLOAT * fz, int n)
+fht(FLOAT * fz, real n)
 {
     const FLOAT *tri = costab;
-    int     k4;
+    real     k4;
     FLOAT  *fi, *gi;
     FLOAT const *fn;
 
@@ -73,7 +73,7 @@ fht(FLOAT * fz, int n)
     k4 = 4;
     do {
         FLOAT   s1, c1;
-        int     i, k1, k2, k3, kx;
+        real     i, k1, k2, k3, kx;
         kx = k4 >> 1;
         k1 = k4;
         k2 = k4 << 1;
@@ -192,15 +192,15 @@ static const unsigned char rv_tbl[] = {
 
 void
 fft_short(lame_internal_flags const *const gfc,
-          FLOAT x_real[3][BLKSIZE_s], int chn, const sample_t *const buffer[2])
+          FLOAT x_real[3][BLKSIZE_s], real chn, const sample_t *const buffer[2])
 {
-    int     i;
-    int     j;
-    int     b;
+    real     i;
+    real     j;
+    real     b;
 
     for (b = 0; b < 3; b++) {
         FLOAT  *x = &x_real[b][BLKSIZE_s / 2];
-        short const k = (576 / 3) * (b + 1);
+        real const k = (576 / 3) * (b + 1);
         j = BLKSIZE_s / 8 - 1;
         do {
             FLOAT   f0, f1, f2, f3, w;
@@ -244,10 +244,10 @@ fft_short(lame_internal_flags const *const gfc,
 
 void
 fft_long(lame_internal_flags const *const gfc,
-         FLOAT x[BLKSIZE], int chn, const sample_t *const buffer[2])
+         FLOAT x[BLKSIZE], real chn, const sample_t *const buffer[2])
 {
-    int     i;
-    int     jj = BLKSIZE / 8 - 1;
+    real     i;
+    real     jj = BLKSIZE / 8 - 1;
     x += BLKSIZE / 2;
 
     do {
@@ -289,14 +289,14 @@ fft_long(lame_internal_flags const *const gfc,
 }
 
 #ifdef HAVE_NASM
-extern void fht_3DN(FLOAT * fz, int n);
-extern void fht_SSE(FLOAT * fz, int n);
+extern void fht_3DN(FLOAT * fz, real n);
+extern void fht_SSE(FLOAT * fz, real n);
 #endif
 
 void
 init_fft(lame_internal_flags * const gfc)
 {
-    int     i;
+    real     i;
 
     /* The type of window used here will make no real difference, but */
     /* in the interest of merging nspsytune stuff - switch to blackman window */

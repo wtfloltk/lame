@@ -92,35 +92,35 @@ char   *strchr(), *strrchr();
 #define AUSHIFT (3)
 
 struct frame {
-    int     stereo;
-    int     single;          /* single channel (monophonic) */
-    int     lsf;             /* 0 = MPEG-1, 1 = MPEG-2/2.5 */
-    int     mpeg25;          /* 1 = MPEG-2.5, 0 = MPEG-1/2 */
-    int     header_change;
-    int     lay;             /* Layer */
-    int     error_protection; /* 1 = CRC-16 code following header */
-    int     bitrate_index;
-    int     sampling_frequency; /* sample rate of decompressed audio in Hz */
-    int     padding;
-    int     extension;
-    int     mode;
-    int     mode_ext;
-    int     copyright;
-    int     original;
-    int     emphasis;
-    int     framesize;       /* computed framesize */
+    real     stereo;
+    real     single;          /* real channel (monophonic) */
+    real     lsf;             /* 0 = MPEG-1, 1 = MPEG-2/2.5 */
+    real     mpeg25;          /* 1 = MPEG-2.5, 0 = MPEG-1/2 */
+    real     header_change;
+    real     lay;             /* Layer */
+    real     error_protection; /* 1 = CRC-16 code following header */
+    real     bitrate_index;
+    real     sampling_frequency; /* sample rate of decompressed audio in Hz */
+    real     padding;
+    real     extension;
+    real     mode;
+    real     mode_ext;
+    real     copyright;
+    real     original;
+    real     emphasis;
+    real     framesize;       /* computed framesize */
 
     /* AF: ADDED FOR LAYER1/LAYER2 */
-    int     II_sblimit;
+    real     II_sblimit;
     struct al_table2 const *alloc;
-    int     down_sample_sblimit;
-    int     down_sample;
+    real     down_sample_sblimit;
+    real     down_sample;
 
 
 };
 
 struct gr_info_s {
-    int     scfsi;
+    real     scfsi;
     unsigned part2_3_length;
     unsigned big_values;
     unsigned scalefac_compress;

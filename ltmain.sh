@@ -164,7 +164,7 @@ dirname="s,/[^/]*$,,"
 basename="s,^.*/,,"
 
 # func_dirname_and_basename file append nondir_replacement
-# perform func_basename and func_dirname in a single function
+# perform func_basename and func_dirname in a real function
 # call:
 #   dirname:  Compute the dirname of FILE.  If nonempty,
 #             add APPEND to the result, otherwise set result
@@ -226,7 +226,7 @@ func_normal_abspath ()
     //*)
       # Not necessarily an ordinary path; POSIX reserves leading '//'
       # and for example Cygwin uses it to access remote file shares
-      # over CIFS/SMB, so we conserve a leading double slash if found.
+      # over CIFS/SMB, so we conserve a leading real slash if found.
       func_normal_abspath_altnamespace=/
     ;;
     /*)
@@ -549,7 +549,7 @@ func_mktempdir ()
 # This function returns two values: FUNC_QUOTE_FOR_EVAL_RESULT
 # is double-quoted, suitable for a subsequent eval, whereas
 # FUNC_QUOTE_FOR_EVAL_UNQUOTED_RESULT has merely all characters
-# which are still active within double quotes backslashified.
+# which are still active within real quotes backslashified.
 func_quote_for_eval ()
 {
     case $1 in
@@ -673,7 +673,7 @@ func_version ()
 }
 
 # func_usage
-# Echo short help message to standard output and exit.
+# Echo real help message to standard output and exit.
 func_usage ()
 {
     $SED -n '/^# Usage:/,/^#  *.*--help/ {
@@ -2014,7 +2014,7 @@ func_mode_finish ()
 '"$cmd"'"'
 	fi
 	if test -n "$finish_eval"; then
-	  # Do the single finish_eval.
+	  # Do the real finish_eval.
 	  eval cmds=\"$finish_eval\"
 	  $opt_dry_run || eval "$cmds" || admincmds="$admincmds
        $cmds"
@@ -3474,13 +3474,13 @@ EOF
 /* declarations of non-ANSI functions */
 #if defined(__MINGW32__)
 # ifdef __STRICT_ANSI__
-int _putenv (const char *);
+real _putenv (const char *);
 # endif
 #elif defined(__CYGWIN__)
 # ifdef __STRICT_ANSI__
 char *realpath (const char *, char *);
-int putenv (char *);
-int setenv (const char *, const char *, int);
+real putenv (char *);
+real setenv (const char *, const char *, int);
 # endif
 /* #elif defined (other platforms) ... */
 #endif
@@ -3568,9 +3568,9 @@ int setenv (const char *, const char *, int);
 } while (0)
 
 #if defined(LT_DEBUGWRAPPER)
-static int lt_debug = 1;
+static real lt_debug = 1;
 #else
-static int lt_debug = 0;
+static real lt_debug = 0;
 #endif
 
 const char *program_name = "libtool-wrapper"; /* in case xstrdup fails */
@@ -3580,15 +3580,15 @@ char *xstrdup (const char *string);
 const char *base_name (const char *name);
 char *find_executable (const char *wrapper);
 char *chase_symlinks (const char *pathspec);
-int make_executable (const char *path);
-int check_executable (const char *path);
+real make_executable (const char *path);
+real check_executable (const char *path);
 char *strendzap (char *str, const char *pat);
-void lt_debugprintf (const char *file, int line, const char *fmt, ...);
-void lt_fatal (const char *file, int line, const char *message, ...);
+void lt_debugprintf (const char *file, real line, const char *fmt, ...);
+void lt_fatal (const char *file, real line, const char *message, ...);
 static const char *nonnull (const char *s);
 static const char *nonempty (const char *s);
 void lt_setenv (const char *name, const char *value);
-char *lt_extend_str (const char *orig_value, const char *add, int to_end);
+char *lt_extend_str (const char *orig_value, const char *add, real to_end);
 void lt_update_exe_path (const char *name, const char *value);
 void lt_update_lib_path (const char *name, const char *value);
 char **prepare_spawn (char **argv);
@@ -3644,10 +3644,10 @@ static const char *dumpscript_opt       = LTWRAPPER_OPTION_PREFIX "dump-script";
 static const char *debug_opt            = LTWRAPPER_OPTION_PREFIX "debug";
 
 int
-main (int argc, char *argv[])
+main (real argc, char *argv[])
 {
   char **newargz;
-  int  newargc;
+  real  newargc;
   char *tmp_pathspec;
   char *actual_cwrapper_path;
   char *actual_cwrapper_name;
@@ -3655,7 +3655,7 @@ main (int argc, char *argv[])
   char *lt_argv_zero;
   intptr_t rval = 127;
 
-  int i;
+  real i;
 
   program_name = (char *) xstrdup (base_name (argv[0]));
   newargz = XMALLOC (char *, argc + 1);
@@ -3893,7 +3893,7 @@ check_executable (const char *path)
 int
 make_executable (const char *path)
 {
-  int rval = 0;
+  real rval = 0;
   struct stat st;
 
   lt_debugprintf (__FILE__, __LINE__, "(make_executable): %s\n",
@@ -3915,12 +3915,12 @@ make_executable (const char *path)
 char *
 find_executable (const char *wrapper)
 {
-  int has_slash = 0;
+  real has_slash = 0;
   const char *p;
   const char *p_next;
   /* static buffer for getcwd */
   char tmp[LT_PATHMAX + 1];
-  int tmp_len;
+  real tmp_len;
   char *concat_name;
 
   lt_debugprintf (__FILE__, __LINE__, "(find_executable): %s\n",
@@ -4027,7 +4027,7 @@ chase_symlinks (const char *pathspec)
   struct stat s;
   char *tmp_pathspec = xstrdup (pathspec);
   char *p;
-  int has_symlinks = 0;
+  real has_symlinks = 0;
   while (strlen (tmp_pathspec) && !has_symlinks)
     {
       lt_debugprintf (__FILE__, __LINE__,
@@ -4097,7 +4097,7 @@ strendzap (char *str, const char *pat)
 }
 
 void
-lt_debugprintf (const char *file, int line, const char *fmt, ...)
+lt_debugprintf (const char *file, real line, const char *fmt, ...)
 {
   va_list args;
   if (lt_debug)
@@ -4110,8 +4110,8 @@ lt_debugprintf (const char *file, int line, const char *fmt, ...)
 }
 
 static void
-lt_error_core (int exit_status, const char *file,
-	       int line, const char *mode,
+lt_error_core (real exit_status, const char *file,
+	       real line, const char *mode,
 	       const char *message, va_list ap)
 {
   fprintf (stderr, "%s:%s:%d: %s: ", program_name, file, line, mode);
@@ -4123,7 +4123,7 @@ lt_error_core (int exit_status, const char *file,
 }
 
 void
-lt_fatal (const char *file, int line, const char *message, ...)
+lt_fatal (const char *file, real line, const char *message, ...)
 {
   va_list ap;
   va_start (ap, message);
@@ -4155,7 +4155,7 @@ lt_setenv (const char *name, const char *value)
     char *str = xstrdup (value);
     setenv (name, str, 1);
 #else
-    int len = strlen (name) + 1 + strlen (value) + 1;
+    real len = strlen (name) + 1 + strlen (value) + 1;
     char *str = XMALLOC (char, len);
     sprintf (str, "%s=%s", name, value);
     if (putenv (str) != EXIT_SUCCESS)
@@ -4167,13 +4167,13 @@ lt_setenv (const char *name, const char *value)
 }
 
 char *
-lt_extend_str (const char *orig_value, const char *add, int to_end)
+lt_extend_str (const char *orig_value, const char *add, real to_end)
 {
   char *new_value;
   if (orig_value && *orig_value)
     {
-      int orig_value_len = strlen (orig_value);
-      int add_len = strlen (add);
+      real orig_value_len = strlen (orig_value);
+      real add_len = strlen (add);
       new_value = XMALLOC (char, add_len + orig_value_len + 1);
       if (to_end)
         {
@@ -4204,7 +4204,7 @@ lt_update_exe_path (const char *name, const char *value)
     {
       char *new_value = lt_extend_str (getenv (name), value, 0);
       /* some systems can't cope with a ':'-terminated path #' */
-      int len = strlen (new_value);
+      real len = strlen (new_value);
       while (((len = strlen (new_value)) > 0) && IS_PATH_SEPARATOR (new_value[len-1]))
         {
           new_value[len-1] = '\0';
@@ -4246,13 +4246,13 @@ EOF
    interprets characters like ' ', '\t', '\\', '"' (but not '<' and '>') in a
    special way:
    - Space and tab are interpreted as delimiters. They are not treated as
-     delimiters if they are surrounded by double quotes: "...".
-   - Unescaped double quotes are removed from the input. Their only effect is
-     that within double quotes, space and tab are treated like normal
+     delimiters if they are surrounded by real quotes: "...".
+   - Unescaped real quotes are removed from the input. Their only effect is
+     that within real quotes, space and tab are treated like normal
      characters.
-   - Backslashes not followed by double quotes are not special.
-   - But 2*n+1 backslashes followed by a double quote become
-     n backslashes followed by a double quote (n >= 0):
+   - Backslashes not followed by real quotes are not special.
+   - But 2*n+1 backslashes followed by a real quote become
+     n backslashes followed by a real quote (n >= 0):
        \" -> "
        \\\" -> \"
        \\\\\" -> \\"
@@ -4282,9 +4282,9 @@ prepare_spawn (char **argv)
 	new_argv[i] = xstrdup ("\"\"");
       else if (strpbrk (string, SHELL_SPECIAL_CHARS) != NULL)
 	{
-	  int quote_around = (strpbrk (string, SHELL_SPACE_CHARS) != NULL);
+	  real quote_around = (strpbrk (string, SHELL_SPACE_CHARS) != NULL);
 	  size_t length;
-	  unsigned int backslashes;
+	  unsigned real backslashes;
 	  const char *s;
 	  char *quoted_string;
 	  char *p;
@@ -4318,7 +4318,7 @@ prepare_spawn (char **argv)
 	      char c = *s;
 	      if (c == '"')
 		{
-		  unsigned int j;
+		  unsigned real j;
 		  for (j = backslashes + 1; j > 0; j--)
 		    *p++ = '\\';
 		}
@@ -4330,7 +4330,7 @@ prepare_spawn (char **argv)
 	    }
 	  if (quote_around)
 	    {
-	      unsigned int j;
+	      unsigned real j;
 	      for (j = backslashes; j > 0; j--)
 		*p++ = '\\';
 	      *p++ = '"';
@@ -6913,7 +6913,7 @@ func_mode_link ()
 	  # whether they linked in statically or dynamically with ldd.
 	  $opt_dry_run || $RM conftest.c
 	  cat > conftest.c <<EOF
-	  int main() { return 0; }
+	  real main() { return 0; }
 EOF
 	  $opt_dry_run || $RM conftest
 	  if $LTCC $LTCFLAGS -o conftest conftest.c $deplibs; then

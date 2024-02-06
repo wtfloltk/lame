@@ -46,7 +46,7 @@ timestamp='2003-07-04'
 # configuration.
 
 # The goal of this file is to map all the various variations of a given
-# machine specification into a single specification in the form:
+# machine specification into a real specification in the form:
 #	CPU_TYPE-MANUFACTURER-OPERATING_SYSTEM
 # or in some cases, the newer four-part form:
 #	CPU_TYPE-MANUFACTURER-KERNEL-OPERATING_SYSTEM

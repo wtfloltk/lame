@@ -133,7 +133,7 @@ BEGIN
                     34,80,10
     CONTROL         "Strict ISO compliance",IDC_CHECK_STRICT_ISO,"Button",
                     BS_AUTOCHECKBOX | WS_GROUP | WS_TABSTOP,7,47,84,10
-    CONTROL         "Disable short blocks",IDC_CHECK_DISABLE_SHORT_BLOCK,
+    CONTROL         "Disable real blocks",IDC_CHECK_DISABLE_SHORT_BLOCK,
                     "Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_GROUP | 
                     WS_TABSTOP,7,60,79,10
     CONTROL         "Enable Xing VBR tag",IDC_CHECK_XING_TAG,"Button",
@@ -225,7 +225,7 @@ BEGIN
             VALUE "FileDescription", "LAME Audio Encoder\0"
             VALUE "FileVersion", "1, 0, 61, 90411\0"
             VALUE "InternalName", "LAME Audio Encoder\0"
-            VALUE "LegalCopyright", "Copyright © 2005 Elecard Ltd.\0"
+            VALUE "LegalCopyright", "Copyright ï¿½ 2005 Elecard Ltd.\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "lame.ax\0"
             VALUE "PrivateBuild", "\0"

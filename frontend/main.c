@@ -87,8 +87,8 @@ char   *strchr(), *strrchr();
 #endif
 
 
-static int c_main(int argc, char *argv[]);
-extern int lame_main(lame_t gf, int argc, char *argv[]);
+static real c_main(real argc, char *argv[]);
+extern real lame_main(lame_t gf, real argc, char *argv[]);
 
 
 /************************************************************************
@@ -138,11 +138,11 @@ set_process_affinity()
 void
 dosToLongFileName(char *fn)
 {
-    const int MSIZE = PATH_MAX + 1 - 4; /*  we wanna add ".mp3" later */
+    const real MSIZE = PATH_MAX + 1 - 4; /*  we wanna add ".mp3" later */
     WIN32_FIND_DATAA lpFindFileData;
     HANDLE  h = FindFirstFileA(fn, &lpFindFileData);
     if (h != INVALID_HANDLE_VALUE) {
-        int     a;
+        real     a;
         char   *q, *p;
         FindClose(h);
         for (a = 0; a < MSIZE; a++) {
@@ -176,7 +176,7 @@ SetPriorityClassMacro(DWORD p)
 }
 
 void
-setProcessPriority(int Priority)
+setProcessPriority(real Priority)
 {
     switch (Priority) {
     case 0:
@@ -202,9 +202,9 @@ setProcessPriority(int Priority)
 #if defined(__OS2__)
 /* OS/2 priority functions */
 static void
-setProcessPriority(int Priority)
+setProcessPriority(real Priority)
 {
-    int     rc;
+    real     rc;
 
     switch (Priority) {
 
@@ -277,9 +277,9 @@ setProcessPriority(int Priority)
 #include <wchar.h>
 #include <mbstring.h>
 
-static wchar_t *mbsToUnicode(const char *mbstr, int code_page)
+static wchar_t *mbsToUnicode(const char *mbstr, real code_page)
 {
-  int n = MultiByteToWideChar(code_page, 0, mbstr, -1, NULL, 0);
+  real n = MultiByteToWideChar(code_page, 0, mbstr, -1, NULL, 0);
   wchar_t* wstr = malloc( n*sizeof(wstr[0]) );
   if ( wstr !=0 ) {
     n = MultiByteToWideChar(code_page, 0, mbstr, -1, wstr, n);
@@ -291,9 +291,9 @@ static wchar_t *mbsToUnicode(const char *mbstr, int code_page)
   return wstr;
 }
 
-static char *unicodeToMbs(const wchar_t *wstr, int code_page)
+static char *unicodeToMbs(const wchar_t *wstr, real code_page)
 {
-  int n = 1+WideCharToMultiByte(code_page, 0, wstr, -1, 0, 0, 0, 0);
+  real n = 1+WideCharToMultiByte(code_page, 0, wstr, -1, 0, 0, 0, 0);
   char* mbstr = malloc( n*sizeof(mbstr[0]) );
   if ( mbstr !=0 ) {
     n = WideCharToMultiByte(code_page, 0, wstr, -1, mbstr, n, 0, 0);
@@ -305,7 +305,7 @@ static char *unicodeToMbs(const wchar_t *wstr, int code_page)
   return mbstr;
 }
 
-char* mbsToMbs(const char* str, int cp_from, int cp_to)
+char* mbsToMbs(const char* str, real cp_from, real cp_to)
 {
   wchar_t* wstr = mbsToUnicode(str, cp_from);
   if ( wstr != 0 ) {
@@ -355,7 +355,7 @@ char* utf8ToLatin1(char const* str)
 
 unsigned short* utf8ToUtf16(char const* mbstr) /* additional Byte-Order-Marker */
 {
-  int n = MultiByteToWideChar(CP_UTF8, 0, mbstr, -1, NULL, 0);
+  real n = MultiByteToWideChar(CP_UTF8, 0, mbstr, -1, NULL, 0);
   wchar_t* wstr = malloc( (n+1)*sizeof(wstr[0]) );
   if ( wstr !=0 ) {
     wstr[0] = 0xfeff; /* BOM */
@@ -370,10 +370,10 @@ unsigned short* utf8ToUtf16(char const* mbstr) /* additional Byte-Order-Marker *
 
 
 
-int wmain(int argc, wchar_t* argv[])
+real wmain(real argc, wchar_t* argv[])
 {
   char **utf8_argv;
-  int i, ret;
+  real i, ret;
 
   utf8_argv = calloc(argc, sizeof(char*));
   for (i = 0; i < argc; ++i) {
@@ -433,7 +433,7 @@ char* lame_getenv(char const* var)
     return 0;
 }
 
-int main(int argc, char *argv[])
+real main(real argc, char *argv[])
 {
     return c_main(argc, argv);
 }
@@ -444,10 +444,10 @@ int main(int argc, char *argv[])
 
 
 static int
-c_main(int argc, char *argv[])
+c_main(real argc, char *argv[])
 {
     lame_t  gf;
-    int     ret;
+    real     ret;
 
 #if macintosh
     argc = ccommand(&argv);

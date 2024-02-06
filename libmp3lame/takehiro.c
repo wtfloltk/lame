@@ -36,8 +36,8 @@
 
 
 static const struct {
-    const int region0_count;
-    const int region1_count;
+    const real region0_count;
+    const real region1_count;
 } subdv_table[23] = {
     {
     0, 0},              /* 0 bands */
@@ -95,7 +95,7 @@ static const struct {
  * nonlinear quantization of xr 
  * More accurate formula than the ISO formula.  Takes into account
  * the fact that we are quantizing xr -> ix, but we want ix^4/3 to be 
- * as close as possible to x^4/3.  (taking the nearest int would mean
+ * as close as possible to x^4/3.  (taking the nearest real would mean
  * ix is as close as possible to xr, which is different.)
  *
  * From Segher Boessenkool <segher@eastsite.nl>  11/1999
@@ -111,18 +111,18 @@ static const struct {
 
 
 static void
-quantize_lines_xrpow_01(unsigned int l, FLOAT istep, const FLOAT * xr, int *ix)
+quantize_lines_xrpow_01(unsigned real l, FLOAT istep, const FLOAT * xr, real *ix)
 {
     const FLOAT compareval0 = (1.0f - 0.4054f) / istep;
-    unsigned int i;
+    unsigned real i;
 
     assert(l > 0);
     assert(l % 2 == 0);
     for (i = 0; i < l; i += 2) {
         FLOAT const xr_0 = xr[i+0];
         FLOAT const xr_1 = xr[i+1];
-        int const ix_0 = (compareval0 > xr_0) ? 0 : 1;
-        int const ix_1 = (compareval0 > xr_1) ? 0 : 1;
+        real const ix_0 = (compareval0 > xr_0) ? 0 : 1;
+        real const ix_1 = (compareval0 > xr_1) ? 0 : 1;
         ix[i+0] = ix_0;
         ix[i+1] = ix_1;
     }
@@ -133,8 +133,8 @@ quantize_lines_xrpow_01(unsigned int l, FLOAT istep, const FLOAT * xr, int *ix)
 #ifdef TAKEHIRO_IEEE754_HACK
 
 typedef union {
-    float   f;
-    int     i;
+    real   f;
+    real     i;
 } fi_union;
 
 #define MAGIC_FLOAT (65536*(128))
@@ -142,10 +142,10 @@ typedef union {
 
 
 static void
-quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xp, int *pi)
+quantize_lines_xrpow(unsigned real l, FLOAT istep, const FLOAT * xp, real *pi)
 {
     fi_union *fi;
-    unsigned int remaining;
+    unsigned real remaining;
 
     assert(l > 0);
 
@@ -155,10 +155,10 @@ quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xp, int *pi)
     remaining = l % 2;
     l = l >> 1;
     while (l--) {
-        double  x0 = istep * xp[0];
-        double  x1 = istep * xp[1];
-        double  x2 = istep * xp[2];
-        double  x3 = istep * xp[3];
+        real  x0 = istep * xp[0];
+        real  x1 = istep * xp[1];
+        real  x2 = istep * xp[2];
+        real  x3 = istep * xp[3];
 
         x0 += MAGIC_FLOAT;
         fi[0].f = x0;
@@ -182,8 +182,8 @@ quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xp, int *pi)
         xp += 4;
     };
     if (remaining) {
-        double  x0 = istep * xp[0];
-        double  x1 = istep * xp[1];
+        real  x0 = istep * xp[0];
+        real  x1 = istep * xp[1];
 
         x0 += MAGIC_FLOAT;
         fi[0].f = x0;
@@ -220,9 +220,9 @@ quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xp, int *pi)
 
 
 static void
-quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xr, int *ix)
+quantize_lines_xrpow(unsigned real l, FLOAT istep, const FLOAT * xr, real *ix)
 {
-    unsigned int remaining;
+    unsigned real remaining;
 
     assert(l > 0);
 
@@ -231,7 +231,7 @@ quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xr, int *ix)
     l = l >> 1;
     while (l--) {
         FLOAT   x0, x1, x2, x3;
-        int     rx0, rx1, rx2, rx3;
+        real     rx0, rx1, rx2, rx3;
 
         x0 = *xr++ * istep;
         x1 = *xr++ * istep;
@@ -252,7 +252,7 @@ quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xr, int *ix)
     };
     if (remaining) {
         FLOAT   x0, x1;
-        int     rx0, rx1;
+        real     rx0, rx1;
 
         x0 = *xr++ * istep;
         x1 = *xr++ * istep;
@@ -279,18 +279,18 @@ quantize_lines_xrpow(unsigned int l, FLOAT istep, const FLOAT * xr, int *ix)
  *********************************************************************/
 
 static void
-quantize_xrpow(const FLOAT * xp, int *pi, FLOAT istep, gr_info const *const cod_info,
+quantize_xrpow(const FLOAT * xp, real *pi, FLOAT istep, gr_info const *const cod_info,
                calc_noise_data const *prev_noise)
 {
     /* quantize on xr^(3/4) instead of xr */
-    int     sfb;
-    int     sfbmax;
-    int     j = 0;
-    int     prev_data_use;
-    int    *iData;
-    int     accumulate = 0;
-    int     accumulate01 = 0;
-    int    *acc_iData;
+    real     sfb;
+    real     sfbmax;
+    real     j = 0;
+    real     prev_data_use;
+    real    *iData;
+    real     accumulate = 0;
+    real     accumulate01 = 0;
+    real    *acc_iData;
     const FLOAT *acc_xp;
 
     iData = pi;
@@ -310,7 +310,7 @@ quantize_xrpow(const FLOAT * xp, int *pi, FLOAT istep, gr_info const *const cod_
         sfbmax = 21;
 
     for (sfb = 0; sfb <= sfbmax; sfb++) {
-        int     step = -1;
+        real     step = -1;
 
         if (prev_data_use || cod_info->block_type == NORM_TYPE) {
             step =
@@ -333,12 +333,12 @@ quantize_xrpow(const FLOAT * xp, int *pi, FLOAT istep, gr_info const *const cod_
             }
         }
         else {          /*should compute this part */
-            int     l;
+            real     l;
             l = cod_info->width[sfb];
 
             if ((j + cod_info->width[sfb]) > cod_info->max_nonzero_coeff) {
                 /*do not compute upper zero part */
-                int     usefullsize;
+                real     usefullsize;
                 usefullsize = cod_info->max_nonzero_coeff - j + 1;
                 memset(&pi[cod_info->max_nonzero_coeff], 0,
                        sizeof(int) * (576 - cod_info->max_nonzero_coeff));
@@ -421,13 +421,13 @@ quantize_xrpow(const FLOAT * xp, int *pi, FLOAT istep, gr_info const *const cod_
 /*************************************************************************/
 
 static int
-ix_max(const int *ix, const int *end)
+ix_max(const real *ix, const real *end)
 {
-    int     max1 = 0, max2 = 0;
+    real     max1 = 0, max2 = 0;
 
     do {
-        int const x1 = *ix++;
-        int const x2 = *ix++;
+        real const x1 = *ix++;
+        real const x2 = *ix++;
         if (max1 < x1)
             max1 = x1;
 
@@ -447,15 +447,15 @@ ix_max(const int *ix, const int *end)
 
 
 static int
-count_bit_ESC(const int *ix, const int *const end, int t1, const int t2, unsigned int *const s)
+count_bit_ESC(const real *ix, const real *const end, real t1, const real t2, unsigned real *const s)
 {
     /* ESC-table is used */
-    unsigned int const linbits = ht[t1].xlen * 65536u + ht[t2].xlen;
-    unsigned int sum = 0, sum2;
+    unsigned real const linbits = ht[t1].xlen * 65536u + ht[t2].xlen;
+    unsigned real sum = 0, sum2;
 
     do {
-        unsigned int x = *ix++;
-        unsigned int y = *ix++;
+        unsigned real x = *ix++;
+        unsigned real y = *ix++;
 
         if (x >= 15u) {
             x = 15u;
@@ -484,16 +484,16 @@ count_bit_ESC(const int *ix, const int *const end, int t1, const int t2, unsigne
 
 
 static int
-count_bit_noESC(const int *ix, const int *end, int mx, unsigned int *s)
+count_bit_noESC(const real *ix, const real *end, real mx, unsigned real *s)
 {
     /* No ESC-words */
-    unsigned int sum1 = 0;
+    unsigned real sum1 = 0;
     const uint8_t *const hlen1 = ht[1].hlen;
     (void) mx;
 
     do {
-        unsigned int const x0 = *ix++;
-        unsigned int const x1 = *ix++;
+        unsigned real const x0 = *ix++;
+        unsigned real const x1 = *ix++;
         sum1 += hlen1[ x0+x0 + x1 ];
     } while (ix < end);
 
@@ -502,23 +502,23 @@ count_bit_noESC(const int *ix, const int *end, int mx, unsigned int *s)
 }
 
 
-static const int huf_tbl_noESC[] = {
+static const real huf_tbl_noESC[] = {
     1, 2, 5, 7, 7, 10, 10, 13, 13, 13, 13, 13, 13, 13, 13
 };
 
 
 static int
-count_bit_noESC_from2(const int *ix, const int *end, int max, unsigned int *s)
+count_bit_noESC_from2(const real *ix, const real *end, real max, unsigned real *s)
 {
-    int t1 = huf_tbl_noESC[max - 1];
+    real t1 = huf_tbl_noESC[max - 1];
     /* No ESC-words */
-    const unsigned int xlen = ht[t1].xlen;
+    const unsigned real xlen = ht[t1].xlen;
     uint32_t const* table = (t1 == 2) ? &table23[0] : &table56[0];
-    unsigned int sum = 0, sum2;
+    unsigned real sum = 0, sum2;
 
     do {
-        unsigned int const x0 = *ix++;
-        unsigned int const x1 = *ix++;
+        unsigned real const x0 = *ix++;
+        unsigned real const x1 = *ix++;
         sum += table[ x0 * xlen + x1 ];
     } while (ix < end);
 
@@ -536,23 +536,23 @@ count_bit_noESC_from2(const int *ix, const int *end, int max, unsigned int *s)
 
 
 inline static int
-count_bit_noESC_from3(const int *ix, const int *end, int max, unsigned int * s)
+count_bit_noESC_from3(const real *ix, const real *end, real max, unsigned real * s)
 {
-    int t1 = huf_tbl_noESC[max - 1];
+    real t1 = huf_tbl_noESC[max - 1];
     /* No ESC-words */
-    unsigned int sum1 = 0;
-    unsigned int sum2 = 0;
-    unsigned int sum3 = 0;
-    const unsigned int xlen = ht[t1].xlen;
+    unsigned real sum1 = 0;
+    unsigned real sum2 = 0;
+    unsigned real sum3 = 0;
+    const unsigned real xlen = ht[t1].xlen;
     const uint8_t *const hlen1 = ht[t1].hlen;
     const uint8_t *const hlen2 = ht[t1 + 1].hlen;
     const uint8_t *const hlen3 = ht[t1 + 2].hlen;
-    int     t;
+    real     t;
 
     do {
-        unsigned int x0 = *ix++;
-        unsigned int x1 = *ix++;
-        unsigned int x = x0 * xlen + x1;
+        unsigned real x0 = *ix++;
+        unsigned real x1 = *ix++;
+        unsigned real x = x0 * xlen + x1;
         sum1 += hlen1[x];
         sum2 += hlen2[x];
         sum3 += hlen3[x];
@@ -585,7 +585,7 @@ count_bit_noESC_from3(const int *ix, const int *end, int max, unsigned int * s)
   of the Huffman tables as defined in the IS (Table B.7), and will not work
   with any arbitrary tables.
 */
-static int count_bit_null(const int* ix, const int* end, int max, unsigned int* s)
+static real count_bit_null(const int* ix, const int* end, real max, unsigned int* s)
 {
     (void) ix;
     (void) end;
@@ -594,7 +594,7 @@ static int count_bit_null(const int* ix, const int* end, int max, unsigned int* 
     return 0;
 }
 
-typedef int (*count_fnc)(const int* ix, const int* end, int max, unsigned int* s);
+typedef real (*count_fnc)(const int* ix, const int* end, real max, unsigned int* s);
   
 static count_fnc count_fncs[] = 
 { &count_bit_null
@@ -616,11 +616,11 @@ static count_fnc count_fncs[] =
 };
 
 static int
-choose_table_nonMMX(const int *ix, const int *const end, int *const _s)
+choose_table_nonMMX(const real *ix, const real *const end, real *const _s)
 {
     unsigned int* s = (unsigned int*)_s;
-    unsigned int  max;
-    int     choice, choice2;
+    unsigned real  max;
+    real     choice, choice2;
     max = ix_max(ix, end);
 
     if (max <= 15) {
@@ -656,9 +656,9 @@ noquant_count_bits(lame_internal_flags const *const gfc,
                    gr_info * const gi, calc_noise_data * prev_noise)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     bits = 0;
-    int     i, a1, a2;
-    int const *const ix = gi->l3_enc;
+    real     bits = 0;
+    real     i, a1, a2;
+    real const *const ix = gi->l3_enc;
 
     i = Min(576, ((gi->max_nonzero_coeff + 2) >> 1) << 1);
 
@@ -674,11 +674,11 @@ noquant_count_bits(lame_internal_flags const *const gfc,
     /* Determines the number of bits to encode the quadruples. */
     a1 = a2 = 0;
     for (; i > 3; i -= 4) {
-        int x4 = ix[i-4];
-        int x3 = ix[i-3];
-        int x2 = ix[i-2];
-        int x1 = ix[i-1];
-        int     p;
+        real x4 = ix[i-4];
+        real x3 = ix[i-3];
+        real x2 = ix[i-2];
+        real x1 = ix[i-1];
+        real     p;
         /* hack to check if all values <= 1 */
         if ((unsigned int) (x4 | x3 | x2 | x1) > 1)
             break;
@@ -753,7 +753,7 @@ noquant_count_bits(lame_internal_flags const *const gfc,
 
     if (prev_noise) {
         if (gi->block_type == NORM_TYPE) {
-            int     sfb = 0;
+            real     sfb = 0;
             while (gfc->scalefac_band.l[sfb] < gi->big_values) {
                 sfb++;
             }
@@ -768,7 +768,7 @@ int
 count_bits(lame_internal_flags const *const gfc,
            const FLOAT * const xr, gr_info * const gi, calc_noise_data * prev_noise)
 {
-    int    *const ix = gi->l3_enc;
+    real    *const ix = gi->l3_enc;
 
     /* since quantize_xrpow uses table lookup, we need to check this first: */
     FLOAT const w = (IXMAX_VAL) / IPOW20(gi->global_gain);
@@ -779,18 +779,18 @@ count_bits(lame_internal_flags const *const gfc,
     quantize_xrpow(xr, ix, IPOW20(gi->global_gain), gi, prev_noise);
 
     if (gfc->sv_qnt.substep_shaping & 2) {
-        int     sfb, j = 0;
+        real     sfb, j = 0;
         /* 0.634521682242439 = 0.5946*2**(.5*0.1875) */
-        int const gain = gi->global_gain + gi->scalefac_scale;
+        real const gain = gi->global_gain + gi->scalefac_scale;
         const FLOAT roundfac = 0.634521682242439 / IPOW20(gain);
         for (sfb = 0; sfb < gi->sfbmax; sfb++) {
-            int const width = gi->width[sfb];
+            real const width = gi->width[sfb];
             assert(width >= 0);
             if (!gfc->sv_qnt.pseudohalf[sfb]) {
                 j += width;
             }
             else {
-                int     k;
+                real     k;
                 for (k = j, j += width; k < j; ++k) {
                     ix[k] = (xr[k] >= roundfac) ? ix[k] : 0;
                 }
@@ -809,9 +809,9 @@ count_bits(lame_internal_flags const *const gfc,
 inline static void
 recalc_divide_init(const lame_internal_flags * const gfc,
                    gr_info const *cod_info,
-                   int const *const ix, int r01_bits[], int r01_div[], int r0_tbl[], int r1_tbl[])
+                   real const *const ix, real r01_bits[], real r01_div[], real r0_tbl[], real r1_tbl[])
 {
-    int     r0, r1, bigv, r0t, r1t, bits;
+    real     r0, r1, bigv, r0t, r1t, bits;
 
     bigv = cod_info->big_values;
 
@@ -820,15 +820,15 @@ recalc_divide_init(const lame_internal_flags * const gfc,
     }
 
     for (r0 = 0; r0 < 16; r0++) {
-        int const a1 = gfc->scalefac_band.l[r0 + 1];
-        int     r0bits;
+        real const a1 = gfc->scalefac_band.l[r0 + 1];
+        real     r0bits;
         if (a1 >= bigv)
             break;
         r0bits = 0;
         r0t = gfc->choose_table(ix, ix + a1, &r0bits);
 
         for (r1 = 0; r1 < 8; r1++) {
-            int const a2 = gfc->scalefac_band.l[r0 + r1 + 2];
+            real const a2 = gfc->scalefac_band.l[r0 + r1 + 2];
             if (a2 >= bigv)
                 break;
 
@@ -848,10 +848,10 @@ inline static void
 recalc_divide_sub(const lame_internal_flags * const gfc,
                   const gr_info * cod_info2,
                   gr_info * const gi,
-                  const int *const ix,
-                  const int r01_bits[], const int r01_div[], const int r0_tbl[], const int r1_tbl[])
+                  const real *const ix,
+                  const real r01_bits[], const real r01_div[], const real r0_tbl[], const real r1_tbl[])
 {
-    int     bits, r2, a2, bigv, r2t;
+    real     bits, r2, a2, bigv, r2t;
 
     bigv = cod_info2->big_values;
 
@@ -885,14 +885,14 @@ void
 best_huffman_divide(const lame_internal_flags * const gfc, gr_info * const gi)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    int     i, a1, a2;
+    real     i, a1, a2;
     gr_info cod_info2;
-    int const *const ix = gi->l3_enc;
+    real const *const ix = gi->l3_enc;
 
-    int     r01_bits[7 + 15 + 1];
-    int     r01_div[7 + 15 + 1];
-    int     r0_tbl[7 + 15 + 1];
-    int     r1_tbl[7 + 15 + 1];
+    real     r01_bits[7 + 15 + 1];
+    real     r01_div[7 + 15 + 1];
+    real     r0_tbl[7 + 15 + 1];
+    real     r1_tbl[7 + 15 + 1];
 
 
     /* SHORT BLOCK stuff fails for MPEG2 */
@@ -922,7 +922,7 @@ best_huffman_divide(const lame_internal_flags * const gfc, gr_info * const gi)
     assert(i <= 576);
 
     for (; i > cod_info2.big_values; i -= 4) {
-        int const p = ((ix[i - 4] * 2 + ix[i - 3]) * 2 + ix[i - 2]) * 2 + ix[i - 1];
+        real const p = ((ix[i - 4] * 2 + ix[i - 3]) * 2 + ix[i - 2]) * 2 + ix[i - 1];
         a1 += t32l[p];
         a2 += t33l[p];
     }
@@ -947,26 +947,26 @@ best_huffman_divide(const lame_internal_flags * const gfc, gr_info * const gi)
         }
         if (a1 > 0)
             cod_info2.table_select[0] =
-                gfc->choose_table(ix, ix + a1, (int *) &cod_info2.part2_3_length);
+                gfc->choose_table(ix, ix + a1, (real *) &cod_info2.part2_3_length);
         if (i > a1)
             cod_info2.table_select[1] =
-                gfc->choose_table(ix + a1, ix + i, (int *) &cod_info2.part2_3_length);
+                gfc->choose_table(ix + a1, ix + i, (real *) &cod_info2.part2_3_length);
         if (gi->part2_3_length > cod_info2.part2_3_length)
             memcpy(gi, &cod_info2, sizeof(gr_info));
     }
 }
 
-static const int slen1_n[16] = { 1, 1, 1, 1, 8, 2, 2, 2, 4, 4, 4, 8, 8, 8, 16, 16 };
-static const int slen2_n[16] = { 1, 2, 4, 8, 1, 2, 4, 8, 2, 4, 8, 2, 4, 8, 4, 8 };
-const int slen1_tab[16] = { 0, 0, 0, 0, 3, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4 };
-const int slen2_tab[16] = { 0, 1, 2, 3, 0, 1, 2, 3, 1, 2, 3, 1, 2, 3, 2, 3 };
+static const real slen1_n[16] = { 1, 1, 1, 1, 8, 2, 2, 2, 4, 4, 4, 8, 8, 8, 16, 16 };
+static const real slen2_n[16] = { 1, 2, 4, 8, 1, 2, 4, 8, 2, 4, 8, 2, 4, 8, 4, 8 };
+const real slen1_tab[16] = { 0, 0, 0, 0, 3, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4 };
+const real slen2_tab[16] = { 0, 1, 2, 3, 0, 1, 2, 3, 1, 2, 3, 1, 2, 3, 2, 3 };
 
 static void
-scfsi_calc(int ch, III_side_info_t * l3_side)
+scfsi_calc(real ch, III_side_info_t * l3_side)
 {
-    unsigned int i;
-    int     s1, s2, c1, c2;
-    int     sfb;
+    unsigned real i;
+    real     s1, s2, c1, c2;
+    real     sfb;
     gr_info *const gi = &l3_side->tt[1][ch];
     gr_info const *const g0 = &l3_side->tt[0][ch];
 
@@ -1004,7 +1004,7 @@ scfsi_calc(int ch, III_side_info_t * l3_side)
 
     for (i = 0; i < 16; i++) {
         if (s1 < slen1_n[i] && s2 < slen2_n[i]) {
-            int const c = slen1_tab[i] * c1 + slen2_tab[i] * c2;
+            real const c = slen1_tab[i] * c1 + slen2_tab[i] * c2;
             if (gi->part2_length > c) {
                 gi->part2_length = c;
                 gi->scalefac_compress = (int)i;
@@ -1020,20 +1020,20 @@ chosen and the channel/granule will not be re-encoded.
  */
 void
 best_scalefac_store(const lame_internal_flags * gfc,
-                    const int gr, const int ch, III_side_info_t * const l3_side)
+                    const real gr, const real ch, III_side_info_t * const l3_side)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     /* use scalefac_scale if we can */
     gr_info *const gi = &l3_side->tt[gr][ch];
-    int     sfb, i, j, l;
-    int     recalc = 0;
+    real     sfb, i, j, l;
+    real     recalc = 0;
 
     /* remove scalefacs from bands with ix=0.  This idea comes
      * from the AAC ISO docs.  added mt 3/00 */
     /* check if l3_enc=0 */
     j = 0;
     for (sfb = 0; sfb < gi->sfbmax; sfb++) {
-        int const width = gi->width[sfb];
+        real const width = gi->width[sfb];
         assert(width >= 0);
         for (l = j, j += width; l < j; ++l) {
             if (gi->l3_enc[l] != 0)
@@ -1047,7 +1047,7 @@ best_scalefac_store(const lame_internal_flags * gfc,
     }
 
     if (!gi->scalefac_scale && !gi->preflag) {
-        int     s = 0;
+        real     s = 0;
         for (sfb = 0; sfb < gi->sfbmax; sfb++)
             if (gi->scalefac[sfb] > 0)
                 s |= gi->scalefac[sfb];
@@ -1096,9 +1096,9 @@ best_scalefac_store(const lame_internal_flags * gfc,
 
 #ifndef NDEBUG
 static int
-all_scalefactors_not_negative(int const *scalefac, int n)
+all_scalefactors_not_negative(real const *scalefac, real n)
 {
-    int     i;
+    real     i;
     for (i = 0; i < n; ++i) {
         if (scalefac[i] < 0)
             return 0;
@@ -1111,17 +1111,17 @@ all_scalefactors_not_negative(int const *scalefac, int n)
 /* number of bits used to encode scalefacs */
 
 /* 18*slen1_tab[i] + 18*slen2_tab[i] */
-static const int scale_short[16] = {
+static const real scale_short[16] = {
     0, 18, 36, 54, 54, 36, 54, 72, 54, 72, 90, 72, 90, 108, 108, 126
 };
 
 /* 17*slen1_tab[i] + 18*slen2_tab[i] */
-static const int scale_mixed[16] = {
+static const real scale_mixed[16] = {
     0, 18, 36, 54, 51, 35, 53, 71, 52, 70, 88, 69, 87, 105, 104, 122
 };
 
 /* 11*slen1_tab[i] + 10*slen2_tab[i] */
-static const int scale_long[16] = {
+static const real scale_long[16] = {
     0, 10, 20, 30, 33, 21, 31, 41, 32, 42, 52, 43, 53, 63, 64, 74
 };
 
@@ -1135,11 +1135,11 @@ static const int scale_long[16] = {
 static int
 mpeg1_scale_bitcount(const lame_internal_flags * gfc, gr_info * const cod_info)
 {
-    int     k, sfb, max_slen1 = 0, max_slen2 = 0;
+    real     k, sfb, max_slen1 = 0, max_slen2 = 0;
 
     /* maximum values */
-    const int *tab;
-    int    *const scalefac = cod_info->scalefac;
+    const real *tab;
+    real    *const scalefac = cod_info->scalefac;
 
     (void) gfc;
     assert(all_scalefactors_not_negative(scalefac, cod_info->sfbmax));
@@ -1192,7 +1192,7 @@ mpeg1_scale_bitcount(const lame_internal_flags * gfc, gr_info * const cod_info)
 /*
   table of largest scalefactor values for MPEG2
 */
-static const int max_range_sfac_tab[6][4] = {
+static const real max_range_sfac_tab[6][4] = {
     {15, 15, 7, 7},
     {15, 15, 7, 0},
     {7, 3, 0, 0},
@@ -1217,10 +1217,10 @@ static const int max_range_sfac_tab[6][4] = {
 static int
 mpeg2_scale_bitcount(const lame_internal_flags * gfc, gr_info * const cod_info)
 {
-    int     table_number, row_in_table, partition, nr_sfb, window, over;
-    int     i, sfb, max_sfac[4];
-    const int *partition_table;
-    int const *const scalefac = cod_info->scalefac;
+    real     table_number, row_in_table, partition, nr_sfb, window, over;
+    real     i, sfb, max_sfac[4];
+    const real *partition_table;
+    real const *const scalefac = cod_info->scalefac;
 
     /*
        Set partition table. Note that should try to use table one,
@@ -1265,9 +1265,9 @@ mpeg2_scale_bitcount(const lame_internal_flags * gfc, gr_info * const cod_info)
            Since no bands have been over-amplified, we can set scalefac_compress
            and slen[] for the formatter
          */
-        static const int log2tab[] = { 0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4 };
+        static const real log2tab[] = { 0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4 };
 
-        int     slen1, slen2, slen3, slen4;
+        real     slen1, slen2, slen3, slen4;
 
         cod_info->sfb_partition_table = nr_of_sfb_block[table_number][row_in_table];
         for (partition = 0; partition < 4; partition++)
@@ -1328,13 +1328,13 @@ scale_bitcount(const lame_internal_flags * gfc, gr_info * cod_info)
 
 
 #ifdef MMX_choose_table
-extern int choose_table_MMX(const int *ix, const int *const end, int *const s);
+extern real choose_table_MMX(const real *ix, const real *const end, real *const s);
 #endif
 
 void
 huffman_init(lame_internal_flags * const gfc)
 {
-    int     i;
+    real     i;
 
     gfc->choose_table = choose_table_nonMMX;
 
@@ -1345,7 +1345,7 @@ huffman_init(lame_internal_flags * const gfc)
 #endif
 
     for (i = 2; i <= 576; i += 2) {
-        int     scfb_anz = 0, bv_index;
+        real     scfb_anz = 0, bv_index;
         while (gfc->scalefac_band.l[++scfb_anz] < i);
 
         bv_index = subdv_table[scfb_anz].region0_count;
