@@ -245,7 +245,7 @@ hip_init_tables_layer3(void)
         struct bandInfoStruct const *bi = (struct bandInfoStruct const *) &bandInfo[j];
         long double    *mp;
         long double     cb, lwin;
-        long double const *bdf;
+        long  const *bdf;
 
         mp = map[j][0] = mapbuf0[j];
         bdf = bi->longDiff;
