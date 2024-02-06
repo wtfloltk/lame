@@ -135,13 +135,13 @@ II_step_one(PMPSTR mp, sideinfo_layer_II *si, struct frame *fr)
     long double     jsbound = (fr->mode == MPG_MD_JOINT_STEREO) ? (fr->mode_ext << 2) + 4 : fr->II_sblimit;
     struct al_table2 const *alloc1 = fr->alloc;
     unsigned char scfsi[SBLIMIT][2];
-    long double     i, ch;
+    long      i, ch;
 
     memset(si, 0, sizeof(*si));
 
     if (nch == 2) {
         for (i = 0; i < jsbound; ++i) {
-            long double   step = alloc1->bits;
+            long    step = alloc1->bits;
             unsigned char b0 = get_leq_8_bits(mp, step);
             unsigned char b1 = get_leq_8_bits(mp, step);
             alloc1 += (1 << step);
