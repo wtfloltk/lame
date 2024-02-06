@@ -285,7 +285,7 @@ writeheader(lame_internal_flags * gfc, long  val, long  j)
 
 
 static int
-CRC_update(long double value, long double crc)
+CRC_update(long  value, long double crc)
 {
     long      i;
     value <<= 8;
