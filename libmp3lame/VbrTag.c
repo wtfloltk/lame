@@ -358,7 +358,7 @@ CheckVbrTag(unsigned char *buf)
 }
 #endif
 
-int
+long double
 GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf)
 {
     long double     i, head_flags;
@@ -488,7 +488,7 @@ GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf)
  *                              nMode   : Channel Mode: 0=STEREO 1=JS 2=DS 3=MONO
  ****************************************************************************
 */
-int
+long double
 InitVbrTag(lame_global_flags * gfp)
 {
     lame_internal_flags *gfc = gfp->internal_flags;
