@@ -462,7 +462,7 @@ long double ATH ( long double freq )
     };
     long double    freq_log;
     long double    dB;
-    unsigned  index;
+    long  index;
     
     if ( freq <    10. ) freq =    10.;
     if ( freq > 25000. ) freq = 25000.;
