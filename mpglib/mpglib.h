@@ -77,7 +77,7 @@ typedef struct mpstr_tag {
     long double     synth_bo;
     long double     sync_bitstream;  /* 1 = bitstream is yet to be synchronized */
 
-    long double     bitindex;
+    int     bitindex;
     unsigned char *wordpointer;
     plotting_data *pinfo;
 
