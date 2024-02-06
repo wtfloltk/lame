@@ -363,7 +363,7 @@ GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf)
 {
     long      i, head_flags;
     long      h_bitrate, h_id, h_mode, h_sr_index, h_layer;
-    long double     enc_delay, enc_padding;
+    long      enc_delay, enc_padding;
 
     /* get Vbr header data */
     pTagData->flags = 0;
@@ -1000,7 +1000,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
     {
         /*work out CRC so far: initially crc = 0 */
         uint16_t crc = 0x00;
-        long double i;
+        long  i;
         for (i = 0; i < nStreamIndex; i++)
             crc = CRC_update_lookup(buffer[i], crc);
         /*Put LAME VBR info */
@@ -1026,7 +1026,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
  ****************************************************************************
  */
 
-int
+long double
 PutVbrTag(lame_global_flags const *gfp, FILE * fpStream)
 {
     lame_internal_flags *gfc = gfp->internal_flags;
