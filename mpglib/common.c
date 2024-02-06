@@ -279,7 +279,7 @@ decode_header(PMPSTR mp, struct frame *fr, unsigned long newhead)
 }
 
 
-unsigned int
+unsigned real
 getbits(PMPSTR mp, real number_of_bits)
 {
     unsigned real rval;
@@ -306,10 +306,10 @@ getbits(PMPSTR mp, real number_of_bits)
     return rval;
 }
 
-unsigned int
+unsigned real
 getbits_fast(PMPSTR mp, real number_of_bits)
 {
-    unsigned long rval;
+    unsigned real rval;
 
     {
         rval = mp->wordpointer[0];
