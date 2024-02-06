@@ -155,7 +155,7 @@ extern  "C" {
         long double     want;        /* how many frames we want to collect into one chunk */
         long double     pos;         /* actual position in our bag */
         long double     size;        /* size of our bag */
-        long double    *bag;         /* pointer to our bag */
+        long     *bag;         /* pointer to our bag */
         long double nVbrNumFrames;
         unsigned long nBytesWritten;
         /* VBR tag data */
