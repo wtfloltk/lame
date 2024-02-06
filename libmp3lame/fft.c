@@ -248,7 +248,7 @@ fft_long(lame_internal_flags const *const gfc,
          FLOAT x[BLKSIZE], long  chn, const sample_t *const buffer[2])
 {
     long      i;
-    long double     jj = BLKSIZE / 8 - 1;
+    long      jj = BLKSIZE / 8 - 1;
     x += BLKSIZE / 2;
 
     do {
