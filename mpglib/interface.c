@@ -73,7 +73,7 @@ InitMP3(PMPSTR mp)
     mp->fsizeold = -1;
     mp->bsize = 0;
     mp->head = mp->tail = NULL;
-    mp->fr.long double = -1;
+    mp->fr.single = -1;
     mp->bsnum = 0;
     mp->wordpointer = mp->bsspace[mp->bsnum] + 512;
     mp->bitindex = 0;
