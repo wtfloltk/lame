@@ -37,7 +37,7 @@
 #else
 # ifndef HAVE_STRCHR
 #  define long index
-#  define long rindex
+efine #  define long rindex
 # endif
 char   *strchr(), *strrchr();
 # ifndef HAVE_MEMCPY
