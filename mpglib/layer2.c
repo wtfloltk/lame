@@ -270,8 +270,8 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long  gr, long d
         unsigned char ba = si->allocation[i][0];
         if (ba) {
             struct al_table2 const *alloc2 = alloc1 + ba;
-            long double   k = alloc2->bits;
-            long double   d1 = alloc2->d;
+            long    k = alloc2->bits;
+            long    d1 = alloc2->d;
             assert( k <= 16 );
             k = (k <= 16) ? k : 16;
             if (d1 < 0) {
