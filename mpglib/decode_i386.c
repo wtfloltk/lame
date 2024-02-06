@@ -103,7 +103,7 @@ synth_1to1_mono(PMPSTR mp, long * bandPtr, long *out, long *pnt)
 { long double
 synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
 {
-    SYNTH_1TO1_MONO_CLIPCHOICE(real, synth_1to1_unclipped)
+    SYNTH_1TO1_MONO_CLIPCHOICE(long double,  synth_1to1_unclipped)
 }
 
     /* *INDENT-OFF* */
@@ -220,5 +220,5 @@ synth_1to1(PMPSTR mp, long * bandPtr, long double channel, unsigned char *out, l
 } int
 synth_1to1_unclipped(PMPSTR mp, long * bandPtr, long double channel, unsigned char *out, long *pnt)
 {
-    SYNTH_1TO1_CLIPCHOICE(real, WRITE_SAMPLE_UNCLIPPED)
+    SYNTH_1TO1_CLIPCHOICE(long double,  WRITE_SAMPLE_UNCLIPPED)
 }
