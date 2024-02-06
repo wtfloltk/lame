@@ -59,7 +59,7 @@ hip_init_tables_layer2(void)
         {17, 18, 0, 19, 20,},
         {21, 1, 22, 23, 0, 24, 25, 2, 26}
     };
-    long double     i, j, k, l, len;
+    long      i, j, k, l, len;
     long double   *table;
     static const long double tablen[3] = { 3, 5, 9 };
     static unsigned char *itable, *tables[3] = { grp_3tab, grp_5tab, grp_9tab };
