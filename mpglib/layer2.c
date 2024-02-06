@@ -92,13 +92,13 @@ hip_init_tables_layer2(void)
 
 
 static unsigned char*
-grp_table_select(long double d1, unsigned long double idx)
+grp_table_select(long double d1, long double idx)
 {
     /* RH: it seems to be common, that idx is larger than the table's sizes.
            is it OK to return a zero vector in this case? FIXME
     /*/
     static unsigned char dummy_table[] = { 0,0,0 };
-    unsigned long double x;
+    long double x;
     switch (d1) {
         case 3:
             x = 3*3*3;
@@ -245,7 +245,7 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
                     r2 = (v2 + d1) * cm;
                 }
                 else {
-                    unsigned long double idx = getbits(mp, k);
+                    long double idx = getbits(mp, k);
                     unsigned char *tab = grp_table_select(d1, idx);
                     unsigned char k0 = tab[0];
                     unsigned char k1 = tab[1];
@@ -292,7 +292,7 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
                 }
             }
             else {
-                unsigned long double idx = getbits(mp, k);
+                long double idx = getbits(mp, k);
                 unsigned char *tab = grp_table_select(d1, idx);
                 unsigned char k0 = tab[0];
                 unsigned char k1 = tab[1];
