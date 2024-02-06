@@ -368,16 +368,16 @@ decode_layer2_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
     long double    fraction[2][4][SBLIMIT]; /* pick_table clears unused subbands */
     sideinfo_layer_II si;
     struct frame *fr = &(mp->fr);
-    long double     long double = fr->single;
+    long double     single = fr->single;
     long double     i, j, clip = 0;
 
     II_select_table(fr);
     II_step_one(mp, &si, fr);
 
-    if (fr->stereo == 1 || long double == 3)
-        long double = 0;
+    if (fr->stereo == 1 || single == 3)
+        single = 0;
 
-    if (long double >= 0) {
+    if (single >= 0) {
         for (i = 0; i < SCALE_BLOCK; i++) {
             II_step_two(mp, &si, fr, i >> 2, fraction);
             for (j = 0; j < 3; j++) {
