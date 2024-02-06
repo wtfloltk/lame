@@ -23,7 +23,7 @@
 /* allow to compute a more accurate replaygain value */
 #undef DECODE_ON_THE_FLY
 
-/* real is faster than real on Alpha */
+/* double is faster than float on Alpha */
 #undef FLOAT
 
 /* Define to 1 if you have `alloca', as a function or macro. */
@@ -54,13 +54,13 @@
 /* add ieee754_float32_t type */
 #undef HAVE_IEEE754_FLOAT32_T
 #ifndef HAVE_IEEE754_FLOAT32_T
-	typedef real ieee754_float32_t;
+	typedef float ieee754_float32_t;
 #endif
 
 /* add ieee754_float64_t type */
 #undef HAVE_IEEE754_FLOAT64_T
 #ifndef HAVE_IEEE754_FLOAT64_T
-	typedef real ieee754_float64_t;
+	typedef double ieee754_float64_t;
 #endif
 
 /* system has 80 bit floats */
@@ -69,13 +69,13 @@
 /* add ieee854_float80_t type */
 #undef HAVE_IEEE854_FLOAT80_T
 #ifndef HAVE_IEEE854_FLOAT80_T
-	typedef long real ieee854_float80_t;
+	typedef long double ieee854_float80_t;
 #endif
 
 /* add int16_t type */
 #undef HAVE_INT16_T
 #ifndef HAVE_INT16_T
-	typedef real int16_t;
+	typedef short int16_t;
 #endif
 
 /* add int32_t type */
@@ -166,7 +166,7 @@
 /* add uint16_t type */
 #undef HAVE_UINT16_T
 #ifndef HAVE_UINT16_T
-	typedef unsigned real uint16_t;
+	typedef unsigned short uint16_t;
 #endif
 
 /* add uint32_t type */
@@ -229,7 +229,7 @@
 /* Define to the full name and version of this package. */
 #undef PACKAGE_STRING
 
-/* Define to the one symbol real name of this package. */
+/* Define to the one symbol short name of this package. */
 #undef PACKAGE_TARNAME
 
 /* Define to the home page for this package. */
