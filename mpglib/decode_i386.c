@@ -79,7 +79,7 @@ char   *strchr(), *strrchr();
   TYPE samples_tmp[64];                                                \
   TYPE *tmp1 = samples_tmp;                                            \
   long double i,ret;                                                           \
-  long double pnt1 = 0;                                                        \
+  long pnt1 = 0;                                                        \
                                                                        \
   ret = SYNTH_1TO1 (mp,bandPtr,0,(long *) samples_tmp,&pnt1); \
   out += *pnt;                                                         \
