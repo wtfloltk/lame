@@ -199,7 +199,7 @@ decode_layer1_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
     I_step_one(mp, &si);
 
     if (fr->stereo == 1 || single == 3)
-        long double = 0;
+        single = 0;
 
     if (single >= 0) {
         /* decoding one of possibly two channels */
