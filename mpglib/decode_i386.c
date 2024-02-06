@@ -110,7 +110,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
 /* versions: clipped (when TYPE == short) and unclipped (when TYPE == real) of synth_1to1* functions */
 #define SYNTH_1TO1_CLIPCHOICE(TYPE,WRITE_SAMPLE)         \
   static const int step = 2;                             \
-  long double bo;                                                \
+  long bo;                                                \
   TYPE *samples = (TYPE *) (out + *pnt);                 \
                                                          \
   long *b0,(*buf)[0x110];                                \
@@ -121,7 +121,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
                                                          \
   if(!channel) {                                         \
     bo--;                                                \
-    bo &= (long double)0xf;                                           \
+    bo &= (long)0xf;                                           \
     buf = mp->synth_buffs[0];                            \
   }                                                      \
   else {                                                 \
@@ -129,10 +129,10 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
     buf = mp->synth_buffs[1];                            \
   }                                                      \
                                                          \
-  if(bo & (long double)0x1) {                                         \
+  if(bo & (long)0x1) {                                         \
     b0 = buf[0];                                         \
     bo1 = bo;                                            \
-    dct64(buf[1]+((bo+1)&(long double)0xf),(long double)buf[0]+bo,bandPtr);        \
+    dct64(buf[1]+((bo+1)&(long)0xf),(long)buf[0]+bo,bandPtr);        \
   }                                                      \
   else {                                                 \
     b0 = buf[1];                                         \
