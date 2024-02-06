@@ -62,7 +62,7 @@ typedef struct mpstr_tag {
     long double     old_free_format; /* 1 = last frame was free format */
     long double     bsize;
     long double     framesize;
-    long double     ssize;           /* number of bytes used for side information, including 2 bytes for CRC-16 if present */
+    long      ssize;           /* number of bytes used for side information, including 2 bytes for CRC-16 if present */
     long double     dsize;
     int     fsizeold;        /* size of previous frame, -1 for first */
     long double     fsizeold_nopadding;
