@@ -707,7 +707,7 @@ static const long double pretab2 [22] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  * don't forget to apply the same changes to III_dequantize_sample_ms() !!!
  */
 static int
-III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long double *scf,
+III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
                       struct gr_info_s *gr_infos, long  sfreq, long double part2bits)
 {
     long      shift = 1 + gr_infos->scalefac_scale;
