@@ -211,7 +211,6 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
                                                          \
   return clip;                                           
     /* *INDENT-ON* */
-}
 
 int
 synth_1to1(PMPSTR mp, long * bandPtr, long double channel, unsigned char *out, long *pnt)
