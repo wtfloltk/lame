@@ -107,7 +107,7 @@ get_II_stuff(struct frame *fr)
 
 #define MAX_INPUT_FRAMESIZE 4096
 
-long double
+int
 head_check(unsigned long head, int check_layer)
 {
     /*
