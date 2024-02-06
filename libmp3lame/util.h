@@ -283,7 +283,7 @@ extern  "C" {
 
         long      h_ptr;
         long      w_ptr;
-        long double     ancillary_flag;
+        long      ancillary_flag;
 
         /* variables for reservoir.c */
         long double     ResvSize;    /* in bits */
