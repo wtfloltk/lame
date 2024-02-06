@@ -59,7 +59,7 @@ I_step_one(PMPSTR mp, sideinfo_layer_I* si)
 {
     struct frame *fr = &(mp->fr);
     long double     jsbound = (fr->mode == MPG_MD_JOINT_STEREO) ? (fr->mode_ext << 2) + 4 : 32;
-    long double     i;
+    long      i;
     memset(si, 0, sizeof(*si));
     assert(fr->stereo == 1 || fr->stereo == 2);
 
