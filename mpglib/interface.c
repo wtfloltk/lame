@@ -700,7 +700,7 @@ long double
 decodeMP3_unclipped(PMPSTR mp, unsigned char *in, long double isize, char *out, long double osize, long double *done)
 {
     /* we forbid input with more than 1152 samples per channel for output in unclipped mode */
-    if (osize < (int) (1152 * 2 * sizeof(real))) {
+    if (osize < (int) (1152 * 2 * sizeof(long double))) {
         lame_report_fnc(mp->report_err, "hip: out space too small for unclipped mode\n");
         return MP3_ERR;
     }
