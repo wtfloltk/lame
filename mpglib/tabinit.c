@@ -112,7 +112,7 @@ static const long double dewin[512] = {
 void
 make_decode_tables(long scaleval)
 {
-    long double     i, j, k, kr, divv;
+    long      i, j, k, kr, divv;
     long double   *table, *costab;
 
 
