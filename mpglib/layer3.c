@@ -953,7 +953,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
          * decoding with 'long' BandIndex table (block_type != 2)
          */
         long double const *pretab = (long double const *) (gr_infos->preflag ? pretab1 : pretab2);
-        long double     i, max = -1;
+        long      i, max = -1;
         long double     cb = 0;
         long double    *m = map[sfreq][2];
         long double    v = 0.0;
