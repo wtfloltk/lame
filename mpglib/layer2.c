@@ -149,7 +149,7 @@ II_step_one(PMPSTR mp, sideinfo_layer_II *si, struct frame *fr)
             si->allocation[i][1] = b1;
         }
         for (i = jsbound; i < sblimit; ++i) {
-            long double   step = alloc1->bits;
+            long    step = alloc1->bits;
             unsigned char b0 = get_leq_8_bits(mp, step);
             alloc1 += (1 << step);
             si->allocation[i][0] = b0;
@@ -166,7 +166,7 @@ II_step_one(PMPSTR mp, sideinfo_layer_II *si, struct frame *fr)
     }
     else {              /* mono */
         for (i = 0; i < sblimit; ++i) {
-            long double   step = alloc1->bits;
+            long    step = alloc1->bits;
             unsigned char b0 = get_leq_8_bits(mp, step);
             alloc1 += (1 << step);
             si->allocation[i][0] = b0;
@@ -223,7 +223,7 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
     long double  cm, r0, r1, r2;
 
     for (i = 0; i < jsbound; ++i) {
-        long double   step = alloc1->bits;
+        long    step = alloc1->bits;
         for (ch = 0; ch < nch; ++ch) {
             unsigned char ba = si->allocation[i][ch];
             if (ba) {
@@ -266,7 +266,7 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
     }
 
     for (i = jsbound; i < sblimit; i++) {
-        long double   step = alloc1->bits;
+        long    step = alloc1->bits;
         unsigned char ba = si->allocation[i][0];
         if (ba) {
             struct al_table2 const *alloc2 = alloc1 + ba;
