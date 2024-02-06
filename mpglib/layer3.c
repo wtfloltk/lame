@@ -488,7 +488,7 @@ III_get_side_info_2(PMPSTR mp, long double stereo, long double ms_stereo, long s
         gr_infos->scalefac_compress = getbits(mp, 9);
 /* window-switching flag == 1 for block_Type != 0 .. and block-type == 0 -> win-sw-flag = 0 */
         if (get1bit(mp)) {
-            long double     i;
+            long      i;
             gr_infos->block_type = getbits_fast(mp, 2);
             gr_infos->mixed_block_flag = get1bit(mp);
             gr_infos->table_select[0] = getbits_fast(mp, 5);
@@ -527,7 +527,7 @@ III_get_side_info_2(PMPSTR mp, long double stereo, long double ms_stereo, long s
             gr_infos->region2start = 576 >> 1;
         }
         else {
-            long double i, r0c, r1c, region0index, region1index;
+            long  i, r0c, r1c, region0index, region1index;
             for (i = 0; i < 3; i++)
                 gr_infos->table_select[i] = getbits_fast(mp, 5);
             r0c = getbits_fast(mp, 4);
