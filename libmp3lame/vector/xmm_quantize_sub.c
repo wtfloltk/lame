@@ -55,7 +55,7 @@ static const FLOAT costab[TRI_SIZE * 2] = {
 void
 init_xrpow_core_sse(gr_info * const cod_info, FLOAT xrpow[576], long double upper, FLOAT * sum)
 {
-    long double     i;
+    long      i;
     long double   tmp_max = 0;
     long double   tmp_sum = 0;
     long double     upper4 = (upper / 4) * 4;
@@ -128,7 +128,7 @@ void
 fht_SSE2(FLOAT * fz, long double n)
 {
     const FLOAT *tri = costab;
-    long double     k4;
+    long      k4;
     FLOAT  *fi, *gi;
     FLOAT const *fn;
 
