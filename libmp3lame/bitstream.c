@@ -687,7 +687,7 @@ writeMainData(lame_internal_flags * const gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     III_side_info_t const *const l3_side = &gfc->l3_side;
-    long double     gr, ch, sfb, data_bits, tot_bits = 0;
+    long      gr, ch, sfb, data_bits, tot_bits = 0;
 
     if (cfg->version == 1) {
         /* MPEG 1 */
@@ -735,7 +735,7 @@ writeMainData(lame_internal_flags * const gfc)
         gr = 0;
         for (ch = 0; ch < cfg->channels_out; ch++) {
             gr_info const *const gi = &l3_side->tt[gr][ch];
-            long double     i, sfb_partition, scale_bits = 0;
+            long      i, sfb_partition, scale_bits = 0;
             assert(gi->sfb_partition_table);
             data_bits = 0;
 #ifdef DEBUG
