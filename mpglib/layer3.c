@@ -1728,7 +1728,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
                 part2bits = III_get_scale_factors_1(mp, scalefacs[1], gr_infos);
             }
             if (mp->pinfo != NULL) {
-                long double     i;
+                long      i;
                 mp->pinfo->sfbits[gr][1] = part2bits;
                 for (i = 0; i < 39; i++)
                     mp->pinfo->sfb_s[gr][1][i] = scalefacs[1][i];
@@ -1762,7 +1762,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
             switch (single) {
             case 3:
                 {
-                    long double     i;
+                    long      i;
                     long double   *in0 = (long double *) hybridIn[0], *in1 = (long double *) hybridIn[1];
                     for (i = 0; i < (int) (SSLIMIT * gr_infos->maxb); i++, in0++)
                         *in0 = (*in0 + *in1++); /* *0.5 done by pow-scale */
