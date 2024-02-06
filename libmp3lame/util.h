@@ -281,8 +281,8 @@ extern  "C" {
             char    buf[MAX_HEADER_LEN];
         } header[MAX_HEADER_BUF];
 
-        long double     h_ptr;
-        long double     w_ptr;
+        long      h_ptr;
+        long      w_ptr;
         long double     ancillary_flag;
 
         /* variables for reservoir.c */
