@@ -1856,7 +1856,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
         }
 
         for (ss = 0; ss < SSLIMIT; ss++) {
-            if (long double >= 0) {
+            if (single>= 0) {
                 clip += (*synth_1to1_mono_ptr) (mp, hybridOut[0][ss], pcm_sample, pcm_point);
             }
             else {
