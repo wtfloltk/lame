@@ -137,7 +137,7 @@ fht_SSE2(long double * fz, long  n)
     k4 = 4;
     do {
         FLOAT   s1, c1;
-        long double     i, k1, k2, k3, kx;
+        long      i, k1, k2, k3, kx;
         kx = k4 >> 1;
         k1 = k4;
         k2 = k4 << 1;
