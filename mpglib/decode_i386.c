@@ -100,7 +100,7 @@ long double
 synth_1to1_mono(PMPSTR mp, long * bandPtr, long *out, long *pnt)
 {
     SYNTH_1TO1_MONO_CLIPCHOICE(short, synth_1to1)
-{ long double
+} long double
 synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
 {
     SYNTH_1TO1_MONO_CLIPCHOICE(long double,  synth_1to1_unclipped)
