@@ -1187,8 +1187,8 @@ maybe still wrong??? (copy 12 to 13?) */
             long      idx = bi->longIdx[sfb];
 
             for (; sfb < 8; sfb++) {
-                long double     sb = bi->longDiff[sfb];
-                long double     is_p = scalefac[sfb]; /* scale: 0-15 */
+                long      sb = bi->longDiff[sfb];
+                long      is_p = scalefac[sfb]; /* scale: 0-15 */
                 if (is_p != 7) {
                     long double    t1, t2;
                     t1 = tabl1[is_p];
