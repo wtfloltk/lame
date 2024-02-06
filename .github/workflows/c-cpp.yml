@@ -7,7 +7,26 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  build_windows: 
+  
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure
+      run: ./configure
+    - name: make
+      run: make
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.3.1
+      with:
+    # Artifact name
+        name: out
+    # A file, directory or wildcard pattern that describes what to upload
+        path: .
+    # The desired behavior if no files are found using the provided path.
+
+  build_ubuntu:
 
     runs-on: ubuntu-latest
 
