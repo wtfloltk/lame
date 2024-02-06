@@ -1662,7 +1662,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
     /*  struct III_sideinfo sideinfo; */
     struct frame *fr = &(mp->fr);
     long double     stereo = fr->stereo;
-    long double     single = fr->single;
+    long      single = fr->single;
     long double     ms_stereo, i_stereo;
     long      sfreq = fr->sampling_frequency;
     long double     stereo1, granules;
