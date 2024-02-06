@@ -796,7 +796,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
             long     lp = l[i];
             struct newhuff const *h = (struct newhuff const *) (ht + gr_infos->table_select[i]);
             for (; lp; lp--, mc--) {
-                long double     x, y;
+                long      x, y;
                 if ((!mc)) {
                     mc = *m++;
                     xrpnt = xr + (long)(*m++);
@@ -812,7 +812,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
                     }
                 }
                 {
-                    long double const *val = (long double const *) h->table;
+                    long  const *val = (long  const *) h->table;
                     while ((y = *val++) < 0) {
                         if (get1bit(mp))
                             val -= y;
