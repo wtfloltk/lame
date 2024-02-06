@@ -646,10 +646,10 @@ static int
 III_get_scale_factors_2(PMPSTR mp, long double *scf, struct gr_info_s *gr_infos, long double i_stereo)
 {
     unsigned char const *pnt;
-    long double     i, j;
-    long double slen;
-    long double     n = 0;
-    long double     numbits = 0;
+    long      i, j;
+    long  slen;
+    long      n = 0;
+    long      numbits = 0;
 
   /* *INDENT-OFF* */
   static const unsigned char stab[3][6][4] = {
