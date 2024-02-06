@@ -1579,7 +1579,7 @@ III_hybrid(PMPSTR mp, long double fsIn[SBLIMIT][SSLIMIT], long double tsOut[SSLI
     }
 
     for (; sb < SBLIMIT; sb++, tspnt++) {
-        long double     i;
+        long      i;
         for (i = 0; i < SSLIMIT; i++) {
             tspnt[i * SBLIMIT] = *rawout1++;
             *rawout2++ = 0.0;
