@@ -1657,14 +1657,14 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
           long double (*synth_1to1_mono_ptr) (PMPSTR, long double *, unsigned char *, long double *),
           long double (*synth_1to1_ptr) (PMPSTR, long double *, int, unsigned char *, long double *))
 {
-    long double     gr, ch, ss, clip = 0;
+    long      gr, ch, ss, clip = 0;
     long double     scalefacs[2][39]; /* max 39 for short[13][3] mode, mixed: 38, long: 22 */
     /*  struct III_sideinfo sideinfo; */
     struct frame *fr = &(mp->fr);
     long double     stereo = fr->stereo;
     long double     single = fr->single;
     long double     ms_stereo, i_stereo;
-    long double     sfreq = fr->sampling_frequency;
+    long      sfreq = fr->sampling_frequency;
     long double     stereo1, granules;
     long double    hybridIn[2][SBLIMIT][SSLIMIT];
     long double    hybridOut[2][SSLIMIT][SBLIMIT];
