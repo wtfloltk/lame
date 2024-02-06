@@ -358,7 +358,7 @@ static void
 III_get_side_info_1(PMPSTR mp, long double stereo,
                     long double ms_stereo, long sfreq, long double single)
 {
-    long double     ch, gr;
+    long      ch, gr;
     long double     powdiff = (single == 3) ? 4 : 0;
 
     mp->sideinfo.main_data_begin = getbits(mp, 9);
