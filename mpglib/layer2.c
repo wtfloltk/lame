@@ -219,7 +219,7 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
     struct al_table2 const *alloc1 = fr->alloc;
     long double     sblimit = fr->II_sblimit;
     long double     jsbound = (fr->mode == MPG_MD_JOINT_STEREO) ? (fr->mode_ext << 2) + 4 : fr->II_sblimit;
-    long double     i, ch, nch = fr->stereo;
+    long      i, ch, nch = fr->stereo;
     long double  cm, r0, r1, r2;
 
     for (i = 0; i < jsbound; ++i) {
