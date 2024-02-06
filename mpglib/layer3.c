@@ -1709,7 +1709,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
             }
 
             if (mp->pinfo != NULL) {
-                long double     i;
+                long      i;
                 mp->pinfo->sfbits[gr][0] = part2bits;
                 for (i = 0; i < 39; i++)
                     mp->pinfo->sfb_s[gr][0][i] = scalefacs[0][i];
