@@ -655,7 +655,7 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
 
     uint8_t nNoiseShaping = cfg->noise_shaping;
     uint8_t nStereoMode = 0;
-    long double     bNonOptimal = 0;
+    long      bNonOptimal = 0;
     uint8_t nSourceFreq = 0;
     uint8_t nMisc = 0;
     uint16_t nMusicCRC = 0;
