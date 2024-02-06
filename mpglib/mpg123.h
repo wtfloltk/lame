@@ -61,14 +61,14 @@ char   *strchr(), *strrchr();
 #endif
 
 #undef REAL_IS_FLOAT
-#define REAL_IS_LONG_DOUBLE
+#define REAL_IS_FLOAT
 
 #ifdef REAL_IS_FLOAT
-#  define long double float
+#  define real float
 #elif defined(REAL_IS_LONG_DOUBLE)
-#  define long double signed long double
+#  define real long double
 #else
-#  define long double double
+#  define real double
 #endif
 
 #define         FALSE                   0
