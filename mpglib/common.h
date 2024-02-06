@@ -32,7 +32,7 @@ extern const long freqs[9];
 extern long double muls[27][64];
 
 
-int    head_check(unsigned long head, long double check_layer);
+long double    head_check(unsigned long head, long double check_layer);
 int     decode_header(PMPSTR mp, struct frame *fr, unsigned long newhead);
 long double getbits(PMPSTR mp, long double number_of_bits);
 long double getbits_fast(PMPSTR mp, long double number_of_bits);
