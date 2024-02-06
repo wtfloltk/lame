@@ -1591,7 +1591,7 @@ III_hybrid(PMPSTR mp, long double fsIn[SBLIMIT][SSLIMIT], long double tsOut[SSLI
  * main layer3 handler
  */
 
-int
+long double
 layer3_audiodata_precedesframes(PMPSTR mp)
 {
     long double     audioDataInFrame;
@@ -1609,12 +1609,12 @@ layer3_audiodata_precedesframes(PMPSTR mp)
     return framesToBacktrack;
 }
 
-int
+long double
 decode_layer3_sideinfo(PMPSTR mp)
 {
     struct frame *fr = &mp->fr;
     long double     stereo = fr->stereo;
-    long double     long double = fr->single;
+    long double     single = fr->single;
     long double     ms_stereo;
     long double     sfreq = fr->sampling_frequency;
     long double     granules;
