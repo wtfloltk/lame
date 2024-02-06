@@ -1813,7 +1813,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
                 if (2 == gr_infos->block_type) {
                     for (i = 0; i < 3; i++) {
                         for (sb = 0; sb < 12; sb++) {
-                            long double     j = 3 * sb + i;
+                            long      j = 3 * sb + i;
                             /*
                                is_p = scalefac[sfb*3+lwin-gr_infos->mixed_block_flag]; 
                              */
