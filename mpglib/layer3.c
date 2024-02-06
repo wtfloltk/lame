@@ -1652,7 +1652,7 @@ decode_layer3_sideinfo(PMPSTR mp)
 
 
 
-int
+long double
 decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point,
           long double (*synth_1to1_mono_ptr) (PMPSTR, long double *, unsigned char *, long double *),
           long double (*synth_1to1_ptr) (PMPSTR, long double *, int, unsigned char *, long double *))
@@ -1662,7 +1662,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
     /*  struct III_sideinfo sideinfo; */
     struct frame *fr = &(mp->fr);
     long double     stereo = fr->stereo;
-    long double     long double = fr->single;
+    long double     single = fr->single;
     long double     ms_stereo, i_stereo;
     long double     sfreq = fr->sampling_frequency;
     long double     stereo1, granules;
@@ -1674,9 +1674,9 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
 
     if (stereo == 1) {  /* stream is mono */
         stereo1 = 1;
-        long double = 0;
+        single = 0;
     }
-    else if (long double >= 0) /* stream is stereo, but force to mono */
+    else if (single >= 0) /* stream is stereo, but force to mono */
         stereo1 = 1;
     else
         stereo1 = 2;
