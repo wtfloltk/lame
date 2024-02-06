@@ -942,7 +942,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
         gr_infos->maxbandl = max[3] + 1;
 
         {
-            long double     rmax = max[0] > max[1] ? max[0] : max[1];
+            long      rmax = max[0] > max[1] ? max[0] : max[1];
             rmax = (rmax > max[2] ? rmax : max[2]) + 1;
             gr_infos->maxb = rmax ? shortLimit[sfreq][rmax] : longLimit[sfreq][max[3] + 1];
         }
