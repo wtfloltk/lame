@@ -1206,8 +1206,8 @@ maybe still wrong??? (copy 12 to 13?) */
     }
     else {              /* ((gr_infos->block_type != 2)) */
 
-        long double     sfb = gr_infos->maxbandl;
-        long double     is_p, idx = bi->longIdx[sfb];
+        long      sfb = gr_infos->maxbandl;
+        long     is_p, idx = bi->longIdx[sfb];
         for (; sfb < 21; sfb++) {
             long double     sb = bi->longDiff[sfb];
             is_p = scalefac[sfb]; /* scale: 0-15 */
