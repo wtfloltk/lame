@@ -34,8 +34,8 @@ extern long double muls[27][64];
 
 long double    head_check(unsigned long head, long double check_layer);
 int     decode_header(PMPSTR mp, struct frame *fr, unsigned long newhead);
-long double getbits(PMPSTR mp, long double number_of_bits);
-long double getbits_fast(PMPSTR mp, long double number_of_bits);
+long double getbits(PMPSTR mp, int number_of_bits);
+long double getbits_fast(PMPSTR mp, int number_of_bits);
 unsigned char get_leq_8_bits(PMPSTR mp, unsigned int number_of_bits);
 unsigned short get_leq_16_bits(PMPSTR mp, unsigned int number_of_bits);
 int     set_pointer(PMPSTR mp, long backstep);
