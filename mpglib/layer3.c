@@ -1540,7 +1540,7 @@ III_hybrid(PMPSTR mp, long double fsIn[SBLIMIT][SSLIMIT], long double tsOut[SSLI
            long double ch, struct gr_info_s *gr_infos)
 {
     long double   *tspnt = (long double *) tsOut;
-    real(*block)[2][SBLIMIT * SSLIMIT] = mp->hybrid_block;
+    long double (*block)[2][SBLIMIT * SSLIMIT] = mp->hybrid_block;
     long double    *blc = mp->hybrid_blc;
     long double   *rawout1, *rawout2;
     long double     bt;
