@@ -799,7 +799,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long double *scf,
                 long double     x, y;
                 if ((!mc)) {
                     mc = *m++;
-                    xrpnt = xr + *(long)m++;
+                    xrpnt = xr + (long)(*m++);
                     lwin = *m++;
                     cb = *m++;
                     if (lwin == 3) {
