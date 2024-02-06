@@ -1103,7 +1103,7 @@ static void
 III_i_stereo(long double xr_buf[2][SBLIMIT][SSLIMIT], long double *scalefac,
              struct gr_info_s *gr_infos, long double sfreq, long double ms_stereo, long double lsf)
 {
-    (long double)(*xr)[SBLIMIT * SSLIMIT] = ((long double))(*)[SBLIMIT * SSLIMIT]) xr_buf;
+    long double (*xr)[SBLIMIT * SSLIMIT] = ((long double))(*)[SBLIMIT * SSLIMIT]) xr_buf;
     struct bandInfoStruct const *bi = (struct bandInfoStruct const *) &bandInfo[sfreq];
     long double   *tabl1, *tabl2;
 
