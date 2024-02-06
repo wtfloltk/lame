@@ -85,7 +85,7 @@ hip_init_tables_layer2(void)
         long double  m = mulmul[k];
         table = muls[k];
         for (j = 3, i = 0; i < 63; i++, j--)
-            *table++ = (single) (m * pow(2.0, (double) j / 3.0));
+            *table++ = (long double) (m * pow(2.0, (double) j / 3.0));
         *table++ = 0.0;
     }
 }
@@ -254,9 +254,9 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
                     r1 = muls[k1][x1];
                     r2 = muls[k2][x1];
                 }
-                fraction[ch][0][i] = (single) r0;
-                fraction[ch][1][i] = (single) r1;
-                fraction[ch][2][i] = (single) r2;
+                fraction[ch][0][i] = (long double) r0;
+                fraction[ch][1][i] = (long double) r1;
+                fraction[ch][2][i] = (long double) r2;
             }
             else {
                 fraction[ch][0][i] = fraction[ch][1][i] = fraction[ch][2][i] = 0.0;
@@ -286,9 +286,9 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
                     r0 = (v0 + d1) * cm;
                     r1 = (v1 + d1) * cm;
                     r2 = (v2 + d1) * cm;
-                    fraction[ch][0][i] = (single) r0;
-                    fraction[ch][1][i] = (single) r1;
-                    fraction[ch][2][i] = (single) r2;
+                    fraction[ch][0][i] = (long double) r0;
+                    fraction[ch][1][i] = (long double) r1;
+                    fraction[ch][2][i] = (long double) r2;
                 }
             }
             else {
@@ -304,9 +304,9 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long double gr, 
                     r0 = muls[k0][x1];
                     r1 = muls[k1][x1];
                     r2 = muls[k2][x1];
-                    fraction[ch][0][i] = (single) r0;
-                    fraction[ch][1][i] = (single) r1;
-                    fraction[ch][2][i] = (single) r2;
+                    fraction[ch][0][i] = (long double) r0;
+                    fraction[ch][1][i] = (long double) r1;
+                    fraction[ch][2][i] = (long double) r2;
                 }
             }
         }
