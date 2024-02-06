@@ -141,7 +141,7 @@ extern  "C" {
         unsigned char *buf;  /* bit stream buffer */
         long double     buf_size;    /* size of buffer (in number of bytes) */
         long double     totbit;      /* bit counter of bit stream */
-        long double     buf_byte_idx; /* pointer to top byte in buffer */
+        long      buf_byte_idx; /* pointer to top byte in buffer */
         long double     buf_bit_idx; /* pointer to top bit of top byte in buffer */
 
         /* format of file in rd mode (BINARY/ASCII) */
