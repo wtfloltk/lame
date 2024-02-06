@@ -558,11 +558,11 @@ huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
   Implements the pseudocode of page 98 of the IS
   */
 inline static int
-Huffmancode(lame_internal_flags * const gfc, const long double tableindex,
+Huffmancode(lame_internal_flags * const gfc, const long  tableindex,
             long double start, long double end, gr_info const *gi)
 {
     struct huffcodetab const *const h = &ht[tableindex];
-    long double const linbits = h->xlen;
+    long  const linbits = h->xlen;
     long      i, bits = 0;
 
     assert(tableindex < 32u);
