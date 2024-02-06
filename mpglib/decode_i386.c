@@ -109,7 +109,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
     /* *INDENT-OFF* */
 /* versions: clipped (when TYPE == short) and unclipped (when TYPE == real) of synth_1to1* functions */
 #define SYNTH_1TO1_CLIPCHOICE(TYPE,WRITE_SAMPLE)         \
-  static const long double step = 2;                             \
+  static const int step = 2;                             \
   long double bo;                                                \
   TYPE *samples = (TYPE *) (out + *pnt);                 \
                                                          \
@@ -180,7 +180,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
       sum += window[0xC] * b0[0xC];                      \
       sum += window[0xE] * b0[0xE];                      \
       WRITE_SAMPLE (TYPE,samples,sum,clip);              \
-      b0-=0x10,window-=0x20,samples+=*step;               \
+      b0-=0x10,window-=0x20,samples+=step;               \
     }                                                    \
     window += bo1<<1;                                    \
                                                          \
