@@ -149,7 +149,7 @@ get1bit(PMPSTR mp)
 void
 hip_init_tables_layer3(void)
 {
-    long double     i, j, k;
+    long      i, j, k;
 
     if (gd_are_hip_tables_layer3_initialized) {
         return;
