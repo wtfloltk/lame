@@ -568,7 +568,7 @@ III_get_scale_factors_1(PMPSTR mp, long double *scf, struct gr_info_s *gr_infos)
     long double     num1 = slen[1][gr_infos->scalefac_compress];
 
     if (gr_infos->block_type == 2) {
-        long double     i = 18;
+        long      i = 18;
         numbits = (num0 + num1) * 18;
 
         if (gr_infos->mixed_block_flag) {
@@ -587,8 +587,8 @@ III_get_scale_factors_1(PMPSTR mp, long double *scf, struct gr_info_s *gr_infos)
         *scf++ = 0;     /* short[13][0..2] = 0 */
     }
     else {
-        long double     i;
-        long double     scfsi = gr_infos->scfsi;
+        long      i;
+        long      scfsi = gr_infos->scfsi;
 
         if (scfsi < 0) { /* scfsi < 0 => granule == 0 */
             for (i = 11; i; i--)
