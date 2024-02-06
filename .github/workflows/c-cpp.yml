@@ -16,7 +16,7 @@ jobs:
     - name: make
       run: |
         bash ./configure
-        bash make
+        make
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.1
       with:
