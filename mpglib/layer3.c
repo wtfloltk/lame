@@ -1101,7 +1101,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
  */
 static void
 III_i_stereo(long double xr_buf[2][SBLIMIT][SSLIMIT], long double *scalefac,
-             struct gr_info_s *gr_infos, long double sfreq, long double ms_stereo, long double lsf)
+             struct gr_info_s *gr_infos, long  sfreq, long double ms_stereo, long double lsf)
 {
     long double (*xr)[SBLIMIT * SSLIMIT] = xr_buf;
     struct bandInfoStruct const *bi = (struct bandInfoStruct const *) &bandInfo[sfreq];
