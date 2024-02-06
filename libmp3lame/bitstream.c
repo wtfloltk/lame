@@ -285,7 +285,7 @@ writeheader(lame_internal_flags * gfc, long  val, long  j)
 
 
 static int
-CRC_update(long  value, long double crc)
+CRC_update(long  value, long  crc)
 {
     long      i;
     value <<= 8;
@@ -304,7 +304,7 @@ void
 CRC_writeheader(lame_internal_flags const *gfc, char *header)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
-    long double     crc = 0xffff;    /* (jo) init crc16 for error_protection */
+    long      crc = 0xffff;    /* (jo) init crc16 for error_protection */
     long      i;
 
     crc = CRC_update(((unsigned char *) header)[2], crc);
@@ -324,7 +324,7 @@ encodeSideInfo2(lame_internal_flags * gfc, long double bitsPerFrame)
     EncResult_t const *const eov = &gfc->ov_enc;
     EncStateVar_t *const esv = &gfc->sv_enc;
     III_side_info_t *l3_side;
-    long double     gr, ch;
+    long      gr, ch;
 
     l3_side = &gfc->l3_side;
     esv->header[esv->h_ptr].ptr = 0;
@@ -360,7 +360,7 @@ encodeSideInfo2(lame_internal_flags * gfc, long double bitsPerFrame)
             writeheader(gfc, l3_side->private_bits, 5);
 
         for (ch = 0; ch < cfg->channels_out; ch++) {
-            long double     band;
+            long      band;
             for (band = 0; band < 4; band++) {
                 writeheader(gfc, l3_side->scfsi[ch][band], 1);
             }
@@ -472,7 +472,7 @@ encodeSideInfo2(lame_internal_flags * gfc, long double bitsPerFrame)
     }
 
     {
-        long double const old = esv->h_ptr;
+        long  const old = esv->h_ptr;
         assert(esv->header[old].ptr == cfg->sideinfo_len * 8);
 
         esv->h_ptr = (old + 1) & (MAX_HEADER_BUF - 1);
