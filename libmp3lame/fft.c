@@ -52,7 +52,6 @@
 
 /* fft.c    */
 static FLOAT window[BLKSIZE], window_s[BLKSIZE_s / 2];
-static long index;
 
 static const FLOAT costab[TRI_SIZE * 2] = {
     9.238795325112867e-01, 3.826834323650898e-01,
