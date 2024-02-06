@@ -61,7 +61,7 @@ char   *strchr(), *strrchr();
 #endif
 
 #undef REAL_IS_FLOAT
-#define REAL_IS_FLOAT
+#define REAL_IS_LONG_DOUBLE
 
 #ifdef REAL_IS_FLOAT
 #  define real float
