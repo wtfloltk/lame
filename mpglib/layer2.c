@@ -354,7 +354,7 @@ II_select_table(struct frame *fr)
 }
 
 
-int
+long double
 decode_layer2_sideinfo(PMPSTR mp)
 {
     (void) mp;
@@ -362,7 +362,7 @@ decode_layer2_sideinfo(PMPSTR mp)
     return 0;
 }
 
-int
+long double
 decode_layer2_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point)
 {
     long double    fraction[2][4][SBLIMIT]; /* pick_table clears unused subbands */
