@@ -103,7 +103,7 @@ I_step_two(PMPSTR mp, sideinfo_layer_I *si, long double fraction[2][SBLIMIT])
     long double  r0, r1;
     struct frame *fr = &(mp->fr);
     long double     ds_limit = fr->down_sample_sblimit;
-    long double     i;
+    long      i;
 
     assert(fr->stereo == 1 || fr->stereo == 2);
     if (fr->stereo == 2) {
