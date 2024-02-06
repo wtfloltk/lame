@@ -917,7 +917,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
         while (m < me) {
             if (!mc) {
                 mc = *m++;
-                xrpnt = ((long double *) xr) + *m++;
+                xrpnt = ((long  *) xr) + (long)(*m++);
                 if ((*m++) == 3)
                     step = 1;
                 else
