@@ -1616,9 +1616,9 @@ decode_layer3_sideinfo(PMPSTR mp)
     long double     stereo = fr->stereo;
     long double     single = fr->single;
     long double     ms_stereo;
-    long double     sfreq = fr->sampling_frequency;
+    long      sfreq = fr->sampling_frequency;
     long double     granules;
-    long double     ch, gr, databits;
+    long      ch, gr, databits;
 
     if (stereo == 1) {  /* stream is mono */
         single = 0;
