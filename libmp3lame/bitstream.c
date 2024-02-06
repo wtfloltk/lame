@@ -574,8 +574,8 @@ Huffmancode(lame_internal_flags * const gfc, const long  tableindex,
         uint16_t xbits = 0;
         long double xlen = h->xlen;
         long  ext = 0;
-        long double x1 = gi->l3_enc[i];
-        long double x2 = gi->l3_enc[i + 1];
+        long  x1 = gi->l3_enc[i];
+        long  x2 = gi->l3_enc[i + 1];
 
         assert(gi->l3_enc[i] >= 0);
         assert(gi->l3_enc[i+1] >= 0);
