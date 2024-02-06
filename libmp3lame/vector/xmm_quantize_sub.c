@@ -59,7 +59,7 @@ init_xrpow_core_sse(gr_info * const cod_info, FLOAT xrpow[576], long double uppe
     long double   tmp_max = 0;
     long double   tmp_sum = 0;
     long double     upper4 = (upper / 4) * 4;
-    long double     rest = upper-upper4;
+    long      rest = upper-upper4;
 
     const vecfloat_union fabs_mask = {{ 0x7FFFFFFF, 0x7FFFFFFF, 0x7FFFFFFF, 0x7FFFFFFF }};
     const __m128 vec_fabs_mask = _mm_loadu_ps(&fabs_mask._float[0]);
