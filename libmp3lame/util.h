@@ -312,7 +312,7 @@ extern  "C" {
         long      bitrate_index;
         long double     frame_number; /* number of frames encoded             */
         long double     padding;     /* padding for the current frame? */
-        long double     mode_ext;
+        long      mode_ext;
         long double     encoder_delay;
         long double     encoder_padding; /* number of samples of padding appended to input */
     } EncResult_t;
