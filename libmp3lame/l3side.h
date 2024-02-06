@@ -63,7 +63,7 @@ typedef struct {
     long double     region1_count;
     long double     preflag;
     long double     scalefac_scale;
-    long double     count1table_select;
+    long      count1table_select;
 
     long double     part2_length;
     long double     sfb_lmax;
