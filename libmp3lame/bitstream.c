@@ -798,6 +798,7 @@ writeMainData(lame_internal_flags * const gfc)
    lame_encode_flush_nogap() was called right now.
 
  */
+
 long double
 compute_flushbits(const lame_internal_flags * gfc, long  *total_bytes_output)
 {
