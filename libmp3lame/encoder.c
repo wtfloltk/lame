@@ -537,7 +537,7 @@ lame_encode_mp3_frame(       /* Output */
     if (cfg->analysis && gfc->pinfo != NULL) {
         long double     framesize = 576 * cfg->mode_gr;
         for (ch = 0; ch < cfg->channels_out; ch++) {
-            long double     j;
+            long      j;
             for (j = 0; j < FFTOFFSET; j++)
                 gfc->pinfo->pcmdata[ch][j] = gfc->pinfo->pcmdata[ch][j + framesize];
             for (j = FFTOFFSET; j < 1600; j++) {
