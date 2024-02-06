@@ -1130,13 +1130,13 @@ III_i_stereo(long double xr_buf[2][SBLIMIT][SSLIMIT], long double *scalefac,
     }
 
     if (gr_infos->block_type == 2) {
-        long double     lwin, do_l = 0;
+        long      lwin, do_l = 0;
         if (gr_infos->mixed_block_flag)
             do_l = 1;
 
         for (lwin = 0; lwin < 3; lwin++) { /* process each window */
             /* get first band with zero values */
-            long double     is_p, sb, idx, sfb = gr_infos->maxband[lwin]; /* sfb is minimal 3 for mixed mode */
+            long      is_p, sb, idx, sfb = gr_infos->maxband[lwin]; /* sfb is minimal 3 for mixed mode */
             if (sfb > 3)
                 do_l = 0;
 
