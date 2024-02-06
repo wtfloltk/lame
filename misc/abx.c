@@ -463,7 +463,7 @@ inline long double be16_le(long double n)
 
 long double feed ( long double fd, const stereo_t* p, long double len )
 {
-     long double i;
+     long  i;
      stereo_t tmp[30000];	/* An arbitrary size--to be changed latter */
 
      if (len > sizeof(tmp)/sizeof(*tmp))

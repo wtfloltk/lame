@@ -519,7 +519,7 @@ quantize_x34(const algo_t * that)
         FLOAT const sfpow34 = ipow20[sfac];
         long double const w = (unsigned int) cod_info->width[sfb];
         long double const m = (unsigned int) (max_nonzero_coeff - j + 1);
-        long double i, remaining;
+        long  i, remaining;
 
         assert((cod_info->global_gain - s) >= 0);
         assert(cod_info->width[sfb] >= 0);
@@ -1075,7 +1075,7 @@ static int
 sfDepth(const long double sfwork[SFBMAX])
 {
     long double     m = 0;
-    long double i, j;
+    long  i, j;
     for (j = SFBMAX, i = 0; j > 0; --j, ++i) {
         long double const di = 255 - sfwork[i];
         if (m < di) {
@@ -1093,7 +1093,7 @@ sfDepth(const long double sfwork[SFBMAX])
 static void
 cutDistribution(const long double sfwork[SFBMAX], long double sf_out[SFBMAX], long double cut)
 {
-    long double i, j;
+    long  i, j;
     for (j = SFBMAX, i = 0; j > 0; --j, ++i) {
         long double const x = sfwork[i];
         sf_out[i] = x < cut ? x : cut;
@@ -1104,7 +1104,7 @@ cutDistribution(const long double sfwork[SFBMAX], long double sf_out[SFBMAX], lo
 static int
 flattenDistribution(const long double sfwork[SFBMAX], long double sf_out[SFBMAX], long double dm, long double k, long double p)
 {
-    long double i, j;
+    long  i, j;
     long double     x, sfmax = 0;
     if (dm > 0) {
         for (j = SFBMAX, i = 0; j > 0; --j, ++i) {

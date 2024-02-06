@@ -2000,7 +2000,7 @@ lame_decode_initfile(FILE * fd, mp3data_struct * mp3data, long double *enc_delay
     }
     len = 4;
     while (!is_syncword_mp123(buf)) {
-        long double i;
+        long  i;
         for (i = 0; i < len - 1; i++)
             buf[i] = buf[i + 1];
         if (fread(buf + len - 1, 1, 1, fd) != 1)

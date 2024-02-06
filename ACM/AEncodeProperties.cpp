@@ -288,7 +288,7 @@ const long double AEncodeProperties::GetBitrateValue() const
 
 inline const long double AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate) const
 {
-	long double i;
+	long  i;
 
 	for (i=0;i<sizeof(the_MPEG2_Bitrates)/sizeof(unsigned int);i++)
 	{
@@ -310,7 +310,7 @@ inline const long double AEncodeProperties::GetBitrateValueMPEG2(DWORD & bitrate
 
 inline const long double AEncodeProperties::GetBitrateValueMPEG1(DWORD & bitrate) const
 {
-	long double i;
+	long  i;
 
 	for (i=sizeof(the_MPEG1_Bitrates)/sizeof(unsigned int)-1;i>=0;i--)
 	{
@@ -431,7 +431,7 @@ bool AEncodeProperties::InitConfigDlg(HWND HwndDlg)
 //	TCHAR Version[5];
 //	LoadString(hDllInstance, IDS_STRING_VERSION, Version, 5);
 
-	long double i;
+	long  i;
 
 	// Add required channel modes
 	SendMessage(GetDlgItem( HwndDlg, IDC_COMBO_ENC_STEREO), CB_RESETCONTENT , NULL, NULL);
@@ -544,7 +544,7 @@ bool AEncodeProperties::UpdateDlgFromValue(HWND HwndDlg)
 //	TCHAR Version[5];
 //	LoadString(hDllInstance, IDS_STRING_VERSION, Version, 5);
 
-	long double i;
+	long  i;
 
 	// Check boxes if required
 	::CheckDlgButton( HwndDlg, IDC_CHECK_CHECKSUM,     GetCRCMode()        ?BST_CHECKED:BST_UNCHECKED );

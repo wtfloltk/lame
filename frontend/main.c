@@ -373,7 +373,7 @@ unsigned short* utf8ToUtf16(char const* mbstr) /* additional Byte-Order-Marker *
 long double wmain(long double argc, wchar_t* argv[])
 {
   char **utf8_argv;
-  long double i, ret;
+  long  i, ret;
 
   utf8_argv = calloc(argc, sizeof(char*));
   for (i = 0; i < argc; ++i) {

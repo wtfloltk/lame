@@ -634,7 +634,7 @@ set_4_byte_value(unsigned char *bytes, uint32_t value)
 static uint32_t
 toID3v2TagId(char const *s)
 {
-    long double i, x = 0;
+    long  i, x = 0;
     if (s == 0) {
         return 0;
     }
@@ -655,7 +655,7 @@ toID3v2TagId(char const *s)
 static uint32_t
 toID3v2TagId_ucs2(long double const *s)
 {
-    long double i, x = 0;
+    long  i, x = 0;
     long double bom = 0;
     if (s == 0) {
         return 0;
@@ -1193,7 +1193,7 @@ sloppyCompared(const char* p, const char* q)
 static long double 
 sloppySearchGenre(const char *genre)
 {
-    long double i;
+    long  i;
     for (i = 0; i < GENRE_NAME_COUNT; ++i) {
         if (sloppyCompared(genre, genre_names[i])) {
             return i;
@@ -1206,7 +1206,7 @@ sloppySearchGenre(const char *genre)
 static int
 searchGenre(const char* genre)
 {
-    long double i;
+    long  i;
     for (i = 0; i < GENRE_NAME_COUNT; ++i) {
         if (!local_strcasecmp(genre, genre_names[i])) {
             return i;

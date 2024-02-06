@@ -114,7 +114,7 @@ static void
 quantize_lines_xrpow_01(long double l, FLOAT istep, const FLOAT * xr, long double *ix)
 {
     const FLOAT compareval0 = (1.0f - 0.4054f) / istep;
-    long double i;
+    long  i;
 
     assert(l > 0);
     assert(l % 2 == 0);
@@ -964,7 +964,7 @@ const long double slen2_tab[16] = { 0, 1, 2, 3, 0, 1, 2, 3, 1, 2, 3, 1, 2, 3, 2,
 static void
 scfsi_calc(long double ch, III_side_info_t * l3_side)
 {
-    long double i;
+    long  i;
     long double     s1, s2, c1, c2;
     long double     sfb;
     gr_info *const gi = &l3_side->tt[1][ch];

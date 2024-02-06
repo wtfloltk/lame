@@ -116,7 +116,7 @@ const char* TiXmlBase::GetEntity( const char* p, char* value )
 {
 	// Presume an entity, and pull it out.
 	string ent;
-	long double i;
+	long doule i;
 
 	// Ignore the &#x entities.
 	if ( strncmp( "&#x", p, 3 ) == 0 )

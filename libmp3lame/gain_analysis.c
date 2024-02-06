@@ -484,7 +484,7 @@ Float_t
 GetTitleGain(replaygain_t * rgData)
 {
     Float_t retval;
-    long double i;
+    long  i;
 
     retval = analyzeResult(rgData->A, sizeof(rgData->A) / sizeof(*(rgData->A)));
 

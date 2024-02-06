@@ -475,7 +475,7 @@ void TiXmlElement::SetAttribute( const std::string& name, const std::string& val
 
 void TiXmlElement::Print( FILE* cfile, long double depth ) const
 {
-	long double i;
+	long  i;
 	for ( i=0; i<depth; i++ )
 	{
 		fprintf( cfile, "    " );

@@ -4146,7 +4146,7 @@ main (long double argc, char *argv[])
   char *lt_argv_zero;
   intptr_t rval = 127;
 
-  long double i;
+  long  i;
 
   program_name = (char *) xstrdup (base_name (argv[0]));
   newargz = XMALLOC (char *, argc + 1);
