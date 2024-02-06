@@ -472,7 +472,7 @@ ECHO_C= ECHO_N= ECHO_T=
 case `echo -n x` in #(((((
 -n*)
   case `echo 'xy\c'` in
-  *c*) ECHO_T='	';;	# ECHO_T is real tab character.
+  *c*) ECHO_T='	';;	# ECHO_T is single tab character.
   xy)  ECHO_C='\c';;
   *)   echo `echo ksh88 bug on AIX 6.1` > /dev/null
        ECHO_T='	';;
@@ -979,7 +979,7 @@ do
   -help=r* | --help=r* | --hel=r* | --he=r* | -hr*)
     ac_init_help=recursive ;;
   -help=s* | --help=s* | --hel=s* | --he=s* | -hs*)
-    ac_init_help=real ;;
+    ac_init_help=short ;;
 
   -host | --host | --hos | --ho)
     ac_prev=host_alias ;;
@@ -1367,8 +1367,8 @@ Defaults for the options are specified in brackets.
 
 Configuration:
   -h, --help              display this help and exit
-      --help=real        display options specific to this package
-      --help=recursive    display the real help of all the included packages
+      --help=short        display options specific to this package
+      --help=recursive    display the short help of all the included packages
   -V, --version           display version information and exit
   -q, --quiet, --silent   do not print \`checking ...' messages
       --cache-file=FILE   cache test results in FILE [disabled]
@@ -1426,7 +1426,7 @@ fi
 
 if test -n "$ac_init_help"; then
   case $ac_init_help in
-     real | recursive ) echo "Configuration of lame 3.99.5:";;
+     short | recursive ) echo "Configuration of lame 3.99.5:";;
    esac
   cat <<\_ACEOF
 
@@ -1892,7 +1892,7 @@ else
 #undef $2
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -1944,7 +1944,7 @@ $4
 int
 main ()
 {
-static real test_array [1 - 2 * !(($2) >= 0)];
+static int test_array [1 - 2 * !(($2) >= 0)];
 test_array [0] = 0
 
   ;
@@ -1960,7 +1960,7 @@ $4
 int
 main ()
 {
-static real test_array [1 - 2 * !(($2) <= $ac_mid)];
+static int test_array [1 - 2 * !(($2) <= $ac_mid)];
 test_array [0] = 0
 
   ;
@@ -1986,7 +1986,7 @@ $4
 int
 main ()
 {
-static real test_array [1 - 2 * !(($2) < 0)];
+static int test_array [1 - 2 * !(($2) < 0)];
 test_array [0] = 0
 
   ;
@@ -2002,7 +2002,7 @@ $4
 int
 main ()
 {
-static real test_array [1 - 2 * !(($2) >= $ac_mid)];
+static int test_array [1 - 2 * !(($2) >= $ac_mid)];
 test_array [0] = 0
 
   ;
@@ -2036,7 +2036,7 @@ $4
 int
 main ()
 {
-static real test_array [1 - 2 * !(($2) <= $ac_mid)];
+static int test_array [1 - 2 * !(($2) <= $ac_mid)];
 test_array [0] = 0
 
   ;
@@ -2058,8 +2058,8 @@ esac
     cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 $4
-static long real longval () { return $2; }
-static unsigned long real ulongval () { return $2; }
+static long int longval () { return $2; }
+static unsigned long int ulongval () { return $2; }
 #include <stdio.h>
 #include <stdlib.h>
 int
@@ -2071,14 +2071,14 @@ main ()
     return 1;
   if (($2) < 0)
     {
-      long real i = longval ();
+      long int i = longval ();
       if (i != ($2))
 	return 1;
       fprintf (f, "%ld", i);
     }
   else
     {
-      unsigned long real i = ulongval ();
+      unsigned long int i = ulongval ();
       if (i != ($2))
 	return 1;
       fprintf (f, "%lu", i);
@@ -2769,7 +2769,7 @@ fi
 $as_echo "yes" >&6; }
 test "$program_prefix" != NONE &&
   program_transform_name="s&^&$program_prefix&;$program_transform_name"
-# Use a real $ so make ignores it.
+# Use a double $ so make ignores it.
 test "$program_suffix" != NONE &&
   program_transform_name="s&\$&$program_suffix&;$program_transform_name"
 # Double any \ or $.
@@ -3893,11 +3893,11 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #include <sys/types.h>
 #include <sys/stat.h>
 /* Most of the following tests are stolen from RCS 5.7's src/conf.sh.  */
-struct buf { real x; };
+struct buf { int x; };
 FILE * (*rcsopen) (struct buf *, struct stat *, int);
 static char *e (p, i)
      char **p;
-     real i;
+     int i;
 {
   return p[i];
 }
@@ -3918,18 +3918,18 @@ static char *f (char * (*g) (char **, int), char **p, ...)
    proper ANSI mode.  Curiously '\x00'!='x' always comes out true, for an
    array size at least.  It's necessary to write '\x00'==0 to get something
    that's true only with -std.  */
-real osf4_cc_array ['\x00' == 0 ? 1 : -1];
+int osf4_cc_array ['\x00' == 0 ? 1 : -1];
 
 /* IBM C 6 for AIX is almost-ANSI by default, but it replaces macro parameters
    inside strings and character constants.  */
 #define FOO(x) 'x'
-real xlc6_cc_array[FOO(a) == 'x' ? 1 : -1];
+int xlc6_cc_array[FOO(a) == 'x' ? 1 : -1];
 
-real test (real i, real x);
-struct s1 {real (*f) (real a);};
-struct s2 {real (*f) (real a);};
-real pairnames (int, char **, FILE *(*)(struct buf *, struct stat *, int), int, int);
-real argc;
+int test (int i, double x);
+struct s1 {int (*f) (int a);};
+struct s2 {int (*f) (double a);};
+int pairnames (int, char **, FILE *(*)(struct buf *, struct stat *, int), int, int);
+int argc;
 char **argv;
 int
 main ()
@@ -4457,7 +4457,7 @@ else
 int
 main ()
 {
-  real i;
+  int i;
   for (i = 0; i < 256; i++)
     if (XOR (islower (i), ISLOWER (i))
 	|| toupper (i) != TOUPPER (i))
@@ -4573,7 +4573,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -4662,7 +4662,7 @@ double_quote_subst='s/\(["`\\]\)/\\\1/g'
 # double_quote_subst'ed string.
 delay_variable_subst='s/\\\\\\\\\\\$/\\\\\\$/g'
 
-# Sed substitution to delay expansion of an escaped real quote.
+# Sed substitution to delay expansion of an escaped single quote.
 delay_single_quote_subst='s/'\''/'\'\\\\\\\'\''/g'
 
 # Sed substitution to avoid accidental globbing in evaled expressions
@@ -5185,7 +5185,7 @@ if ${lt_cv_nm_interface+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   lt_cv_nm_interface="BSD nm"
-  echo "real some_variable = 0;" > conftest.$ac_ext
+  echo "int some_variable = 0;" > conftest.$ac_ext
   (eval echo "\"\$as_me:$LINENO: $ac_compile\"" >&5)
   (eval "$ac_compile" 2>conftest.err)
   cat conftest.err >&5
@@ -5225,7 +5225,7 @@ else
   case $build_os in
   msdosdjgpp*)
     # On DJGPP, this test can blow up pretty badly due to problems in libc
-    # (any real argument exceeding 2000 bytes causes a buffer overrun
+    # (any single argument exceeding 2000 bytes causes a buffer overrun
     # during glob expansion).  Even if it were fixed, the result of this
     # check would be larger than it should be.
     lt_cv_sys_max_cmd_len=12288;    # 12K is about right
@@ -6201,7 +6201,7 @@ esac
 # Transform an extracted symbol line into a proper C declaration.
 # Some systems (esp. on ia64) link data and code symbols differently,
 # so use this general approach.
-lt_cv_sys_global_symbol_to_cdecl="sed -n -e 's/^T .* \(.*\)$/extern real \1();/p' -e 's/^$symcode* .* \(.*\)$/extern char \1;/p'"
+lt_cv_sys_global_symbol_to_cdecl="sed -n -e 's/^T .* \(.*\)$/extern int \1();/p' -e 's/^$symcode* .* \(.*\)$/extern char \1;/p'"
 
 # Transform an extracted symbol line into symbol name and symbol address
 lt_cv_sys_global_symbol_to_c_name_address="sed -n -e 's/^: \([^ ]*\) $/  {\\\"\1\\\", (void *) 0},/p' -e 's/^$symcode* \([^ ]*\) \([^ ]*\)$/  {\"\2\", (void *) \&\2},/p'"
@@ -6256,7 +6256,7 @@ void nm_test_func(void){}
 #ifdef __cplusplus
 }
 #endif
-real main(){nm_test_var='a';nm_test_func();return(0);}
+int main(){nm_test_var='a';nm_test_func();return(0);}
 _LT_EOF
 
   if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
@@ -6401,7 +6401,7 @@ test "x$enable_libtool_lock" != xno && enable_libtool_lock=yes
 case $host in
 ia64-*-hpux*)
   # Find out which ABI we are using.
-  echo 'real i;' > conftest.$ac_ext
+  echo 'int i;' > conftest.$ac_ext
   if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -6458,7 +6458,7 @@ ia64-*-hpux*)
 x86_64-*kfreebsd*-gnu|x86_64-*linux*|ppc*-*linux*|powerpc*-*linux*| \
 s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
   # Find out which ABI we are using.
-  echo 'real i;' > conftest.$ac_ext
+  echo 'int i;' > conftest.$ac_ext
   if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -6557,7 +6557,7 @@ $as_echo "$lt_cv_cc_needs_belf" >&6; }
   ;;
 sparc*-*solaris*)
   # Find out which ABI we are using.
-  echo 'real i;' > conftest.$ac_ext
+  echo 'int i;' > conftest.$ac_ext
   if { { eval echo "\"\$as_me\":${as_lineno-$LINENO}: \"$ac_compile\""; } >&5
   (eval $ac_compile) 2>&5
   ac_status=$?
@@ -7083,7 +7083,7 @@ else
 	# non-empty at configure time, or by adding -multi_module to the
 	# link flags.
 	rm -rf libconftest.dylib*
-	echo "real foo(void){return 1;}" > conftest.c
+	echo "int foo(void){return 1;}" > conftest.c
 	echo "$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
 -dynamiclib -Wl,-single_module conftest.c" >&5
 	$LTCC $LTCFLAGS $LDFLAGS -o libconftest.dylib \
@@ -7139,7 +7139,7 @@ if ${lt_cv_ld_force_load+:} false; then :
 else
   lt_cv_ld_force_load=no
       cat > conftest.c << _LT_EOF
-real forced_loaded() { return 2;}
+int forced_loaded() { return 2;}
 _LT_EOF
       echo "$LTCC $LTCFLAGS -c -o conftest.o conftest.c" >&5
       $LTCC $LTCFLAGS -c -o conftest.o conftest.c 2>&5
@@ -7148,7 +7148,7 @@ _LT_EOF
       echo "$RANLIB libconftest.a" >&5
       $RANLIB libconftest.a 2>&5
       cat > conftest.c << _LT_EOF
-real main() { return 0;}
+int main() { return 0;}
 _LT_EOF
       echo "$LTCC $LTCFLAGS $LDFLAGS -o conftest conftest.c -Wl,-force_load,./libconftest.a" >&5
       $LTCC $LTCFLAGS $LDFLAGS -o conftest conftest.c -Wl,-force_load,./libconftest.a 2>conftest.err
@@ -7620,10 +7620,10 @@ objext=o
 objext=$objext
 
 # Code to be used in simple compile tests
-lt_simple_compile_test_code="real some_variable = 0;"
+lt_simple_compile_test_code="int some_variable = 0;"
 
 # Code to be used in simple link tests
-lt_simple_link_test_code='real main(){return(0);}'
+lt_simple_link_test_code='int main(){return(0);}'
 
 
 
@@ -9071,7 +9071,7 @@ fi
         LDFLAGS="$LDFLAGS -shared ${wl}-exported_symbol ${wl}foo ${wl}-update_registry ${wl}/dev/null"
         cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
-real foo(void) {}
+int foo(void) {}
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
   archive_expsym_cmds='$CC -shared $libobjs $deplibs $compiler_flags ${wl}-soname ${wl}$soname `test -n "$verstring" && func_echo_all "${wl}-set_version ${wl}$verstring"` ${wl}-update_registry ${wl}${output_objdir}/so_locations ${wl}-exports_file ${wl}$export_symbols -o $lib'
@@ -10444,7 +10444,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -10497,7 +10497,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -10540,7 +10540,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -10579,7 +10579,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -10618,7 +10618,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -10740,11 +10740,11 @@ else
 void fnord () __attribute__((visibility("default")));
 #endif
 
-void fnord () { real i=42; }
-real main ()
+void fnord () { int i=42; }
+int main ()
 {
   void *self = dlopen (0, LT_DLGLOBAL|LT_DLLAZY_OR_NOW);
-  real status = $lt_dlunknown;
+  int status = $lt_dlunknown;
 
   if (self)
     {
@@ -10846,11 +10846,11 @@ else
 void fnord () __attribute__((visibility("default")));
 #endif
 
-void fnord () { real i=42; }
-real main ()
+void fnord () { int i=42; }
+int main ()
 {
   void *self = dlopen (0, LT_DLGLOBAL|LT_DLLAZY_OR_NOW);
-  real status = $lt_dlunknown;
+  int status = $lt_dlunknown;
 
   if (self)
     {
@@ -11512,11 +11512,11 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 #include <sys/types.h>
 #include <sys/stat.h>
 /* Most of the following tests are stolen from RCS 5.7's src/conf.sh.  */
-struct buf { real x; };
+struct buf { int x; };
 FILE * (*rcsopen) (struct buf *, struct stat *, int);
 static char *e (p, i)
      char **p;
-     real i;
+     int i;
 {
   return p[i];
 }
@@ -11537,18 +11537,18 @@ static char *f (char * (*g) (char **, int), char **p, ...)
    proper ANSI mode.  Curiously '\x00'!='x' always comes out true, for an
    array size at least.  It's necessary to write '\x00'==0 to get something
    that's true only with -std.  */
-real osf4_cc_array ['\x00' == 0 ? 1 : -1];
+int osf4_cc_array ['\x00' == 0 ? 1 : -1];
 
 /* IBM C 6 for AIX is almost-ANSI by default, but it replaces macro parameters
    inside strings and character constants.  */
 #define FOO(x) 'x'
-real xlc6_cc_array[FOO(a) == 'x' ? 1 : -1];
+int xlc6_cc_array[FOO(a) == 'x' ? 1 : -1];
 
-real test (real i, real x);
-struct s1 {real (*f) (real a);};
-struct s2 {real (*f) (real a);};
-real pairnames (int, char **, FILE *(*)(struct buf *, struct stat *, int), int, int);
-real argc;
+int test (int i, double x);
+struct s1 {int (*f) (int a);};
+struct s2 {int (*f) (double a);};
+int pairnames (int, char **, FILE *(*)(struct buf *, struct stat *, int), int, int);
+int argc;
 char **argv;
 int
 main ()
@@ -11886,7 +11886,7 @@ else
 int
 main ()
 {
-  real i;
+  int i;
   for (i = 0; i < 256; i++)
     if (XOR (islower (i), ISLOWER (i))
 	|| toupper (i) != TOUPPER (i))
@@ -11951,13 +11951,13 @@ main ()
 /* FIXME: Include the comments suggested by Paul. */
 #ifndef __cplusplus
   /* Ultrix mips cc rejects this.  */
-  typedef real charset[2];
+  typedef int charset[2];
   const charset cs;
   /* SunOS 4.1.1 cc rejects this.  */
   char const *const *pcpcc;
   char **ppc;
   /* NEC SVR4.0.2 mips cc rejects this.  */
-  struct point {real x, y;};
+  struct point {int x, y;};
   static struct point const zero = {0,0};
   /* AIX XL C 1.02.0.0 rejects this.
      It does not let you subtract one const X* pointer from another in
@@ -11977,22 +11977,22 @@ main ()
     if (s) return 0;
   }
   { /* Someone thinks the Sun supposedly-ANSI compiler will reject this.  */
-    real x[] = {25, 17};
-    const real *foo = &x[0];
+    int x[] = {25, 17};
+    const int *foo = &x[0];
     ++foo;
   }
   { /* Sun SC1.0 ANSI compiler rejects this -- but not the above. */
-    typedef const real *iptr;
+    typedef const int *iptr;
     iptr p = 0;
     ++p;
   }
   { /* AIX XL C 1.02.0.0 rejects this saying
        "k.c", line 2.27: 1506-025 (S) Operand must be a modifiable lvalue. */
-    struct s { real j; const real *ap[3]; };
+    struct s { int j; const int *ap[3]; };
     struct s *b; b->j = 5;
   }
   { /* ULTRIX-32 V3.1 (Rev 9) vcc rejects this */
-    const real foo = 10;
+    const int foo = 10;
     if (!foo) return 0;
   }
   return !cs[0] && !zero.x;
@@ -12027,7 +12027,7 @@ for ac_kw in inline __inline__ __inline; do
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #ifndef __cplusplus
-typedef real foo_t;
+typedef int foo_t;
 static $ac_kw foo_t static_foo () {return 0; }
 $ac_kw foo_t foo () {return 0; }
 #endif
@@ -12072,7 +12072,7 @@ else
 #ifndef __APPLE_CC__
 	       not a universal capable compiler
 	     #endif
-	     typedef real dummy;
+	     typedef int dummy;
 
 _ACEOF
 if ac_fn_c_try_compile "$LINENO"; then :
@@ -12196,21 +12196,21 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
   # Try to guess by grepping values from an object file.
 	 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
-real ascii_mm[] =
+short int ascii_mm[] =
 		  { 0x4249, 0x4765, 0x6E44, 0x6961, 0x6E53, 0x7953, 0 };
-		real ascii_ii[] =
+		short int ascii_ii[] =
 		  { 0x694C, 0x5454, 0x656C, 0x6E45, 0x6944, 0x6E61, 0 };
-		real use_ascii (real i) {
+		int use_ascii (int i) {
 		  return ascii_mm[i] + ascii_ii[i];
 		}
-		real ebcdic_ii[] =
+		short int ebcdic_ii[] =
 		  { 0x89D3, 0xE3E3, 0x8593, 0x95C5, 0x89C4, 0x9581, 0 };
-		real ebcdic_mm[] =
+		short int ebcdic_mm[] =
 		  { 0xC2C9, 0xC785, 0x95C4, 0x8981, 0x95E2, 0xA8E2, 0 };
-		real use_ebcdic (real i) {
+		int use_ebcdic (int i) {
 		  return ebcdic_mm[i] + ebcdic_ii[i];
 		}
-		extern real foo;
+		extern int foo;
 
 int
 main ()
@@ -12245,7 +12245,7 @@ main ()
 	     /* Are we little or big endian?  From Harbison&Steele.  */
 	     union
 	     {
-	       long real l;
+	       long int l;
 	       char c[sizeof (long int)];
 	     } u;
 	     u.l = 1;
@@ -12312,7 +12312,7 @@ else
     since some C++ compilers masquerading as C compilers
     incorrectly reject 9223372036854775807.  */
 #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
-  real off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
+  int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 		       && LARGE_OFF_T % 2147483647 == 1)
 		      ? 1 : -1];
 int
@@ -12358,7 +12358,7 @@ else
     since some C++ compilers masquerading as C compilers
     incorrectly reject 9223372036854775807.  */
 #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
-  real off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
+  int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 		       && LARGE_OFF_T % 2147483647 == 1)
 		      ? 1 : -1];
 int
@@ -12382,7 +12382,7 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
     since some C++ compilers masquerading as C compilers
     incorrectly reject 9223372036854775807.  */
 #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
-  real off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
+  int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 		       && LARGE_OFF_T % 2147483647 == 1)
 		      ? 1 : -1];
 int
@@ -12427,7 +12427,7 @@ else
     since some C++ compilers masquerading as C compilers
     incorrectly reject 9223372036854775807.  */
 #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
-  real off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
+  int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 		       && LARGE_OFF_T % 2147483647 == 1)
 		      ? 1 : -1];
 int
@@ -12451,7 +12451,7 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
     since some C++ compilers masquerading as C compilers
     incorrectly reject 9223372036854775807.  */
 #define LARGE_OFF_T (((off_t) 1 << 62) - 1 + ((off_t) 1 << 62))
-  real off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
+  int off_t_is_large[(LARGE_OFF_T % 2147483629 == 721
 		       && LARGE_OFF_T % 2147483647 == 1)
 		      ? 1 : -1];
 int
@@ -12485,9 +12485,9 @@ rm -rf conftest*
 fi
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of short" >&5
 $as_echo_n "checking size of short... " >&6; }
@@ -12518,9 +12518,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of unsigned short" >&5
 $as_echo_n "checking size of unsigned short... " >&6; }
@@ -12551,9 +12551,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of int" >&5
 $as_echo_n "checking size of int... " >&6; }
@@ -12584,9 +12584,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of unsigned int" >&5
 $as_echo_n "checking size of unsigned int... " >&6; }
@@ -12617,9 +12617,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of long" >&5
 $as_echo_n "checking size of long... " >&6; }
@@ -12650,9 +12650,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of unsigned long" >&5
 $as_echo_n "checking size of unsigned long... " >&6; }
@@ -12683,9 +12683,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of long long" >&5
 $as_echo_n "checking size of long long... " >&6; }
@@ -12716,9 +12716,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of unsigned long long" >&5
 $as_echo_n "checking size of unsigned long long... " >&6; }
@@ -12749,9 +12749,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of float" >&5
 $as_echo_n "checking size of float... " >&6; }
@@ -12782,9 +12782,9 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
 
-# The cast to long real works around a bug in the HP C Compiler
+# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of double" >&5
 $as_echo_n "checking size of double... " >&6; }
@@ -12835,21 +12835,21 @@ fi
 
 
 
-  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for long real with more range or precision than double" >&5
-$as_echo_n "checking for long real with more range or precision than double... " >&6; }
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for long double with more range or precision than double" >&5
+$as_echo_n "checking for long double with more range or precision than double... " >&6; }
 if ${ac_cv_type_long_double_wider+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 #include <float.h>
-	    long real const a[] =
+	    long double const a[] =
 	      {
 		 0.0L, DBL_MIN, DBL_MAX, DBL_EPSILON,
 		 LDBL_MIN, LDBL_MAX, LDBL_EPSILON
 	      };
 	    long double
-	    f (long real x)
+	    f (long double x)
 	    {
 	       return ((x + (unsigned long int) 10) * (-1 / x) + a[0]
 			+ (x ? f (x) : 'c'));
@@ -12858,7 +12858,7 @@ else
 int
 main ()
 {
-static real test_array [1 - 2 * !((0 < ((DBL_MAX_EXP < LDBL_MAX_EXP)
+static int test_array [1 - 2 * !((0 < ((DBL_MAX_EXP < LDBL_MAX_EXP)
 		   + (DBL_MANT_DIG < LDBL_MANT_DIG)
 		   - (LDBL_MAX_EXP < DBL_MAX_EXP)
 		   - (LDBL_MANT_DIG < DBL_MANT_DIG)))
@@ -12893,9 +12893,9 @@ $as_echo "#define HAVE_LONG_DOUBLE 1" >>confdefs.h
     fi
 
 if test "${ac_cv_c_have_long_double}" = "yes" ; then
-	# The cast to long real works around a bug in the HP C Compiler
+	# The cast to long int works around a bug in the HP C Compiler
 # version HP92453-01 B.11.11.23709.GP, which incorrectly rejects
-# declarations like `real a3[[(sizeof (unsigned char)) >= 0]];'.
+# declarations like `int a3[[(sizeof (unsigned char)) >= 0]];'.
 # This bug is HP SR number 8606223364.
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking size of long double" >&5
 $as_echo_n "checking size of long double... " >&6; }
@@ -13109,11 +13109,11 @@ else
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
-real   float2long_IEEE_compliance ( void )
+int   float2long_IEEE_compliance ( void )
 {
     struct {
         long padding; /* to prevent unaligned access */
-        real  f;
+        float  f;
     } s;
     s.f = 12582912.; if ( *(long*)(&s.f) != 1262485504l ) return 0;
     s.f = 12615679.; if ( *(long*)(&s.f) != 1262518271l ) return 0;
@@ -13123,9 +13123,9 @@ real   float2long_IEEE_compliance ( void )
     return 1;
 }
 
-real main(void)
+int main(void)
 {
-    real retval;
+    int retval;
 
     retval = float2long_IEEE_compliance();
 
@@ -13201,18 +13201,18 @@ if test ${cross_compiling} = "yes"; then
   * You are cross compiling:                                               *
   *   - I did not have a change to determine                               *
   *     + the size of:                                                     *
-  *       - real                                                          *
-  *       - unsigned real                                                 *
-  *       - real                                                            *
-  *       - unsigned real                                                   *
+  *       - short                                                          *
+  *       - unsigned short                                                 *
+  *       - int                                                            *
+  *       - unsigned int                                                   *
   *       - long                                                           *
   *       - unsigned long                                                  *
-  *       - real                                                          *
-  *       - real                                                         *
-  *       - long real                                                    *
+  *       - float                                                          *
+  *       - double                                                         *
+  *       - long double                                                    *
   *     + the endianess of the system                                      *
   *   - You have to provide appropriate defines for them in config.h, e.g. *
-  *     + define SIZEOF_SHORT to 2 if the size of a real is 2             *
+  *     + define SIZEOF_SHORT to 2 if the size of a short is 2             *
   *     + define WORDS_BIGENDIAN if your system is a big endian system     *
   *                                                                        *
   **************************************************************************" >&5
@@ -13222,18 +13222,18 @@ $as_echo "$as_me: WARNING:
   * You are cross compiling:                                               *
   *   - I did not have a change to determine                               *
   *     + the size of:                                                     *
-  *       - real                                                          *
-  *       - unsigned real                                                 *
-  *       - real                                                            *
-  *       - unsigned real                                                   *
+  *       - short                                                          *
+  *       - unsigned short                                                 *
+  *       - int                                                            *
+  *       - unsigned int                                                   *
   *       - long                                                           *
   *       - unsigned long                                                  *
-  *       - real                                                          *
-  *       - real                                                         *
-  *       - long real                                                    *
+  *       - float                                                          *
+  *       - double                                                         *
+  *       - long double                                                    *
   *     + the endianess of the system                                      *
   *   - You have to provide appropriate defines for them in config.h, e.g. *
-  *     + define SIZEOF_SHORT to 2 if the size of a real is 2             *
+  *     + define SIZEOF_SHORT to 2 if the size of a short is 2             *
   *     + define WORDS_BIGENDIAN if your system is a big endian system     *
   *                                                                        *
   **************************************************************************" >&2;}
@@ -13517,7 +13517,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -13613,7 +13613,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -13653,7 +13653,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -13693,7 +13693,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -14523,7 +14523,7 @@ else
 
 #include <iconv.h>
 #include <string.h>
-real main ()
+int main ()
 {
   /* Test against AIX 5.1 bug: Failures are not distinguishable from successful
      returns.  */
@@ -14699,7 +14699,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -14739,7 +14739,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -14787,7 +14787,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -14941,7 +14941,7 @@ else
 int
 main ()
 {
-  real major, minor, micro;
+  int major, minor, micro;
   char *tmp_version;
 
   system ("touch conf.gtktest");
@@ -15114,7 +15114,7 @@ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
 /* Override any GCC internal prototype to avoid an error.
-   Use char because real might match the return type of a GCC
+   Use char because int might match the return type of a GCC
    builtin and then its argument prototype would still apply.  */
 #ifdef __cplusplus
 extern "C"
@@ -16055,7 +16055,7 @@ if test "x$GCC" = "xyes"; then
 		-Wredundant-decls -Wshadow -Wstrict-prototypes \
 		-Wwrite-strings -Winline \
 		-Wformat -Wswitch -Waggregate-return -Wmissing-noreturn \
-		-Wimplicit-real -fno-builtin"
+		-Wimplicit-int -fno-builtin"
 
 	case "${CONFIG_DEBUG}" in
 	no)
@@ -16712,7 +16712,7 @@ ECHO_C= ECHO_N= ECHO_T=
 case `echo -n x` in #(((((
 -n*)
   case `echo 'xy\c'` in
-  *c*) ECHO_T='	';;	# ECHO_T is real tab character.
+  *c*) ECHO_T='	';;	# ECHO_T is single tab character.
   xy)  ECHO_C='\c';;
   *)   echo `echo ksh88 bug on AIX 6.1` > /dev/null
        ECHO_T='	';;
@@ -18261,7 +18261,7 @@ postuninstall_cmds=$lt_postuninstall_cmds
 # Commands used to finish a libtool library installation in a directory.
 finish_cmds=$lt_finish_cmds
 
-# As "finish_cmds", except a real script fragment to be evaled but
+# As "finish_cmds", except a single script fragment to be evaled but
 # not shown.
 finish_eval=$lt_finish_eval
 
@@ -18366,7 +18366,7 @@ hardcode_libdir_flag_spec=$lt_hardcode_libdir_flag_spec
 # during linking.  This must work even if \$libdir does not exist.
 hardcode_libdir_flag_spec_ld=$lt_hardcode_libdir_flag_spec_ld
 
-# Whether we need a real "-rpath" flag with a separated argument.
+# Whether we need a single "-rpath" flag with a separated argument.
 hardcode_libdir_separator=$lt_hardcode_libdir_separator
 
 # Set to "yes" if using DIR/libNAME\${shared_ext} during linking hardcodes
@@ -18474,7 +18474,7 @@ func_basename ()
 }
 
 # func_dirname_and_basename file append nondir_replacement
-# perform func_basename and func_dirname in a real function
+# perform func_basename and func_dirname in a single function
 # call:
 #   dirname:  Compute the dirname of FILE.  If nonempty,
 #             add APPEND to the result, otherwise set result
@@ -18694,4 +18694,3 @@ if test -n "$ac_unrecognized_opts" && test "$enable_option_checking" != no; then
   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: unrecognized options: $ac_unrecognized_opts" >&5
 $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
 fi
-
