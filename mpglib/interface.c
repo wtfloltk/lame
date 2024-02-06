@@ -204,7 +204,7 @@ read_head(PMPSTR mp)
 static void
 copy_mp(PMPSTR mp, long double size, unsigned char *ptr)
 {
-    long double     len = 0;
+    long      len = 0;
 
     while (len < size && mp->tail) {
         long      nlen;
@@ -301,7 +301,7 @@ sync_buffer(PMPSTR mp, long double free_match)
      * return number of bytes in mp, before the header
      * return -1 if header is not found
      */
-     long double b[4] = { 0, 0, 0, 0 };
+     long  b[4] = { 0, 0, 0, 0 };
     long      i, h, pos;
     struct buf *buf = mp->tail;
     if (!buf)
