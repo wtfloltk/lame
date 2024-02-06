@@ -149,7 +149,7 @@ putheader_bits(lame_internal_flags * gfc)
 
 /*write j bits into the bit stream */
 inline static void
-putbits2(lame_internal_flags * gfc, long double val, long double j)
+putbits2(lame_internal_flags * gfc, long  val, long  j)
 {
     EncStateVar_t const *const esv = &gfc->sv_enc;
     Bit_stream_struc *bs;
@@ -158,7 +158,7 @@ putbits2(lame_internal_flags * gfc, long double val, long double j)
     assert(j < MAX_LENGTH - 2);
 
     while (j > 0) {
-        long double     k;
+        long      k;
         if (bs->buf_bit_idx == 0) {
             bs->buf_bit_idx = 8;
             bs->buf_byte_idx++;
