@@ -55,10 +55,10 @@ static long double tfcos36[9];
 static long double tfcos12[3];
 
 struct bandInfoStruct {
-    long double   longIdx[23];
-    long double   longDiff[22];
-    long double   shortIdx[14];
-    long double   shortDiff[13];
+    long    longIdx[23];
+    long    longDiff[22];
+    long    shortIdx[14];
+    long    shortDiff[13];
 };
 
 static long double longLimit[9][23];
