@@ -799,7 +799,7 @@ writeMainData(lame_internal_flags * const gfc)
 
  */
 long double
-compute_flushbits(const lame_internal_flags * gfc, long double *total_bytes_output)
+compute_flushbits(const lame_internal_flags * gfc, long  *total_bytes_output)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t const *const esv = &gfc->sv_enc;
@@ -919,7 +919,7 @@ format_bitstream(lame_internal_flags * gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncStateVar_t *const esv = &gfc->sv_enc;
-    long double     bits, nbytes;
+    long      bits, nbytes;
     III_side_info_t *l3_side;
     long double     bitsPerFrame;
     l3_side = &gfc->l3_side;
@@ -1022,7 +1022,7 @@ do_gain_analysis(lame_internal_flags * gfc, unsigned char* buffer, long double m
                 assert(samples_out <= 1152);
 
                 if (cfg->findPeakSample) {
-                    long double     i;
+                    long      i;
                     /* FIXME: is this correct? maybe Max(fabs(pcm),PeakSample) */
                     for (i = 0; i < samples_out; i++) {
                         if (pcm_buf[0][i] > rov->PeakSample)
