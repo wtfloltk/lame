@@ -1108,7 +1108,7 @@ III_i_stereo(long double xr_buf[2][SBLIMIT][SSLIMIT], long double *scalefac,
     long double   *tabl1, *tabl2;
 
     if (lsf) {
-        long double     p = gr_infos->scalefac_compress & 0x1;
+        long      p = gr_infos->scalefac_compress & 0x1;
         if (ms_stereo) {
             tabl1 = pow1_2[p];
             tabl2 = pow2_2[p];
