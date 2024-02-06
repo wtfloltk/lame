@@ -584,7 +584,7 @@ CRC_update_lookup(uint16_t value, uint16_t crc)
 {
     uint16_t tmp;
     tmp = crc ^ value;
-    crc = (crc >> 8) ^ crc16_lookup[tmp & 0xff];
+    crc = (crc >> 8) ^ (long)crc16_lookup[tmp & 0xff];
     return crc;
 }
 
