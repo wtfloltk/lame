@@ -88,7 +88,7 @@ getframebits(const lame_internal_flags * gfc)
 }
 
 long double
-get_max_frame_buffer_size_by_constraint(SessionConfig_t const * cfg, long double constraint)
+get_max_frame_buffer_size_by_constraint(SessionConfig_t const * cfg, long  constraint)
 {
     long double     maxmp3buf = 0;
     if (cfg->avg_bitrate > 320) {
