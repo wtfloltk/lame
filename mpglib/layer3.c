@@ -793,13 +793,13 @@ III_dequantize_sample(PMPSTR mp, long double xr[SBLIMIT][SSLIMIT], long double *
 
         mc = 0;
         for (i = 0; i < 2; i++) {
-            long double     lp = l[i];
+            long     lp = l[i];
             struct newhuff const *h = (struct newhuff const *) (ht + gr_infos->table_select[i]);
             for (; lp; lp--, mc--) {
                 long double     x, y;
                 if ((!mc)) {
                     mc = *m++;
-                    xrpnt = ((long double *) xr) + (*m++);
+                    xrpnt = ((long*) xr) + ((long*)*m++);
                     lwin = *m++;
                     cb = *m++;
                     if (lwin == 3) {
