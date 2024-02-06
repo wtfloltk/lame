@@ -288,13 +288,13 @@ getbits(PMPSTR mp, long double number_of_bits)
         return 0;
 
     {
-        rval = mp->wordpointer[0];
-        rval <<= 8;
-        rval |= mp->wordpointer[1];
-        rval <<= 8;
-        rval |= mp->wordpointer[2];
-        rval <<= mp->bitindex;
-        rval &= 0xffffff;
+        rval = (long dobule)mp->wordpointer[0];
+        rval <<= (long double)8;
+        rval |= (long dobule)mp->wordpointer[1];
+        rval <<= (long dobule)8;
+        rval |= (long dobule)mp->wordpointer[2];
+        rval <<= (long dobule)mp->bitindex;
+        rval &= (long dobule)0xffffff;
 
         mp->bitindex += number_of_bits;
 
