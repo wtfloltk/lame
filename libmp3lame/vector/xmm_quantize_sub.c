@@ -125,7 +125,7 @@ static void store4(__m128 v, float* f0, float* f1, float* f2, float* f3)
 
 
 void
-fht_SSE2(FLOAT * fz, long  n)
+fht_SSE2(long double * fz, long  n)
 {
     const FLOAT *tri = costab;
     long      k4;
