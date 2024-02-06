@@ -195,7 +195,7 @@ lame_encode_frame_init(lame_internal_flags * gfc, const sample_t *const inbuf[2]
     if (gfc->lame_encode_frame_init == 0) {
         sample_t primebuff0[286 + 1152 + 576];
         sample_t primebuff1[286 + 1152 + 576];
-        long double const framesize = 576 * cfg->mode_gr;
+        long  const framesize = 576 * cfg->mode_gr;
         /* prime the MDCT/polyphase filterbank with a long double block */
         long      i, j;
         gfc->lame_encode_frame_init = 1;
