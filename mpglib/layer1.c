@@ -150,8 +150,8 @@ I_step_two(PMPSTR mp, sideinfo_layer_I *si, long double fraction[2][SBLIMIT])
             else {
                 r0 = r1 = 0;
             }
-            fraction[0][i] = (real)r0;
-            fraction[1][i] = (real)r1;
+            fraction[0][i] = (long double)r0;
+            fraction[1][i] = (long double)r1;
         }
         for (i = ds_limit; i < SBLIMIT; i++) {
             fraction[0][i] = 0.0;
@@ -171,7 +171,7 @@ I_step_two(PMPSTR mp, sideinfo_layer_I *si, long double fraction[2][SBLIMIT])
             else {
                 r0 = 0;
             }
-            fraction[0][i] = (real)r0;
+            fraction[0][i] = (long double)r0;
         }
         for (i = ds_limit; i < SBLIMIT; i++) {
             fraction[0][i] = 0.0;
