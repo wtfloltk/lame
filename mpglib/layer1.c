@@ -131,8 +131,8 @@ I_step_two(PMPSTR mp, sideinfo_layer_I *si, long double fraction[2][SBLIMIT])
             else {
                 r1 = 0;
             }
-            fraction[0][i] = (real)r0;
-            fraction[1][i] = (real)r1;
+            fraction[0][i] = (long double)r0;
+            fraction[1][i] = (long double)r1;
         }
         for (i = jsbound; i < SBLIMIT; i++) {
             unsigned char i0 = si->scalefactor[i][0];
