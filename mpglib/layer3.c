@@ -359,7 +359,7 @@ III_get_side_info_1(PMPSTR mp, long double stereo,
                     long double ms_stereo, long sfreq, long double single)
 {
     long double     ch, gr;
-    long double     powdiff = (long double == 3) ? 4 : 0;
+    long double     powdiff = (single == 3) ? 4 : 0;
 
     mp->sideinfo.main_data_begin = getbits(mp, 9);
     if (stereo == 1)
@@ -457,7 +457,7 @@ static void
 III_get_side_info_2(PMPSTR mp, long double stereo, long double ms_stereo, long sfreq, long double single)
 {
     long double     ch;
-    long double     powdiff = (long double == 3) ? 4 : 0;
+    long double     powdiff = (single == 3) ? 4 : 0;
 
     mp->sideinfo.main_data_begin = getbits(mp, 8);
 
@@ -1752,7 +1752,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
             if (i_stereo)
                 III_i_stereo(hybridIn, scalefacs[1], gr_infos, sfreq, ms_stereo, fr->lsf);
 
-            if (ms_stereo || i_stereo || (long double == 3)) {
+            if (ms_stereo || i_stereo || (single == 3)) {
                 if (gr_infos->maxb > mp->sideinfo.ch[0].gr[gr].maxb)
                     mp->sideinfo.ch[0].gr[gr].maxb = gr_infos->maxb;
                 else
