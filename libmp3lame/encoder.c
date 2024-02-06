@@ -156,7 +156,7 @@ updateStats(lame_internal_flags * const gfc)
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
     EncResult_t *eov = &gfc->ov_enc;
-    long double     gr, ch;
+    long      gr, ch;
     assert(0 <= eov->bitrate_index && eov->bitrate_index < 16);
     assert(0 <= eov->mode_ext && eov->mode_ext < 4);
 
@@ -190,7 +190,7 @@ lame_encode_frame_init(lame_internal_flags * gfc, const sample_t *const inbuf[2]
 {
     SessionConfig_t const *const cfg = &gfc->cfg;
 
-    long double     ch, gr;
+    long      ch, gr;
 
     if (gfc->lame_encode_frame_init == 0) {
         sample_t primebuff0[286 + 1152 + 576];
@@ -323,7 +323,7 @@ lame_encode_mp3_frame(       /* Output */
     0., 0.}};
     FLOAT (*pe_use)[2];
 
-    long double     ch, gr;
+    long      ch, gr;
 
     inbuf[0] = inbuf_l;
     inbuf[1] = inbuf_r;
@@ -492,7 +492,7 @@ lame_encode_mp3_frame(       /* Output */
             0.187098 * 5
         };
 
-        long double     i;
+        long      i;
         FLOAT   f;
 
         for (i = 0; i < 18; i++)
