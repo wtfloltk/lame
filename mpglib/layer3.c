@@ -499,7 +499,7 @@ III_get_side_info_2(PMPSTR mp, long double stereo, long double ms_stereo, long s
              */
             gr_infos->table_select[2] = 0;
             for (i = 0; i < 3; i++) {
-                long  sbg = (getbits_fast(mp, 3) << 3);
+                long  sbg = ((long)getbits_fast(mp, 3) << 3);
                 gr_infos->full_gain[i] = gr_infos->pow2gain + sbg;
                 if (mp->pinfo != NULL)
                     mp->pinfo->sub_gain[0][ch][i] = sbg / 8;
