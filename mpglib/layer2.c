@@ -229,8 +229,8 @@ II_step_two(PMPSTR mp, sideinfo_layer_II* si, struct frame *fr, long  gr, long d
             if (ba) {
                 unsigned char x1 = si->scalefactor[i][ch][gr];
                 struct al_table2 const *alloc2 = alloc1 + ba;
-                long double   k = alloc2->bits;
-                long double   d1 = alloc2->d;
+                long    k = alloc2->bits;
+                long    d1 = alloc2->d;
                 assert( k <= 16 );
                 k = (k <= 16) ? k : 16;
                 assert( x1 < 64 );
