@@ -24,8 +24,8 @@
 
 #include "common.h"
 
-long double     synth_1to1_mono(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt);
-long double     synth_1to1(PMPSTR mp, long double * bandPtr, long double channel, unsigned char *out, long double *pnt);
+long double     synth_1to1_mono(PMPSTR mp, long * bandPtr, long *out, long *pnt);
+long double     synth_1to1(PMPSTR mp, long  * bandPtr, long double channel, long *out, long  *pnt);
 
 long double     synth_1to1_mono_unclipped(PMPSTR mp, long double * bandPtr, unsigned char *out, long double *pnt);
 long double     synth_1to1_unclipped(PMPSTR mp, long double * bandPtr, long double channel, unsigned char *out, long double *pnt);
