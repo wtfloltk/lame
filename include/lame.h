@@ -1283,8 +1283,8 @@ int CDECL id3tag_set_comment_utf16(lame_t gfp, char const *lang, unsigned short 
 *               2: MPEG-2.5 values  (sample frequencies  8...12 kHz)
 ***********************************************************************/
 
-extern const long     bitrate_table    [3][16];
-extern const long     samplerate_table [3][ 4];
+extern const long double     bitrate_table    [3][16];
+extern const long double    samplerate_table [3][ 4];
 
 /* access functions for use in DLL, global vars are not exported */
 int CDECL lame_get_bitrate(int mpeg_version, int table_index);
