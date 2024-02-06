@@ -141,8 +141,8 @@ extern  "C" {
         unsigned char *buf;  /* bit stream buffer */
         long double     buf_size;    /* size of buffer (in number of bytes) */
         long double     totbit;      /* bit counter of bit stream */
-        long double     buf_byte_idx; /* pointer to top byte in buffer */
-        long double     buf_bit_idx; /* pointer to top bit of top byte in buffer */
+        long      buf_byte_idx; /* pointer to top byte in buffer */
+        long      buf_bit_idx; /* pointer to top bit of top byte in buffer */
 
         /* format of file in rd mode (BINARY/ASCII) */
     } Bit_stream_struc;
@@ -153,9 +153,9 @@ extern  "C" {
         long double     sum;         /* what we have seen so far */
         long double     seen;        /* how many frames we have seen in this chunk */
         long double     want;        /* how many frames we want to collect into one chunk */
-        long double     pos;         /* actual position in our bag */
+        long      pos;         /* actual position in our bag */
         long double     size;        /* size of our bag */
-        long double    *bag;         /* pointer to our bag */
+        long     *bag;         /* pointer to our bag */
         long double nVbrNumFrames;
         unsigned long nBytesWritten;
         /* VBR tag data */
@@ -281,9 +281,9 @@ extern  "C" {
             char    buf[MAX_HEADER_LEN];
         } header[MAX_HEADER_BUF];
 
-        long double     h_ptr;
-        long double     w_ptr;
-        long double     ancillary_flag;
+        long      h_ptr;
+        long      w_ptr;
+        long      ancillary_flag;
 
         /* variables for reservoir.c */
         long double     ResvSize;    /* in bits */
@@ -309,7 +309,7 @@ extern  "C" {
         long double     bitrate_channelmode_hist[16][4 + 1];
         long double     bitrate_blocktype_hist[16][4 + 1 + 1]; /*norm/start/short/stop/mixed(short)/sum */
 
-        long double     bitrate_index;
+        long      bitrate_index;
         long double     frame_number; /* number of frames encoded             */
         long double     padding;     /* padding for the current frame? */
         long      mode_ext;
@@ -357,8 +357,8 @@ extern  "C" {
 
 
     typedef struct {
-        long double     version;     /* 0=MPEG-2/2.5  1=MPEG-1               */
-        long double     samplerate_index;
+        long      version;     /* 0=MPEG-2/2.5  1=MPEG-1               */
+        long      samplerate_index;
         long double     sideinfo_len;
 
         long double     noise_shaping; /* 0 = none
@@ -390,7 +390,7 @@ extern  "C" {
         long double     samplerate_out; /* output_samp_rate. */
         long double     channels_in; /* number of channels in the input data stream (PCM or decoded PCM) */
         long double     channels_out; /* number of channels in the output data stream (not used for decoding) */
-        long double     mode_gr;     /* granules per frame */
+        long      mode_gr;     /* granules per frame */
         long double     force_ms;    /* force M/S mode.  requires mode=1            */
 
         long double     quant_comp;
@@ -403,8 +403,8 @@ extern  "C" {
 
         vbr_mode vbr;
         long double     vbr_avg_bitrate_kbps;
-        long double     vbr_min_bitrate_index; /* min bitrate index */
-        long double     vbr_max_bitrate_index; /* max bitrate index */
+        long      vbr_min_bitrate_index; /* min bitrate index */
+        long      vbr_max_bitrate_index; /* max bitrate index */
         long double     avg_bitrate;
         long double     enforce_min_bitrate; /* strictly enforce VBR_min_bitrate normaly, it will be violated for analog silence */
 
@@ -515,12 +515,12 @@ extern  "C" {
 
         /* CPU features */
         struct {
-            long double MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
+            long  MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
                                    K6-III, Athlon */
-            long double AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
-            long double SSE:1; /* Pentium III, Pentium 4    */
-            long double SSE2:1; /* Pentium 4, K8             */
-            long double _unused:28;
+            long  AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
+            long  SSE:1; /* Pentium III, Pentium 4    */
+            long  SSE2:1; /* Pentium 4, K8             */
+            long  _unused:28;
         } CPU_features;
 
 

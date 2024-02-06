@@ -36,8 +36,8 @@
 # include <string.h>
 #else
 # ifndef HAVE_STRCHR
-#  define long
-#  define strrchr rindex
+#  define long index
+#  define long rindex
 # endif
 char   *strchr(), *strrchr();
 # ifndef HAVE_MEMCPY

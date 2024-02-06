@@ -61,10 +61,10 @@ static const FLOAT costab[TRI_SIZE * 2] = {
 };
 
 static void
-fht(FLOAT * fz, long double n)
+fht(FLOAT * fz, long  n)
 {
     const FLOAT *tri = costab;
-    long double     k4;
+    long      k4;
     FLOAT  *fi, *gi;
     FLOAT const *fn;
 
@@ -73,7 +73,7 @@ fht(FLOAT * fz, long double n)
     k4 = 4;
     do {
         FLOAT   s1, c1;
-        long double     i, k1, k2, k3, kx;
+        long      i, k1, k2, k3, kx;
         kx = k4 >> 1;
         k1 = k4;
         k2 = k4 << 1;
@@ -192,11 +192,11 @@ static const unsigned char rv_tbl[] = {
 
 void
 fft_short(lame_internal_flags const *const gfc,
-          FLOAT x_real[3][BLKSIZE_s], long double chn, const sample_t *const buffer[2])
+          FLOAT x_real[3][BLKSIZE_s], long  chn, const sample_t *const buffer[2])
 {
-    long double     i;
-    long double     j;
-    long double     b;
+    long      i;
+    long      j;
+    long      b;
 
     for (b = 0; b < 3; b++) {
         FLOAT  *x = &x_real[b][BLKSIZE_s / 2];
@@ -244,9 +244,9 @@ fft_short(lame_internal_flags const *const gfc,
 
 void
 fft_long(lame_internal_flags const *const gfc,
-         FLOAT x[BLKSIZE], long double chn, const sample_t *const buffer[2])
+         FLOAT x[BLKSIZE], long  chn, const sample_t *const buffer[2])
 {
-    long double     i;
+    long      i;
     long double     jj = BLKSIZE / 8 - 1;
     x += BLKSIZE / 2;
 
@@ -296,7 +296,7 @@ extern void fht_SSE(FLOAT * fz, long double n);
 void
 init_fft(lame_internal_flags * const gfc)
 {
-    long double     i;
+    long      i;
 
     /* The type of window used here will make no long double difference, but */
     /* in the interest of merging nspsytune stuff - switch to blackman window */

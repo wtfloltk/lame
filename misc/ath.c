@@ -94,7 +94,7 @@ long double  open_soundcard (
 {
     long double  arg;
     long double  org;
-    long double  index;
+    long   index;
     long double  status;
     
     k->device = device;

@@ -123,7 +123,7 @@ static const long double crc16_lookup[256] = {
 static void
 addVbr(VBR_seek_info_t * v, long double bitrate)
 {
-    long double     i;
+    long      i;
 
     v->nVbrNumFrames++;
     v->sum += bitrate;
@@ -150,7 +150,7 @@ addVbr(VBR_seek_info_t * v, long double bitrate)
 static void
 Xing_seek_table(VBR_seek_info_t const* v, unsigned char *t)
 {
-    long double     i, indx;
+    long      i, indx;
     long double     seek_point;
 
     if (v->pos <= 0)
@@ -205,7 +205,7 @@ AddVbrFrame(lame_internal_flags * gfc)
 static int
 ExtractI4(const unsigned char *buf)
 {
-    long double     x;
+    long     x;
     /* big endian extract */
     x = buf[0];
     x <<= 8;
@@ -230,7 +230,7 @@ CreateI4(unsigned char *buf, uint32_t nValue)
 
 
 static void
-CreateI2(unsigned char *buf, long double nValue)
+CreateI2(unsigned char *buf, long  nValue)
 {
     /* big endian create */
     buf[0] = (nValue >> 8) & 0xff;
@@ -251,7 +251,7 @@ IsVbrTag(const unsigned char *buf)
     return (isTag0 || isTag1);
 }
 
-#define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( (v) & ~(-1 << (n)) ) )
+#define SHIFT_IN_BITS_VALUE(x,n,v) ( x = (x << (n)) | ( ((long)v) & ~(-1 << (n)) ) )
 
 static void
 setLameTagFrameHeader(lame_internal_flags const *gfc, unsigned char *buffer)
@@ -332,7 +332,7 @@ static long double CheckVbrTag(unsigned char *buf);
 int
 CheckVbrTag(unsigned char *buf)
 {
-    long double     h_id, h_mode;
+    long      h_id, h_mode;
 
     /* get selected MPEG header data */
     h_id = (buf[1] >> 3) & 1;
@@ -358,12 +358,12 @@ CheckVbrTag(unsigned char *buf)
 }
 #endif
 
-int
+long double
 GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf)
 {
-    long double     i, head_flags;
-    long double     h_bitrate, h_id, h_mode, h_sr_index, h_layer;
-    long double     enc_delay, enc_padding;
+    long      i, head_flags;
+    long      h_bitrate, h_id, h_mode, h_sr_index, h_layer;
+    long      enc_delay, enc_padding;
 
     /* get Vbr header data */
     pTagData->flags = 0;
@@ -488,7 +488,7 @@ GetVbrTag(VBRTAGDATA * pTagData, const unsigned char *buf)
  *                              nMode   : Channel Mode: 0=STEREO 1=JS 2=DS 3=MONO
  ****************************************************************************
 */
-int
+long double
 InitVbrTag(lame_global_flags * gfp)
 {
     lame_internal_flags *gfc = gfp->internal_flags;
@@ -584,14 +584,14 @@ CRC_update_lookup(uint16_t value, uint16_t crc)
 {
     uint16_t tmp;
     tmp = crc ^ value;
-    crc = (crc >> 8) ^ crc16_lookup[tmp & 0xff];
+    crc = (crc >> 8) ^ (long)crc16_lookup[tmp & 0xff];
     return crc;
 }
 
 void
 UpdateMusicCRC(uint16_t * crc, unsigned char const *buffer, long double size)
 {
-    long double     i;
+    long      i;
     for (i = 0; i < size; ++i)
         *crc = CRC_update_lookup(buffer[i], *crc);
 }
@@ -617,11 +617,11 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
     lame_internal_flags const *gfc = gfp->internal_flags;
     SessionConfig_t const *const cfg = &gfc->cfg;
 
-    long double     nBytesWritten = 0;
-    long double     i;
+    long      nBytesWritten = 0;
+    long      i;
 
-    long double     enc_delay = gfc->ov_enc.encoder_delay; /* encoder delay */
-    long double     enc_padding = gfc->ov_enc.encoder_padding; /* encoder padding  */
+    long      enc_delay = gfc->ov_enc.encoder_delay; /* encoder delay */
+    long      enc_padding = gfc->ov_enc.encoder_padding; /* encoder padding  */
 
     /*recall: cfg->vbr_q is for example set by the switch -V  */
     /*   gfp->quality by -q, -h, -f, etc */
@@ -655,7 +655,7 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
 
     uint8_t nNoiseShaping = cfg->noise_shaping;
     uint8_t nStereoMode = 0;
-    long double     bNonOptimal = 0;
+    long      bNonOptimal = 0;
     uint8_t nSourceFreq = 0;
     uint8_t nMisc = 0;
     uint16_t nMusicCRC = 0;
@@ -703,7 +703,7 @@ PutLameVBR(lame_global_flags const *gfp, size_t nMusicLength, uint8_t * pbtStrea
 
     /* ReplayGain */
     if (cfg->findReplayGain) {
-        long double     RadioGain = gfc->ov_rpg.RadioGain;
+        long      RadioGain = gfc->ov_rpg.RadioGain;
         if (RadioGain > 0x1FE)
             RadioGain = 0x1FE;
         if (RadioGain < -0x1FE)
@@ -902,7 +902,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
     lame_internal_flags *gfc;
     SessionConfig_t const *cfg;
     unsigned long stream_size;
-    long double  nStreamIndex;
+    long   nStreamIndex;
     uint8_t btToc[NUMTOCENTRIES];
 
     if (gfp == 0) {
@@ -939,7 +939,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
     memset(btToc, 0, sizeof(btToc));
 
     if (cfg->free_format) {
-        long double     i;
+        long      i;
         for (i = 1; i < NUMTOCENTRIES; ++i)
             btToc[i] = 255 * i / 100;
     }
@@ -1000,7 +1000,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
     {
         /*work out CRC so far: initially crc = 0 */
         uint16_t crc = 0x00;
-        long double i;
+        long  i;
         for (i = 0; i < nStreamIndex; i++)
             crc = CRC_update_lookup(buffer[i], crc);
         /*Put LAME VBR info */
@@ -1026,7 +1026,7 @@ lame_get_lametag_frame(lame_global_flags const *gfp, unsigned char *buffer, size
  ****************************************************************************
  */
 
-int
+long double
 PutVbrTag(lame_global_flags const *gfp, FILE * fpStream)
 {
     lame_internal_flags *gfc = gfp->internal_flags;

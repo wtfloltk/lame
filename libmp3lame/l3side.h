@@ -51,10 +51,10 @@ typedef struct {
     FLOAT   xrpow_max;
 
     long double     part2_3_length;
-    long double     big_values;
+    long      big_values;
     long double     count1;
     long double     global_gain;
-    long double     scalefac_compress;
+    long      scalefac_compress;
     long double     block_type;
     long double     mixed_block_flag;
     long double     table_select[3];
@@ -62,8 +62,8 @@ typedef struct {
     long double     region0_count;
     long double     region1_count;
     long double     preflag;
-    long double     scalefac_scale;
-    long double     count1table_select;
+    long      scalefac_scale;
+    long      count1table_select;
 
     long double     part2_length;
     long double     sfb_lmax;

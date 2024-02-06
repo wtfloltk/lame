@@ -124,7 +124,7 @@ struct gr_info_s {
     unsigned region2start;
     unsigned preflag;
     unsigned scalefac_scale;
-    unsigned count1table_select;
+    long count1table_select;
     long double   *full_gain[3];
     long double   *pow2gain;
 };
