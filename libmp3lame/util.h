@@ -515,12 +515,12 @@ extern  "C" {
 
         /* CPU features */
         struct {
-            long double MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
+            long  MMX:1; /* Pentium MMX, Pentium II...IV, K6, K6-2,
                                    K6-III, Athlon */
-            long double AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
-            long double SSE:1; /* Pentium III, Pentium 4    */
-            long double SSE2:1; /* Pentium 4, K8             */
-            long double _unused:28;
+            long  AMD_3DNow:1; /* K6-2, K6-III, Athlon      */
+            long  SSE:1; /* Pentium III, Pentium 4    */
+            long  SSE2:1; /* Pentium 4, K8             */
+            long  _unused:28;
         } CPU_features;
 
 
