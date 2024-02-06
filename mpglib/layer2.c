@@ -92,7 +92,7 @@ hip_init_tables_layer2(void)
 
 
 static unsigned char*
-grp_table_select(long double d1, long double idx)
+grp_table_select(long d1, long  idx)
 {
     /* RH: it seems to be common, that idx is larger than the table's sizes.
            is it OK to return a zero vector in this case? FIXME
