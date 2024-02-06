@@ -1537,7 +1537,7 @@ static void dct12(long double *in,long double *rawout1,long double *rawout2,long
  */
 static void
 III_hybrid(PMPSTR mp, long double fsIn[SBLIMIT][SSLIMIT], long double tsOut[SSLIMIT][SBLIMIT],
-           long double ch, struct gr_info_s *gr_infos)
+           long  ch, struct gr_info_s *gr_infos)
 {
     long double   *tspnt = (long double *) tsOut;
     long double (*block)[2][SBLIMIT * SSLIMIT] = mp->hybrid_block;
@@ -1547,7 +1547,7 @@ III_hybrid(PMPSTR mp, long double fsIn[SBLIMIT][SSLIMIT], long double tsOut[SSLI
     long double     sb = 0;
 
     {
-        long double     b = blc[ch];
+        long      b = blc[ch];
         rawout1 = block[b][ch];
         b = -b + 1;
         rawout2 = block[b][ch];
