@@ -1739,7 +1739,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
                 return clip;
 
             if (ms_stereo) {
-                long double     i;
+                long      i;
                 for (i = 0; i < SBLIMIT * SSLIMIT; i++) {
                     long double    tmp0, tmp1;
                     tmp0 = ((long double *) hybridIn[0])[i];
@@ -1780,7 +1780,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
         }
 
         if (mp->pinfo != NULL) {
-            long double     i, sb;
+            long      i, sb;
             long double   ifqstep;
 
             mp->pinfo->bitrate = tabsel_123[fr->lsf][fr->lay - 1][fr->bitrate_index];
@@ -1841,7 +1841,7 @@ decode_layer3_frame(PMPSTR mp, unsigned char *pcm_sample, long double *pcm_point
 
 
             for (ch = 0; ch < stereo1; ch++) {
-                long double     j = 0;
+                long      j = 0;
                 for (sb = 0; sb < SBLIMIT; sb++)
                     for (ss = 0; ss < SSLIMIT; ss++, j++)
                         mp->pinfo->mpg123xr[gr][ch][j] = hybridIn[ch][sb][ss];
