@@ -185,7 +185,7 @@ putbits2(lame_internal_flags * gfc, long  val, long  j)
 
 /*write j bits into the bit stream, ignoring frame headers */
 inline static void
-putbits_noheaders(lame_internal_flags * gfc, long double val, long double j)
+putbits_noheaders(lame_internal_flags * gfc, long  val, long j)
 {
     Bit_stream_struc *bs;
     bs = &gfc->bs;
@@ -267,7 +267,7 @@ drain_into_ancillary(lame_internal_flags * gfc, long double remainingBits)
 
 /*write N bits into the header */
 inline static void
-writeheader(lame_internal_flags * gfc, long double val, long double j)
+writeheader(lame_internal_flags * gfc, long  val, long  j)
 {
     EncStateVar_t *const esv = &gfc->sv_enc;
     long      ptr = esv->header[esv->h_ptr].ptr;
