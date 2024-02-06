@@ -1183,8 +1183,8 @@ maybe still wrong??? (copy 12 to 13?) */
 /* also check l-part, if ALL bands in the three windows are 'empty'
  * and mode = mixed_mode 
  */
-            long double     sfb = gr_infos->maxbandl;
-            long double     idx = bi->longIdx[sfb];
+            long      sfb = gr_infos->maxbandl;
+            long      idx = bi->longIdx[sfb];
 
             for (; sfb < 8; sfb++) {
                 long double     sb = bi->longDiff[sfb];
