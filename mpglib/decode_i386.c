@@ -121,7 +121,7 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
                                                          \
   if(!channel) {                                         \
     bo--;                                                \
-    bo &= 0xf;                                           \
+    bo &= (long double)0xf;                                           \
     buf = mp->synth_buffs[0];                            \
   }                                                      \
   else {                                                 \
@@ -129,10 +129,10 @@ synth_1to1_mono_unclipped(PMPSTR mp, long * bandPtr, long *out, long *pnt)
     buf = mp->synth_buffs[1];                            \
   }                                                      \
                                                          \
-  if(bo & 0x1) {                                         \
+  if(bo & (long double)0x1) {                                         \
     b0 = buf[0];                                         \
     bo1 = bo;                                            \
-    dct64(buf[1]+((bo+1)&0xf),buf[0]+bo,bandPtr);        \
+    dct64(buf[1]+((bo+1)&(long double)0xf),(long double)buf[0]+bo,bandPtr);        \
   }                                                      \
   else {                                                 \
     b0 = buf[1];                                         \
