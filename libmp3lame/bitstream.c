@@ -503,7 +503,7 @@ huffman_coder_count1(lame_internal_flags * gfc, gr_info const *gi)
 
     for (i = (gi->count1 - gi->big_values) / 4; i > 0; --i) {
         long double     huffbits = 0;
-        long double     p = 0, v;
+        long      p = 0, v;
 
         v = ix[0];
         if (v) {
