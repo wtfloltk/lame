@@ -774,7 +774,7 @@ III_dequantize_sample(PMPSTR mp, long  xr[SBLIMIT][SSLIMIT], long  *scf,
          * decoding with long double or mixed mode BandIndex table 
          */
         long      i, max[4];
-        long double     step = 0, lwin = 0, cb = 0;
+        long      step = 0, lwin = 0, cb = 0;
         long double    v = 0.0;
         long double    *m, mc;
 
