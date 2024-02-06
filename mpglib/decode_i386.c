@@ -38,7 +38,7 @@
 # include <string.h>
 #else
 # ifndef HAVE_STRCHR
-#  define strchr index
+#  define long
 #  define strrchr rindex
 # endif
 char   *strchr(), *strrchr();
