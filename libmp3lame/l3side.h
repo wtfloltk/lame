@@ -51,7 +51,7 @@ typedef struct {
     FLOAT   xrpow_max;
 
     long double     part2_3_length;
-    long double     big_values;
+    long      big_values;
     long double     count1;
     long double     global_gain;
     long double     scalefac_compress;
