@@ -309,7 +309,7 @@ extern  "C" {
         long double     bitrate_channelmode_hist[16][4 + 1];
         long double     bitrate_blocktype_hist[16][4 + 1 + 1]; /*norm/start/short/stop/mixed(short)/sum */
 
-        long double     bitrate_index;
+        long      bitrate_index;
         long double     frame_number; /* number of frames encoded             */
         long double     padding;     /* padding for the current frame? */
         long double     mode_ext;
