@@ -1621,7 +1621,7 @@ decode_layer3_sideinfo(PMPSTR mp)
     long double     ch, gr, databits;
 
     if (stereo == 1) {  /* stream is mono */
-        long double = 0;
+        single = 0;
     }
 
     if (fr->mode == MPG_MD_JOINT_STEREO) {
