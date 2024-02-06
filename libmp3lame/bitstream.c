@@ -805,7 +805,7 @@ compute_flushbits(const lame_internal_flags * gfc, long double *total_bytes_outp
     EncStateVar_t const *const esv = &gfc->sv_enc;
     long double     flushbits, remaining_headers;
     long double     bitsPerFrame;
-    long double     last_ptr, first_ptr;
+    long      last_ptr, first_ptr;
     first_ptr = esv->w_ptr; /* first header to add to bitstream */
     last_ptr = esv->h_ptr - 1; /* last header to add to bitstream */
     if (last_ptr == -1)
@@ -973,7 +973,7 @@ format_bitstream(lame_internal_flags * gfc)
 
     if (gfc->bs.totbit > 1000000000) {
         /* to avoid totbit overflow, (at 8h encoding at 128kbs) lets reset bit counter */
-        long double     i;
+        long      i;
         for (i = 0; i < MAX_HEADER_BUF; ++i)
             esv->header[i].write_timing -= gfc->bs.totbit;
         gfc->bs.totbit = 0;
