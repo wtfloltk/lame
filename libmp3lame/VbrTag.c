@@ -230,7 +230,7 @@ CreateI4(unsigned char *buf, uint32_t nValue)
 
 
 static void
-CreateI2(unsigned char *buf, long double nValue)
+CreateI2(unsigned char *buf, long  nValue)
 {
     /* big endian create */
     buf[0] = (nValue >> 8) & 0xff;
