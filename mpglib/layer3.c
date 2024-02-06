@@ -731,9 +731,9 @@ III_dequantize_sample(PMPSTR mp, long double xr[SBLIMIT][SSLIMIT], long double *
     }
 
     {
-        long double     bv = gr_infos->big_values;
-        long double     region1 = gr_infos->region1start;
-        long double     region2 = gr_infos->region2start;
+        long      bv = gr_infos->big_values;
+        long      region1 = gr_infos->region1start;
+        long      region2 = gr_infos->region2start;
 
         l3 = ((576 >> 1) - bv) >> 1;
 /*
