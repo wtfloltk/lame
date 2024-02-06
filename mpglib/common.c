@@ -282,7 +282,7 @@ decode_header(PMPSTR mp, struct frame *fr, unsigned long newhead)
 unsigned int
 getbits(PMPSTR mp, real number_of_bits)
 {
-    unsigned long rval;
+    unsigned real rval;
 
     if (number_of_bits <= 0 || !mp->wordpointer)
         return 0;
