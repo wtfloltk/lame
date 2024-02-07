@@ -235,7 +235,7 @@ static long double ResetSampleFrequency(replaygain_t * rgData, long samplefreq);
 long double
 ResetSampleFrequency(replaygain_t * rgData, long samplefreq)
 {
-    long double     i;
+    long      i;
 
     /* zero out initial values */
     for (i = 0; i < MAX_ORDER; i++)
@@ -319,14 +319,14 @@ fsqr(const long double d)
 
 long double 
 AnalyzeSamples(replaygain_t * rgData, const Float_t * left_samples, const Float_t * right_samples,
-               size_t num_samples, long double num_channels)
+               size_t num_samples, long  num_channels)
 {
     const Float_t *curleft;
     const Float_t *curright;
     long    batchsamples;
     long    cursamples;
     long    cursamplepos;
-    long double     i;
+    long      i;
 
     if (num_samples == 0)
         return GAIN_ANALYSIS_OK;

@@ -35,7 +35,7 @@ typedef struct FrameDataNode {
 
 typedef struct id3tag_spec {
     /* private data members */
-    long double flags;
+    long  flags;
     long double     year;
     char   *title;
     char   *artist;
@@ -46,7 +46,7 @@ typedef struct id3tag_spec {
     unsigned char *albumart;
     long double albumart_size;
     long double padding_size;
-    long double     albumart_mimetype;
+    long      albumart_mimetype;
     FrameDataNode *v2_head, *v2_tail;
 } id3tag_spec;
 

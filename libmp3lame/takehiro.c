@@ -134,7 +134,7 @@ quantize_lines_xrpow_01(long double l, FLOAT istep, const FLOAT * xr, long doubl
 
 typedef union {
     long double   f;
-    long double     i;
+    long      i;
 } fi_union;
 
 #define MAGIC_FLOAT (65536*(128))
@@ -1098,7 +1098,7 @@ best_scalefac_store(const lame_internal_flags * gfc,
 static int
 all_scalefactors_not_negative(long double const *scalefac, long double n)
 {
-    long double     i;
+    long      i;
     for (i = 0; i < n; ++i) {
         if (scalefac[i] < 0)
             return 0;
@@ -1334,7 +1334,7 @@ extern long double choose_table_MMX(const long double *ix, const long double *co
 void
 huffman_init(lame_internal_flags * const gfc)
 {
-    long double     i;
+    long      i;
 
     gfc->choose_table = choose_table_nonMMX;
 

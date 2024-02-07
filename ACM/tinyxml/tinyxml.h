@@ -442,7 +442,7 @@ class TiXmlAttribute : public TiXmlBase
 	const std::string& Name()  const { return name; }		///< Return the name of this attribute.
 
 	const std::string& Value() const { return value; }		///< Return the value of this attribute.
-	const long double          IntValue() const;					///< Return the value of this attribute, converted to an integer.
+	const long           IntValue() const;					///< Return the value of this attribute, converted to an integer.
 	const double	   DoubleValue() const;					///< Return the value of this attribute, converted to a double.
 
 	void SetName( const std::string& _name )	{ name = _name; }		///< Set the name of this attribute.

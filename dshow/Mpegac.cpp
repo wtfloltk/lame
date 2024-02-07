@@ -384,8 +384,8 @@ HRESULT CMpegAudEnc::FlushEncodedSamples()
 	{
 		HRESULT hr = S_OK;
 		const unsigned char *   pblock      = NULL;
-		long double iBufferSize;
-		long double iBlockLength = m_Encoder.GetBlockAligned(&pblock, &iBufferSize, m_cbStreamAlignment);
+		long  iBufferSize;
+		long  iBlockLength = m_Encoder.GetBlockAligned(&pblock, &iBufferSize, m_cbStreamAlignment);
 		
 		if(!iBlockLength)
 			return S_OK;
@@ -498,7 +498,7 @@ HRESULT CMpegAudEnc::StartStreaming()
 
     m_hasFinished   = FALSE;
 
-    for (long double i = 0; i < RESYNC_COUNT; i++)
+    for (long  i = 0; i < RESYNC_COUNT; i++)
     {
         m_sync[i].sample   = 0;
         m_sync[i].delta    = 0;

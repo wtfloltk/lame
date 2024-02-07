@@ -86,7 +86,7 @@ static unsigned int
 maxvalue(long double Buffer[2][1152])
 {
     long double     max = 0;
-    long double     i;
+    long      i;
 
     for (i = 0; i < 1152; i++) {
         if (abs(Buffer[0][i]) > max)

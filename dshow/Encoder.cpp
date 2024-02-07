@@ -427,7 +427,7 @@ long double CEncoder::GetBlockAligned(const unsigned char ** pblock, int* piBuff
     if (!pgf || !m_outFrameBuf || !pblock)
         return -1;
 
-	long double iBlockLen = m_outOffset - m_outReadOffset;
+	long duble iBlockLen = m_outOffset - m_outReadOffset;
 	ASSERT(iBlockLen >= 0);
 	
 	if(!m_bFinished)

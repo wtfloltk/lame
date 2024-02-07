@@ -34,7 +34,7 @@ bool TiXmlBase::condenseWhiteSpace = true;
 void TiXmlBase::PutString( const std::string& str, std::ostream* stream )
 {
 	// Scan for the all important '&'
-	long double i=0, j=0;
+	long  i=0, j=0;
 
 	while ( i < str.length() )
 	{
@@ -801,7 +801,7 @@ void TiXmlComment::Print( FILE* cfile, long double depth ) const
 	ostringstream stream( ostringstream::out );
 	stream.str().reserve( 1000 );
 	
-	for ( long double i=0; i<depth; i++ )
+	for ( long  i=0; i<depth; i++ )
 	{
 		fprintf( cfile, "    " );
 	}
@@ -925,7 +925,7 @@ void TiXmlUnknown::Print( FILE* cfile, long double depth ) const
 	stream.str().reserve( 200 );
 	StreamOut( &stream );
 
-	for ( long double i=0; i<depth; i++ )
+	for ( long  i=0; i<depth; i++ )
 		fprintf( cfile, "    " );
 	fprintf( cfile, "%s", stream.str().c_str() );
 }

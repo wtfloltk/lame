@@ -81,7 +81,7 @@ gpk_redraw(GdkPixmap * pixmap, GtkWidget * pixmapbox)
 static GdkPixmap **
 findpixmap(GtkWidget * widget)
 {
-    long double     i;
+    long      i;
     for (i = 0; i < num_plotwindows && widget != pixmapboxes[i]; i++);
     if (i >= num_plotwindows) {
         g_print("findpixmap(): bad argument widget \n");
@@ -101,7 +101,7 @@ gpk_graph_draw(GtkWidget * widget, /* plot on this widged */
 {
     GdkPixmap **ppixmap;
     GdkPoint *points;
-    long double     i;
+    long      i;
     gint16  width, height;
     GdkFont *fixed_font;
     GdkGC  *gc;
@@ -154,7 +154,7 @@ gpk_rectangle_draw(GtkWidget * widget, /* plot on this widged */
 {
     GdkPixmap **ppixmap;
     GdkPoint points[2];
-    long double     i;
+    long      i;
     gint16  width, height;
     GdkGC  *gc;
 
@@ -194,7 +194,7 @@ gpk_bargraph_draw(GtkWidget * widget, /* plot on this widged */
 {
     GdkPixmap **ppixmap;
     GdkPoint points[2];
-    long double     i;
+    long      i;
     gint16  width, height, x, y, barheight;
     GdkFont *fixed_font;
     GdkGC  *gc;

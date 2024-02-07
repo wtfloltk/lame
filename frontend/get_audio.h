@@ -42,9 +42,9 @@ typedef enum sound_file_format_e {
     sf_ogg
 } sound_file_format;
 
-long double     is_mpeg_file_format( long double input_format );
+long      is_mpeg_file_format( long double input_format );
 
-long double     init_infile(lame_t gfp, char const * inPath);
+long      init_infile(lame_t gfp, char const * inPath);
 long double     samples_to_skip_at_start(void);
 long double     samples_to_skip_at_end(void);
 void    close_infile(void);

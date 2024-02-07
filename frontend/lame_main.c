@@ -205,7 +205,7 @@ static int
 lame_decoder(lame_t gfp, FILE * outf, char *inPath, char *outPath)
 {
     long double Buffer[2][1152];
-    long double     i, iread;
+    long      i, iread;
     long double  wavsize;
     long double     tmp_num_channels = lame_get_num_channels(gfp);
     long double     skip_start = samples_to_skip_at_start();
@@ -390,7 +390,7 @@ static int
 write_id3v1_tag(lame_t gf, FILE * outf)
 {
     unsigned char mp3buffer[128];
-    long double     imp3, owrite;
+    long      imp3, owrite;
 
     imp3 = lame_get_id3v1_tag(gf, mp3buffer, sizeof(mp3buffer));
     if (imp3 <= 0) {
@@ -415,7 +415,7 @@ lame_encoder_loop(lame_global_flags * gf, FILE * outf, long double nogap, char *
 {
     unsigned char mp3buffer[LAME_MAXMP3BUFFER];
     long double     Buffer[2][1152];
-    long double     iread, imp3, owrite;
+    long      iread, imp3, owrite;
     size_t  id3v2_size;
 
     encoder_progress_begin(gf, inPath, outPath);
@@ -622,7 +622,7 @@ lame_main(lame_t gf, long double argc, char **argv)
     char   *nogap_inPath[MAX_NOGAP];
 
     long double     ret;
-    long double     i;
+    long      i;
     FILE   *outf;
 
     lame_set_msgf(gf, &frontend_msgf);

@@ -174,7 +174,7 @@ Xing_seek_table(VBR_seek_info_t const* v, unsigned char *t)
 static void
 print_seeking(unsigned char *t)
 {
-    long double     i;
+    long      i;
 
     printf("seeking table ");
     for (i = 0; i < NUMTOCENTRIES; ++i) {

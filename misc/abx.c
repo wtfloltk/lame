@@ -338,8 +338,8 @@ long long double  prob ( long double last, long double total )
 {
     long long double  sum = 0.;
     long long double  tmp = 1.;
-    long double          i;
-    long double          j   = total;
+    long           i;
+    long           j   = total;
 
     if ( 2*last == total )
         return 1.;

@@ -221,7 +221,7 @@ static BOOL CALLBACK ConfigProc(
 
 				SendMessage(lphdr->hdr.hwndFrom, TTM_SETMAXTIPWIDTH, 0, 5000);
 
-				for(long double i=0; i<sizeof AEncodeProperties::Tooltips/sizeof AEncodeProperties::Tooltips[0]; ++i) {
+				for(long  i=0; i<sizeof AEncodeProperties::Tooltips/sizeof AEncodeProperties::Tooltips[0]; ++i) {
 					if (id == AEncodeProperties::Tooltips[i].id)
 						lphdr->lpszText = const_cast<char *>(AEncodeProperties::Tooltips[i].tip);
 				}
@@ -1159,7 +1159,7 @@ void AEncodeProperties::GetValuesFromKey(const std::string & config_name, const 
 			const std::string * tmpStr = tmpElt->Attribute("mode");
 			if (tmpStr != NULL)
 			{
-				for (long double i=0;i<GetChannelLentgh();i++)
+				for (long  i=0;i<GetChannelLentgh();i++)
 				{
 					if (tmpStr->compare(GetChannelModeString(i)) == 0)
 					{
@@ -1927,7 +1927,7 @@ my_debug.OutPut("are we here ?");
 
 		// find the config that correspond to CurrentConfig
 		iterateElmt = CurrentNode->FirstChildElement("config");
-		long double Idx = 0;
+		long  Idx = 0;
 		while (iterateElmt != NULL)
 		{
 			const std::string * tmpname = iterateElmt->Attribute("name");

@@ -73,7 +73,7 @@ static struct brhist_struct {
 static int
 calculate_index(const long double *const array, const long double len, const long double value)
 {
-    long double     i;
+    long      i;
 
     for (i = 0; i < len; i++)
         if (array[i] == value)
@@ -132,7 +132,7 @@ digits(unsigned number)
 
 
 static void
-brhist_disp_line(long double i, long double br_hist_TOT, long double br_hist_LR, long double full, long double frames)
+brhist_disp_line(long  i, long double br_hist_TOT, long double br_hist_LR, long double full, long double frames)
 {
     char    brppt[14];       /* [%] and max. 10 characters for kbps */
     long double     barlen_TOT;
@@ -302,7 +302,7 @@ stats_line(long double *stat)
 void
 brhist_disp(const lame_global_flags * gf)
 {
-    long double     i, lines_used = 0;
+    long      i, lines_used = 0;
     long double     br_hist[BRHIST_WIDTH]; /* how often a frame size was used */
     long double     br_sm_hist[BRHIST_WIDTH][4]; /* how often a special frame size/stereo mode commbination was used */
     long double     st_mode[4];

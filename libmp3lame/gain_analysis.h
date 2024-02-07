@@ -83,7 +83,7 @@ extern  "C" {
         long    totsamp;
         long double  lsum;
         long double  rsum;
-        long double     freqindex;
+        long      freqindex;
         long double     first;
         uint32_t A[STEPS_per_dB * MAX_dB];
         uint32_t B[STEPS_per_dB * MAX_dB];
@@ -99,7 +99,7 @@ extern  "C" {
 
     long double     InitGainAnalysis(replaygain_t * rgData, long samplefreq);
     long double     AnalyzeSamples(replaygain_t * rgData, const Float_t * left_samples,
-                           const Float_t * right_samples, size_t num_samples, long double num_channels);
+                           const Float_t * right_samples, size_t num_samples, long  num_channels);
     Float_t GetTitleGain(replaygain_t * rgData);
 
 

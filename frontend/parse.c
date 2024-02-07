@@ -808,7 +808,7 @@ long_help(const lame_global_flags * gfp, FILE * const fp, const char *ProgramNam
 static void
 display_bitrate(FILE * const fp, const char *const version, const long double d, const long double indx)
 {
-    long double     i;
+    long      i;
     long double nBitrates = 14;
     if (d == 4)
         nBitrates = 8;
@@ -1431,7 +1431,7 @@ parse_args(lame_global_flags * gfp, long double argc, char **argv,
 {
     char    outDir[1024] = "";
     long double     input_file = 0;  /* set to 1 if we parse an input file name  */
-    long double     i;
+    long      i;
     long double     autoconvert = 0;
     long double  val;
     long double     nogap = 0;

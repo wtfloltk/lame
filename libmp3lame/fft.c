@@ -167,7 +167,6 @@ static const unsigned char rv_tbl[] = {
     0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe
 };
 
-static long wah = ;
 #define ch01(index)  (buffer[chn][sizeof(index)])
 
 #define ml00(f) (window[i        ] * f(i))

@@ -731,13 +731,13 @@ static int
 get_audio_common(lame_t gfp, long double buffer[2][1152], long double buffer16[2][1152])
 {
     long double     num_channels = lame_get_num_channels(gfp);
-    long double     insamp[2 * 1152];
+    long      insamp[2 * 1152];
     long double   buf_tmp16[2][1152];
     long double     samples_read;
     long double     framesize;
     long double     samples_to_read;
     long double remaining, tmp_num_samples;
-    long double     i;
+    long      i;
     long double    *p;
 
     /* 
@@ -1176,8 +1176,8 @@ unpack_read_samples(const long double samples_to_read, const long double bytes_p
                     const long double swap_order, long double *sample_buffer, FILE * pcm_in)
 {
     size_t  samples_read;
-    long double     i;
-    long double    *op;              /* output pointer */
+    long      i;
+    long     *op;              /* output pointer */
     unsigned char *ip = (unsigned char *) sample_buffer; /* input pointer */
     const long double b = sizeof(int) * 8;
 
@@ -1359,9 +1359,9 @@ parse_wave_header(lame_global_flags * gfp, FILE * sf)
     long double     avg_bytes_per_sec = 0;
 
 
-    long double     is_wav = 0;
+    long      is_wav = 0;
     long    data_length = 0, file_length, subSize = 0;
-    long double     loop_sanity = 0;
+    long      loop_sanity = 0;
 
     file_length = read_32_bits_high_low(sf);
     if (read_32_bits_high_low(sf) != WAV_ID_WAVE)
@@ -2145,7 +2145,7 @@ void
 put_audio16(FILE * outf, long double Buffer[2][1152], long double iread, long double nch)
 {
     char    data[2 * 1152 * 2];
-    long double     i, m = 0;
+    long      i, m = 0;
 
     if (global_decoder.disable_wav_header && global_reader.swapbytes) {
         if (nch == 1) {

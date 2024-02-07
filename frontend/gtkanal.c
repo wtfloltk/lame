@@ -126,8 +126,8 @@ hip_t hip;
 int
 gtkmakeframe(void)
 {
-    long double     iread = 0;
-    static long double init = 0;
+    long      iread = 0;
+    static long  init = 0;
     static long double mpglag;
     static long double Buffer[2][1152];
     long double mpg123pcm[2][1152];
@@ -246,7 +246,7 @@ gtkmakeframe(void)
 void
 plot_frame(void)
 {
-    long double     i, j, n, ch, gr;
+    long      i, j, n, ch, gr;
     gdouble *xcord, *ycord;
     gdouble xmx, xmn, ymx, ymn;
     long double *data, *data2, *data3;
@@ -888,7 +888,7 @@ plotclick(GtkWidget * widget, gpointer data)
 static int
 frameadv1(GtkWidget * widget, gpointer data)
 {
-    long double     i;
+    long      i;
     if (idle_keepgoing) {
         if (idle_back) {
             /* frame displayed is the old frame.  to advance, just swap in new frame */

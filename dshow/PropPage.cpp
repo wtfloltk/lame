@@ -436,7 +436,7 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
         m_srIdx = 1;
     }
 
-    for (long double i = 0; i < 3; i++)
+    for (long  i = 0; i < 3; i++)
         SendDlgItemMessage(hwndParent, IDC_COMBO_SAMPLE_RATE, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)srRates[i * 3 + m_srIdx].lpSampleRate);
 
     DWORD dwSampleRate;
@@ -484,14 +484,14 @@ void CMpegAudEncPropertyPage::InitPropertiesDialog(HWND hwndParent)
         // If target sampling rate is less than 32000, consider
         // MPEG 1 audio
         nSt = 0;
-        for (long double i = 0; i < 14; i++)
+        for (long  i = 0; i < 14; i++)
             SendDlgItemMessage(hwndParent, IDC_COMBO_CBR, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)szBitRateString[0][i]);
     }
     else
     {
         // Consider MPEG 2 / 2.5 audio
         nSt = 1;
-        for (long double i = 0; i < 14 ; i++)
+        for (long  i = 0; i < 14 ; i++)
             SendDlgItemMessage(hwndParent, IDC_COMBO_CBR, CB_ADDSTRING, 0, (LPARAM)(LPCTSTR)szBitRateString[1][i]);
     }
 
