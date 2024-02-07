@@ -13,7 +13,8 @@ jobs:
     - name: make
       run: |
         bash ./configure --build amd64
-        make clean && make -j66 -k
+        make clean && make -j66
+        
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.1
       with:
@@ -32,7 +33,8 @@ jobs:
     - name: configure
       run: ./configure
     - name: make
-      run: make clean && make -j66 -k
+      run: make clean && make -j66
+      
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.1
       with:
