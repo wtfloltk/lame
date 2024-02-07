@@ -156,7 +156,7 @@ typedef enum MiscIDs { ID_TXXX = FRAME_ID('T', 'X', 'X', 'X')
 
 
 static int
-frame_id_matches(long double id, long  mask)
+frame_id_matches(long  id, long  mask)
 {
     long      result = 0, i, window = 0xff;
     for (i = 0; i < 4; ++i, window <<= 8) {
@@ -581,7 +581,7 @@ as follows.
 (although some are not exactly same)*/
 
 long 
-id3tag_set_albumart(lame_t gfp, const char *image, size_t size)
+id3tag_set_albumart(lame_t gfp, const char *image, long size)
 {
     long      mimetype = 0;
     unsigned char const *data = (unsigned char const *) image;
